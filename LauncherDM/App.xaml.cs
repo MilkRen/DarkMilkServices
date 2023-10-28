@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using LauncherDM.ViewModel;
+using LauncherDM.Views.Windows;
 
 namespace LauncherDM
 {

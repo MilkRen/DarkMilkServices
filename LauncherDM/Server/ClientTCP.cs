@@ -45,6 +45,6 @@ namespace LauncherDM.Server
         //    tcpSocket.Shutdown(SocketShutdown.Both); // закрываем подкоючение сокета и клиента, и у сервера 
         //    tcpSocket.Close(); // отключает, закрывает сокет и освобождает ресурсы
 
-        }
+        //}
     }
 }
