@@ -1,0 +1,82 @@
+﻿<Window x:Class="LauncherDM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:LauncherDM.ViewModel"
+        xmlns:local="clr-namespace:LauncherDM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280" AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" WindowStyle="None">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Border Background="Wheat" CornerRadius="5" >
+        <DockPanel LastChildFill="True">
+
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem >
+                    <TextBlock Text="{Binding Status}"/>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <ProgressBar Width="120" Height="14" Value="30"/>
+                </StatusBarItem>
+            </StatusBar>
+
+
+
+            <TabControl>
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabPanel}">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                </TabControl.Resources>
+
+                <TabItem x:Name="GamesTI">
+                    <TabItem.Header>
+                        <Label Content="Игры"></Label>
+                    </TabItem.Header>
+
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem Header="SubTab1"/>
+                        <TabItem Header="SubTab2"/>
+                        <TabItem Header="SubTab3"/>
+                    </TabControl>
+                </TabItem>
+
+                <TabItem x:Name="ProgramTI">
+                    <TabItem.Header>
+                        <Label Content="Программы"></Label>
+                    </TabItem.Header>
+
+                    <Grid>
+
+                    </Grid>
+                </TabItem>
+
+                <TabItem x:Name="TeamTI">
+                    <TabItem.Header>
+                        <Label Content="Форум"></Label>
+                    </TabItem.Header>
+
+                    <Grid>
+
+                    </Grid>
+                </TabItem>
+
+                <TabItem x:Name="SettingsTI">
+                    <TabItem.Header>
+                        <Label Content="Настройки"></Label>
+                    </TabItem.Header>
+
+                    <Grid>
+
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+        </DockPanel>
+
+    </Border>
+</Window>
