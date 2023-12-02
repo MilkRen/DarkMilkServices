@@ -8,13 +8,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Source\Images\ToolBar\Close.png" />
+    <None Remove="Source\Images\ToolBar\CloseBlack.png" />
+    <None Remove="Source\Images\ToolBar\Maximize.png" />
+    <None Remove="Source\Images\ToolBar\MaximizeRev.png" />
+    <None Remove="Source\Images\ToolBar\Minimize.png" />
+    <None Remove="Source\Images\ToolBar\World.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Source\Fonts\" />
-    <Folder Include="Source\Images\" />
     <Folder Include="Styles\Pages\" />
     <Folder Include="Styles\Window\" />
     <Folder Include="Views\Pages\" />
     <Folder Include="Server\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Source\Images\ToolBar\Close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\CloseBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Maximize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\MaximizeRev.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\World.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
