@@ -9,4 +9,8 @@
         <Setter Property="Height" Value="30" />
     </Style>
 
+    <Style x:Key="LogoFontsDesign" TargetType="Label">
+        <Setter Property="FontFamily" Value="#Gloss And Bloom"/>
+    </Style>
+
 </ResourceDictionary>

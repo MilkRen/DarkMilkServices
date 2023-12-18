@@ -12,7 +12,7 @@
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
@@ -84,7 +84,23 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TextBlock Text="DarkMilk" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" Foreground="White"/>
+            <Label Content="DarkMilk" Foreground="White" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource LogoFontsDesign}"/>
+            <Label Content="DarkMilk" Foreground="White" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource LogoFontsDesign}">
+                <Label.Effect>
+                    <BlurEffect Radius="5"/>
+                </Label.Effect>
+            </Label>
+
+            <Separator Margin="0,65,0,0" Height="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="280" Background="White">
+                <Separator.Effect>
+                    <BlurEffect Radius="2.5"/>
+                </Separator.Effect>
+                <Separator.Style>
+                    <Style TargetType="{x:Type Separator}">
+                        <Setter Property="Opacity" Value="0.8"/>
+                    </Style>
+                </Separator.Style>
+            </Separator>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -101,12 +117,69 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <Separator Height="2" Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="White">
+                            <Separator.Effect>
+                                <BlurEffect Radius="0.2"/>
+                            </Separator.Effect>
+                            <Separator.Style>
+                                <Style TargetType="{x:Type Separator}">
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </Style>
+                            </Separator.Style>
+                        </Separator>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="1">
+                    <Button Margin="5">
+
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Button Margin="5">
+
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Column="2" Grid.Row="0">
+                    <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <Button Margin="5">
+
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Column="3" Grid.Row="0">
+                    <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                </Grid>
+                <Grid Grid.Column="3" Grid.Row="1">
+                    <Button Margin="5">
+
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Column="4" Grid.Row="0">
+                    <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                </Grid>
+                <Grid Grid.Column="4" Grid.Row="1">
+                    <Button Margin="5">
+
+                    </Button>
+                </Grid>
+
             </Grid>
         </Grid>
 
         <Grid Grid.Row="3">
             <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="20"  />
         </Grid>
-        
+
     </Grid>
 </Window>
