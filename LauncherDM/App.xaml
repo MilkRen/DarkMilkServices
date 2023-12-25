@@ -8,6 +8,9 @@
 
 
                 <ResourceDictionary Source="Styles/Other/DockPanelStyles.xaml"/>
+                <ResourceDictionary Source="Styles/Other/LabelStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/BorderStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ButtonStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
