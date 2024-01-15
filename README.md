@@ -5,3 +5,4 @@
 3. Server TCP/UDP => C#
 4. Web => ASP.net
 5. maybe mobile (xamarin? maui? android studio?)
+6. DataBase PostgreSQL
