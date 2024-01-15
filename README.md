@@ -1,6 +1,7 @@
 # DarkMilkServices
 Сервисы для DarkMilk
-1. Launcher DarkMilk => c#/c++ => WPF & QT (Linux)
-2. Server TCP/UDP => c#
-3. Web => PHP
-4. maybe mobile (xamarin? maui? android studio?)
+1. Launcher DarkMilk for Windows => C#/WPF
+2. Launcher DarkMilk for Linux => C++/QT/Cmake
+3. Server TCP/UDP => C#
+4. Web => ASP.net
+5. maybe mobile (xamarin? maui? android studio?)
