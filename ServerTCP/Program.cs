@@ -1,5 +1,5 @@
-﻿using System.Net.Sockets;
-using System.Net;
+﻿using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace ServerTCP
@@ -8,25 +8,24 @@ namespace ServerTCP
     {
         static void Main(string[] args)
         {
-            const string ip = "91.210.171.69";
-            const int port = 8080;
+            const string ip = DataInfo.Ip;
+            const int port = DataInfo.Port;
 
-
-
-            var tcpEndPoint = new IPEndPoint(IPAddress.Parse(ip), port); // конечное подключение
+            IPAddress ipAddress = IPAddress.Parse(ip);
+            IPEndPoint endPoint = new IPEndPoint(ipAddress, port);
 
             var tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            tcpSocket.Bind(tcpEndPoint); // Связываем подлкючение к сокету, чтобы его прослушивать 
+            tcpSocket.Bind(endPoint); // Связываем подлкючение к сокету, чтобы его прослушивать 
 
-            tcpSocket.Listen(5); // количество подключеных в очередь, 6 не добавят в очередь 
+            tcpSocket.Listen(100); // количество подключеных в очередь, 6 не добавят в очередь 
 
             // чтобы сделать многопоточное подключение, нужен новый сокет и т д 
 
 
             while (true)
             {
-                Console.WriteLine("Ожидаем соединение через порт {0}", tcpEndPoint);
+                Console.WriteLine("Ожидаем соединение через порт {0}", endPoint);
                 var listener = tcpSocket.Accept(); // новый сокет для нового клиента
                 Console.WriteLine("Подключился!");
                 var buffer = new byte[256]; // размер буфера .  максимум сообщение из 256 байт 
@@ -37,6 +36,15 @@ namespace ServerTCP
                 do
                 {
                     size = listener.Receive(buffer); // получение данных, количество, значение
+
+                    MessageHeader header = MessageHeader.FromArray(buffer);
+                    switch (header.Type)
+                    {
+                        case MessageHeader.MessageType.File:
+                            Console.WriteLine("TExt");
+                            break;
+                    }
+
                     data.Append(Encoding.UTF8.GetString(buffer, 0, size)); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
                 }
                 while (listener.Available > 0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
@@ -49,11 +57,7 @@ namespace ServerTCP
                 listener.Send(Encoding.UTF8.GetBytes("Сервер: Успех!")); // кодируем данные 
                 listener.Shutdown(SocketShutdown.Both); // закрываем подкоючение сокета и клиента, и у сервера 
                 listener.Close(); // отключает, закрывает сокет и освобождает ресурсы
-
             }
-
-
-
         }
     }
 }

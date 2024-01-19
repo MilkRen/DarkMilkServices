@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClientTCP\ClientTCP.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Source\Fonts\Gloss_And_Bloom.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
