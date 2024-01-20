@@ -31,7 +31,7 @@ namespace ServerTCP
                 var buffer = new byte[256]; // размер буфера .  максимум сообщение из 256 байт 
                 var size = 0; // количество реально полученных количества байт, потом чтобы оптимизировать память 
 
-                var data = new StringBuilder();
+                //var data = new StringBuilder();
 
                 do
                 {
@@ -40,16 +40,18 @@ namespace ServerTCP
                     MessageHeader header = MessageHeader.FromArray(buffer);
                     switch (header.Type)
                     {
-                        case MessageHeader.MessageType.File:
-                            Console.WriteLine("TExt");
+                        case MessageHeader.MessageType.Check:
+                            var header1 = new MessageHeader(MessageHeader.MessageType.File, 12345);
+                            byte[] headerBytes = header1.ToArray();
+                            listener.Send(headerBytes);
                             break;
                     }
 
-                    data.Append(Encoding.UTF8.GetString(buffer, 0, size)); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
+                    //data.Append(Encoding.UTF8.GetString(buffer, 0, size)); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
                 }
                 while (listener.Available > 0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
                                                 // 
-                Console.WriteLine(data);
+                //Console.WriteLine(data);
 
 
                 // надо отправить ответ, чтобы показать, что мы получили

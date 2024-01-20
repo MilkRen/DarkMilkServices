@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using LauncherDM.ViewModel;
+﻿using LauncherDM.Services;
+using LauncherDM.Services.Interfaces;
+using LauncherDM.ViewModels;
 using LauncherDM.Views.Windows;
+using System.Windows;
 
 namespace LauncherDM
 {
@@ -18,7 +14,8 @@ namespace LauncherDM
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            new AuthorizationWIndow().Show();
+            IDialogWindowService windowService = new DialogWindowService();
+            windowService.OpenWindow(new LoadingWindow(){DataContext = new LoadingWindowViewModel()});
         }
     }
 }

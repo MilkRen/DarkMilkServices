@@ -1,4 +1,5 @@
 ﻿using System.Buffers.Binary;
+using System.Text;
 
 namespace ServerTCP
 {
@@ -6,15 +7,18 @@ namespace ServerTCP
     {
         public MessageType Type { get; }
         public int Length { get; }
+        public string Message { get; }
 
         public enum MessageType : byte
         {
             Session = 0,
             Token= 1,
             Registration = 2,
-            File = 3,
-            Photo = 4,
-            Data = 5,
+            Log = 3,
+            File = 4,
+            Photo = 5,
+            Data = 6,
+            Check = 7
         }
 
         public MessageHeader(MessageType type, int length)
@@ -23,11 +27,21 @@ namespace ServerTCP
             Length = length;
         }
 
+        public MessageHeader(string messageText, MessageType type, int length)
+        {
+            Message = messageText;
+            Type = type;
+            Length = length;
+        }
+
         public byte[] ToArray()
         {
-            var result = new byte[5];
+            var message = Encoding.UTF8.GetBytes(Message);
+            var result = new byte[message.Length + 6];
             result[0] = (byte)Type;
             BinaryPrimitives.WriteInt32LittleEndian(result.AsSpan()[1..], Length);
+            //BinaryPrimitives.WriteInt32LittleEndian(result.AsSpan()[1..], Encoding.UTF8.GetBytes(Message).);
+            Array.Copy(Encoding.UTF8.GetBytes(Message), 0, result, 6, result.Length);
             return result;
         }
 

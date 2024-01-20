@@ -9,7 +9,6 @@
         Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" ResizeMode="NoResize">
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -18,8 +17,12 @@
 
         <Grid Grid.Row="0" Background="Black">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <Image Source="/Source/Images/DarkMilk/Logo.png" Width="15" Height="15"/>
-                <Label Content="{Binding Title}" Foreground="White" FontSize="8" VerticalAlignment="Center"/>
+                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="15" Height="15">
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="0.1"/>
+                    </Image.Effect>
+                </Image>
+                <Label Content="{Binding Title}" Foreground="White" FontSize="10" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
             </StackPanel>
         </Grid>
 
