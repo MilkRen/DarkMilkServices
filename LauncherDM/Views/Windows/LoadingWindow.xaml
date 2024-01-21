@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="100" Width="500"
@@ -10,25 +11,31 @@
         AllowsTransparency="True" ResizeMode="NoResize">
 
     <Grid>
+        <behaviors:Interaction.Triggers>
+            <behaviors:EventTrigger EventName="MouseDown" >
+                <behaviors:InvokeCommandAction Command="{Binding MoveWindowCommand}" />
+            </behaviors:EventTrigger>
+        </behaviors:Interaction.Triggers>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="Black">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="15" Height="15">
+                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="20" Height="20">
                     <Image.Effect>
                         <DropShadowEffect Color="White" ShadowDepth="0.1"/>
                     </Image.Effect>
                 </Image>
-                <Label Content="{Binding Title}" Foreground="White" FontSize="10" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
+                <Label Content="{Binding Title}" Foreground="White" FontSize="12" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
             <Border Background="White" Height="2" VerticalAlignment="Top"/>
-            <Label Content="{Binding InfoConnecting}" Foreground="White" />
+            <Label Content="{Binding DescInfoConnect}" Margin="5" FontSize="12" Style="{StaticResource DescFont}"/>
         </Grid>
 
     </Grid>

@@ -6,4 +6,9 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
+    <Style x:Key="DescFont" TargetType="Label">
+        <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
 </ResourceDictionary>

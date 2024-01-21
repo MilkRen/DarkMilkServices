@@ -21,7 +21,7 @@ namespace LauncherDM.Models
 
         }
 
-        public string sendRequest(string text, MessageHeader.MessageType messageType)
+        public string SendMessageRequest<T>(T data, MessageHeader.MessageType messageType)
         {
             try
             {
