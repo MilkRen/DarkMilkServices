@@ -165,6 +165,54 @@ LinLauncherDM_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.s
 .PHONY : LinLauncherDM_autogen/mocs_compilation.cpp.s
 
+connectivitychecknetwork.obj: connectivitychecknetwork.cpp.obj
+.PHONY : connectivitychecknetwork.obj
+
+# target to build an object file
+connectivitychecknetwork.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj
+.PHONY : connectivitychecknetwork.cpp.obj
+
+connectivitychecknetwork.i: connectivitychecknetwork.cpp.i
+.PHONY : connectivitychecknetwork.i
+
+# target to preprocess a source file
+connectivitychecknetwork.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.i
+.PHONY : connectivitychecknetwork.cpp.i
+
+connectivitychecknetwork.s: connectivitychecknetwork.cpp.s
+.PHONY : connectivitychecknetwork.s
+
+# target to generate assembly for a file
+connectivitychecknetwork.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.s
+.PHONY : connectivitychecknetwork.cpp.s
+
+loadingwindow.obj: loadingwindow.cpp.obj
+.PHONY : loadingwindow.obj
+
+# target to build an object file
+loadingwindow.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj
+.PHONY : loadingwindow.cpp.obj
+
+loadingwindow.i: loadingwindow.cpp.i
+.PHONY : loadingwindow.i
+
+# target to preprocess a source file
+loadingwindow.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.i
+.PHONY : loadingwindow.cpp.i
+
+loadingwindow.s: loadingwindow.cpp.s
+.PHONY : loadingwindow.s
+
+# target to generate assembly for a file
+loadingwindow.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.s
+.PHONY : loadingwindow.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -213,6 +261,30 @@ mainwindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
 
+serverrequest.obj: serverrequest.cpp.obj
+.PHONY : serverrequest.obj
+
+# target to build an object file
+serverrequest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj
+.PHONY : serverrequest.cpp.obj
+
+serverrequest.i: serverrequest.cpp.i
+.PHONY : serverrequest.i
+
+# target to preprocess a source file
+serverrequest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.i
+.PHONY : serverrequest.cpp.i
+
+serverrequest.s: serverrequest.cpp.s
+.PHONY : serverrequest.s
+
+# target to generate assembly for a file
+serverrequest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LinLauncherDM.dir\build.make CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.s
+.PHONY : serverrequest.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -226,12 +298,21 @@ help:
 	@echo ... LinLauncherDM_autogen/mocs_compilation.obj
 	@echo ... LinLauncherDM_autogen/mocs_compilation.i
 	@echo ... LinLauncherDM_autogen/mocs_compilation.s
+	@echo ... connectivitychecknetwork.obj
+	@echo ... connectivitychecknetwork.i
+	@echo ... connectivitychecknetwork.s
+	@echo ... loadingwindow.obj
+	@echo ... loadingwindow.i
+	@echo ... loadingwindow.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
 	@echo ... mainwindow.obj
 	@echo ... mainwindow.i
 	@echo ... mainwindow.s
+	@echo ... serverrequest.obj
+	@echo ... serverrequest.i
+	@echo ... serverrequest.s
 .PHONY : help
 
 

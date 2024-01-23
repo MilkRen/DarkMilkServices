@@ -1,5 +1,5 @@
-CMakeFiles/LinLauncherDM.dir/main.cpp.obj: \
- C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\main.cpp \
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj: \
+ C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\loadingwindow.cpp \
  C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\loadingwindow.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QWidget \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qwidget.h \
@@ -258,6 +258,13 @@ CMakeFiles/LinLauncherDM.dir/main.cpp.obj: \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qsizepolicy.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qcursor.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qkeysequence.h \
+ C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug/LinLauncherDM_autogen/include/ui_loadingwindow.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtCore/QVariant \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qvariant.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qmap.h \
+ D:/programs/QT/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/functional \
+ D:/programs/QT/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/std_function.h \
+ D:/programs/QT/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/refwrap.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QApplication \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qapplication.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qcoreapplication.h \
@@ -267,7 +274,9 @@ CMakeFiles/LinLauncherDM.dir/main.cpp.obj: \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qinputmethod.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qlocale.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qvariant.h \
- D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qmap.h \
- D:/programs/QT/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/functional \
- D:/programs/QT/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/std_function.h \
- D:/programs/QT/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/refwrap.h
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QPushButton \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qpushbutton.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qabstractbutton.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qicon.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qwidget.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QWidget

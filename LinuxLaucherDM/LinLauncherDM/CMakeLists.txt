@@ -19,6 +19,16 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+
+        loadingwindow.cpp
+        loadingwindow.h
+        loadingwindow.ui
+
+        serverrequest.cpp
+        serverrequest.h
+
+        connectivitychecknetwork.cpp
+        connectivitychecknetwork.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -1,11 +1,12 @@
-#include "mainwindow.h"
+#include "loadingwindow.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    LoadingWindow loadWindow;
+    loadWindow.setWindowFlags(Qt::Window | Qt::FramelessWindowHint); // задал флаг, что без рамок окно
+    loadWindow.show();
     return a.exec();
 }

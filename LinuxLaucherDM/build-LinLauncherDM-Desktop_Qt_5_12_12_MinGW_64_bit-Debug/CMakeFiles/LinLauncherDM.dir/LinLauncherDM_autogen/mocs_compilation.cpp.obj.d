@@ -1,9 +1,9 @@
 CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj: \
  C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\LinLauncherDM_autogen\mocs_compilation.cpp \
- C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\LinLauncherDM_autogen\EWIEGA46WW/moc_mainwindow.cpp \
- C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/mainwindow.h \
- D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QMainWindow \
- D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qmainwindow.h \
+ C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\LinLauncherDM_autogen\EWIEGA46WW/moc_loadingwindow.cpp \
+ C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/loadingwindow.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QWidget \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qwidget.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qtwidgetsglobal.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qtguiglobal.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qglobal.h \
@@ -92,7 +92,6 @@ CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj: \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qversiontagging.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qtgui-config.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qtwidgets-config.h \
- D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qwidget.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qwindowdefs.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qobjectdefs.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtCore/qnamespace.h \
@@ -260,5 +259,10 @@ CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj: \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qsizepolicy.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qcursor.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qkeysequence.h \
+ C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\LinLauncherDM_autogen\EWIEGA46WW/moc_mainwindow.cpp \
+ C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/mainwindow.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/QMainWindow \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qmainwindow.h \
+ D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qwidget.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtWidgets/qtabwidget.h \
  D:/programs/QT/5.12.12/mingw73_64/include/QtGui/qicon.h

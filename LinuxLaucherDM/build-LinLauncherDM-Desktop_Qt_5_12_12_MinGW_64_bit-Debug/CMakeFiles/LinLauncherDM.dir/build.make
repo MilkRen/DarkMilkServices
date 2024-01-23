@@ -113,11 +113,59 @@ CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.s"
 	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\mainwindow.cpp -o CMakeFiles\LinLauncherDM.dir\mainwindow.cpp.s
 
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj: CMakeFiles/LinLauncherDM.dir/flags.make
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj: CMakeFiles/LinLauncherDM.dir/includes_CXX.rsp
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj: C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/loadingwindow.cpp
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj: CMakeFiles/LinLauncherDM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj -MF CMakeFiles\LinLauncherDM.dir\loadingwindow.cpp.obj.d -o CMakeFiles\LinLauncherDM.dir\loadingwindow.cpp.obj -c C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\loadingwindow.cpp
+
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.i"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\loadingwindow.cpp > CMakeFiles\LinLauncherDM.dir\loadingwindow.cpp.i
+
+CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.s"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\loadingwindow.cpp -o CMakeFiles\LinLauncherDM.dir\loadingwindow.cpp.s
+
+CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj: CMakeFiles/LinLauncherDM.dir/flags.make
+CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj: CMakeFiles/LinLauncherDM.dir/includes_CXX.rsp
+CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj: C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/serverrequest.cpp
+CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj: CMakeFiles/LinLauncherDM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj -MF CMakeFiles\LinLauncherDM.dir\serverrequest.cpp.obj.d -o CMakeFiles\LinLauncherDM.dir\serverrequest.cpp.obj -c C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\serverrequest.cpp
+
+CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.i"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\serverrequest.cpp > CMakeFiles\LinLauncherDM.dir\serverrequest.cpp.i
+
+CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.s"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\serverrequest.cpp -o CMakeFiles\LinLauncherDM.dir\serverrequest.cpp.s
+
+CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj: CMakeFiles/LinLauncherDM.dir/flags.make
+CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj: CMakeFiles/LinLauncherDM.dir/includes_CXX.rsp
+CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj: C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/connectivitychecknetwork.cpp
+CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj: CMakeFiles/LinLauncherDM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj -MF CMakeFiles\LinLauncherDM.dir\connectivitychecknetwork.cpp.obj.d -o CMakeFiles\LinLauncherDM.dir\connectivitychecknetwork.cpp.obj -c C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\connectivitychecknetwork.cpp
+
+CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.i"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\connectivitychecknetwork.cpp > CMakeFiles\LinLauncherDM.dir\connectivitychecknetwork.cpp.i
+
+CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.s"
+	D:\programs\QT\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\LinLauncherDM\connectivitychecknetwork.cpp -o CMakeFiles\LinLauncherDM.dir\connectivitychecknetwork.cpp.s
+
 # Object files for target LinLauncherDM
 LinLauncherDM_OBJECTS = \
 "CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj" \
 "CMakeFiles/LinLauncherDM.dir/main.cpp.obj" \
-"CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.obj"
+"CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.obj" \
+"CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj" \
+"CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj" \
+"CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj"
 
 # External object files for target LinLauncherDM
 LinLauncherDM_EXTERNAL_OBJECTS =
@@ -125,6 +173,9 @@ LinLauncherDM_EXTERNAL_OBJECTS =
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/main.cpp.obj
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.obj
+LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj
+LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj
+LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/build.make
 LinLauncherDM.exe: D:/programs/QT/5.12.12/mingw73_64/lib/libQt5Widgetsd.a
 LinLauncherDM.exe: D:/programs/QT/5.12.12/mingw73_64/lib/libQt5Guid.a
@@ -132,7 +183,7 @@ LinLauncherDM.exe: D:/programs/QT/5.12.12/mingw73_64/lib/libQt5Cored.a
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/linkLibs.rsp
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/objects1.rsp
 LinLauncherDM.exe: CMakeFiles/LinLauncherDM.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable LinLauncherDM.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\rinat\Desktop\OtherLanguages\C_Cplus_plus\QT\build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable LinLauncherDM.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\LinLauncherDM.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

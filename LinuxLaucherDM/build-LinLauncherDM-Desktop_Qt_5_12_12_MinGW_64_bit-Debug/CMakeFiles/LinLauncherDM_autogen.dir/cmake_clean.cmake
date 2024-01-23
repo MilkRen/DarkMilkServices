@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/LinLauncherDM_autogen"
+  "LinLauncherDM_autogen/include/ui_loadingwindow.h"
   "LinLauncherDM_autogen/include/ui_mainwindow.h"
   "LinLauncherDM_autogen/mocs_compilation.cpp"
 )

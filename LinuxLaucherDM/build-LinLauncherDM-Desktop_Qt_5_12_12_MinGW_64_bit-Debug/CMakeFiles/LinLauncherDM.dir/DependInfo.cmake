@@ -9,8 +9,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug/LinLauncherDM_autogen/mocs_compilation.cpp" "CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj" "gcc" "CMakeFiles/LinLauncherDM.dir/LinLauncherDM_autogen/mocs_compilation.cpp.obj.d"
+  "C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/connectivitychecknetwork.cpp" "CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj" "gcc" "CMakeFiles/LinLauncherDM.dir/connectivitychecknetwork.cpp.obj.d"
+  "C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/loadingwindow.cpp" "CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj" "gcc" "CMakeFiles/LinLauncherDM.dir/loadingwindow.cpp.obj.d"
   "C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/main.cpp" "CMakeFiles/LinLauncherDM.dir/main.cpp.obj" "gcc" "CMakeFiles/LinLauncherDM.dir/main.cpp.obj.d"
   "C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/mainwindow.cpp" "CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.obj" "gcc" "CMakeFiles/LinLauncherDM.dir/mainwindow.cpp.obj.d"
+  "C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/LinLauncherDM/serverrequest.cpp" "CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj" "gcc" "CMakeFiles/LinLauncherDM.dir/serverrequest.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
