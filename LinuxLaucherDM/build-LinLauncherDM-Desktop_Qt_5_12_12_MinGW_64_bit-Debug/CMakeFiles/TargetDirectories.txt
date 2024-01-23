@@ -1,4 +1,0 @@
-C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug/CMakeFiles/LinLauncherDM.dir
-C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/rinat/Desktop/OtherLanguages/C_Cplus_plus/QT/build-LinLauncherDM-Desktop_Qt_5_12_12_MinGW_64_bit-Debug/CMakeFiles/LinLauncherDM_autogen.dir

@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\LinLauncherDM.dir/objects.a
-D:\programs\QT\Tools\mingw730_64\bin\ar.exe qc CMakeFiles\LinLauncherDM.dir/objects.a @CMakeFiles\LinLauncherDM.dir\objects1.rsp
-D:\programs\QT\Tools\mingw730_64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\LinLauncherDM.dir/objects.a -Wl,--no-whole-archive -o LinLauncherDM.exe -Wl,--out-implib,libLinLauncherDM.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\LinLauncherDM.dir\linkLibs.rsp
