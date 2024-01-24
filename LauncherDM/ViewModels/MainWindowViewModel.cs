@@ -28,11 +28,7 @@ namespace LauncherDM.ViewModel
 
         #endregion
 
-
-
-
         #endregion
-
 
 
         public MainWindowViewModel()

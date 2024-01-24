@@ -22,7 +22,7 @@ namespace LauncherDM
             {
                 base.OnStartup(e);
                 IDialogWindowService windowService = new DialogWindowService();
-                windowService.OpenWindow(new LoadingWindow() { DataContext = new LoadingWindowViewModel() });
+                windowService.OpenLoadingWindow();
                 mutex.ReleaseMutex();
             }
         }

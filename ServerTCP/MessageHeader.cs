@@ -1,14 +1,18 @@
-﻿using System.Buffers.Binary;
+﻿using System;
+using System.Buffers.Binary;
 using System.Drawing;
 using System.Text;
 
 namespace ServerTCP
 {
-    public class MessageHeader
+    public class MessageHeader<T>
     {
+        public const int LengthAndDataType = 6; // 1 байт тип данных, 5 байт размер 
+
         public MessageType Type { get; }
         public int Length { get; }
-        public string Message { get; }
+        public T Message { get; }
+        public string MessageString { get; }
 
         public enum MessageType : byte
         {
@@ -28,29 +32,51 @@ namespace ServerTCP
             Length = length;
         }
 
-        public MessageHeader(string messageText, MessageType type, int length)
+        public MessageHeader(T message, MessageType type, int length)
         {
-            Message = messageText;
+            Message = message;
             Type = type;
             Length = length;
         }
 
-        public byte[] ToArray()
+        public MessageHeader(string message, MessageType type, int length)
         {
-            var message = Encoding.UTF8.GetBytes(Message);
-            var result = new byte[message.Length + 6];
+            MessageString = message;
+            Type = type;
+            Length = length;
+        }
+
+        public byte[] MessageToArray()
+        {
+            byte[] message;
+            var result = new byte[Length + LengthAndDataType];
             result[0] = (byte)Type;
             BinaryPrimitives.WriteInt32LittleEndian(result.AsSpan()[1..5], Length);
-            Array.Copy(message, 0, result, 6, message.Length);
+            if (Message is not null)
+            {
+                if (!string.IsNullOrEmpty(Message?.ToString()))
+                {
+                    message = Encoding.UTF8.GetBytes(Message.ToString());
+                    Array.Copy(message, 0, result, 6, Length);
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(MessageString))
+                {
+                    message = Encoding.UTF8.GetBytes(MessageString);
+                    Array.Copy(message, 0, result, 6, Length);
+                }
+            }
             return result;
         }
 
-        public static MessageHeader FromArray(ReadOnlySpan<byte> buffer)
+        public static MessageHeader<T> FromArray(ReadOnlySpan<byte> buffer)
         {
-            if(buffer.Length <= 6)
-                return new MessageHeader((MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..]));
+            if (buffer.Length <= LengthAndDataType)
+                return new MessageHeader<T>((MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..]));
             else
-                return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), 6, buffer.Length - 6), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..]));
+                return new MessageHeader<T>(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..]));
         }
     }
 }

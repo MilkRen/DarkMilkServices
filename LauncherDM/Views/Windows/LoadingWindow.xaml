@@ -22,20 +22,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="Black">
+        <Border Grid.Row="0" Grid.RowSpan="2" BorderBrush="White" Opacity="0.5" Margin="1" BorderThickness="1" />
+
+        <Grid Grid.Row="0" Background="Black" Margin="5">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="20" Height="20">
+                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="18" Height="18">
                     <Image.Effect>
                         <DropShadowEffect Color="White" ShadowDepth="0.1"/>
                     </Image.Effect>
                 </Image>
-                <Label Content="{Binding Title}" Foreground="White" FontSize="12" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
+                <Label Content="{Binding Title}" Foreground="White" FontSize="10" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <Border Background="White" Height="2" VerticalAlignment="Top"/>
-            <Label Content="{Binding DescInfoConnect}" Margin="5" FontSize="12" Style="{StaticResource DescFont}"/>
+            <Border Background="White" Height="2" VerticalAlignment="Top" Margin="2,0,2,0"/>
+            <Label Content="{Binding DescInfoConnect}" Margin="5" FontSize="10" Style="{StaticResource DescFont}"/>
         </Grid>
 
     </Grid>

@@ -7,7 +7,7 @@ namespace LauncherDM.Services
 {
     class DialogMessageBoxService : IDialogMessageBoxService
     {
-        public void DialogShow(string title, string text, CustomMessageBoxButton messageBoxButton, CustomMessageBoxImage messageBoxImage)
+        public void DialogShow(string title, string text, CustomMessageBoxButton messageBoxButton = CustomMessageBoxButton.OK, CustomMessageBoxImage messageBoxImage = CustomMessageBoxImage.Information)
         {
             MessageBox.Show(text, title, MessageBoxButtonMapping[messageBoxButton], MessageBoxIconMapping[messageBoxImage]);
         }

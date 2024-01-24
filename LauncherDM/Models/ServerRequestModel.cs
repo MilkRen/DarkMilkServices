@@ -1,4 +1,6 @@
-﻿using ServerTCP;
+﻿using LauncherDM.Services.Interfaces;
+using LauncherDM.Services;
+using ServerTCP;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -14,14 +16,14 @@ namespace LauncherDM.Models
 
         private IPAddress ipAddress;
         private IPEndPoint endPoint;
+
         public ServerRequestModel()
         {
             ipAddress = IPAddress.Parse(ip);
             endPoint = new IPEndPoint(ipAddress, port);
-
         }
 
-        public string SendMessageRequest<T>(T data, MessageHeader.MessageType messageType)
+        public string SendMessageRequestT<T>(T data, MessageHeader<T>.MessageType messageType, int length)
         {
             try
             {
@@ -30,8 +32,8 @@ namespace LauncherDM.Models
                     var tcpClient = new TcpClient();
                     tcpClient.Connect(endPoint);
 
-                    var header = new MessageHeader(text, MessageHeader.MessageType.File, 12345);
-                    byte[] headerBytes = header.ToArray();
+                    var messageHeader = new MessageHeader<T>(data, messageType, length + MessageHeader<T>.LengthAndDataType);
+                    byte[] headerBytes = messageHeader.MessageToArray();
 
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);
@@ -44,14 +46,13 @@ namespace LauncherDM.Models
                         byte[] getBytes = new byte[tcpClient.ReceiveBufferSize];
                         tcpStream.Read(getBytes, 0, tcpClient.ReceiveBufferSize);
 
-                        var header2 = MessageHeader.FromArray(getBytes);
-                        switch (header.Type)
+                        var header2 = MessageHeader<T>.FromArray(getBytes);
+                        switch (header2.Type)
                         {
-                            case MessageHeader.MessageType.Check:
-                                Console.WriteLine("TExt");
+                            case MessageHeader<T>.MessageType.Check:
+                                return header2.MessageString;
                                 break;
                         }
-
                     } while (tcpStream.DataAvailable);
 
                     //WriteColorTextCmd("Получил сообщение: ");
@@ -63,12 +64,10 @@ namespace LauncherDM.Models
             }
             catch (Exception e)
             {
-                //WriteColorTextCmd("Сервер не доступен! " + e.ToString());
+                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
                 return string.Empty;
             }
         }
-
-
-       
     }
 }

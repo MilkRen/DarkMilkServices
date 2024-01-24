@@ -25,12 +25,12 @@ namespace ClientTCP
 
                     string sendText = Console.ReadLine();
 
-                    MessageHeader header = new MessageHeader(MessageHeader.MessageType.File, 12345);
-                    byte[] headerBytes = header.ToArray();
+                    //MessageHeader header = new MessageHeader(MessageHeader.MessageType.File, 12345);
+                    //byte[] headerBytes = header.MessageToArray();
 
                     NetworkStream tcpStream = tcpClient.GetStream();
                     //byte[] sendBytes = Encoding.UTF8.GetBytes(sendText);
-                    tcpStream.Write(headerBytes);
+                    //tcpStream.Write(headerBytes);
 
                     WriteColorTextCmd("Сообщение отправил!");
                     StringBuilder returnDataStrBuild = new StringBuilder();

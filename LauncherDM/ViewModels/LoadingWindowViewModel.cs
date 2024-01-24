@@ -4,6 +4,13 @@ using LauncherDM.Models;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using ServerTCP;
+using LauncherDM.Services.Interfaces;
+using LauncherDM.Services;
+using LauncherDM.Views.Windows;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace LauncherDM.ViewModels
 {
@@ -12,13 +19,13 @@ namespace LauncherDM.ViewModels
 
         #region Fields
 
-        Window mainWindow = Application.Current.MainWindow;
+        private readonly Window _loadingWindow = Application.Current.MainWindow;
 
         #region Models
 
-        private ConnectivityCheckServerModel checkServer;
+        private ConnectivityCheckNetworkModel _checkNetwork;
 
-        ServerRequestModel serverRequest;
+        private ServerRequestModel _serverRequest;
 
         #endregion
 
@@ -63,7 +70,7 @@ namespace LauncherDM.ViewModels
         private void OnMoveWindowCommandExecuted(object p)
         { 
             if (Mouse.LeftButton == MouseButtonState.Pressed) 
-                mainWindow.DragMove();
+                _loadingWindow.DragMove();
         }
 
         #endregion
@@ -75,15 +82,36 @@ namespace LauncherDM.ViewModels
         public LoadingWindowViewModel()
         {
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
-            checkServer = new ConnectivityCheckServerModel();
-            serverRequest = new ServerRequestModel();
-            if (checkServer.CheckingNetworkConnection())
-            {
-                DescInfoConnect = "Lfpsad";
-                //Title = serverRequest.SendMessageRequest("Sral", MessageHeader.MessageType.Check);
-            }
-            else
-                Environment.Exit(0);
+            LoadAlgo();
+        }
+
+        void LoadAlgo()
+        {
+
+            _checkNetwork = new ConnectivityCheckNetworkModel();
+            _serverRequest = new ServerRequestModel();
+
+            Task.Run(() =>
+            { 
+                if (_checkNetwork.CheckingNetworkConnection())
+                {
+                    DescInfoConnect = _serverRequest.SendMessageRequestT<string>(string.Empty,
+                        MessageHeader<string>.MessageType.Check, string.Empty.Length);
+                    Thread.Sleep(5000);
+
+                    _loadingWindow.Dispatcher.Invoke(() =>
+                    {
+                        IDialogWindowService windowService = new DialogWindowService();
+                        windowService.OpenWindow(this);
+                        _loadingWindow.Hide();
+                    });
+                }
+                else
+                    _loadingWindow.Dispatcher.Invoke(() =>
+                    {
+                        Environment.Exit(0);
+                    });
+            });
         }
 
         #endregion

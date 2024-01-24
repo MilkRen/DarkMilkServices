@@ -4,7 +4,7 @@ using LauncherDM.Services.Interfaces;
 
 namespace LauncherDM.Models
 {
-    public class ConnectivityCheckServerModel
+    public class ConnectivityCheckNetworkModel
     {
         public bool CheckingNetworkConnection()
         {
