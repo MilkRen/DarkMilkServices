@@ -13,11 +13,12 @@ namespace LauncherDM.Services
             if (viewModel is LoadingWindowViewModel)
             {
                 var authorization = new AuthorizationWIndow(){};
-                authorization.DataContext = new AuthorizationWIndowViewModel();
+                //authorization.DataContext = new AuthorizationWIndowViewModel(authorization.Close);
+                authorization.DataContext = new AuthorizationWindowViewModel();
                 authorization.Show();
                 return;
             }
-            if(viewModel is AuthorizationWIndowViewModel)
+            if(viewModel is AuthorizationWindowViewModel)
                 return;
         }
 

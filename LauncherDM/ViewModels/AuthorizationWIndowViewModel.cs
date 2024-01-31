@@ -1,35 +1,59 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Models;
 using System;
+using System.Net.Mime;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LauncherDM.ViewModels
 {
-    class AuthorizationWIndowViewModel : ViewModel.Base.ViewModel  
+    class AuthorizationWindowViewModel : ViewModel.Base.ViewModel  
     {
+        #region Fields
+
+        private Action _closeWidnowAction;
+
+        #endregion
+
         #region Commmands
 
-        private Action closeWidnowAction;
+        #region CloseWindowActionCommand
 
-        #region MoveWindowCommand
-
-        public Command CloseWindowCommand { get; }
+        public Command CloseWindowActionCommand { get; }
         private bool CanCloseWindowCommandExecute(object p) => true;
-        private void OnCloseWindowCommandExecuted(object p) => closeWidnowAction() ?? Environment.Exit(0);
+        private void OnCloseWindowCommandExecuted(object p) => _closeWidnowAction();
+
+        #endregion
+
+        #region CloseApplicationCommand
+
+        private bool CanCloseApplicationCommandExecute(object p) => true;
+
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            //Environment.Exit(0);
+            Application.Current.Shutdown();
+        }
+
 
         #endregion
 
         #endregion
 
-        public AuthorizationWIndowViewModel(Action closeWindow)
+        #region Ctor
+
+        public AuthorizationWindowViewModel(Action closeWindow)
         {
-            closeWidnowAction = closeWindow;
-            CloseWindowCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+            _closeWidnowAction = closeWindow;
+            CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
         }
 
-        public AuthorizationWIndowViewModel()
+        public AuthorizationWindowViewModel()
         {
-            CloseWindowCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+            CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
         }
+
+        #endregion
     }
 }

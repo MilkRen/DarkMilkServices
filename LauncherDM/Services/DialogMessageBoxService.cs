@@ -7,12 +7,7 @@ namespace LauncherDM.Services
 {
     class DialogMessageBoxService : IDialogMessageBoxService
     {
-        public void DialogShow(string title, string text, CustomMessageBoxButton messageBoxButton = CustomMessageBoxButton.OK, CustomMessageBoxImage messageBoxImage = CustomMessageBoxImage.Information)
-        {
-            MessageBox.Show(text, title, MessageBoxButtonMapping[messageBoxButton], MessageBoxIconMapping[messageBoxImage]);
-        }
-
-        private static readonly Dictionary<CustomMessageBoxImage, MessageBoxImage> MessageBoxIconMapping = 
+        private static readonly Dictionary<CustomMessageBoxImage, MessageBoxImage> MessageBoxIconMapping =
             new Dictionary<CustomMessageBoxImage, MessageBoxImage>
             {
                 { CustomMessageBoxImage.None, MessageBoxImage.None },
@@ -35,5 +30,10 @@ namespace LauncherDM.Services
                 { CustomMessageBoxButton.YesNoCancel, MessageBoxButton.YesNoCancel },
                 { CustomMessageBoxButton.YesNo, MessageBoxButton.YesNo }
             };
+
+        public void DialogShow(string title, string text, CustomMessageBoxButton messageBoxButton = CustomMessageBoxButton.OK, CustomMessageBoxImage messageBoxImage = CustomMessageBoxImage.Information)
+        {
+            MessageBox.Show(text, title, MessageBoxButtonMapping[messageBoxButton], MessageBoxIconMapping[messageBoxImage]);
+        }
     }
 }

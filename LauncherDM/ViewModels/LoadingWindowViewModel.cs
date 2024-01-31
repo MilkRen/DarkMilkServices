@@ -16,7 +16,6 @@ namespace LauncherDM.ViewModels
 {
     class LoadingWindowViewModel : ViewModel.Base.ViewModel
     {
-
         #region Fields
 
         private readonly Window _loadingWindow = Application.Current.MainWindow;
@@ -87,7 +86,6 @@ namespace LauncherDM.ViewModels
 
         void LoadAlgo()
         {
-
             _checkNetwork = new ConnectivityCheckNetworkModel();
             _serverRequest = new ServerRequestModel();
 
@@ -95,16 +93,26 @@ namespace LauncherDM.ViewModels
             { 
                 if (_checkNetwork.CheckingNetworkConnection())
                 {
-                    DescInfoConnect = _serverRequest.SendMessageRequestT<string>(string.Empty,
+                    var requestMessageServer = _serverRequest.SendMessageRequestT<string>(string.Empty,
                         MessageHeader<string>.MessageType.Check, string.Empty.Length);
-                    Thread.Sleep(5000);
 
-                    _loadingWindow.Dispatcher.Invoke(() =>
+                    if (!string.IsNullOrEmpty(requestMessageServer))
                     {
-                        IDialogWindowService windowService = new DialogWindowService();
-                        windowService.OpenWindow(this);
-                        _loadingWindow.Hide();
-                    });
+                        DescInfoConnect = "sd";
+
+                        Thread.Sleep(5000);
+                        _loadingWindow.Dispatcher.Invoke(() =>
+                        {
+                            IDialogWindowService windowService = new DialogWindowService();
+                            windowService.OpenWindow(this);
+                            _loadingWindow.Hide();
+                        });
+                    }
+                    else
+                    {
+                        IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                        dialogMessageBox.DialogShow("s","s");
+                    }
                 }
                 else
                     _loadingWindow.Dispatcher.Invoke(() =>

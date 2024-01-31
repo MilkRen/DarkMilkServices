@@ -47,7 +47,7 @@
                     </Button.Style>
                     <Image Height="15" Width="15" Source="/Source/Images/ToolBar/Minimize.png"/>
                 </Button>
-                <Button x:Name="CloseBtn" BorderThickness="0" Margin="0,0,0,0"  Width="30" Command="{Binding CloseWindowCommand}">
+                <Button x:Name="CloseBtn" BorderThickness="0" Margin="0,0,0,0"  Width="30" Command="{Binding CloseWindowActionCommand}">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
