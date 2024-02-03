@@ -18,13 +18,17 @@ namespace LauncherDM
         [STAThread] //  Это означает, что все потоки в этой программе выполняются в рамках одного процесса, а управление программой осуществляется одним главным потоком
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (mutex.WaitOne(TimeSpan.Zero, true))
-            {
-                base.OnStartup(e);
-                IDialogWindowService windowService = new DialogWindowService();
-                windowService.OpenLoadingWindow();
-                mutex.ReleaseMutex();
-            }
+            base.OnStartup(e);
+            new AuthorizationWIndow(){DataContext = new AuthorizationWindowViewModel()}.Show();
+
+
+            //if (mutex.WaitOne(TimeSpan.Zero, true))
+            //{
+            //    base.OnStartup(e);
+            //    IDialogWindowService windowService = new DialogWindowService();
+            //    windowService.OpenLoadingWindow();
+            //    mutex.ReleaseMutex();
+            //}
         }
     }
 }

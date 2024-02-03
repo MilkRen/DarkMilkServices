@@ -15,6 +15,7 @@ namespace LauncherDM.Services
                 var authorization = new AuthorizationWIndow(){};
                 //authorization.DataContext = new AuthorizationWIndowViewModel(authorization.Close);
                 authorization.DataContext = new AuthorizationWindowViewModel();
+                authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
                 return;
             }

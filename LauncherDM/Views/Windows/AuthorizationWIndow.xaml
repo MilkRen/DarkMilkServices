@@ -9,6 +9,26 @@
         Height="350" Width="600"
         AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" WindowStyle="None">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ButtonRegistration" From="0" To="1.0" Storyboard.TargetProperty="Opacity" Duration="0:0:1.2" >
+                        <DoubleAnimation.EasingFunction>
+                            <CircleEase/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <ThicknessAnimation Storyboard.TargetName="ButtonRegistration" From="0 -30 0 0" To="0 0 0 0" Storyboard.TargetProperty="Margin" Duration="0:0:1.7" >
+                        <ThicknessAnimation.EasingFunction>
+                            <BackEase/>
+                        </ThicknessAnimation.EasingFunction>
+                    </ThicknessAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -47,6 +67,7 @@
                     </Button.Style>
                     <Image Height="15" Width="15" Source="/Source/Images/ToolBar/Minimize.png"/>
                 </Button>
+
                 <Button x:Name="CloseBtn" BorderThickness="0" Margin="0,0,0,0"  Width="30" Command="{Binding CloseWindowActionCommand}">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -120,9 +141,7 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="1">
-                    <Button Margin="5" Style="{StaticResource ButtonAuthorization}"  Content="Start">
-
-                    </Button>
+                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
                 </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">
@@ -132,52 +151,44 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1">
-                    <Button Margin="5">
-
-                    </Button>
+                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
                 </Grid>
 
                 <Grid Grid.Column="2" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="2" Grid.Row="1">
-                    <Button Margin="5">
-
-                    </Button>
+                    <Button  Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
                 </Grid>
 
                 <Grid Grid.Column="3" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Style="{StaticResource DescFont}"/>
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="3" Grid.Row="1">
-                    <Button Margin="5">
-
-                    </Button>
+                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
                 </Grid>
 
                 <Grid Grid.Column="4" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}"/>
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="4" Grid.Row="1">
-                    <Button Margin="5">
-
-                    </Button>
+                    <Button  Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
                 </Grid>
 
             </Grid>
         </Grid>
 
         <Grid Grid.Row="3">
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="20"  />
+            <Button x:Name="ButtonRegistration" Style="{StaticResource ButtonRegistrationAccount}" Content="Регистрация"/>
         </Grid>
 
     </Grid>
