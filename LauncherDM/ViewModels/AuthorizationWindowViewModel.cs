@@ -17,6 +17,8 @@ namespace LauncherDM.ViewModels
 
         private Action _closeWidnowAction;
 
+        private readonly Window _authorizationWindow = Application.Current.MainWindow;
+
         #endregion
 
         #region Commmands
@@ -35,7 +37,6 @@ namespace LauncherDM.ViewModels
 
         private void OnCloseApplicationCommandExecuted(object p)
         {
-            //Environment.Exit(0);
             Application.Current.Shutdown();
         }
 
@@ -54,7 +55,7 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        #region registration
+        #region ShowRegistrationFormComman
 
         public Command ShowRegistrationFormCommand { get; }
         private bool CanShowRegistrationFormCommandExecute(object p) => true;
@@ -63,6 +64,7 @@ namespace LauncherDM.ViewModels
         {
             IDialogWindowService windowService = new DialogWindowService();
             windowService.OpenWindow(this);
+            _authorizationWindow.Hide();
         }
 
         #endregion
@@ -71,15 +73,16 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
+        public AuthorizationWindowViewModel()
+        {
+            CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
+        }
+
         public AuthorizationWindowViewModel(Action closeWindow)
         {
             _closeWidnowAction = closeWindow;
             CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
-        }
-
-        public AuthorizationWindowViewModel()
-        {
-            CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
         }
 
         #endregion
