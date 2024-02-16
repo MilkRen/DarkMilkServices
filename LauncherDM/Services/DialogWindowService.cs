@@ -1,8 +1,10 @@
 ﻿using LauncherDM.Services.Interfaces;
 using System;
 using System.Windows;
+using LauncherDM.ViewModel;
 using LauncherDM.ViewModels;
 using LauncherDM.Views.Windows;
+using System.Net;
 
 namespace LauncherDM.Services
 {
@@ -12,15 +14,21 @@ namespace LauncherDM.Services
         {
             if (viewModel is LoadingWindowViewModel)
             {
-                var authorization = new AuthorizationWIndow(){};
+                var authorization = new AuthorizationWIndow();
                 //authorization.DataContext = new AuthorizationWIndowViewModel(authorization.Close);
                 authorization.DataContext = new AuthorizationWindowViewModel();
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
                 return;
             }
-            if(viewModel is AuthorizationWindowViewModel)
+            else if (viewModel is AuthorizationWindowViewModel)
+            {
+                var mainWindow = new MainWindow(); 
+                mainWindow.DataContext = new MainWindowViewModel();
+                mainWindow.Owner = Application.Current.MainWindow;
+                mainWindow.Show();
                 return;
+            }
         }
 
         public void CloseWindow(Window window)

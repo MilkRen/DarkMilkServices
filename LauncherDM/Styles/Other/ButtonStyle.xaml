@@ -102,7 +102,7 @@
 
 
     <Style x:Key="ButtonToolBar" TargetType="Button">
-        <Setter Property="Template">
+        <!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Button.Style>
@@ -138,7 +138,7 @@
                     </Image>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter>-->
     </Style>
 
 

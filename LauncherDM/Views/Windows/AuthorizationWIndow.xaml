@@ -8,7 +8,7 @@
         Title="AuthorizationWIndow" 
         Height="350" Width="600"
         AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen" WindowStyle="None">
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Visibility="{Binding visi1}">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -188,7 +188,7 @@
         </Grid>
 
         <Grid Grid.Row="3">
-            <Button x:Name="ButtonRegistration" Style="{StaticResource ButtonRegistrationAccount}" Content="Регистрация"/>
+            <Button x:Name="ButtonRegistration" Style="{StaticResource ButtonRegistrationAccount}" Command="{Binding ShowRegistrationFormCommand}" Content="Регистрация"/>
         </Grid>
 
     </Grid>

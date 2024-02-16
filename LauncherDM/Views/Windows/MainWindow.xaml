@@ -39,6 +39,16 @@
                         </Style>
                     </TabControl.Resources>
 
+                <TabItem x:Name="StoreTI">
+                    <TabItem.Header>
+                            <Label Content="Мастерская|Магазин"></Label>
+                    </TabItem.Header>
+
+                    <Grid>
+
+                    </Grid>
+                </TabItem>
+
                     <TabItem x:Name="GamesTI">
                         <TabItem.Header>
                             <Label Content="Игры"></Label>
@@ -70,6 +80,16 @@
 
                         </Grid>
                     </TabItem>
+
+                <TabItem x:Name="AccountTI">
+                    <TabItem.Header>
+                        <Label Content="Аккаунт"></Label>
+                    </TabItem.Header>
+
+                    <Grid>
+
+                    </Grid>
+                </TabItem>
 
                     <TabItem x:Name="SettingsTI">
                         <TabItem.Header>

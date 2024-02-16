@@ -1,6 +1,9 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Models;
+using LauncherDM.Services.Interfaces;
+using LauncherDM.Services;
+using LauncherDM.Views.Windows;
 using System;
 using System.Net.Mime;
 using System.Windows;
@@ -13,6 +16,8 @@ namespace LauncherDM.ViewModels
         #region Fields
 
         private Action _closeWidnowAction;
+
+        private readonly Window _authorizationWindow = Application.Current.MainWindow;
 
         #endregion
 
@@ -32,10 +37,35 @@ namespace LauncherDM.ViewModels
 
         private void OnCloseApplicationCommandExecuted(object p)
         {
-            //Environment.Exit(0);
             Application.Current.Shutdown();
         }
 
+
+        #endregion
+
+        #region ShowLoginFormCommand
+
+        public Command ShowLoginFormCommand { get; }
+        private bool CanShowLoginFormCommandExecute(object p) => true;
+        private void OnShowLoginFormCommandExecuted(object p)
+        {
+            IDialogWindowService windowService = new DialogWindowService();
+            windowService.OpenWindow(this);
+        }
+
+        #endregion
+
+        #region ShowRegistrationFormComman
+
+        public Command ShowRegistrationFormCommand { get; }
+        private bool CanShowRegistrationFormCommandExecute(object p) => true;
+
+        private void OnShowRegistrationFormCommandExecuted(object p)
+        {
+            IDialogWindowService windowService = new DialogWindowService();
+            windowService.OpenWindow(this);
+            _authorizationWindow.Hide();
+        }
 
         #endregion
 
@@ -43,15 +73,16 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
+        public AuthorizationWindowViewModel()
+        {
+            CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
+        }
+
         public AuthorizationWindowViewModel(Action closeWindow)
         {
             _closeWidnowAction = closeWindow;
             CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
-        }
-
-        public AuthorizationWindowViewModel()
-        {
-            CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
         }
 
         #endregion
