@@ -26,8 +26,15 @@ namespace LauncherDM.ViewModels
         #region CloseWindowActionCommand
 
         public Command CloseWindowActionCommand { get; }
+
         private bool CanCloseWindowCommandExecute(object p) => true;
-        private void OnCloseWindowCommandExecuted(object p) => _closeWidnowAction();
+
+        private void OnCloseWindowCommandExecuted(object p)
+        {
+            var windowService = new DialogWindowService();
+            windowService.CloseAction = _closeWidnowAction;
+            windowService.CloseWindow();
+        }
 
         #endregion
 
@@ -46,11 +53,14 @@ namespace LauncherDM.ViewModels
         #region ShowLoginFormCommand
 
         public Command ShowLoginFormCommand { get; }
+
         private bool CanShowLoginFormCommandExecute(object p) => true;
+
         private void OnShowLoginFormCommandExecuted(object p)
         {
-            IDialogWindowService windowService = new DialogWindowService();
-            windowService.OpenWindow(this);
+            var windowService = new DialogWindowService();
+            windowService.OpenLoginWindow();
+            _authorizationWindow.Hide();
         }
 
         #endregion
@@ -58,12 +68,13 @@ namespace LauncherDM.ViewModels
         #region ShowRegistrationFormComman
 
         public Command ShowRegistrationFormCommand { get; }
+
         private bool CanShowRegistrationFormCommandExecute(object p) => true;
 
         private void OnShowRegistrationFormCommandExecuted(object p)
         {
-            IDialogWindowService windowService = new DialogWindowService();
-            windowService.OpenWindow(this);
+            var windowService = new DialogWindowService();
+            windowService.OpenRegistrationWindow();
             _authorizationWindow.Hide();
         }
 
@@ -76,6 +87,7 @@ namespace LauncherDM.ViewModels
         public AuthorizationWindowViewModel()
         {
             CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
             ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
         }
 
@@ -83,6 +95,8 @@ namespace LauncherDM.ViewModels
         {
             _closeWidnowAction = closeWindow;
             CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+            ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
+            ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
         }
 
         #endregion
