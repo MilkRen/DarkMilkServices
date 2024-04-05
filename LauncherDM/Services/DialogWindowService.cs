@@ -10,13 +10,15 @@ namespace LauncherDM.Services
 {
     class DialogWindowService : IDialogWindowService
     {
+        public Action CloseAction { get; set; }
+
         public void OpenWindow(object viewModel)
         {
             if (viewModel is LoadingWindowViewModel)
             {
                 var authorization = new AuthorizationWIndow();
-                //authorization.DataContext = new AuthorizationWIndowViewModel(authorization.Close);
-                authorization.DataContext = new AuthorizationWindowViewModel();
+                authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close); // other
+                //authorization.DataContext = new AuthorizationWindowViewModel();
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
                 return;
@@ -31,9 +33,9 @@ namespace LauncherDM.Services
             }
         }
 
-        public void CloseWindow(Window window)
+        public void CloseWindow()
         {
-            throw new NotImplementedException();
+            CloseAction();
         }
 
         public void ShowWindow(Window window)
@@ -46,11 +48,18 @@ namespace LauncherDM.Services
             window.Hide();
         }
 
-        public void OpenLoadingWindow()
+        public void OpenLoginWindow()
         {
-            var loadWindow = new LoadingWindow();
-            loadWindow.DataContext = new LoadingWindowViewModel();
+            var loadWindow = new LoginWindow();
+            //loadWindow.DataContext = new LoadingWindowViewModel();
             loadWindow.Show();
+        }
+
+        public void OpenRegistrationWindow()
+        {
+            var registrationWindow = new RegistrationWindow();
+            //loadWindow.DataContext = new LoadingWindowViewModel();
+            registrationWindow.Show();
         }
     }
 }

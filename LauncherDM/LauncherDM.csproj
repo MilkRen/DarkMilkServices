@@ -25,6 +25,7 @@
     <Folder Include="Styles\Pages\" />
     <Folder Include="Styles\Window\" />
     <Folder Include="Views\Pages\" />
+    <Folder Include="Views\UserControls\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +64,21 @@
     <Resource Include="Source\Images\ToolBar\World.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Source\Resource\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Source\Resource\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

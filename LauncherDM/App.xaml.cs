@@ -6,6 +6,7 @@ using LauncherDM.Views.Windows;
 using System.Windows;
 using System.Threading;
 using System.Reflection;
+using LauncherDM.ViewModel;
 
 namespace LauncherDM
 {
@@ -19,6 +20,7 @@ namespace LauncherDM
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            //new MainWindow(){DataContext = new MainWindowViewModel()}.Show();
             new AuthorizationWIndow(){DataContext = new AuthorizationWindowViewModel()}.Show();
 
 

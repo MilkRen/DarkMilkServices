@@ -6,9 +6,13 @@
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="100" Width="500"
-        Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" ResizeMode="NoResize">
+        Title="{Binding Title}"
+        Height="100" Width="500"
+        Background="Black"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        ResizeMode="NoResize">
 
     <Grid>
         <behaviors:Interaction.Triggers>

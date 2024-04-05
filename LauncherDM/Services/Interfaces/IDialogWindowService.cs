@@ -1,17 +1,22 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace LauncherDM.Services.Interfaces
 {
     public interface IDialogWindowService
-    {
-       public void OpenWindow(object viewModel);
-
-       public void CloseWindow(Window window);
-
-       public void ShowWindow(Window window);
-
-       public void HideWindow(Window window);
-
-       public void OpenLoadingWindow();
+    { 
+        Action CloseAction { get; set; } 
+        
+        void OpenWindow(object viewModel);
+        
+        void CloseWindow();
+        
+        void ShowWindow(Window window);
+        
+        void HideWindow(Window window);
+        
+        void OpenLoginWindow();
+        
+        void OpenRegistrationWindow();
     }
 }

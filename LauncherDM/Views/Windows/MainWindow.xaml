@@ -41,7 +41,10 @@
 
                 <TabItem x:Name="StoreTI">
                     <TabItem.Header>
-                            <Label Content="Мастерская|Магазин"></Label>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Мастерская | Каталог"/>
+                            <Image Source="C:\Users\rinat\Downloads\free-icon-store-front-8723059 (1).png" Margin="5"/>
+                        </StackPanel>
                     </TabItem.Header>
 
                     <Grid>
@@ -49,21 +52,12 @@
                     </Grid>
                 </TabItem>
 
-                    <TabItem x:Name="GamesTI">
-                        <TabItem.Header>
-                            <Label Content="Игры"></Label>
-                        </TabItem.Header>
-
-                        <TabControl TabStripPlacement="Left">
-                            <TabItem Header="SubTab1"/>
-                            <TabItem Header="SubTab2"/>
-                            <TabItem Header="SubTab3"/>
-                        </TabControl>
-                    </TabItem>
 
                     <TabItem x:Name="ProgramTI">
                         <TabItem.Header>
-                            <Label Content="Программы"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Программы"/>
+                            </StackPanel>
                         </TabItem.Header>
 
                         <Grid>
@@ -73,7 +67,9 @@
 
                     <TabItem x:Name="TeamTI">
                         <TabItem.Header>
-                            <Label Content="Форум"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Форум"/>
+                            </StackPanel>
                         </TabItem.Header>
 
                         <Grid>
@@ -83,7 +79,9 @@
 
                 <TabItem x:Name="AccountTI">
                     <TabItem.Header>
-                        <Label Content="Аккаунт"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Аккаунт"/>
+                            </StackPanel>
                     </TabItem.Header>
 
                     <Grid>
@@ -93,7 +91,9 @@
 
                     <TabItem x:Name="SettingsTI">
                         <TabItem.Header>
-                            <Label Content="Настройки"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Настройки"/>
+                            </StackPanel>
                         </TabItem.Header>
 
                         <Grid>

@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
-        Title="AuthorizationWIndow" 
+        Title="{Binding Title}"
         Height="350" Width="600"
-        AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen" WindowStyle="None" Visibility="{Binding visi1}">
+        AllowsTransparency="True" 
+        Background="Black" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -29,7 +32,7 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid Background="Black">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="70"/>
@@ -68,39 +71,7 @@
                     <Image Height="15" Width="15" Source="/Source/Images/ToolBar/Minimize.png"/>
                 </Button>
 
-                <Button x:Name="CloseBtn" BorderThickness="0" Margin="0,0,0,0"  Width="30" Command="{Binding CloseWindowActionCommand}">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="DarkRed"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <Image x:Name="ImgCloseBtn" Height="15" Width="15">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Source" Value="../../Source/Images/ToolBar/Close.png"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=ImgCloseBtn}" Value="True">
-                                        <Setter Property="Source" Value="../../Source/Images/ToolBar/CloseBlack.png"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </Button>
+                <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonClose}"/>
             </StackPanel>
         </Grid>
 
@@ -141,7 +112,7 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="1">
-                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
+                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowLoginFormCommand}" Content="+"/>
                 </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">
@@ -156,7 +127,7 @@
 
                 <Grid Grid.Column="2" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
