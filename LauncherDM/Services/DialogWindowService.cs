@@ -17,8 +17,7 @@ namespace LauncherDM.Services
             if (viewModel is LoadingWindowViewModel)
             {
                 var authorization = new AuthorizationWIndow();
-                authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close); // other
-                //authorization.DataContext = new AuthorizationWindowViewModel();
+                authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close); 
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
                 return;

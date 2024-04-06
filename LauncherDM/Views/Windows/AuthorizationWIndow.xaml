@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolbarControl="clr-namespace:LauncherDM.Views.UserControls"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
         Title="{Binding Title}"
@@ -47,32 +48,7 @@
         <Border Grid.Row="0" Grid.RowSpan="5" BorderBrush="White" Opacity="0.5" Margin="1" BorderThickness="1" />
 
         <Grid Grid.Row="0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,2,0" >
-                <Button x:Name="MinimizeBtn" Background="Transparent" BorderThickness="0" Margin="0,0,0,0" Width="30">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="DarkRed"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <Image Height="15" Width="15" Source="/Source/Images/ToolBar/Minimize.png"/>
-                </Button>
-
-                <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonClose}"/>
-            </StackPanel>
+            <toolbarControl:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" />
         </Grid>
 
         <Grid Grid.Row="1">

@@ -8,6 +8,9 @@ using System;
 using System.Net.Mime;
 using System.Windows;
 using System.Windows.Input;
+using LauncherDM.Views.UserControls;
+using LauncherDM.ViewModels.UserControlsVM;
+using System.Windows.Controls;
 
 namespace LauncherDM.ViewModels
 {
@@ -15,28 +18,24 @@ namespace LauncherDM.ViewModels
     {
         #region Fields
 
-        private Action _closeWidnowAction;
-
         private readonly Window _authorizationWindow = Application.Current.MainWindow;
 
         #endregion
 
-        #region Commmands
+        #region Properties
 
-        #region CloseWindowActionCommand
+        private ToolbarToWindowViewModel _toolbarVM;
 
-        public Command CloseWindowActionCommand { get; }
-
-        private bool CanCloseWindowCommandExecute(object p) => true;
-
-        private void OnCloseWindowCommandExecuted(object p)
+        public ToolbarToWindowViewModel ToolbarVM
         {
-            var windowService = new DialogWindowService();
-            windowService.CloseAction = _closeWidnowAction;
-            windowService.CloseWindow();
+            get => _toolbarVM;
+            set => Set(ref _toolbarVM, value);
         }
 
         #endregion
+
+
+        #region Commmands
 
         #region CloseApplicationCommand
 
@@ -84,17 +83,9 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public AuthorizationWindowViewModel()
-        {
-            CloseWindowActionCommand = new lambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-            ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
-            ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
-        }
-
         public AuthorizationWindowViewModel(Action closeWindow)
         {
-            _closeWidnowAction = closeWindow;
-            CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+            ToolbarVM = new ToolbarToWindowViewModel(closeWindow);
             ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
             ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
         }

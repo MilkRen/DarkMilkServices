@@ -21,7 +21,10 @@ namespace LauncherDM
         {
             base.OnStartup(e);
             //new MainWindow(){DataContext = new MainWindowViewModel()}.Show();
-            new AuthorizationWIndow(){DataContext = new AuthorizationWindowViewModel()}.Show();
+            var authorization = new AuthorizationWIndow();
+            authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close);
+ 
+            authorization.Show();
 
 
             //if (mutex.WaitOne(TimeSpan.Zero, true))
