@@ -34,7 +34,6 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-
         #region Commmands
 
         #region CloseApplicationCommand
@@ -79,15 +78,28 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region MoveWindowCommand
+
+        public Command MoveWindowCommand { get; }
+        private bool CanMoveWindowCommandExecute(object p) => true;
+        private void OnMoveWindowCommandExecuted(object p)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+                _authorizationWindow.DragMove();
+        }
+
+        #endregion
+
         #endregion
 
         #region Ctor
 
         public AuthorizationWindowViewModel(Action closeWindow)
         {
-            ToolbarVM = new ToolbarToWindowViewModel(closeWindow);
+            ToolbarVM = new ToolbarToWindowViewModel(closeWindow, Visibility.Visible);
             ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
             ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
+            MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
 
         #endregion
