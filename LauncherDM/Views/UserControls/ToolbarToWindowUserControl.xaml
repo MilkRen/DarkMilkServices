@@ -5,12 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LauncherDM.Views.UserControls"
              mc:Ignorable="d" 
-             x:Name="ToolbarControl"
              d:DesignHeight="30" UseLayoutRounding="True">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,2,0" >
-            <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonMinimize}"/>
-
+            <Button Command="{Binding CloseWindowActionCommand}" Visibility="{Binding VisibilityMinBut}" Style="{StaticResource ButtonMinimize}"/>
             <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonClose}"/>
         </StackPanel>
     </Grid>

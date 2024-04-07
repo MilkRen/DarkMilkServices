@@ -6,13 +6,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LauncherDM.Infastructure.Commands;
+using System.Windows;
 
 namespace LauncherDM.ViewModels.UserControlsVM
 {
     public class ToolbarToWindowViewModel : ViewModel.Base.ViewModel
     {
+        #region Fields
+
         private Action _closeWidnowAction;
 
+        #endregion
+
+        #region Properties
+
+        private Visibility _visibilityMaxBut;
+
+        public Visibility VisibilityMaxBut
+        {
+            get => _visibilityMaxBut;
+            set => Set(ref _visibilityMaxBut, value);
+        }
+
+        private Visibility _visibilityMinBut;
+
+        public Visibility VisibilityMinBut
+        {
+            get => _visibilityMinBut;
+            set => Set(ref _visibilityMinBut, value);
+        }
+
+        #endregion
+
+
+        #region Commands
 
         public Command CloseWindowActionCommand { get; }
 
@@ -25,8 +52,11 @@ namespace LauncherDM.ViewModels.UserControlsVM
             windowService.CloseWindow();
         }
 
-        public ToolbarToWindowViewModel(Action closeWidnow)
+        #endregion
+
+        public ToolbarToWindowViewModel(Action closeWidnow, Visibility visibilityMinBut = Visibility.Visible)
         {
+            VisibilityMinBut = visibilityMinBut;
             _closeWidnowAction = closeWidnow;
             CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
         }

@@ -14,10 +14,14 @@
     <None Remove="Source\Images\Logo\MilkBottle.png" />
     <None Remove="Source\Images\ToolBar\Close.png" />
     <None Remove="Source\Images\ToolBar\CloseBlack.png" />
+    <None Remove="Source\Images\ToolBar\Down.png" />
+    <None Remove="Source\Images\ToolBar\DownBlack.png" />
     <None Remove="Source\Images\ToolBar\Maximize.png" />
     <None Remove="Source\Images\ToolBar\MaximizeRev.png" />
     <None Remove="Source\Images\ToolBar\Minimize.png" />
     <None Remove="Source\Images\ToolBar\MinimizeBlack.png" />
+    <None Remove="Source\Images\ToolBar\Up.png" />
+    <None Remove="Source\Images\ToolBar\UpBlack.png" />
     <None Remove="Source\Images\ToolBar\World.png" />
   </ItemGroup>
 
@@ -52,6 +56,12 @@
     <Resource Include="Source\Images\ToolBar\CloseBlack.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Source\Images\ToolBar\Down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\DownBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Source\Images\ToolBar\Maximize.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -62,6 +72,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\Images\ToolBar\MinimizeBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Up.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\UpBlack.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\Images\ToolBar\World.png">
@@ -75,12 +91,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Source\Resource\ResourceEng.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceEng.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Source\Resource\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Source\Resource\ResourceEng.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceEng.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

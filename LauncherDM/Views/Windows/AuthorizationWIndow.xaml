@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:toolbarControl="clr-namespace:LauncherDM.Views.UserControls"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
         Title="{Binding Title}"
@@ -58,7 +59,7 @@
                 </Label.Effect>
             </Label>
 
-            <Border Margin="0,65,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="280" Style="{StaticResource BorderRounded}" />
+            <!--<Border Margin="0,65,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="280" Style="{StaticResource BorderRounded}" />-->
 
             <Label Content="DarkMilk" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource LogoFont}">
                 <Label.Effect>
@@ -83,17 +84,22 @@
 
                 <Grid Grid.Column="0" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}"/>
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="1">
                     <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowLoginFormCommand}" Content="+"/>
+                    <Image Source="/Source/Images/Logo/MilkBottle.png" >
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1"/>
+                        </Image.Effect>
+                    </Image>
                 </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}"/>
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
@@ -103,7 +109,7 @@
 
                 <Grid Grid.Column="2" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}" />
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>
@@ -113,7 +119,7 @@
 
                 <Grid Grid.Column="3" Grid.Row="0">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Style="{StaticResource DescFont}"/>
+                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"  Style="{StaticResource DescFont}"/>
                         <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
                     </StackPanel>
                 </Grid>

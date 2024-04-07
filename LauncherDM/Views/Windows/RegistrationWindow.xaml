@@ -3,15 +3,121 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolbarControl="clr-namespace:LauncherDM.Views.UserControls"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
         Title="RegistrationWindow" 
-        Height="450" Width="800"
-        Background="Black" 
-        ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen" 
-        WindowStyle="None">
+        Height="432" Width="299"
+        Background="White" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Resources>
+        <Storyboard x:Key="Storyboard1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.063"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1.174"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.294"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1.438"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1.9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="2.085"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="2.426"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="2.651"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="19.333"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="32.666"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="48.666"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="99.999"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="120.499"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="158.343"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="183.343"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangleLogin" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Login" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
     <Grid>
-        
+        <Path x:Name="path" Data="M0.33333333,390.37333 L1.8333333,-1.0866785 751.08335,0.45513326 751.08335,391.91513 C740.59384,398.03961 732.85159,440.95536 680.65373,440.95536 628.45587,440.95536 567.01725,325.48437 520.3139,325.48437 473.61055,325.48437 474.85931,368.82183 452.13201,390.49055 z" Fill="Black" HorizontalAlignment="Center" Height="222" Margin="0,-1,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="304" RenderTransformOrigin="0.5,0.5">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Height="9" Margin="7.6,423,0,0" Text="Version 0.1" Width="228" Foreground="Black" FontSize="6" FontFamily="Cascadia Mono Light"/>
+        <Grid x:Name="Login" Margin="0,-770,0,0">
+            <toolbarControl:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" Margin="0,365,-2,0" />
+            <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,802,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="22" FontFamily="Cascadia Mono"/>
+           
+            <TextBlock Text="Login" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,848,7,334">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=LoginTB}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox x:Name="LoginTB" HorizontalAlignment="Center" Height="40" Margin="0,835,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <Path Data="M30,105 L417,105" Fill="White" HorizontalAlignment="Center" Height="1" Margin="0,875,0,0" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
+
+            <TextBlock Text="Password" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,892,7,286">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=PasswordTB}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox x:Name="PasswordTB" HorizontalAlignment="Center" Height="40" Margin="0,881,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <Path Data="M30,105 L417,105" Fill="White" HorizontalAlignment="Center" Height="1" Margin="0,921,0,0" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
+           
+            <CheckBox Content="Forgot password" HorizontalAlignment="Left" Height="24" Margin="10,927,0,0" VerticalAlignment="Top" Width="140" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
+        </Grid>
+        <Rectangle x:Name="rectangle" HorizontalAlignment="Left" Height="37" Margin="189,163,0,0" VerticalAlignment="Top" Width="37" RenderTransformOrigin="0.486,0.527">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/Source/Images/ToolBar/UpBlack.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="rectangleLogin" HorizontalAlignment="Left" Height="36" Margin="255,185,0,0" VerticalAlignment="Top" Width="36">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/Source/Images/ToolBar/Down.png"/>
+            </Rectangle.Fill>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+        <Grid x:Name="SingUp" Margin="-10,-354,10,-272">
+            <TextBlock HorizontalAlignment="Left" Height="27" Margin="20,563,0,0" TextWrapping="Wrap" Text="Sign up" VerticalAlignment="Top" Width="132" Foreground="Black" FontSize="22" FontFamily="Cascadia Mono"/>
+            <TextBox HorizontalAlignment="Left" Height="40                  " Margin="17,595,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,635,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
+            
+            <TextBox HorizontalAlignment="Left" Height="40                  " Margin="17,641,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,681,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
+            <TextBox HorizontalAlignment="Left" Height="40                  " Margin="17,687,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+           
+            <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,727,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
+            <CheckBox Content="Forgot password" HorizontalAlignment="Left" Height="24" Margin="20,733,0,0" VerticalAlignment="Top" Width="220" Foreground="Black" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
+        </Grid>
+
     </Grid>
 </Window>

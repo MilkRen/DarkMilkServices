@@ -14,12 +14,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" BorderThickness="3" CornerRadius="6" BorderBrush="White" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
-                        <!--<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-                        <Image Source="/Source/Images/Logo/MilkBottle.png" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <!--<Image Source="/Source/Images/Logo/MilkBottle.png" >
                             <Image.Effect>
                                 <DropShadowEffect ShadowDepth="1"/>
                             </Image.Effect>
-                        </Image>
+                        </Image>-->
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -142,6 +142,26 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ButtonMaximize" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <Image x:Name="image"  Source="/Source/Images/ToolBar/Maximize.png" Width="15" Height="15"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="image" Property="Source" Value="/Source/Images/ToolBar/MaximizeRev.png"/>
+                            <Setter Property="Background" Value="DarkRed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 
