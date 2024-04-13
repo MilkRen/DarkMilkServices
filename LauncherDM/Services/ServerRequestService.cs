@@ -1,15 +1,12 @@
 ﻿using LauncherDM.Services.Interfaces;
-using LauncherDM.Services;
 using ServerTCP;
 using System;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
-using System.Text;
 
-namespace LauncherDM.Models
+namespace LauncherDM.Services
 {
-    class ServerRequestModel
+    class ServerRequestService : IServerRequestService
     {
         const string ip = DataInfo.Ip;
         const int port = DataInfo.Port;
@@ -17,7 +14,7 @@ namespace LauncherDM.Models
         private IPAddress ipAddress;
         private IPEndPoint endPoint;
 
-        public ServerRequestModel()
+        public ServerRequestService()
         {
             ipAddress = IPAddress.Parse(ip);
             endPoint = new IPEndPoint(ipAddress, port);

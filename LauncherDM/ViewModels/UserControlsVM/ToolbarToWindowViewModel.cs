@@ -60,6 +60,5 @@ namespace LauncherDM.ViewModels.UserControlsVM
             _closeWidnowAction = closeWidnow;
             CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
         }
-
     }
 }

@@ -16,7 +16,7 @@ namespace LauncherDM.Services
         {
             if (viewModel is LoadingWindowViewModel)
             {
-                var authorization = new AuthorizationWIndow();
+                var authorization = new AuthorizationWindow();
                 authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close); 
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
@@ -30,6 +30,14 @@ namespace LauncherDM.Services
                 mainWindow.Show();
                 return;
             }
+            else if (viewModel is RegAndLogWindowViewModel)
+            {
+                var regAndLogWindow = new RegAndLogWindow();
+                regAndLogWindow.DataContext = new RegAndLogWindowViewModel();
+                regAndLogWindow.Owner = Application.Current.MainWindow;
+                regAndLogWindow.Show();
+                return;
+            }
         }
 
         public void CloseWindow()
@@ -38,8 +46,8 @@ namespace LauncherDM.Services
         }
 
         public void ShowWindow(Window window)
-        {
-            throw new NotImplementedException();
+        { 
+            window.Show();
         }
 
         public void HideWindow(Window window)
@@ -47,18 +55,11 @@ namespace LauncherDM.Services
             window.Hide();
         }
 
-        public void OpenLoginWindow()
+        public void OpenLoadingWindow()
         {
-            var loadWindow = new LoginWindow();
-            //loadWindow.DataContext = new LoadingWindowViewModel();
-            loadWindow.Show();
-        }
-
-        public void OpenRegistrationWindow()
-        {
-            var registrationWindow = new RegistrationWindow();
-            //loadWindow.DataContext = new LoadingWindowViewModel();
-            registrationWindow.Show();
+            var loadingWindow = new LoadingWindow();
+            loadingWindow.DataContext = new LoadingWindowViewModel();
+            loadingWindow.Show();
         }
     }
 }

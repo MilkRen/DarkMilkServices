@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LauncherDM.Models
+namespace LauncherDM.ViewModels
 {
-    internal class CheckUpdateModel
+    class RegAndLogWindowViewModel : ViewModel.Base.ViewModel
     {
     }
 }

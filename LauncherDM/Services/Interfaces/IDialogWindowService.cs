@@ -14,9 +14,7 @@ namespace LauncherDM.Services.Interfaces
         void ShowWindow(Window window);
         
         void HideWindow(Window window);
-        
-        void OpenLoginWindow();
-        
-        void OpenRegistrationWindow();
+
+        void OpenLoadingWindow();
     }
 }

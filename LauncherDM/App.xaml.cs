@@ -21,19 +21,19 @@ namespace LauncherDM
         {
             base.OnStartup(e);
             //new MainWindow(){DataContext = new MainWindowViewModel()}.Show();
-            var authorization = new AuthorizationWIndow();
-            authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close);
- 
-            authorization.Show();
+            //var authorization = new AuthorizationWIndow();
+            //authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close);
+
+            //authorization.Show();
 
 
-            //if (mutex.WaitOne(TimeSpan.Zero, true))
-            //{
-            //    base.OnStartup(e);
-            //    IDialogWindowService windowService = new DialogWindowService();
-            //    windowService.OpenLoadingWindow();
-            //    mutex.ReleaseMutex();
-            //}
+            if (mutex.WaitOne(TimeSpan.Zero, true))
+            {
+                base.OnStartup(e);
+                IDialogWindowService windowService = new DialogWindowService();
+                windowService.OpenLoadingWindow();
+                mutex.ReleaseMutex();
+            }
         }
     }
 }

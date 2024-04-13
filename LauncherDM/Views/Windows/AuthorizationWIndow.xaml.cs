@@ -5,9 +5,9 @@ namespace LauncherDM.Views.Windows
     /// <summary>
     /// Логика взаимодействия для AuthorizationWIndow.xaml
     /// </summary>
-    public partial class AuthorizationWIndow : Window
+    public partial class AuthorizationWindow : Window
     {
-        public AuthorizationWIndow()
+        public AuthorizationWindow()
         {
             InitializeComponent();
         }
