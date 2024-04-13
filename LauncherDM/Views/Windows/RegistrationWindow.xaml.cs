@@ -18,9 +18,9 @@ namespace LauncherDM.Views.Windows
     /// <summary>
     /// Логика взаимодействия для RegistrationWindow.xaml
     /// </summary>
-    public partial class RegAndLogWindow : Window
+    public partial class RegistrationWindow : Window
     {
-        public RegAndLogWindow()
+        public RegistrationWindow()
         {
             InitializeComponent();
         }

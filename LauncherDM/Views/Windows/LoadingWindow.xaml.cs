@@ -3,7 +3,7 @@
 namespace LauncherDM.Views.Windows
 {
     /// <summary>
-    /// Первичная форма проверок и загрузки данных
+    /// Логика взаимодействия для LoadingWindow.xaml
     /// </summary>
     public partial class LoadingWindow : Window
     {

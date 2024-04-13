@@ -1,14 +1,16 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Models;
-using LauncherDM.Services;
-using LauncherDM.Services.Interfaces;
-using ServerTCP;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ServerTCP;
+using LauncherDM.Services.Interfaces;
+using LauncherDM.Services;
+using LauncherDM.Views.Windows;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace LauncherDM.ViewModels
 {
@@ -17,6 +19,14 @@ namespace LauncherDM.ViewModels
         #region Fields
 
         private readonly Window _loadingWindow = Application.Current.MainWindow;
+
+        #region Models
+
+        private ConnectivityCheckNetworkModel _checkNetwork;
+
+        private ServerRequestModel _serverRequest;
+
+        #endregion
 
         #endregion
 
@@ -71,21 +81,19 @@ namespace LauncherDM.ViewModels
         public LoadingWindowViewModel()
         {
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
-            Load();
+            LoadAlgo();
         }
 
-        #endregion
-
-        private void Load()
+        void LoadAlgo()
         {
-            ICheckNetworkService checkNetwork = new CheckNetworkService();
-            IServerRequestService serverRequest = new ServerRequestService();
+            _checkNetwork = new ConnectivityCheckNetworkModel();
+            _serverRequest = new ServerRequestModel();
 
             Task.Run(() =>
             { 
-                if (checkNetwork.CheckingNetworkConnection())
+                if (_checkNetwork.CheckingNetworkConnection())
                 {
-                    var requestMessageServer = serverRequest.SendMessageRequestT<string>(string.Empty,
+                    var requestMessageServer = _serverRequest.SendMessageRequestT<string>(string.Empty,
                         MessageHeader<string>.MessageType.Check, string.Empty.Length);
 
                     if (!string.IsNullOrEmpty(requestMessageServer))
@@ -113,5 +121,7 @@ namespace LauncherDM.ViewModels
                     });
             });
         }
+
+        #endregion
     }
 }

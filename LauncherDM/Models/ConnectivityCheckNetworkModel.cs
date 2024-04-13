@@ -1,14 +1,10 @@
-﻿using LauncherDM.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.NetworkInformation;
+using LauncherDM.Services;
+using LauncherDM.Services.Interfaces;
 
-namespace LauncherDM.Services
+namespace LauncherDM.Models
 {
-    class CheckNetworkService : ICheckNetworkService
+    public class ConnectivityCheckNetworkModel
     {
         public bool CheckingNetworkConnection()
         {
