@@ -48,16 +48,31 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        #region ShowRegAndLogWindowCommand
+        #region ShowLoginFormCommand
 
-        public Command ShowRegAndLogWindowCommand { get; }
+        public Command ShowLoginFormCommand { get; }
+
+        private bool CanShowLoginFormCommandExecute(object p) => true;
+
+        private void OnShowLoginFormCommandExecuted(object p)
+        {
+            var windowService = new DialogWindowService();
+            windowService.OpenLoginWindow();
+            _authorizationWindow.Hide();
+        }
+
+        #endregion
+
+        #region ShowRegistrationFormComman
+
+        public Command ShowRegistrationFormCommand { get; }
 
         private bool CanShowRegistrationFormCommandExecute(object p) => true;
 
         private void OnShowRegistrationFormCommandExecuted(object p)
         {
             var windowService = new DialogWindowService();
-            windowService.OpenWindow(this);
+            windowService.OpenRegistrationWindow();
             _authorizationWindow.Hide();
         }
 
@@ -82,7 +97,8 @@ namespace LauncherDM.ViewModels
         public AuthorizationWindowViewModel(Action closeWindow)
         {
             ToolbarVM = new ToolbarToWindowViewModel(closeWindow, Visibility.Visible);
-            ShowRegAndLogWindowCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
+            ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
+            ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
 
