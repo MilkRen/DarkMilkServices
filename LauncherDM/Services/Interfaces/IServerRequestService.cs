@@ -9,6 +9,10 @@ namespace LauncherDM.Services.Interfaces
 {
     interface IServerRequestService
     {
-        public string SendMessageRequestT<T>(T data, MessageHeader<T>.MessageType messageType, int length);
+        public MessageHeader SendMessageRequest(string data, MessageHeader.MessageType messageType, int length);
+
+        public MessageHeader SendMessageRequest(MessageHeader.MessageType messageType, int length);
+
+        //public string SendMessageRequestT<T>(T data, MessageHeader<T>.MessageType messageType, int length);
     }
 }

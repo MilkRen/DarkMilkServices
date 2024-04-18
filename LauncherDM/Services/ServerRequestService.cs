@@ -1,15 +1,21 @@
 ﻿using LauncherDM.Services.Interfaces;
 using ServerTCP;
 using System;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
+using System.Windows.Markup;
 
 namespace LauncherDM.Services
 {
+    /// <summary>
+    /// Для запросов на сервер
+    /// </summary>
     class ServerRequestService : IServerRequestService
     {
-        const string ip = DataInfo.Ip;
-        const int port = DataInfo.Port;
+        private static readonly string ip = DataInfo.Ip;
+        private static readonly int port = DataInfo.Port;
 
         private IPAddress ipAddress;
         private IPEndPoint endPoint;
@@ -20,7 +26,7 @@ namespace LauncherDM.Services
             endPoint = new IPEndPoint(ipAddress, port);
         }
 
-        public string SendMessageRequestT<T>(T data, MessageHeader<T>.MessageType messageType, int length)
+        public MessageHeader SendMessageRequest(string data, MessageHeader.MessageType messageType, int length)
         {
             try
             {
@@ -29,33 +35,28 @@ namespace LauncherDM.Services
                     var tcpClient = new TcpClient();
                     tcpClient.Connect(endPoint);
 
-                    var messageHeader = new MessageHeader<T>(data, messageType, length + MessageHeader<T>.LengthAndDataType);
+                    var messageHeader = new MessageHeader(data, messageType, length + MessageHeader.LengthAndDataType);
                     byte[] headerBytes = messageHeader.MessageToArray();
 
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);
 
-                    //WriteColorTextCmd("Сообщение отправил!");
-                    //var returnDataStrBuild = new StringBuilder();
-
                     do
                     {
                         byte[] getBytes = new byte[tcpClient.ReceiveBufferSize];
                         tcpStream.Read(getBytes, 0, tcpClient.ReceiveBufferSize);
-
-                        var header2 = MessageHeader<T>.FromArray(getBytes);
-                        switch (header2.Type)
-                        {
-                            case MessageHeader<T>.MessageType.Check:
-                                return header2.MessageString;
-                                break;
-                        }
+                        var defaultData = getBytes.Skip(1).Take(5);
+                        var size = 0;
+                        foreach (var sizeData in defaultData)
+                            size += sizeData;
+                        getBytes = getBytes.Take(size + MessageHeader.LengthAndDataType).ToArray();
+                        return MessageHeader.FromArray(getBytes);
                     } while (tcpStream.DataAvailable);
 
                     //WriteColorTextCmd("Получил сообщение: ");
                     //Console.Write(returnDataStrBuild);
                     tcpClient.Close();
-                    return string.Empty;
+                    //return string.Empty;
                 }
 
             }
@@ -63,7 +64,51 @@ namespace LauncherDM.Services
             {
                 IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
                 dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
-                return string.Empty;
+                //return string.Empty;
+            }
+
+
+            return null;
+        }
+
+        public MessageHeader SendMessageRequest(MessageHeader.MessageType messageType, int length)
+        {
+            TcpClient tcpClient = null;
+            try
+            {
+                while (true)
+                {
+                    tcpClient = new TcpClient();
+                    tcpClient.Connect(endPoint);
+
+                    var messageHeader = new MessageHeader(messageType, length);
+                    byte[] headerBytes = messageHeader.MessageToArray();
+
+                    NetworkStream tcpStream = tcpClient.GetStream();
+                    tcpStream.Write(headerBytes);
+
+                    do
+                    {
+                        byte[] getBytes = new byte[tcpClient.ReceiveBufferSize];
+                        tcpStream.Read(getBytes, 0, tcpClient.ReceiveBufferSize);
+                        var defaultData = getBytes.Skip(1).Take(5);
+                        var size = 0;
+                        foreach (var sizeData in defaultData)
+                            size += sizeData;
+                        getBytes = getBytes.Take(size + MessageHeader.LengthAndDataType).ToArray();
+                        return MessageHeader.FromArray(getBytes);
+                    } while (tcpStream.DataAvailable);
+                }
+            }
+            catch (Exception e)
+            {
+                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                return null;
+            }
+            finally
+            {
+                tcpClient?.Close();
             }
         }
     }

@@ -1,12 +1,9 @@
-﻿using System;
-using LauncherDM.Services;
+﻿using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
-using LauncherDM.ViewModels;
-using LauncherDM.Views.Windows;
-using System.Windows;
-using System.Threading;
+using System;
 using System.Reflection;
-using LauncherDM.ViewModel;
+using System.Threading;
+using System.Windows;
 
 namespace LauncherDM
 {

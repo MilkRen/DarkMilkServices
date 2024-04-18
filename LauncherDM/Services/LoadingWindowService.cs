@@ -1,4 +1,5 @@
-﻿using LauncherDM.Services.Interfaces;
+﻿using System;
+using LauncherDM.Services.Interfaces;
 using ServerTCP;
 
 namespace LauncherDM.Services
@@ -12,10 +13,8 @@ namespace LauncherDM.Services
             if (serverRequest is null)
                 serverRequest = new ServerRequestService();
 
-            var requestMessageServer = serverRequest.SendMessageRequestT<string>(string.Empty,
-                MessageHeader<string>.MessageType.Check, string.Empty.Length);
-
-            return !string.IsNullOrEmpty(requestMessageServer);
+            var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.Check, 0);
+            return requestMessageServer.Message == "1";
         }
 
         public void GetTitle()
@@ -23,8 +22,8 @@ namespace LauncherDM.Services
             if (serverRequest is null)
                 serverRequest = new ServerRequestService();
 
-            var requestMessageServer = serverRequest.SendMessageRequestT<string>(string.Empty,
-                    MessageHeader<string>.MessageType.Check, string.Empty.Length);
+            var requestMessageServer = serverRequest.SendMessageRequest(string.Empty,
+                    MessageHeader.MessageType.Check, string.Empty.Length);
         }
 
         public void DescInfoConnect()
@@ -32,8 +31,8 @@ namespace LauncherDM.Services
             if (serverRequest is null)
                 serverRequest = new ServerRequestService();
 
-            var requestMessageServer = serverRequest.SendMessageRequestT<string>(string.Empty,
-                MessageHeader<string>.MessageType.Check, string.Empty.Length);
+            var requestMessageServer = serverRequest.SendMessageRequest(string.Empty,
+                MessageHeader.MessageType.Check, string.Empty.Length);
         }
     }
 }

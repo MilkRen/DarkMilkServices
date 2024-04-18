@@ -9,11 +9,8 @@ namespace ClientTCP
     {
         static void Main(string[] args)
         {
-            const string ip = DataInfo.Ip;
-            const int port = DataInfo.Port;
-
-            IPAddress ipAddress = IPAddress.Parse(ip);
-            IPEndPoint endPoint = new IPEndPoint(ipAddress, port);
+            IPAddress ipAddress = IPAddress.Parse(DataInfo.Ip);
+            IPEndPoint endPoint = new IPEndPoint(ipAddress, DataInfo.Port);
 
             try
             {

@@ -56,9 +56,9 @@ namespace LauncherDM.ViewModels
 
         private void OnShowLoginFormCommandExecuted(object p)
         {
-            var windowService = new DialogWindowService();
-            windowService.OpenLoginWindow();
-            _authorizationWindow.Hide();
+            //var windowService = new DialogWindowService();
+            //windowService.OpenLoginWindow();
+            //_authorizationWindow.Hide();
         }
 
         #endregion
@@ -71,9 +71,9 @@ namespace LauncherDM.ViewModels
 
         private void OnShowRegistrationFormCommandExecuted(object p)
         {
-            var windowService = new DialogWindowService();
-            windowService.OpenRegistrationWindow();
-            _authorizationWindow.Hide();
+            //var windowService = new DialogWindowService();
+            //windowService.OpenRegistrationWindow();
+            //_authorizationWindow.Hide();
         }
 
         #endregion

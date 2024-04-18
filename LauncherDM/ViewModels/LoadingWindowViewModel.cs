@@ -1,9 +1,7 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
-using LauncherDM.Models;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
-using ServerTCP;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -79,16 +77,13 @@ namespace LauncherDM.ViewModels
         private void Load()
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
-            IServerRequestService serverRequest = new ServerRequestService();
+            ILoadingWindowService ServerCheck = new LoadingWindowService();
 
             Task.Run(() =>
             { 
                 if (checkNetwork.CheckingNetworkConnection())
                 {
-                    var requestMessageServer = serverRequest.SendMessageRequestT<string>(string.Empty,
-                        MessageHeader<string>.MessageType.Check, string.Empty.Length);
-
-                    if (!string.IsNullOrEmpty(requestMessageServer))
+                    if (ServerCheck.CheckRequestServer())
                     {
                         DescInfoConnect = "sd";
 

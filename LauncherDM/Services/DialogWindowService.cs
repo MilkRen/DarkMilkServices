@@ -1,10 +1,9 @@
 ﻿using LauncherDM.Services.Interfaces;
-using System;
-using System.Windows;
 using LauncherDM.ViewModel;
 using LauncherDM.ViewModels;
 using LauncherDM.Views.Windows;
-using System.Net;
+using System;
+using System.Windows;
 
 namespace LauncherDM.Services
 {
@@ -24,18 +23,18 @@ namespace LauncherDM.Services
             }
             else if (viewModel is AuthorizationWindowViewModel)
             {
-                var mainWindow = new MainWindow(); 
-                mainWindow.DataContext = new MainWindowViewModel();
-                mainWindow.Owner = Application.Current.MainWindow;
-                mainWindow.Show();
-                return;
-            }
-            else if (viewModel is RegAndLogWindowViewModel)
-            {
                 var regAndLogWindow = new RegAndLogWindow();
                 regAndLogWindow.DataContext = new RegAndLogWindowViewModel();
                 regAndLogWindow.Owner = Application.Current.MainWindow;
                 regAndLogWindow.Show();
+                return;
+            }
+            else if (viewModel is RegAndLogWindowViewModel)
+            {
+                var mainWindow = new MainWindow(); 
+                mainWindow.DataContext = new MainWindowViewModel();
+                mainWindow.Owner = Application.Current.MainWindow;
+                mainWindow.Show();
                 return;
             }
         }
