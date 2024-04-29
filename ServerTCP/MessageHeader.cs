@@ -29,6 +29,7 @@ namespace ServerTCP
             Data,
             Check,
             Title,
+            TitleLoading,
         }
 
         public MessageHeader(MessageType type, int length)

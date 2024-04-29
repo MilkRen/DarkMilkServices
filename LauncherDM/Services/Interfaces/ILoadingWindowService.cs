@@ -4,8 +4,8 @@
     {
         bool CheckRequestServer();
 
-        void GetTitle();
+        string GetTitle();
 
-        void DescInfoConnect();
+        string DescInfoConnect();
     }
 }

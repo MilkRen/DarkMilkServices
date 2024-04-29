@@ -1,11 +1,11 @@
 ﻿using LauncherDM.Services.Interfaces;
-using ServerTCP;
 using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Windows.Markup;
+using ServerTCP;
 
 namespace LauncherDM.Services
 {
@@ -28,11 +28,12 @@ namespace LauncherDM.Services
 
         public MessageHeader SendMessageRequest(string data, MessageHeader.MessageType messageType, int length)
         {
+            TcpClient tcpClient = null;
             try
             {
                 while (true)
                 {
-                    var tcpClient = new TcpClient();
+                    tcpClient = new TcpClient();
                     tcpClient.Connect(endPoint);
 
                     var messageHeader = new MessageHeader(data, messageType, length + MessageHeader.LengthAndDataType);
@@ -52,11 +53,6 @@ namespace LauncherDM.Services
                         getBytes = getBytes.Take(size + MessageHeader.LengthAndDataType).ToArray();
                         return MessageHeader.FromArray(getBytes);
                     } while (tcpStream.DataAvailable);
-
-                    //WriteColorTextCmd("Получил сообщение: ");
-                    //Console.Write(returnDataStrBuild);
-                    tcpClient.Close();
-                    //return string.Empty;
                 }
 
             }
@@ -64,14 +60,15 @@ namespace LauncherDM.Services
             {
                 IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
                 dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
-                //return string.Empty;
+                return null;
             }
-
-
-            return null;
+            finally
+            {
+                tcpClient?.Close();
+            }
         }
 
-        public MessageHeader SendMessageRequest(MessageHeader.MessageType messageType, int length)
+        public MessageHeader SendMessageRequest(MessageHeader.MessageType messageType)
         {
             TcpClient tcpClient = null;
             try
@@ -81,7 +78,7 @@ namespace LauncherDM.Services
                     tcpClient = new TcpClient();
                     tcpClient.Connect(endPoint);
 
-                    var messageHeader = new MessageHeader(messageType, length);
+                    var messageHeader = new MessageHeader(messageType, 0);
                     byte[] headerBytes = messageHeader.MessageToArray();
 
                     NetworkStream tcpStream = tcpClient.GetStream();

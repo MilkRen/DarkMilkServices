@@ -11,8 +11,6 @@ namespace LauncherDM.Services.Interfaces
     {
         public MessageHeader SendMessageRequest(string data, MessageHeader.MessageType messageType, int length);
 
-        public MessageHeader SendMessageRequest(MessageHeader.MessageType messageType, int length);
-
-        //public string SendMessageRequestT<T>(T data, MessageHeader<T>.MessageType messageType, int length);
+        public MessageHeader SendMessageRequest(MessageHeader.MessageType messageType);
     }
 }

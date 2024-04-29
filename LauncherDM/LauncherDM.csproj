@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClientTCP\ClientTCP.csproj" />
+    <ProjectReference Include="..\ServerTCP\ServerTCP.csproj" />
   </ItemGroup>
 
   <ItemGroup>

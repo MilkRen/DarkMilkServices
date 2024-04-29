@@ -77,15 +77,15 @@ namespace LauncherDM.ViewModels
         private void Load()
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
-            ILoadingWindowService ServerCheck = new LoadingWindowService();
+            ILoadingWindowService Server = new LoadingWindowService();
 
             Task.Run(() =>
             { 
                 if (checkNetwork.CheckingNetworkConnection())
                 {
-                    if (ServerCheck.CheckRequestServer())
+                    if (Server.CheckRequestServer())
                     {
-                        DescInfoConnect = "sd";
+                        DescInfoConnect = Server.GetTitle();
 
                         Thread.Sleep(5000);
                         _loadingWindow.Dispatcher.Invoke(() =>
