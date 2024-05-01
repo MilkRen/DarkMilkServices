@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LauncherDM.Source.Resource {
+namespace ServerTCP.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LauncherDM.Source.Resource {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceEng {
+    internal class Resource_rus {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceEng() {
+        internal Resource_rus() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LauncherDM.Source.Resource {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LauncherDM.Source.Resource.ResourceEng", typeof(ResourceEng).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ServerTCP.Resources.Resource_rus", typeof(Resource_rus).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

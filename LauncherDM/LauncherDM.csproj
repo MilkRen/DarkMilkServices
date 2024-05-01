@@ -86,27 +86,39 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Source\Resource\Resource.Designer.cs">
+    <Compile Update="Source\Resources\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Source\Resource\ResourceEng.Designer.cs">
+    <Compile Update="Source\Resources\ResourceEng.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceEng.resx</DependentUpon>
     </Compile>
+    <Compile Update="Source\Settings\SettingsApp.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SettingsApp.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Source\Resource\Resource.resx">
+    <EmbeddedResource Update="Source\Resources\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Source\Resource\ResourceEng.resx">
+    <EmbeddedResource Update="Source\Resources\ResourceEng.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceEng.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Source\Settings\SettingsApp.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SettingsApp.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

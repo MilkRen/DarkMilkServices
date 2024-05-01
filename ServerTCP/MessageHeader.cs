@@ -1,6 +1,4 @@
-﻿using System;
-using System.Buffers.Binary;
-using System.Drawing;
+﻿using System.Buffers.Binary;
 using System.Text;
 
 namespace ServerTCP
@@ -11,12 +9,6 @@ namespace ServerTCP
     public class MessageHeader
     {
         public const int LengthAndDataType = 6; // 1 байт тип данных, 5 байт размер 
-
-        public MessageType Type { get; }
-
-        public int Length { get; }
-
-        public string Message { get; }
 
         public enum MessageType : byte
         {
@@ -32,13 +24,28 @@ namespace ServerTCP
             TitleLoading,
         }
 
+        public enum Languages
+        {
+            rus,
+            eng
+        }
+
+        public MessageType Type { get; }
+
+        public Languages Language { get; }
+
+        public int Length { get; }
+
+        public object Message { get; }
+        public string Token { get; }
+
         public MessageHeader(MessageType type, int length)
         {
             Type = type;
             Length = length;
         }
 
-        public MessageHeader(string message, MessageType type, int length)
+        public MessageHeader(object message, MessageType type, int length)
         {
             Message = message;
             Type = type;
@@ -50,7 +57,8 @@ namespace ServerTCP
             byte[] message;
             var result = new byte[Length + LengthAndDataType];
             result[0] = (byte)Type;
-            BinaryPrimitives.WriteInt32LittleEndian(result.AsSpan()[1..5], Length);
+            result[1] = (byte)Language;
+            //BinaryPrimitives.WriteInt32LittleEndian(result.AsSpan()[1..5], Length);
 
             switch (Type)
             {
@@ -75,14 +83,11 @@ namespace ServerTCP
                 case MessageType.Data:
                     message = Encoding.UTF8.GetBytes("1");
                     break;
-                case MessageType.Check:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
                 default:
                     message = Encoding.UTF8.GetBytes("1");
                     break;
             }
-            Array.Copy(message, 0, result, 6, Length);
+            Array.Copy(message ?? [0], 0, result, 6, Length);
 
             return result;
         }

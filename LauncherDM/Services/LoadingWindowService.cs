@@ -23,7 +23,7 @@ namespace LauncherDM.Services
                 serverRequest = new ServerRequestService();
 
             var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.TitleLoading);
-            return requestMessageServer.Message;
+            return requestMessageServer.Message.ToString();
         }
 
         public string DescInfoConnect()
@@ -33,7 +33,7 @@ namespace LauncherDM.Services
 
             var requestMessageServer = serverRequest.SendMessageRequest(string.Empty,
                 MessageHeader.MessageType.Check, string.Empty.Length);
-            return requestMessageServer.Message;
+            return requestMessageServer.Message.ToString();
         }
     }
 }

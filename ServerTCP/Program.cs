@@ -2,6 +2,11 @@
 using System.Net.Sockets;
 using ServerTCP.DataBase;
 using ServerTCP.Models;
+using System.Security.Authentication;
+using System.Text;
+using System.Security.Cryptography.X509Certificates;
+using System.Reflection.Metadata;
+using System.Security.Cryptography;
 
 namespace ServerTCP
 {
@@ -92,6 +97,22 @@ namespace ServerTCP
                 {
                     Console.WriteLine(e.Message);
                 }
+            }
+        }
+
+        static void Send()
+        {
+            using (ECDiffieHellmanCng alice = new ECDiffieHellmanCng())
+            {
+
+                alice.KeyDerivationFunction = ECDiffieHellmanKeyDerivationFunction.Hash;
+                alice.HashAlgorithm = CngAlgorithm.Sha256;
+                var alicePublicKey = alice.PublicKey.ToByteArray();
+                CngKey bobKey = CngKey.Import(bob.bobPublicKey, CngKeyBlobFormat.EccPublicBlob);
+                byte[] aliceKey = alice.DeriveKeyMaterial(bobKey);
+                byte[] encryptedMessage = null;
+                byte[] iv = null;
+                Send(aliceKey, "Secret message", out encryptedMessage, out iv);
             }
         }
     }

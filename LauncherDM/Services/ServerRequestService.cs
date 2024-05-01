@@ -80,7 +80,6 @@ namespace LauncherDM.Services
 
                     var messageHeader = new MessageHeader(messageType, 0);
                     byte[] headerBytes = messageHeader.MessageToArray();
-
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);
 
