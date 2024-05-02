@@ -13,8 +13,11 @@ namespace LauncherDM.Services
             if (serverRequest is null)
                 serverRequest = new ServerRequestService();
 
-            var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.Check);
-            return requestMessageServer.Message == "1";
+            //var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.Check);
+            //return requestMessageServer.Message == "1";
+
+            var a = serverRequest.SendMessageRequest(MessageHeader.MessageType.Token);
+            return false;
         }
 
         public string GetTitle()

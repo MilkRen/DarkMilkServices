@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 namespace ServerTCP
@@ -31,28 +32,35 @@ namespace ServerTCP
                 try
                 {
                     Console.WriteLine("Ожидаем соединение через порт {0}", endPoint);
-                    var listener = tcpSocket.Accept(); // новый сокет для нового клиента
+                    var listener = tcpSocket.Accept(); // новый с   окет для нового клиента
                     Console.WriteLine("Подключился!");
                     var buffer = new byte[256]; // размер буфера .  максимум сообщение из 256 байт 
                     var size = 0; // количество реально полученных количества байт, потом чтобы оптимизировать память 
                     do
                     {
                         size = listener.Receive(buffer); // получение данных, количество, значение
-                        //buffer = buffer.Where(x => x != 0).ToArray();
-                        var header = MessageHeader.FromArray(buffer);
+                        //byte[] cleanBuffer;
+                        //var lenghtBuffer = buffer[3] + buffer[4] + buffer[5];
+                        //if (buffer[2] == 1)
+                        //    lenghtBuffer += 10;
+                        //cleanBuffer = buffer.Take(lenghtBuffer).ToArray();
+                        var header = MessageHeader.FromArray(buffer.Take(size).ToArray());
 
                         MessageHeader headerRequest = null;
                         byte[] headerRequestBytes;
+                        string message = string.Empty;
+                        bool loadToken = false;
                         switch (header.Type)
                         {
                             case MessageHeader.MessageType.Check:
                                 headerRequest = new MessageHeader("1", MessageHeader.MessageType.Check, 1);
-                                headerRequestBytes = headerRequest.MessageToArray();
-                                listener.Send(headerRequestBytes);
                                 break;
                             case MessageHeader.MessageType.Session:
                                 break;
                             case MessageHeader.MessageType.Token:
+                                message = "1234567890";
+                                loadToken = true;
+                                headerRequest = new MessageHeader(message, MessageHeader.MessageType.Token, message.Length);
                                 break;
                             case MessageHeader.MessageType.Registration:
                                 var user = new User
@@ -73,18 +81,11 @@ namespace ServerTCP
                                 break;
                             case MessageHeader.MessageType.TitleLoading:
                                 headerRequest = new MessageHeader("1", MessageHeader.MessageType.TitleLoading, 1);
-                                headerRequestBytes = headerRequest.MessageToArray();
-                                listener.Send(headerRequestBytes);
                                 break;
-
-                                //case MessageHeader<string>.MessageType.Title:
-                                //    string messageRequest = "Привет, пупс!";
-                                //    var header1 = new MessageHeader<string>(messageRequest, MessageHeader<string>.MessageType.Check, Encoding.UTF8.GetBytes(messageRequest).Length);
-                                //    byte[] headerBytes = header1.MessageToArray();
-                                //    listener.Send(headerBytes);
-                                //    break;
                         }
-                        //data.Append(Encoding.UTF8.GetString(buffer, 0, size)); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
+
+                        headerRequestBytes = headerRequest.MessageServerToArray(loadToken);
+                        listener.Send(headerRequestBytes);
                     }
                     while (listener.Available > 0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
 
@@ -97,22 +98,6 @@ namespace ServerTCP
                 {
                     Console.WriteLine(e.Message);
                 }
-            }
-        }
-
-        static void Send()
-        {
-            using (ECDiffieHellmanCng alice = new ECDiffieHellmanCng())
-            {
-
-                alice.KeyDerivationFunction = ECDiffieHellmanKeyDerivationFunction.Hash;
-                alice.HashAlgorithm = CngAlgorithm.Sha256;
-                var alicePublicKey = alice.PublicKey.ToByteArray();
-                CngKey bobKey = CngKey.Import(bob.bobPublicKey, CngKeyBlobFormat.EccPublicBlob);
-                byte[] aliceKey = alice.DeriveKeyMaterial(bobKey);
-                byte[] encryptedMessage = null;
-                byte[] iv = null;
-                Send(aliceKey, "Secret message", out encryptedMessage, out iv);
             }
         }
     }

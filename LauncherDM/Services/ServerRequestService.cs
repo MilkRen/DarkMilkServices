@@ -86,13 +86,8 @@ namespace LauncherDM.Services
                     do
                     {
                         byte[] getBytes = new byte[tcpClient.ReceiveBufferSize];
-                        tcpStream.Read(getBytes, 0, tcpClient.ReceiveBufferSize);
-                        var defaultData = getBytes.Skip(1).Take(5);
-                        var size = 0;
-                        foreach (var sizeData in defaultData)
-                            size += sizeData;
-                        getBytes = getBytes.Take(size + MessageHeader.LengthAndDataType).ToArray();
-                        return MessageHeader.FromArray(getBytes);
+                        var lengthByte =  tcpStream.Read(getBytes, 0, tcpClient.ReceiveBufferSize);
+                        return MessageHeader.FromArray(getBytes.Take(lengthByte).ToArray());
                     } while (tcpStream.DataAvailable);
                 }
             }
