@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using LauncherDM.Properties;
 
 namespace LauncherDM.ViewModels
 {
@@ -77,7 +78,8 @@ namespace LauncherDM.ViewModels
         private void Load()
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
-            ILoadingWindowService Server = new LoadingWindowService();
+            ILoadingWindowService server = new LoadingWindowService();
+            IResourcesHelperService resourcesHelper = new ResourcesHelperService();
 
             Task.Run(() =>
             { 
@@ -86,9 +88,9 @@ namespace LauncherDM.ViewModels
                     int countMs = 1000;
                     while (true)
                     {
-                        if (Server.CheckRequestServer())
+                        if (server.CheckRequestServer())
                         {
-                            DescInfoConnect = Server.GetTitle();
+                            DescInfoConnect = server.GetTitle();
 
                             Thread.Sleep(5000);
                             _loadingWindow.Dispatcher.Invoke(() =>
