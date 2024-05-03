@@ -83,29 +83,35 @@ namespace LauncherDM.ViewModels
             { 
                 if (checkNetwork.CheckingNetworkConnection())
                 {
-                    if (Server.CheckRequestServer())
+                    int countMs = 1000;
+                    while (true)
                     {
-                        DescInfoConnect = Server.GetTitle();
-
-                        Thread.Sleep(5000);
-                        _loadingWindow.Dispatcher.Invoke(() =>
+                        if (Server.CheckRequestServer())
                         {
-                            IDialogWindowService windowService = new DialogWindowService();
-                            windowService.OpenWindow(this);
-                            _loadingWindow.Hide();
-                        });
-                    }
-                    else
-                    {
-                        IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                        dialogMessageBox.DialogShow("s","s");
+                            DescInfoConnect = Server.GetTitle();
+
+                            Thread.Sleep(5000);
+                            _loadingWindow.Dispatcher.Invoke(() =>
+                            {
+                                IDialogWindowService windowService = new DialogWindowService();
+                                windowService.OpenWindow(this);
+                                _loadingWindow.Hide();
+                            });
+                        }
+                        else
+                        {
+                            IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                            dialogMessageBox.DialogShow("s", "s");
+                        }
                     }
                 }
                 else
+                {
                     _loadingWindow.Dispatcher.Invoke(() =>
                     {
                         Environment.Exit(0);
                     });
+                }
             });
         }
     }

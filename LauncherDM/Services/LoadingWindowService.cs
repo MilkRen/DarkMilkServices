@@ -13,11 +13,8 @@ namespace LauncherDM.Services
             if (serverRequest is null)
                 serverRequest = new ServerRequestService();
 
-            //var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.Check);
-            //return requestMessageServer.Message == "1";
-
-            var a = serverRequest.SendMessageRequest(MessageHeader.MessageType.Token);
-            return false;
+            var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.Check);
+            return requestMessageServer.Message.ToString() == "1";
         }
 
         public string GetTitle()
@@ -27,6 +24,11 @@ namespace LauncherDM.Services
 
             var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.TitleLoading);
             return requestMessageServer.Message.ToString();
+        }
+
+        public bool CheckUpdate()
+        {
+            throw new NotImplementedException();
         }
 
         public string DescInfoConnect()

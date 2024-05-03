@@ -6,6 +6,8 @@
 
         string GetTitle();
 
+        bool CheckUpdate();
+
         string DescInfoConnect();
     }
 }

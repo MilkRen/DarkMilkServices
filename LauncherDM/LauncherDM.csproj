@@ -86,15 +86,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Source\Resources\Resource.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Source\Resources\ResourceEng.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceEng.resx</DependentUpon>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Source\Settings\SettingsApp.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -104,13 +99,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Source\Resources\Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Properties\Resources.en.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Source\Resources\ResourceEng.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceEng.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
