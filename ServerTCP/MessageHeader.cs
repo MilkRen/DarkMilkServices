@@ -27,22 +27,16 @@ namespace ServerTCP
             TitleLoading,
         }
 
-        public enum Languages
-        {
-            rus,
-            eng
-        }
-
         public MessageType Type { get; }
 
-        public Languages Language { get; }
+        public MessageLanguages.Languages Language { get; }
 
         public int Length { get; }
 
         public object Message { get; }
         public string Token { get; }
 
-        public MessageHeader(MessageType type, Languages lang, string token, int length)
+        public MessageHeader(MessageType type, MessageLanguages.Languages lang, string token, int length)
         {
             Type = type;
             Language = lang;
@@ -50,7 +44,7 @@ namespace ServerTCP
             Length = length;
         }
 
-        public MessageHeader(object message, MessageType type, Languages lang, string token, int length)
+        public MessageHeader(object message, MessageType type, MessageLanguages.Languages lang, string token, int length)
         {
             Message = message;
             Type = type;
@@ -66,7 +60,7 @@ namespace ServerTCP
             Length = length;
         }
 
-        public MessageHeader(MessageType type, Languages lang, int length = 0)
+        public MessageHeader(MessageType type, MessageLanguages.Languages lang, int length = 0)
         {
             Type = type;
             Language = lang;
@@ -207,7 +201,7 @@ namespace ServerTCP
                     break;
                 case MessageHeader.MessageType.Token:
                     //return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..])); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
-                    return new MessageHeader((MessageType)buffer[0], (Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), buffer[3] + buffer[4] + buffer[5]);
+                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), buffer[3] + buffer[4] + buffer[5]);
                     break;
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.Log:
@@ -232,14 +226,14 @@ namespace ServerTCP
             switch ((MessageType)buffer[0])
             {
                 case MessageHeader.MessageType.Check:
-                    return new MessageHeader((MessageType)buffer[0], (Languages)buffer[1], 0);
+                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], 0);
                     break;
                 case MessageHeader.MessageType.Session:
                     return null;
                     break;
                 case MessageHeader.MessageType.Token:
                     //return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..])); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
-                    return new MessageHeader((MessageType)buffer[0], (Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), buffer[3] + buffer[4] + buffer[5]);
+                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), buffer[3] + buffer[4] + buffer[5]);
                     break;
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.Log:

@@ -1,9 +1,11 @@
 ﻿using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using System;
+using System.Globalization;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using ServerTCP;
 
 namespace LauncherDM
 {
@@ -17,16 +19,10 @@ namespace LauncherDM
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            //new MainWindow(){DataContext = new MainWindowViewModel()}.Show();
-            //var authorization = new AuthorizationWIndow();
-            //authorization.DataContext = new AuthorizationWindowViewModel(authorization.Close);
-
-            //authorization.Show();
-
-
             if (mutex.WaitOne(TimeSpan.Zero, true))
             {
                 base.OnStartup(e);
+                MessageLanguages.Language = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru" ? MessageLanguages.Languages.rus : MessageLanguages.Languages.eng;
                 IDialogWindowService windowService = new DialogWindowService();
                 windowService.OpenLoadingWindow();
                 mutex.ReleaseMutex();

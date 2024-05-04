@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LauncherDM.Source.Settings {
+namespace LauncherDM.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,18 +20,6 @@ namespace LauncherDM.Source.Settings {
         public static SettingsApp Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AccessToken {
-            get {
-                return ((string)(this["AccessToken"]));
-            }
-            set {
-                this["AccessToken"] = value;
             }
         }
     }

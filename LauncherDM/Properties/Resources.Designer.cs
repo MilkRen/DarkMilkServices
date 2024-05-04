@@ -61,11 +61,56 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Повторное подключение через {0} мс.
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string CloseApp {
+            get {
+                return ResourceManager.GetString("CloseApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка!.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нет подключения к интернету..
+        /// </summary>
+        internal static string EthernetClose {
+            get {
+                return ResourceManager.GetString("EthernetClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Повторное подключение через {0} мс....
         /// </summary>
         internal static string Reconnection {
             get {
                 return ResourceManager.GetString("Reconnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сервер недоступен..
+        /// </summary>
+        internal static string ServerClose {
+            get {
+                return ResourceManager.GetString("ServerClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Подключение....
+        /// </summary>
+        internal static string Сonnection {
+            get {
+                return ResourceManager.GetString("Сonnection", resourceCulture);
             }
         }
     }

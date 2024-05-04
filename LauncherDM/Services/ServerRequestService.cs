@@ -93,8 +93,8 @@ namespace LauncherDM.Services
             }
             catch (Exception e)
             {
-                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                //IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                //dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
                 return null;
             }
             finally

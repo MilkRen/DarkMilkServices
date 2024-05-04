@@ -13,6 +13,7 @@ namespace LauncherDM.Services
         public bool CheckingNetworkConnection()
         {
             IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+            IResourcesHelperService resourcesHelper = new ResourcesHelperService();
             try
             {
                 using var ping = new Ping();
@@ -24,7 +25,7 @@ namespace LauncherDM.Services
             }
             catch (PingException)
             {
-                dialogMessageBox.DialogShow("Ethernet error", "Ethernet error");
+                dialogMessageBox.DialogShow(resourcesHelper.LocalizationGet("Error"), resourcesHelper.LocalizationGet("EthernetClose"));
                 return false;
             }
         }

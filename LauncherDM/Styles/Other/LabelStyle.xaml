@@ -27,6 +27,15 @@
     <Style x:Key="DescFont" TargetType="Label">
         <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
         <Setter Property="Foreground" Value="White"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Button.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1"  To="0.5" Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

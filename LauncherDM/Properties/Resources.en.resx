@@ -12,6 +12,21 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="Reconnection" xml:space="preserve">
-		<value>Reconnect after {0} ms</value>
+		<value>Reconnect after {0} ms...</value>
+	</data>
+	<data name="ServerClose" xml:space="preserve">
+		<value>The server is unavailable.</value>
+	</data>
+	<data name="Error" xml:space="preserve">
+		<value>Error!</value>
+	</data>
+	<data name="Сonnection" xml:space="preserve">
+		<value>Сonnection...</value>
+	</data>
+	<data name="EthernetClose" xml:space="preserve">
+		<value>There is no internet connection.</value>
+	</data>
+	<data name="CloseApp" xml:space="preserve">
+		<value>Close the application</value>
 	</data>
 </root>

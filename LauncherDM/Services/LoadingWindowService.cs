@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using LauncherDM.Services.Interfaces;
 using ServerTCP;
 
@@ -14,7 +15,7 @@ namespace LauncherDM.Services
                 serverRequest = new ServerRequestService();
 
             var requestMessageServer = serverRequest.SendMessageRequest(MessageHeader.MessageType.Check);
-            return requestMessageServer.Message.ToString() == "1";
+            return requestMessageServer?.Message.ToString() == "1";
         }
 
         public string GetTitle()
@@ -28,7 +29,8 @@ namespace LauncherDM.Services
 
         public bool CheckUpdate()
         {
-            throw new NotImplementedException();
+            var curver = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+            return false;
         }
 
         public string DescInfoConnect()

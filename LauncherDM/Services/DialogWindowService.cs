@@ -57,7 +57,7 @@ namespace LauncherDM.Services
         public void OpenLoadingWindow()
         {
             var loadingWindow = new LoadingWindow();
-            loadingWindow.DataContext = new LoadingWindowViewModel();
+            loadingWindow.DataContext = new LoadingWindowViewModel(new ResourcesHelperService());
             loadingWindow.Show();
         }
     }

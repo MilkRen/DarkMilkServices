@@ -3,11 +3,13 @@ using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using LauncherDM.Properties;
+using System.Diagnostics;
 
 namespace LauncherDM.ViewModels
 {
@@ -19,13 +21,18 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region Services
+
+        private readonly IResourcesHelperService _resourcesHelper;
+
+        #endregion
+
         #region Bindings
 
         #region Заголовок окна
 
         private string _title = "DarkMilk";
 
-        /// <summary>Заголовок окна</summary>
         public string Title
         {
             get => _title;
@@ -38,7 +45,6 @@ namespace LauncherDM.ViewModels
 
         private string _descInfoConnect;
 
-        /// <summary>Заголовок окна</summary>
         public string DescInfoConnect
         {
             get => _descInfoConnect;
@@ -47,11 +53,18 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region MenuItem
+
+        public string CloseApp => _resourcesHelper.LocalizationGet("CloseApp");
+
+
+        #endregion
+
         #endregion
 
         #region Commmands
 
-        #region MoveWindowCommand
+        #region MoveWindow
 
         public Command MoveWindowCommand { get; }
         private bool CanMoveWindowCommandExecute(object p) => true;
@@ -63,57 +76,81 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        #endregion
+        #region CloseWindow
 
-        #region Ctor
-
-        public LoadingWindowViewModel()
+        public Command CloseWindowCommand { get; }
+        private bool CanCloseWindowCommandExecute(object p) => true;
+        private void OnCloseWindowCommandExecuted(object p)
         {
-            MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
-            Load();
+            Environment.Exit(0);
         }
 
         #endregion
 
-        private void Load()
+        #endregion
+
+        #region Ctor
+
+        public LoadingWindowViewModel(ResourcesHelperService resourcesHelper)
+        {
+            _resourcesHelper = resourcesHelper;
+            MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+            CloseWindowCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+            Loading();
+        }
+
+        #endregion
+
+        private void Loading()
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
             ILoadingWindowService server = new LoadingWindowService();
-            IResourcesHelperService resourcesHelper = new ResourcesHelperService();
 
             Task.Run(() =>
-            { 
-                if (checkNetwork.CheckingNetworkConnection())
+            {
+                DescInfoConnect = _resourcesHelper.LocalizationGet("Сonnection");
+                if (!checkNetwork.CheckingNetworkConnection())
                 {
-                    int countMs = 1000;
-                    while (true)
-                    {
-                        if (server.CheckRequestServer())
-                        {
-                            DescInfoConnect = server.GetTitle();
+                    OpenWindow();
+                    return;
+                }
 
-                            Thread.Sleep(5000);
-                            _loadingWindow.Dispatcher.Invoke(() =>
-                            {
-                                IDialogWindowService windowService = new DialogWindowService();
-                                windowService.OpenWindow(this);
-                                _loadingWindow.Hide();
-                            });
-                        }
-                        else
+                var countMs = 0;
+                while (true)
+                {
+                    if (server.CheckRequestServer())
+                    {
+                        DescInfoConnect = server.GetTitle();
+                        server.CheckUpdate();
+                        Thread.Sleep(5000);
+                        OpenWindow();
+                    }
+                    else
+                    {
+                        if (countMs >= 10000)
                         {
                             IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                            dialogMessageBox.DialogShow("s", "s");
+                            dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ServerClose"));
+                            break;
                         }
+
+                        countMs += 2000;
+                        DescInfoConnect = string.Format(CultureInfo.InvariantCulture,
+                            _resourcesHelper.LocalizationGet("Reconnection"), countMs);
+                        Thread.Sleep(5000);
                     }
                 }
-                else
-                {
-                    _loadingWindow.Dispatcher.Invoke(() =>
-                    {
-                        Environment.Exit(0);
-                    });
-                }
+                OpenWindow();
+            });
+        }
+
+        private void OpenWindow()
+        {
+            _loadingWindow.Dispatcher.Invoke(() =>
+            {
+                IDialogWindowService windowService = new DialogWindowService();
+                windowService.OpenWindow(this);
+                _loadingWindow.Hide();
             });
         }
     }

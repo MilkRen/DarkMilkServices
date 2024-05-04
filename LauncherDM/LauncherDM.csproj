@@ -91,7 +91,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Source\Settings\SettingsApp.Designer.cs">
+    <Compile Update="Properties\SettingsApp.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>SettingsApp.settings</DependentUpon>
@@ -109,7 +109,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Source\Settings\SettingsApp.settings">
+    <None Update="Properties\SettingsApp.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>SettingsApp.Designer.cs</LastGenOutput>
     </None>
