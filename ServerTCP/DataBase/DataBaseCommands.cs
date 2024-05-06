@@ -10,11 +10,8 @@ namespace ServerTCP.DataBase
         {
             using (var db = new ApplicationContext())
             {
-                if (db.Database.CanConnect())
-                    ConsoleExtension.WriteLineColor("База данных доступна.", ConsoleColor.DarkGreen);
-                else
-                    ConsoleExtension.WriteLineColor("База данных не доступна!", ConsoleColor.DarkRed);
-                
+                CheckConnect(db);
+
                 switch (messageType)
                 {
                     case MessageHeader.MessageType.Registration:
@@ -24,6 +21,38 @@ namespace ServerTCP.DataBase
                 }
                 db.SaveChanges();
             }
+        }
+
+        public static object Select(MessageHeader.MessageType messageType)
+        {
+            using (var db = new ApplicationContext())
+            {
+                CheckConnect(db);
+                object result = null;
+                switch (messageType)
+                {
+                    case MessageHeader.MessageType.Version:
+                        var appWPF = db.apps.Where(x => x.parametername == "wpfDMVersion").ToArray();
+                        result = appWPF[0].parametervalue;
+                        break;
+                    default: 
+                        result = null;                     
+                        break;
+                }
+
+                if (result is null)
+                    throw new ArgumentNullException(nameof(result));
+
+                return result;
+            }
+        }
+
+        private static void CheckConnect(ApplicationContext db)
+        {
+            if (db.Database.CanConnect())
+                ConsoleExtension.WriteLineColor("База данных доступна.", ConsoleColor.DarkGreen);
+            else
+                ConsoleExtension.WriteLineColor("База данных не доступна!", ConsoleColor.DarkRed);
         }
 
     }

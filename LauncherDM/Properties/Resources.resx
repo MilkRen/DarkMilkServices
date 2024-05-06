@@ -102,7 +102,7 @@
 		<value>Повторное подключение через {0} мс...</value>
 	</data>
 	<data name="ServerClose" xml:space="preserve">
-		<value>Сервер недоступен.</value>
+		<value>Сервер недоступен (автономный режим).</value>
 	</data>
 	<data name="Error" xml:space="preserve">
 		<value>Ошибка!</value>

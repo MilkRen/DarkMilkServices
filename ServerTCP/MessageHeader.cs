@@ -18,6 +18,7 @@ namespace ServerTCP
             Session,
             Token,
             Registration,
+            Version,
             Log,
             File,
             Photo,
@@ -31,46 +32,39 @@ namespace ServerTCP
 
         public MessageLanguages.Languages Language { get; }
 
-        public int Length { get; }
-
         public object Message { get; }
         public string Token { get; }
 
-        public MessageHeader(MessageType type, MessageLanguages.Languages lang, string token, int length)
+        public MessageHeader(MessageType type, MessageLanguages.Languages lang, string token)
         {
             Type = type;
             Language = lang;
             Token = token;
-            Length = length;
         }
 
-        public MessageHeader(object message, MessageType type, MessageLanguages.Languages lang, string token, int length)
+        public MessageHeader(object message, MessageType type, MessageLanguages.Languages lang, string token)
         {
             Message = message;
             Type = type;
             Language = lang;
             Token = token;
-            Length = length;
         }
 
-        public MessageHeader(object message, MessageType type, int length)
+        public MessageHeader(object message, MessageType type)
         {
             Message = message;
             Type = type;
-            Length = length;
         }
 
-        public MessageHeader(MessageType type, MessageLanguages.Languages lang, int length = 0)
+        public MessageHeader(MessageType type, MessageLanguages.Languages lang)
         {
             Type = type;
             Language = lang;
-            Length = length;
         }
 
-        public MessageHeader(MessageType type, int length = 0)
+        public MessageHeader(MessageType type)
         {
             Type = type;
-            Length = length;
         }
 
         /// <summary>
@@ -80,48 +74,32 @@ namespace ServerTCP
         /// <returns></returns>
         public byte[] MessageToArray(bool loadToken = false)
         {
-            byte[] message;
-            int lengthByte = loadToken ? Length + TokenLength + LengthAndDataType : Length + LengthAndDataType;
+            var message = new byte[]{};
+
+            //switch (Type)
+            //{
+            //    default:
+            //        return result;
+            //        break;
+            //}
+
+            var messageLength = message.Length;
+            int lengthByte = loadToken ? messageLength + TokenLength + LengthAndDataType : messageLength + LengthAndDataType;
 
             var result = new byte[lengthByte];
             result[0] = (byte)Type;
             result[1] = (byte)Language;
             result[2] = loadToken ? (byte)1 : (byte)0; // 1 - токен есть | 0 - без токена(размер токена 10 байт)
-            if (Length > 0)
+            if (messageLength > 0)
                 BinaryPrimitives.WriteInt32LittleEndian(result.AsSpan().Slice(3, 5), lengthByte);
 
-            switch (Type)
-            {
-                case MessageType.Session:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Registration:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Log:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.File:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Photo:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Data:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                default:
-                    return result;
-                    break;
-            }
-
-            if (loadToken)
-            {
-                Array.Copy(Encoding.UTF8.GetBytes("1234567890"), 0, result, LengthAndDataType, TokenLength);
-                Array.Copy(message ?? [0], 0, result, LengthAndDataType + TokenLength, Length);
-            }
-            else
-                Array.Copy(message ?? [0], 0, result, 6, Length);
+            //if (loadToken)
+            //{
+            //    Array.Copy(Encoding.UTF8.GetBytes("1234567890"), 0, result, LengthAndDataType, TokenLength);
+            //    Array.Copy(message ?? [0], 0, result, LengthAndDataType + TokenLength, Length);
+            //}
+            //else
+            //    Array.Copy(message ?? [0], 0, result, 6, Length);
                 
             return result;
         }
@@ -133,45 +111,15 @@ namespace ServerTCP
         /// <returns></returns>
         internal byte[] MessageServerToArray(bool loadToken = false)
         {
-            byte[] message;
-            int lengthByte = loadToken ? Length + TokenLength + LengthAndDataType : Length + LengthAndDataType;
-
-            var result = new byte[lengthByte];
-            result[0] = (byte)Type;
-            result[1] = (byte)Language;
-            result[2] = loadToken ? (byte)1 : (byte)0; // 1 - токен есть | 0 - без токена(размер токена 10 байт)
-            lengthByte += 1000;
-            var bytes = BitConverter.GetBytes(lengthByte).Where(x => x != 0).ToArray();
-
-            if (bytes.Length > 3)
-                throw new ArgumentException(nameof(bytes));
-
-            Array.Copy(bytes, 0, result, 3, bytes.Length);
-
+            var message = new byte[] { };
 
             switch (Type)
             {
-                case MessageType.Session:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
                 case MessageType.Token:
                     message = Encoding.UTF8.GetBytes("1234567890");
                     break;
-                case MessageType.Registration:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Log:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.File:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Photo:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
-                case MessageType.Data:
-                    message = Encoding.UTF8.GetBytes("1");
-                    break;
+                case MessageType.TitleLoading:
+                case MessageType.Version:
                 case MessageType.Check:
                     message = Encoding.UTF8.GetBytes(Message.ToString());
                     break;
@@ -180,12 +128,25 @@ namespace ServerTCP
                     break;
             }
 
-            Array.Copy(message ?? [0], 0, result, LengthAndDataType, Length);
+            var messageLength = message.Length;
+            var lengthByte = loadToken ? messageLength + TokenLength + LengthAndDataType : messageLength + LengthAndDataType;
+            var result = new byte[lengthByte];
+            result[0] = (byte)Type;
+            result[1] = (byte)Language;
+            result[2] = loadToken ? (byte)1 : (byte)0; // 1 - токен есть | 0 - без токена(размер токена 10 байт)
+            var bytes = BitConverter.GetBytes(lengthByte).Where(x => x != 0).ToArray();
+
+            if (bytes.Length > 3)
+                throw new ArgumentException(nameof(bytes));
+
+            Array.Copy(bytes, 0, result, 3, bytes.Length);
+
+            Array.Copy(message ?? [0], 0, result, LengthAndDataType, messageLength);
             return result;
         }
 
         /// <summary>
-        /// Распаковка сообщения для клиента
+        /// Распаковка сообщения
         /// </summary>
         /// <param name="buffer"></param>
         /// <returns></returns>
@@ -193,58 +154,25 @@ namespace ServerTCP
         {
             switch ((MessageType)buffer[0])
             {
+                case MessageHeader.MessageType.TitleLoading:
+                case MessageHeader.MessageType.Version:
                 case MessageHeader.MessageType.Check:
-                    return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], 0);  
-                    break;
-                case MessageHeader.MessageType.Session:
-                    return null;
+                    return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0]);  
                     break;
                 case MessageHeader.MessageType.Token:
                     //return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..])); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
-                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), buffer[3] + buffer[4] + buffer[5]);
+                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType));
                     break;
+                case MessageHeader.MessageType.Session:
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.Log:
                 case MessageHeader.MessageType.File:
                 case MessageHeader.MessageType.Photo:
                 case MessageHeader.MessageType.Data:
                 case MessageHeader.MessageType.Title:
-                case MessageHeader.MessageType.TitleLoading:
                 default:
                     return null;
                 break;
-            }
-        }
-
-        /// <summary>
-        /// Распаковка сообщения для сервера
-        /// </summary>
-        /// <param name="buffer"></param>
-        /// <returns></returns>
-        internal static MessageHeader ServerFromArray(ReadOnlySpan<byte> buffer)
-        {
-            switch ((MessageType)buffer[0])
-            {
-                case MessageHeader.MessageType.Check:
-                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], 0);
-                    break;
-                case MessageHeader.MessageType.Session:
-                    return null;
-                    break;
-                case MessageHeader.MessageType.Token:
-                    //return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..])); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
-                    return new MessageHeader((MessageType)buffer[0], (MessageLanguages.Languages)buffer[1], Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), buffer[3] + buffer[4] + buffer[5]);
-                    break;
-                case MessageHeader.MessageType.Registration:
-                case MessageHeader.MessageType.Log:
-                case MessageHeader.MessageType.File:
-                case MessageHeader.MessageType.Photo:
-                case MessageHeader.MessageType.Data:
-                case MessageHeader.MessageType.Title:
-                case MessageHeader.MessageType.TitleLoading:
-                default:
-                    return null;
-                    break;
             }
         }
     }

@@ -39,11 +39,6 @@ namespace ServerTCP
                     do
                     {
                         size = listener.Receive(buffer); // получение данных, количество, значение
-                        //byte[] cleanBuffer;
-                        //var lenghtBuffer = buffer[3] + buffer[4] + buffer[5];
-                        //if (buffer[2] == 1)
-                        //    lenghtBuffer += 10;
-                        //cleanBuffer = buffer.Take(lenghtBuffer).ToArray();
                         var header = MessageHeader.FromArray(buffer.Take(size).ToArray());
 
                         MessageHeader headerRequest = null;
@@ -53,14 +48,12 @@ namespace ServerTCP
                         switch (header.Type)
                         {
                             case MessageHeader.MessageType.Check:
-                                headerRequest = new MessageHeader("1", MessageHeader.MessageType.Check, 1);
-                                break;
-                            case MessageHeader.MessageType.Session:
+                                headerRequest = new MessageHeader("1", MessageHeader.MessageType.Check);
                                 break;
                             case MessageHeader.MessageType.Token:
                                 message = "1234567890";
                                 loadToken = true;
-                                headerRequest = new MessageHeader(message, MessageHeader.MessageType.Token, message.Length);
+                                headerRequest = new MessageHeader(message, MessageHeader.MessageType.Token);
                                 break;
                             case MessageHeader.MessageType.Registration:
                                 var user = new User
@@ -69,23 +62,21 @@ namespace ServerTCP
                                 };
                                 DataBaseCommands.Insert(user, MessageHeader.MessageType.Registration);
                                 break;
-                            case MessageHeader.MessageType.Log:
-                                break;
-                            case MessageHeader.MessageType.File:
-                                break;
-                            case MessageHeader.MessageType.Photo:
-                                break;
-                            case MessageHeader.MessageType.Data:
-                                break;
-                            case MessageHeader.MessageType.Title:
-                                break;
                             case MessageHeader.MessageType.TitleLoading:
-                                headerRequest = new MessageHeader("1", MessageHeader.MessageType.TitleLoading, 1);
+                                var tx = "Привет, славяне!";
+                                headerRequest = new MessageHeader(tx, MessageHeader.MessageType.TitleLoading);
+                                break;
+                            case MessageHeader.MessageType.Version:
+                                var version = DataBaseCommands.Select(MessageHeader.MessageType.Version);
+                                headerRequest = new MessageHeader(version.ToString(), MessageHeader.MessageType.Version);
                                 break;
                         }
 
-                        headerRequestBytes = headerRequest.MessageServerToArray(loadToken);
-                        listener.Send(headerRequestBytes);
+                        if (headerRequest is not null)
+                        {
+                            headerRequestBytes = headerRequest.MessageServerToArray(loadToken);
+                            listener.Send(headerRequestBytes);
+                        }
                     }
                     while (listener.Available > 0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
 

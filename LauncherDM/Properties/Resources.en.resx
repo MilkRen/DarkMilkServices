@@ -15,7 +15,7 @@
 		<value>Reconnect after {0} ms...</value>
 	</data>
 	<data name="ServerClose" xml:space="preserve">
-		<value>The server is unavailable.</value>
+		<value>The server is unavailable (offline mode).</value>
 	</data>
 	<data name="Error" xml:space="preserve">
 		<value>Error!</value>

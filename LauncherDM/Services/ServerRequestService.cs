@@ -14,16 +14,16 @@ namespace LauncherDM.Services
     /// </summary>
     class ServerRequestService : IServerRequestService
     {
-        private static readonly string ip = DataInfo.Ip;
-        private static readonly int port = DataInfo.Port;
+        private static readonly string _ip = DataInfo.Ip;
+        private static readonly int _port = DataInfo.Port;
 
-        private IPAddress ipAddress;
-        private IPEndPoint endPoint;
+        private IPAddress _ipAddress;
+        private IPEndPoint _endPoint;
 
         public ServerRequestService()
         {
-            ipAddress = IPAddress.Parse(ip);
-            endPoint = new IPEndPoint(ipAddress, port);
+            _ipAddress = IPAddress.Parse(_ip);
+            _endPoint = new IPEndPoint(_ipAddress, _port);
         }
 
         public MessageHeader SendMessageRequest(string data, MessageHeader.MessageType messageType, int length)
@@ -34,9 +34,9 @@ namespace LauncherDM.Services
                 while (true)
                 {
                     tcpClient = new TcpClient();
-                    tcpClient.Connect(endPoint);
+                    tcpClient.Connect(_endPoint);
 
-                    var messageHeader = new MessageHeader(data, messageType, length + MessageHeader.LengthAndDataType);
+                    var messageHeader = new MessageHeader(data, messageType);
                     byte[] headerBytes = messageHeader.MessageToArray();
 
                     NetworkStream tcpStream = tcpClient.GetStream();
@@ -76,16 +76,16 @@ namespace LauncherDM.Services
                 while (true)
                 {
                     tcpClient = new TcpClient();
-                    tcpClient.Connect(endPoint);
+                    tcpClient.Connect(_endPoint);
 
-                    var messageHeader = new MessageHeader(messageType, 0);
+                    var messageHeader = new MessageHeader(messageType);
                     byte[] headerBytes = messageHeader.MessageToArray();
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);
 
                     do
                     {
-                        byte[] getBytes = new byte[tcpClient.ReceiveBufferSize];
+                        var getBytes = new byte[tcpClient.ReceiveBufferSize];
                         var lengthByte =  tcpStream.Read(getBytes, 0, tcpClient.ReceiveBufferSize);
                         return MessageHeader.FromArray(getBytes.Take(lengthByte).ToArray());
                     } while (tcpStream.DataAvailable);

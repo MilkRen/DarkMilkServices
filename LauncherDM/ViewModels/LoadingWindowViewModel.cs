@@ -8,8 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using LauncherDM.Properties;
-using System.Diagnostics;
 
 namespace LauncherDM.ViewModels
 {
@@ -104,7 +102,7 @@ namespace LauncherDM.ViewModels
         private void Loading()
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
-            ILoadingWindowService server = new LoadingWindowService();
+            ILoadingWindowService server = new LoadingWindowService(new ServerRequestService());
 
             Task.Run(() =>
             {
@@ -124,6 +122,7 @@ namespace LauncherDM.ViewModels
                         server.CheckUpdate();
                         Thread.Sleep(5000);
                         OpenWindow();
+                        break;
                     }
                     else
                     {
@@ -131,16 +130,16 @@ namespace LauncherDM.ViewModels
                         {
                             IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
                             dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ServerClose"));
+                            OpenWindow();
                             break;
                         }
 
                         countMs += 2000;
                         DescInfoConnect = string.Format(CultureInfo.InvariantCulture,
                             _resourcesHelper.LocalizationGet("Reconnection"), countMs);
-                        Thread.Sleep(5000);
+                        Thread.Sleep(countMs);
                     }
                 }
-                OpenWindow();
             });
         }
 
