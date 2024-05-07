@@ -29,4 +29,31 @@
 	<data name="CloseApp" xml:space="preserve">
 		<value>Close the application</value>
 	</data>
+	<data name="ConnectClose" xml:space="preserve">
+		<value>The server has terminated the connection.</value>
+	</data>
+	<data name="Login" xml:space="preserve">
+		<value>Login</value>
+	</data>
+	<data name="Password" xml:space="preserve">
+		<value>Password</value>
+	</data>
+	<data name="RememberPassword" xml:space="preserve">
+		<value>Remember the password</value>
+	</data>
+	<data name="RememberMe" xml:space="preserve">
+		<value>Remember me</value>
+	</data>
+	<data name="Authorization" xml:space="preserve">
+		<value>Authorization</value>
+	</data>
+	<data name="SignUp" xml:space="preserve">
+		<value>Sign Up</value>
+	</data>
+	<data name="ConfirmPassword" xml:space="preserve">
+		<value>Confirm password</value>
+	</data>
+	<data name="ForgotPassword" xml:space="preserve">
+		<value>Forgot password</value>
+	</data>
 </root>

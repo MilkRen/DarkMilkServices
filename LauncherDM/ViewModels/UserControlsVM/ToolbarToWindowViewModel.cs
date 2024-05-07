@@ -16,6 +16,10 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private Action _closeWidnowAction;
 
+        private Action _minWindowAction;
+
+        private Action _maxWindowAction;
+
         #endregion
 
         #region Properties
@@ -38,8 +42,9 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-
         #region Commands
+
+        #region CloseWindow
 
         public Command CloseWindowActionCommand { get; }
 
@@ -54,11 +59,62 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-        public ToolbarToWindowViewModel(Action closeWidnow, Visibility visibilityMinBut = Visibility.Visible)
+        #region CloseApp
+
+        private bool CanCloseAppCommandExecute(object p) => true;
+
+        private void OnCloseAppCommandExecuted(object p)
         {
-            VisibilityMinBut = visibilityMinBut;
+            Environment.Exit(0);
+        }
+
+        #endregion
+
+        #region Maximize
+
+        public Command MaximizeWindowCommand { get; }
+
+        private bool CanMaximizeWindowCommandExecute(object p) => true;
+
+        private void OnMaximizeWindowCommandExecuted(object p)
+        {
+            var windowService = new DialogWindowService();
+            windowService.MaxWindowAction = _maxWindowAction;
+            windowService.MaxWindow();
+        }
+
+        #endregion
+
+        #region Minimize
+
+        public Command MinimizeWindowCommand { get; }
+
+        private bool CanMinimizeWindowCommandExecute(object p) => true;
+
+        private void OnMinimizeWindowCommandExecuted(object p)
+        {
+            var windowService = new DialogWindowService();
+            windowService.MinWindowAction = _minWindowAction;
+            windowService.MinWindow();
+        }
+
+        #endregion
+
+        #endregion
+
+        public ToolbarToWindowViewModel(Action closeWidnow)
+        {
             _closeWidnowAction = closeWidnow;
             CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+        }
+
+        public ToolbarToWindowViewModel(Action minWindowAction, Action maxWindowAction)
+        {
+            _minWindowAction = minWindowAction;
+            _maxWindowAction = maxWindowAction;
+            CloseWindowActionCommand = new lambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
+            MinimizeWindowCommand = new lambdaCommand(OnMinimizeWindowCommandExecuted, CanMinimizeWindowCommandExecute);
+            MaximizeWindowCommand = new lambdaCommand(OnMaximizeWindowCommandExecuted, CanMaximizeWindowCommandExecute);
         }
     }
 }

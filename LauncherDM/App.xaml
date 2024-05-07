@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Styles/Other/BorderStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ContextMenuStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ImageStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

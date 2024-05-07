@@ -15,6 +15,8 @@ namespace LauncherDM.ViewModels
     {
         #region Fields
 
+        private Action _hideWindow;
+
         private readonly Window _loadingWindow = Application.Current.MainWindow;
 
         #endregion
@@ -27,7 +29,7 @@ namespace LauncherDM.ViewModels
 
         #region Bindings
 
-        #region Заголовок окна
+        #region Title
 
         private string _title = "DarkMilk";
 
@@ -39,7 +41,7 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        #region Описание
+        #region Description
 
         private string _descInfoConnect;
 
@@ -54,7 +56,6 @@ namespace LauncherDM.ViewModels
         #region MenuItem
 
         public string CloseApp => _resourcesHelper.LocalizationGet("CloseApp");
-
 
         #endregion
 
@@ -89,9 +90,10 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public LoadingWindowViewModel(ResourcesHelperService resourcesHelper)
+        public LoadingWindowViewModel(Action hideWindow,ResourcesHelperService resourcesHelper)
         {
             _resourcesHelper = resourcesHelper;
+            _hideWindow = hideWindow;
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
             CloseWindowCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
             Loading();
@@ -103,6 +105,8 @@ namespace LauncherDM.ViewModels
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
             ILoadingWindowService server = new LoadingWindowService(new ServerRequestService());
+            OpenWindow();
+            return;
 
             Task.Run(() =>
             {
@@ -149,7 +153,8 @@ namespace LauncherDM.ViewModels
             {
                 IDialogWindowService windowService = new DialogWindowService();
                 windowService.OpenWindow(this);
-                _loadingWindow.Hide();
+                windowService.HideAction = _hideWindow;
+                windowService.HideWindow();
             });
         }
     }

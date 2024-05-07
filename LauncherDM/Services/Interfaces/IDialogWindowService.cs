@@ -6,15 +6,26 @@ namespace LauncherDM.Services.Interfaces
     public interface IDialogWindowService
     { 
         Action CloseAction { get; set; } 
+
+        Action HideAction { get; set; } 
+
+        Action MaxWindowAction { get; set; } 
+        
+        Action MinWindowAction { get; set; } 
         
         void OpenWindow(object viewModel);
         
         void CloseWindow();
         
-        void ShowWindow(Window window);
-        
-        void HideWindow(Window window);
+        void HideWindow();
+
+        void MaxWindow();
+
+        void MinWindow();
 
         void OpenLoadingWindow();
+
+        void OpenAccountRecovery();
+
     }
 }

@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
-    <ApplicationIcon>Source\Images\Logo\OnlyLogoTwo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +13,6 @@
     <None Remove="Source\Images\Logo\Logo.png" />
     <None Remove="Source\Images\Logo\MilkBottle.png" />
     <None Remove="Source\Images\Logo\OnlyLogo.png" />
-    <None Remove="Source\Images\Logo\OnlyLogoTwo.ico" />
     <None Remove="Source\Images\ToolBar\Close.png" />
     <None Remove="Source\Images\ToolBar\CloseBlack.png" />
     <None Remove="Source\Images\ToolBar\Down.png" />
@@ -26,16 +24,6 @@
     <None Remove="Source\Images\ToolBar\Up.png" />
     <None Remove="Source\Images\ToolBar\UpBlack.png" />
     <None Remove="Source\Images\ToolBar\World.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Source\Images\Logo\OnlyLogoTwo.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Source\Images\Logo\OnlyLogoTwo.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -63,9 +51,7 @@
     <Resource Include="Source\Images\Logo\MilkBottle.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Source\Images\Logo\OnlyLogo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Source\Images\Logo\OnlyLogo.png" />
     <Resource Include="Source\Images\ToolBar\Close.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -35,11 +35,7 @@
 
         <Grid Grid.Row="0" Background="Black" Margin="5">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="18" Height="18">
-                    <Image.Effect>
-                        <DropShadowEffect Color="White" ShadowDepth="0.1"/>
-                    </Image.Effect>
-                </Image>
+                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="18" Height="18" Style="{StaticResource WhiteLiteImage}" />
                 <Label Content="{Binding Title}" Foreground="White" FontSize="10" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
             </StackPanel>
         </Grid>

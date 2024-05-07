@@ -58,6 +58,7 @@ namespace LauncherDM.Services
             }
             catch (Exception e)
             {
+                //IResourcesHelperService resourcesHelper = new ResourcesHelperService();
                 IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
                 dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
                 return null;
