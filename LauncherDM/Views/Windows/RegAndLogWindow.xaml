@@ -213,7 +213,7 @@
         </Button>
         <Button x:Name="ButtonDown" Style="{StaticResource ButtonSingUp}" HorizontalAlignment="Left" Margin="255,185,0,0" VerticalAlignment="Top">
             <Button.Triggers>
-                <EventTrigger RoutedEvent="MouseDown">
+                <EventTrigger RoutedEvent="MouseUp">
                     <BeginStoryboard Storyboard="{StaticResource StoryboardReg}"/>
                 </EventTrigger>
             </Button.Triggers>

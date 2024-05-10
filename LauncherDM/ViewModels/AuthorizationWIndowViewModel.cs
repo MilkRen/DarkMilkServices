@@ -22,7 +22,7 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        #region Properties
+        #region Bindings
 
         private ToolbarToWindowViewModel _toolbarVM;
 
@@ -36,44 +36,17 @@ namespace LauncherDM.ViewModels
 
         #region Commmands
 
-        #region CloseApplicationCommand
+        #region ShowLoginForm
 
-        private bool CanCloseApplicationCommandExecute(object p) => true;
+        public Command ShowRegAndLogFormCommand { get; }
 
-        private void OnCloseApplicationCommandExecuted(object p)
+        private bool CanShowRegAndLogFormCommandExecute(object p) => true;
+
+        private void OnShowRegAndLogFormCommandExecuted(object p)
         {
-            Application.Current.Shutdown();
-        }
-
-
-        #endregion
-
-        #region ShowLoginFormCommand
-
-        public Command ShowLoginFormCommand { get; }
-
-        private bool CanShowLoginFormCommandExecute(object p) => true;
-
-        private void OnShowLoginFormCommandExecuted(object p)
-        {
-            //var windowService = new DialogWindowService();
-            //windowService.OpenLoginWindow();
-            //_authorizationWindow.Hide();
-        }
-
-        #endregion
-
-        #region ShowRegistrationFormComman
-
-        public Command ShowRegistrationFormCommand { get; }
-
-        private bool CanShowRegistrationFormCommandExecute(object p) => true;
-
-        private void OnShowRegistrationFormCommandExecuted(object p)
-        {
-            //var windowService = new DialogWindowService();
-            //windowService.OpenRegistrationWindow();
-            //_authorizationWindow.Hide();
+            var windowService = new DialogWindowService();
+            windowService.OpenWindow(this);
+            _authorizationWindow.Hide();
         }
 
         #endregion
@@ -94,11 +67,10 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public AuthorizationWindowViewModel(Action closeWindow)
+        public AuthorizationWindowViewModel(ToolbarToWindowViewModel toolbarVM, Action closeWindow)
         {
-            ToolbarVM = new ToolbarToWindowViewModel(closeWindow, Visibility.Visible);
-            ShowLoginFormCommand = new lambdaCommand(OnShowLoginFormCommandExecuted, CanShowLoginFormCommandExecute);
-            ShowRegistrationFormCommand = new lambdaCommand(OnShowRegistrationFormCommandExecuted, CanShowRegistrationFormCommandExecute);
+            ToolbarVM = toolbarVM;
+            ShowRegAndLogFormCommand = new lambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
 
