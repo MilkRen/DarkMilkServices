@@ -13,6 +13,8 @@ namespace LauncherDM.ViewModels
     {
         #region Bindings
 
+        #region NameAccount
+
         private string _accountName;
 
         public string AccountName
@@ -23,9 +25,26 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        public AccountUserControlViewModel(string accountName)
+        #region ImagePath
+
+        private string _displayedImagePath;
+
+        public string DisplayedImagePath
+        {
+            get => _displayedImagePath;
+            set => Set(ref _displayedImagePath, value);
+        }
+
+        #endregion
+
+
+
+        #endregion
+
+        public AccountUserControlViewModel(string accountName, string imagePath)
         {
             AccountName = accountName;
+            DisplayedImagePath = imagePath;
         }
     }
 }

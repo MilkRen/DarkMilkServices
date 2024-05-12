@@ -16,7 +16,7 @@
     <Grid>
         <Grid.ContextMenu>
             <ContextMenu Style="{StaticResource ContextMenuLoadingForm}">
-                <MenuItem Header="{Binding CloseApp}" Command="{Binding CloseWindowCommand}"></MenuItem>
+                <MenuItem Header="{Binding CloseApp}" Command="{Binding CloseWindowCommand}"/>
             </ContextMenu>
         </Grid.ContextMenu>
 

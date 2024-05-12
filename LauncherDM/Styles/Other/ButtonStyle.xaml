@@ -121,6 +121,27 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ButtonSettings" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <Image x:Name="image"  Source="/Source/Images/ToolBar/SettingsTwo.png" Width="15" Height="15"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="image" Property="Source" Value="/Source/Images/ToolBar/SettingsTwoBlack.png"/>
+                            <Setter Property="Background" Value="DarkRed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ButtonMinimize" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Width" Value="30"/>

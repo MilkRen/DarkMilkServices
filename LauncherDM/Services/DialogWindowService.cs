@@ -23,7 +23,7 @@ namespace LauncherDM.Services
             {
                 var authorization = new AuthorizationWindow();
                 authorization.DataContext = new AuthorizationWindowViewModel(authorization.DragMove ,authorization.Close,
-                    new ToolbarToWindowViewModel(new WindowService(authorization))); 
+                    new ToolbarToWindowViewModel(new WindowService(authorization), visibilitySettings: Visibility.Visible)); 
                 authorization.Show();
                 return;
             }

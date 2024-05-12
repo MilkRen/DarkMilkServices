@@ -27,4 +27,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="WhiteHighLiteImage" TargetType="Image">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" Color="White"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -90,7 +90,7 @@
 
                 <!--<toolbarControl:AccountUserControl></toolbarControl:AccountUserControl>-->
                 <!--<ContentControl Content="{Binding ContentWindow}"/>-->
-                <ItemsControl ItemsSource="{Binding AccountList}">
+                <ItemsControl ItemsSource="{Binding AccountControls}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <toolbarControl:AccountUserControl/>

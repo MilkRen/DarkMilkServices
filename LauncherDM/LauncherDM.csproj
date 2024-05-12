@@ -23,6 +23,12 @@
     <None Remove="Source\Images\ToolBar\MaximizeRev.png" />
     <None Remove="Source\Images\ToolBar\Minimize.png" />
     <None Remove="Source\Images\ToolBar\MinimizeBlack.png" />
+    <None Remove="Source\Images\ToolBar\Settings.png" />
+    <None Remove="Source\Images\ToolBar\SettingsBlack.png" />
+    <None Remove="Source\Images\ToolBar\SettingsThree.png" />
+    <None Remove="Source\Images\ToolBar\SettingsThreeBlack.png" />
+    <None Remove="Source\Images\ToolBar\SettingsTwo.png" />
+    <None Remove="Source\Images\ToolBar\SettingsTwoBlack.png" />
     <None Remove="Source\Images\ToolBar\Up.png" />
     <None Remove="Source\Images\ToolBar\UpBlack.png" />
     <None Remove="Source\Images\ToolBar\World.png" />
@@ -88,6 +94,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\Images\ToolBar\MinimizeBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsThree.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsThreeBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsTwo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsTwoBlack.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\Images\ToolBar\Up.png">

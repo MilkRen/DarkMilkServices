@@ -8,7 +8,14 @@
              d:DesignHeight="30" UseLayoutRounding="True">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,2,0" >
-            <Button Command="{Binding MinimizeWindowCommand}" Visibility="{Binding VisibilityMinBut}" Style="{StaticResource ButtonMinimize}"/>
+            <Button Style="{StaticResource ButtonSettings}" Visibility="{Binding VisibilitySettingsBut}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="abcd" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Command="{Binding MinimizeWindowCommand}" Style="{StaticResource ButtonMinimize}"/>
             <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonClose}"/>
         </StackPanel>
     </Grid>
