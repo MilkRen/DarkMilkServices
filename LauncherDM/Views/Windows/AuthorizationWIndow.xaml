@@ -34,12 +34,18 @@
         </EventTrigger>
     </Window.Triggers>
 
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="MouseDown" >
+            <behaviors:InvokeCommandAction Command="{Binding MoveWindowCommand}" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="70"/>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -74,15 +80,29 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>-->
-                <Grid.ColumnDefinitions>
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>-->
 
-                <toolbarControl:AccountUserControl></toolbarControl:AccountUserControl>
+                <!--<toolbarControl:AccountUserControl></toolbarControl:AccountUserControl>-->
+                <!--<ContentControl Content="{Binding ContentWindow}"/>-->
+                <ItemsControl ItemsSource="{Binding AccountList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <toolbarControl:AccountUserControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+              
 
                 <!--<Grid Grid.Column="0" Grid.Row="0">
                     <StackPanel Orientation="Vertical">

@@ -4,6 +4,6 @@ namespace LauncherDM.Services.Interfaces
 {
     interface IWindowService
     {
-        Window Window { get; set; }
+        Window Window { get; }
     }
 }

@@ -1,14 +1,10 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
-using LauncherDM.Models;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.Services;
-using LauncherDM.Views.Windows;
 using System;
-using System.Net.Mime;
-using System.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
-using LauncherDM.Views.UserControls;
 using LauncherDM.ViewModels.UserControlsVM;
 using System.Windows.Controls;
 
@@ -18,11 +14,23 @@ namespace LauncherDM.ViewModels
     {
         #region Fields
 
-        private readonly Window _authorizationWindow = Application.Current.MainWindow;
+        private Action _closeAction;
+
+        private Action _dragMoveAction;
+
+        #endregion
+
+        #region Services
+
+        private readonly IResourcesHelperService _resourcesHelper;
+
+        private readonly IDialogWindowService _windowService;
 
         #endregion
 
         #region Bindings
+
+        #region Toolbar
 
         private ToolbarToWindowViewModel _toolbarVM;
 
@@ -31,6 +39,14 @@ namespace LauncherDM.ViewModels
             get => _toolbarVM;
             set => Set(ref _toolbarVM, value);
         }
+
+        #endregion
+
+        #region AccountUserControl
+
+        public ObservableCollection<AccountUserControlViewModel> AccountList { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -44,9 +60,9 @@ namespace LauncherDM.ViewModels
 
         private void OnShowRegAndLogFormCommandExecuted(object p)
         {
-            var windowService = new DialogWindowService();
-            windowService.OpenWindow(this);
-            _authorizationWindow.Hide();
+            _windowService.OpenWindow(this);
+            _windowService.CloseAction = _closeAction;
+            _windowService.CloseWindow();
         }
 
         #endregion
@@ -58,7 +74,10 @@ namespace LauncherDM.ViewModels
         private void OnMoveWindowCommandExecuted(object p)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
-                _authorizationWindow.DragMove();
+            {
+                _windowService.DragMoveAction = _dragMoveAction;
+                _windowService.DragMoveWindow();
+            }
         }
 
         #endregion
@@ -67,9 +86,22 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public AuthorizationWindowViewModel(ToolbarToWindowViewModel toolbarVM, Action closeWindow)
+        public AuthorizationWindowViewModel(Action dragMove, Action closeWindowAction ,ToolbarToWindowViewModel toolbarVM)
         {
+            _dragMoveAction = dragMove;
+            _closeAction = closeWindowAction;
             ToolbarVM = toolbarVM;
+
+            AccountList = new ObservableCollection<AccountUserControlViewModel>()
+            {
+                new AccountUserControlViewModel("Sex"),
+                new AccountUserControlViewModel("Sex"),
+                new AccountUserControlViewModel("Sex"),
+                new AccountUserControlViewModel("Sex"),
+                new AccountUserControlViewModel("Sex"),
+            };
+
+            _windowService = new DialogWindowService();
             ShowRegAndLogFormCommand = new lambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }

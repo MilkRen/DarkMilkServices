@@ -17,13 +17,17 @@ namespace LauncherDM.ViewModels
 
         private Action _hideWindow;
 
-        private readonly Window _loadingWindow = Application.Current.MainWindow;
+        private Action _dragMoveAction;
 
         #endregion
 
         #region Services
 
         private readonly IResourcesHelperService _resourcesHelper;
+
+        private readonly IDialogWindowService _windowService;
+
+        private readonly IWindowService _window;
 
         #endregion
 
@@ -68,9 +72,12 @@ namespace LauncherDM.ViewModels
         public Command MoveWindowCommand { get; }
         private bool CanMoveWindowCommandExecute(object p) => true;
         private void OnMoveWindowCommandExecuted(object p)
-        { 
-            if (Mouse.LeftButton == MouseButtonState.Pressed) 
-                _loadingWindow.DragMove();
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                _windowService.DragMoveAction = _dragMoveAction;
+                _windowService.DragMoveWindow();
+            }
         }
 
         #endregion
@@ -81,7 +88,8 @@ namespace LauncherDM.ViewModels
         private bool CanCloseWindowCommandExecute(object p) => true;
         private void OnCloseWindowCommandExecuted(object p)
         {
-            Environment.Exit(0);
+            IApplicationService application = new ApplicationService();
+            application.CloseApplication();
         }
 
         #endregion
@@ -90,10 +98,13 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public LoadingWindowViewModel(Action hideWindow,ResourcesHelperService resourcesHelper)
+        public LoadingWindowViewModel(Action dragMoveWindow, Action hideWindow, WindowService window, ResourcesHelperService resourcesHelper)
         {
+            _dragMoveAction = dragMoveWindow;
             _resourcesHelper = resourcesHelper;
+            _window = window;
             _hideWindow = hideWindow;
+            _windowService = new DialogWindowService();
             MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
             CloseWindowCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
             Loading();
@@ -149,12 +160,11 @@ namespace LauncherDM.ViewModels
 
         private void OpenWindow()
         {
-            _loadingWindow.Dispatcher.Invoke(() =>
+            _window.Window.Dispatcher.Invoke(() =>
             {
-                IDialogWindowService windowService = new DialogWindowService();
-                windowService.OpenWindow(this);
-                windowService.HideAction = _hideWindow;
-                windowService.HideWindow();
+                _windowService.OpenWindow(this);
+                _windowService.HideAction = _hideWindow;
+                _windowService.HideWindow();
             });
         }
     }

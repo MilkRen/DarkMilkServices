@@ -9,18 +9,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="180"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" Grid.Row="0">
             <StackPanel Orientation="Vertical">
-                <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AccountFont}"/>
+                <Label Content="{Binding AccountName}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AccountFont}"/>
                 <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
             </StackPanel>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowRegAndLogWindowCommand}" Content="+"/>
-            <Image IsHitTestVisible="False" UseLayoutRounding="True" Source="/Source/Images/Logo/MilkBottle.png" >
+            <Image IsHitTestVisible="False" Width="80" UseLayoutRounding="True" Source="/Source/Images/Logo/MilkBottle.png" >
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="1"/>
                 </Image.Effect>

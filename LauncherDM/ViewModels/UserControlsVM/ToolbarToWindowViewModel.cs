@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LauncherDM.Infastructure.Commands;
 using System.Windows;
+using LauncherDM.Services.Interfaces;
 
 namespace LauncherDM.ViewModels.UserControlsVM
 {
@@ -16,9 +17,13 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private Action _closeWidnowAction;
 
-        private Action _minWindowAction;
+        #endregion
 
-        private Action _maxWindowAction;
+        #region Services
+
+        private readonly IWindowService _window;
+
+        private readonly IDialogWindowService _windowService;
 
         #endregion
 
@@ -52,9 +57,8 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private void OnCloseWindowCommandExecuted(object p)
         {
-            var windowService = new DialogWindowService();
-            windowService.CloseAction = _closeWidnowAction;
-            windowService.CloseWindow();
+            _windowService.CloseAction = _closeWidnowAction;
+            _windowService.CloseWindow();
         }
 
         #endregion
@@ -65,7 +69,8 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private void OnCloseAppCommandExecuted(object p)
         {
-            Environment.Exit(0);
+            IApplicationService application = new ApplicationService();
+            application.CloseApplication();
         }
 
         #endregion
@@ -78,9 +83,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private void OnMaximizeWindowCommandExecuted(object p)
         {
-            var windowService = new DialogWindowService();
-            windowService.MaxWindowAction = _maxWindowAction;
-            windowService.MaxWindow();
+            _window.Window.WindowState = WindowState.Maximized;
         }
 
         #endregion
@@ -93,26 +96,25 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private void OnMinimizeWindowCommandExecuted(object p)
         {
-            var windowService = new DialogWindowService();
-            windowService.MinWindowAction = _minWindowAction;
-            windowService.MinWindow();
+            _window.Window.WindowState = WindowState.Minimized;
         }
 
         #endregion
 
         #endregion
 
-        public ToolbarToWindowViewModel(Action closeWidnow)
+        public ToolbarToWindowViewModel(WindowService window, Action closeWidnow = null)
         {
-            _closeWidnowAction = closeWidnow;
-            CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
-        }
+            if (closeWidnow is not null)
+            {
+                _closeWidnowAction = closeWidnow;
+                CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+            }
+            else 
+                CloseWindowActionCommand = new lambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
 
-        public ToolbarToWindowViewModel(Action minWindowAction, Action maxWindowAction)
-        {
-            _minWindowAction = minWindowAction;
-            _maxWindowAction = maxWindowAction;
-            CloseWindowActionCommand = new lambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
+            _window = window;
+            _windowService = new DialogWindowService();
             MinimizeWindowCommand = new lambdaCommand(OnMinimizeWindowCommandExecuted, CanMinimizeWindowCommandExecute);
             MaximizeWindowCommand = new lambdaCommand(OnMaximizeWindowCommandExecuted, CanMaximizeWindowCommandExecute);
         }

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using LauncherDM.Services.Interfaces;
 
 namespace LauncherDM.Services
 {
-    class WindowService : IWindowService
+    public class WindowService : IWindowService
     {
-        public Window Window
+        public Window Window { get; }
+
+        public WindowService(Window window)
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            Window = window;
         }
     }
 }

@@ -5,6 +5,7 @@ using LauncherDM.Views.Windows;
 using System;
 using System.Windows;
 using LauncherDM.ViewModels.UserControlsVM;
+using System.Net;
 
 namespace LauncherDM.Services
 {
@@ -14,26 +15,22 @@ namespace LauncherDM.Services
 
         public Action HideAction { get; set; }
 
-        public Action MaxWindowAction { get; set; }
-
-        public Action MinWindowAction { get; set; }
+        public Action DragMoveAction { get; set; }
 
         public void OpenWindow(object viewModel)
         {
             if (viewModel is LoadingWindowViewModel)
             {
                 var authorization = new AuthorizationWindow();
-                Action minAction = () => authorization.WindowState = WindowState.Minimized;
-                authorization.DataContext = new AuthorizationWindowViewModel(new ToolbarToWindowViewModel(minAction, minAction),
-                    authorization.Close); 
+                authorization.DataContext = new AuthorizationWindowViewModel(authorization.DragMove ,authorization.Close,
+                    new ToolbarToWindowViewModel(new WindowService(authorization))); 
                 authorization.Show();
                 return;
             }
             else if (viewModel is AuthorizationWindowViewModel)
             {
                 var regAndLogWindow = new RegAndLogWindow();
-                Action minAction = () => regAndLogWindow.WindowState = WindowState.Minimized; 
-                regAndLogWindow.DataContext = new RegAndLogWindowViewModel(new ToolbarToWindowViewModel(minAction, minAction), 
+                regAndLogWindow.DataContext = new RegAndLogWindowViewModel(new ToolbarToWindowViewModel(new WindowService(regAndLogWindow)), 
                     new ResourcesHelperService());
                 regAndLogWindow.Show();
                 return;
@@ -58,20 +55,16 @@ namespace LauncherDM.Services
             HideAction();
         }
 
-        public void MaxWindow()
+        public void DragMoveWindow()
         {
-            MaxWindowAction();
-        }
-
-        public void MinWindow()
-        {
-            MinWindowAction();
+            DragMoveAction();
         }
 
         public void OpenLoadingWindow()
         {
             var loadingWindow = new LoadingWindow();
-            loadingWindow.DataContext = new LoadingWindowViewModel(loadingWindow.Hide, new ResourcesHelperService());
+            loadingWindow.DataContext = new LoadingWindowViewModel(loadingWindow.DragMove, loadingWindow.Hide,
+                new WindowService(loadingWindow), new ResourcesHelperService());
             loadingWindow.Show();
         }
 

@@ -9,19 +9,15 @@ namespace LauncherDM.Services.Interfaces
 
         Action HideAction { get; set; } 
 
-        Action MaxWindowAction { get; set; } 
-        
-        Action MinWindowAction { get; set; } 
-        
+        Action DragMoveAction { get; set; } 
+
         void OpenWindow(object viewModel);
         
         void CloseWindow();
         
         void HideWindow();
 
-        void MaxWindow();
-
-        void MinWindow();
+        void DragMoveWindow();
 
         void OpenLoadingWindow();
 
