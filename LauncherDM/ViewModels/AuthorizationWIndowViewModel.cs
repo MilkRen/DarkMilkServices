@@ -3,6 +3,7 @@ using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using LauncherDM.ViewModels.UserControlsVM;
@@ -44,7 +45,9 @@ namespace LauncherDM.ViewModels
 
         #region AccountUserControl
 
-        public ObservableCollection<AccountUserControlViewModel> AccountList { get; set; }
+        private ObservableCollection<AccountUserControlViewModel> _accountList;
+
+        public IEnumerable<AccountUserControlViewModel> AccountControls => _accountList;
 
         #endregion
 
@@ -92,13 +95,13 @@ namespace LauncherDM.ViewModels
             _closeAction = closeWindowAction;
             ToolbarVM = toolbarVM;
 
-            AccountList = new ObservableCollection<AccountUserControlViewModel>()
+            _accountList = new ObservableCollection<AccountUserControlViewModel>()
             {
-                new AccountUserControlViewModel("Sex"),
-                new AccountUserControlViewModel("Sex"),
-                new AccountUserControlViewModel("Sex"),
-                new AccountUserControlViewModel("Sex"),
-                new AccountUserControlViewModel("Sex"),
+                new AccountUserControlViewModel("Sex", "/Source/Images/Logo/MilkBottle.png"),
+                new AccountUserControlViewModel("Sex", ""),
+                new AccountUserControlViewModel("Sex", ""),
+                new AccountUserControlViewModel("Sex", ""),
+                new AccountUserControlViewModel("Sex", ""),
             };
 
             _windowService = new DialogWindowService();
