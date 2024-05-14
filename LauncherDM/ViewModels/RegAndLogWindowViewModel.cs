@@ -1,15 +1,7 @@
 ﻿using LauncherDM.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LauncherDM.Services;
 using LauncherDM.ViewModels.UserControlsVM;
-using System.Windows;
 using System.Reflection;
-using LauncherDM.Views.Windows;
-using System.Windows.Input;
 using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Infastructure.Commands;
 
@@ -20,6 +12,10 @@ namespace LauncherDM.ViewModels
         #region Services
 
         private readonly IResourcesHelperService _resourcesHelper;
+
+        private readonly IDialogWindowService _dialogWindow;
+
+        private readonly IRegAndLogWindowService _regAndLogWindowService;
 
         #endregion
 
@@ -37,6 +33,8 @@ namespace LauncherDM.ViewModels
 
         public string RememberMeText =>_resourcesHelper.LocalizationGet("RememberMe");
 
+        public string EmailText => _resourcesHelper.LocalizationGet("Email");
+
         public string ForgotPasswordText => _resourcesHelper.LocalizationGet("ForgotPassword");
 
         public string VersionText => string.Concat("Version: ", Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty);
@@ -53,6 +51,54 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region Login
+
+        private string _login;
+
+        public string Login
+        {
+            get => _login;
+            set => Set(ref _login, value);
+        }
+
+        private string _password;
+
+        public string Password
+        {
+            get => _password;
+            set => Set(ref _password, value);
+        }
+
+        #endregion
+
+        #region SugnUp
+
+        private string _regLogin;
+
+        public string RegLogin
+        {
+            get => _regLogin;
+            set => Set(ref _regLogin, value);
+        }
+
+        private string _email;
+
+        public string Email
+        {
+            get => _email;
+            set => Set(ref _email, value);
+        }
+
+        private string _regPassword;
+
+        public string RegPassword
+        {
+            get => _regPassword;
+            set => Set(ref _regPassword, value);
+        }
+
+        #endregion
+
         #endregion
 
         #region Commmands
@@ -63,8 +109,38 @@ namespace LauncherDM.ViewModels
         private bool CanShowAccountRecoveryWindowCommandExecute(object p) => true;
         private void OnShowAccountRecoveryWindowCommandExecuted(object p)
         {
-            IDialogWindowService windowService = new DialogWindowService();
-            windowService.OpenAccountRecovery();
+            _dialogWindow.OpenAccountRecovery();
+        }
+
+        #endregion
+
+        #region Login
+
+        public Command LoginCommand { get; }
+        private bool CanLoginCommandExecute(object p) => true;
+        private void OnLoginCommandExecuted(object p)
+        {
+            IAuthorizationService authorization = new AuthorizationService();
+            if (authorization.Authorization(Login, Password))
+            {
+
+            }
+            else
+            {
+                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+            }
+        }
+
+        #endregion
+
+        #region SignUp
+
+        public Command SignUpCommand { get; }
+        private bool CanSignUpCommandExecute(object p) => true;
+        private void OnSignUpCommandExecuted(object p)
+        {
+
         }
 
         #endregion
@@ -75,7 +151,11 @@ namespace LauncherDM.ViewModels
         {
             _resourcesHelper = resourcesHelper;
             ToolbarVM = toolbarViewModel;
+            _dialogWindow = new DialogWindowService();
+            _regAndLogWindowService = new RegAndLogWindowServiceService();
             ShowAccountRecoveryWindowCommand = new lambdaCommand(OnShowAccountRecoveryWindowCommandExecuted, CanShowAccountRecoveryWindowCommandExecute);
+            LoginCommand = new lambdaCommand(OnLoginCommandExecuted, CanLoginCommandExecute);
+            SignUpCommand = new lambdaCommand(OnSignUpCommandExecuted, CanSignUpCommandExecute);
         }
     }
 }

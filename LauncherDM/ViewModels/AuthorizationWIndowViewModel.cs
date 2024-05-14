@@ -97,11 +97,11 @@ namespace LauncherDM.ViewModels
 
             _accountList = new ObservableCollection<AccountUserControlViewModel>()
             {
-                new AccountUserControlViewModel("Sex", "/Source/Images/Logo/MilkBottle.png"),
-                new AccountUserControlViewModel("Sex", ""),
-                new AccountUserControlViewModel("Sex", ""),
-                new AccountUserControlViewModel("Sex", ""),
-                new AccountUserControlViewModel("Sex", ""),
+                new AccountUserControlViewModel(closeWindowAction,"Sex", "/Source/Images/Logo/MilkBottle.png"),
+                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
+                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
+                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
+                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
             };
 
             _windowService = new DialogWindowService();

@@ -143,4 +143,7 @@
 	<data name="ForgotPassword" xml:space="preserve">
 		<value>Забыли пароль</value>
 	</data>
+	<data name="Email" xml:space="preserve">
+		<value>Почта</value>
+	</data>
 </root>

@@ -14,90 +14,6 @@
     <!--Test View to Bland-->
 
     <Window.Resources>
-        <Storyboard x:Key="Storyboard1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.063"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1.174"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.295"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1.44"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1.903"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="2.089"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="2.431"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="2.657"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="7"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="19.333"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="32.541"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="48.447"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="99.64"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="120.108"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="157.827"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="182.624"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangleLogin" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Login" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.001"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.001"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.094"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.063"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0.011"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.105"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.031"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.094"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SingUp" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="StoryboardSignUp">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.957"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0.835"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.691"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.518"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0.356"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.176"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-0.027"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-4.75"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-18.25"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-34.25"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-53.5"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-71.5"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-91.5"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-114"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangleLogin" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Login" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SingUp" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
         <Storyboard x:Key="StoryboardReg">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.959"/>
@@ -122,10 +38,10 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-117.75"/>
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonUp" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonDown" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Visible}"/>
@@ -154,6 +70,298 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PasswordTB" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginTB" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static VerticalAlignment.Center}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static HorizontalAlignment.Center}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(TextBlock.FontSize)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(TextBlock.FontFamily)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <FontFamily>Cascadia Mono SemiBold</FontFamily>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <FontFamily>Cascadia Mono SemiLight</FontFamily>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.8000000" Value="0,0,0,-102"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.8000000" Value="0,0,0,-200"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.9000000" Value="-8,0,0,-200"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="281.333"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="283.333"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="72"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="8"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static HorizontalAlignment.Center}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static VerticalAlignment.Top}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="StoryboardRegRev">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-0.06"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.131"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.259"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0.383"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.502"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.619"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.743"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="0.871"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0.959"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-117.75"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-96.5"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-82.25"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-68.5"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-55.25"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-42.25"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-28.5"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-14.25"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-4.5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonUp" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonDown" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Login" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Hidden</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SingUp" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="244.665"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="204.665"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="174.665"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="147.332"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="107.999"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="68.666"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="40.666"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="11.333"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SingUp" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="2"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PasswordTB" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginTB" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static VerticalAlignment.Center}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static VerticalAlignment.Center}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static VerticalAlignment.Center}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static HorizontalAlignment.Center}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static HorizontalAlignment.Center}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static HorizontalAlignment.Center}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(TextBlock.FontSize)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="16"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="16"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(TextBlock.FontFamily)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <FontFamily>Cascadia Mono SemiBold</FontFamily>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <FontFamily>Cascadia Mono SemiBold</FontFamily>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <FontFamily>Cascadia Mono SemiBold</FontFamily>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <SplineThicknessKeyFrame KeyTime="00:00:00.1000000" Value="0,0,0,-102"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.4000000" Value="0,0,0,-102"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.9000000" Value="0,0,1000,-102"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ButtonUp" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-8.5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ButtonDown" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-8.5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ButtonUp" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0.25"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ButtonDown" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0.25"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.1000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.4000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.9000000" Value="0,0,1000,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="313"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="313"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="313"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
     <Grid>
@@ -170,9 +378,9 @@
         <TextBlock Text="{Binding VersionText}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="9" Margin="7.6,423,0,0" Width="228" Foreground="Black" FontSize="6" FontFamily="Cascadia Mono Light"/>
         <Grid x:Name="Login" Margin="0,-770,0,0">
             <toolbarControl:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" Margin="0,365,-2,0" />
-            <TextBlock  Text="{Binding Title}" HorizontalAlignment="Left" Height="28" Margin="10,802,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="22" FontFamily="Cascadia Mono"/>
+            <TextBlock x:Name="textBlock2"  Text="{Binding Title}" HorizontalAlignment="Left" Height="28" Margin="10,802,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="22" FontFamily="Cascadia Mono"/>
 
-            <TextBlock Text="{Binding LoginText}" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,848,7,334">
+            <TextBlock x:Name="textBlock1" Text="{Binding LoginText}" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,848,7,334">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -184,10 +392,10 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox x:Name="LoginTB" HorizontalAlignment="Center" Height="40" Margin="0,835,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <TextBox x:Name="LoginTB" Text="{Binding Login}" MaxLength="12" HorizontalAlignment="Center" Height="40" Margin="0,835,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="White" HorizontalAlignment="Center" Height="1" Margin="0,875,0,0" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
 
-            <TextBlock Text="{Binding PasswordText}" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,892,7,286">
+            <TextBlock x:Name="textBlock" Text="{Binding PasswordText}" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,892,7,286">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -199,21 +407,37 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox x:Name="PasswordTB" HorizontalAlignment="Center" Height="40" Margin="0,881,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <TextBox x:Name="PasswordTB" Text="{Binding Password}" MaxLength="64" HorizontalAlignment="Center" Height="40" Margin="0,881,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="White" HorizontalAlignment="Center" Height="1" Margin="0,921,0,0" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
 
-            <Button Content="{Binding ForgotPasswordText}" Style="{StaticResource ButtonForgot}" HorizontalAlignment="Left" Height="24" Margin="10,927,0,0" VerticalAlignment="Top" Width="140" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
+            <Button x:Name="button" Content="{Binding ForgotPasswordText}" Style="{StaticResource ButtonForgot}" HorizontalAlignment="Left" Height="24" Margin="10,927,0,0" VerticalAlignment="Top" Width="140" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
         </Grid>
-        <Button x:Name="ButtonUp" Style="{StaticResource ButtonLogin}" HorizontalAlignment="Left" Margin="189,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,0.527">
+        <Button x:Name="ButtonUp" Command="{Binding SignUpCommand}" Style="{StaticResource ButtonLogin}" HorizontalAlignment="Left" Margin="189,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,0.527">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
             <Button.Triggers>
-                <EventTrigger RoutedEvent="MouseDown">
+                <EventTrigger RoutedEvent="PreviewMouseUp">
                     <BeginStoryboard Storyboard="{StaticResource StoryboardReg}"/>
                 </EventTrigger>
             </Button.Triggers>
         </Button>
-        <Button x:Name="ButtonDown" Style="{StaticResource ButtonSingUp}" HorizontalAlignment="Left" Margin="255,185,0,0" VerticalAlignment="Top">
+        <Button x:Name="ButtonDown" Command="{Binding LoginCommand}" Style="{StaticResource ButtonSingUp}" HorizontalAlignment="Left" Margin="255,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
             <Button.Triggers>
-                <EventTrigger RoutedEvent="MouseUp">
+                <EventTrigger RoutedEvent="PreviewMouseUp">
                     <BeginStoryboard Storyboard="{StaticResource StoryboardReg}"/>
                 </EventTrigger>
             </Button.Triggers>
@@ -241,10 +465,25 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox x:Name="LoginRegTB" HorizontalAlignment="Left" Height="40" Margin="17,595,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <TextBox x:Name="LoginRegTB" MaxLength="12" HorizontalAlignment="Left" Height="40" Margin="17,595,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,635,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
 
-            <TextBlock Text="{Binding PasswordText}" Foreground="#FF3E3E3E" Height="20" FontFamily="Cascadia Mono Light" Margin="20,270,0,0" >
+            <TextBlock Text="{Binding EmailText}" Foreground="#FF3E3E3E" Height="20" FontFamily="Cascadia Mono Light" Margin="20,270,0,0" >
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=EmailRegTB}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox x:Name="EmailRegTB" MaxLength="255" HorizontalAlignment="Left" Height="40" Margin="17,641,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,681,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
+
+            <TextBlock Text="{Binding PasswordText}" Foreground="#FF3E3E3E" Height="20" FontFamily="Cascadia Mono Light" Margin="20,362,0,0" >
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -256,26 +495,45 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox x:Name="PasswordRegTB" HorizontalAlignment="Left" Height="40" Margin="17,641,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
-            <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,681,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
-
-            <TextBlock Text="{Binding ConfirmPasswordText}" Foreground="#FF3E3E3E" Height="20" FontFamily="Cascadia Mono Light" Margin="20,362,0,0" >
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=ConfirmPasswordRegTB}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <TextBox x:Name="ConfirmPasswordRegTB" HorizontalAlignment="Left" Height="40" Margin="17,687,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <TextBox x:Name="PasswordRegTB" MaxLength="64" HorizontalAlignment="Left" Height="40" Margin="17,687,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,727,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
             <CheckBox Content="{Binding RememberMeText}" HorizontalAlignment="Left" Height="24" Margin="20,733,0,0" VerticalAlignment="Top" Width="220" Foreground="Black" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
         </Grid>
 
-        <Image x:Name="image" Source="/Source/Images/Logo/Logo.png" Visibility="Hidden" Style="{StaticResource LogoImage}"/>
+        <Image x:Name="image" Source="/Source/Images/Logo/Logo.png" Visibility="Hidden" Style="{StaticResource LogoImage}" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Button x:Name="button1" Content="Cgfasd" Style="{StaticResource ButtonReturn}" Foreground="Black" Visibility="Hidden" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard Storyboard="{StaticResource StoryboardRegRev}"/>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <TextBlock x:Name="textBlock3" Text="Успешно" Foreground="#FF3E3E3E" Visibility="Hidden" Height="20" FontFamily="Cascadia Mono Light" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
     </Grid>
 </Window>

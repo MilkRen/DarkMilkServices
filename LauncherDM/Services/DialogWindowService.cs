@@ -27,7 +27,7 @@ namespace LauncherDM.Services
                 authorization.Show();
                 return;
             }
-            else if (viewModel is AuthorizationWindowViewModel)
+            else if (viewModel is AccountUserControlViewModel or AuthorizationWindowViewModel)
             {
                 var regAndLogWindow = new RegAndLogWindow();
                 regAndLogWindow.DataContext = new RegAndLogWindowViewModel(new ToolbarToWindowViewModel(new WindowService(regAndLogWindow)), 

@@ -19,12 +19,8 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
-            <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowRegAndLogWindowCommand}" Content="+"/>
-            <Image IsHitTestVisible="False" Width="80" UseLayoutRounding="True" Source="{Binding DisplayedImagePath}" Style="{StaticResource WhiteHighLiteImage}">
-                <!--<Image.Effect>
-                    <DropShadowEffect ShadowDepth="1"/>
-                </Image.Effect>-->
-            </Image>
+            <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowRegAndLogFormCommand}" Content="+"/>
+            <Image IsHitTestVisible="False" Width="80" UseLayoutRounding="True" Source="{Binding DisplayedImagePath}" Style="{StaticResource WhiteHighLiteImage}"/>
         </Grid>
     </Grid>
 </UserControl>

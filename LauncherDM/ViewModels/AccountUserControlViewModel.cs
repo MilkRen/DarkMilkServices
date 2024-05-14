@@ -1,16 +1,40 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System;
+using LauncherDM.Infastructure.Commands;
+using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Services;
+using LauncherDM.Services.Interfaces;
 
 namespace LauncherDM.ViewModels
 {
     public class AccountUserControlViewModel : ViewModel.Base.ViewModel
     {
+        #region Fields
+
+        private Action _closeAction;
+
+        #endregion
+
+        #region Services
+
+        private readonly IDialogWindowService _windowService;
+
+        #endregion
+
+        #region Commands
+
+        public Command ShowRegAndLogFormCommand { get; }
+
+        private bool CanShowRegAndLogFormCommandExecute(object p) => true;
+
+        private void OnShowRegAndLogFormCommandExecuted(object p)
+        {
+            _windowService.OpenWindow(this);
+            _windowService.CloseAction = _closeAction;
+            _windowService.CloseWindow();
+        }
+
+        #endregion
+
         #region Bindings
 
         #region NameAccount
@@ -37,14 +61,15 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-
-
         #endregion
 
-        public AccountUserControlViewModel(string accountName, string imagePath)
+        public AccountUserControlViewModel(Action closeMainWindow, string accountName, string imagePath)
         {
             AccountName = accountName;
             DisplayedImagePath = imagePath;
+            _closeAction = closeMainWindow;
+            _windowService = new DialogWindowService();
+            ShowRegAndLogFormCommand = new lambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
         }
     }
 }

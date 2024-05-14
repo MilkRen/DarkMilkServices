@@ -8,6 +8,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using ServerTCP.Properties;
+using ServerTCP.Сryptographies;
 
 namespace ServerTCP
 {
@@ -16,8 +18,13 @@ namespace ServerTCP
         private static readonly string ip = DataInfo.Ip;
         private static readonly int port = DataInfo.Port;
 
+        private static string _publicKey;
+        private static string _privateKey;
+
         static void Main(string[] args)
         {
+            LoadingRSA();
+
             var ipAddress = IPAddress.Parse(ip);
             var endPoint = new IPEndPoint(ipAddress, port);
 
@@ -34,7 +41,7 @@ namespace ServerTCP
                     Console.WriteLine("Ожидаем соединение через порт {0}", endPoint);
                     var listener = tcpSocket.Accept(); // новый с   окет для нового клиента
                     Console.WriteLine("Подключился!");
-                    var buffer = new byte[256]; // размер буфера .  максимум сообщение из 256 байт 
+                    var buffer = new byte[listener.ReceiveBufferSize]; // размер буфера .  максимум сообщение из 256 байт 
                     var size = 0; // количество реально полученных количества байт, потом чтобы оптимизировать память 
                     do
                     {
@@ -50,10 +57,11 @@ namespace ServerTCP
                             case MessageHeader.MessageType.Check:
                                 headerRequest = new MessageHeader("1", MessageHeader.MessageType.Check);
                                 break;
-                            case MessageHeader.MessageType.Token:
-                                message = "1234567890";
-                                loadToken = true;
-                                headerRequest = new MessageHeader(message, MessageHeader.MessageType.Token);
+                            case MessageHeader.MessageType.Login:
+                              //  byte[] s = (byte[])header.Message;
+                              //var r =  CryptoRsa.Decrypt(_privateKey, s);
+                              //Console.WriteLine(r);
+                              Console.WriteLine(header.Message.ToString());
                                 break;
                             case MessageHeader.MessageType.Registration:
                                 var user = new User
@@ -69,6 +77,9 @@ namespace ServerTCP
                             case MessageHeader.MessageType.Version:
                                 var version = DataBaseCommands.Select(MessageHeader.MessageType.Version);
                                 headerRequest = new MessageHeader(version.ToString(), MessageHeader.MessageType.Version);
+                                break;
+                            case MessageHeader.MessageType.PublicKey:
+                                headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
                                 break;
                         }
 
@@ -90,6 +101,15 @@ namespace ServerTCP
                     Console.WriteLine(e.Message);
                 }
             }
+        }
+
+
+
+        private static void LoadingRSA()
+        {
+            var (publicKey, privateKey) = CryptoRsa.GenerateKey();
+            _publicKey = publicKey;
+            _privateKey = privateKey;
         }
     }
 }

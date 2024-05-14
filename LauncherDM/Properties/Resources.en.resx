@@ -56,4 +56,7 @@
 	<data name="ForgotPassword" xml:space="preserve">
 		<value>Forgot password</value>
 	</data>
+	<data name="Email" xml:space="preserve">
+		<value>Email</value>
+	</data>
 </root>

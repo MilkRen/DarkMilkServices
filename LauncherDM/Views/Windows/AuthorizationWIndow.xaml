@@ -75,91 +75,18 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <Grid>
-                <!--<Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>-->
-                <!--<Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>-->
-
-                <!--<toolbarControl:AccountUserControl></toolbarControl:AccountUserControl>-->
-                <!--<ContentControl Content="{Binding ContentWindow}"/>-->
-                <ItemsControl ItemsSource="{Binding AccountControls}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <toolbarControl:AccountUserControl/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-              
-
-                <!--<Grid Grid.Column="0" Grid.Row="0">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}"/>
-                        <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="0" Grid.Row="1">
-                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowRegAndLogWindowCommand}" Content="+"/>
-                    <Image IsHitTestVisible="False"  Source="/Source/Images/Logo/MilkBottle.png" >
-                        <Image.Effect>
-                            <DropShadowEffect ShadowDepth="1"/>
-                        </Image.Effect>
-                    </Image>
-                </Grid>
-
-                <Grid Grid.Column="1" Grid.Row="0">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}"/>
-                        <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="1" Grid.Row="1">
-                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
-                </Grid>
-
-                <Grid Grid.Column="2" Grid.Row="0">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}" />
-                        <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="2" Grid.Row="1">
-                    <Button  Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
-                </Grid>
-
-                <Grid Grid.Column="3" Grid.Row="0">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"  Style="{StaticResource DescFont}"/>
-                        <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="3" Grid.Row="1">
-                    <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
-                </Grid>
-
-                <Grid Grid.Column="4" Grid.Row="0">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Аккаунт" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DescFont}"/>
-                        <Border Width="110" VerticalAlignment="Center" HorizontalAlignment="Center"  Style="{StaticResource BorderRounded}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="4" Grid.Row="1">
-                    <Button  Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Content="+"/>
-                </Grid>-->
-
-            </Grid>
+            <ItemsControl ItemsSource="{Binding AccountControls}" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <toolbarControl:AccountUserControl/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </Grid>
 
         <Grid Grid.Row="3">
