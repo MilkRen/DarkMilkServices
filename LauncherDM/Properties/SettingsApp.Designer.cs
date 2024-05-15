@@ -58,5 +58,17 @@ namespace LauncherDM.Properties {
                 this["Token"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OfflineMode {
+            get {
+                return ((bool)(this["OfflineMode"]));
+            }
+            set {
+                this["OfflineMode"] = value;
+            }
+        }
     }
 }

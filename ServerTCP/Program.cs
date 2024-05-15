@@ -2,14 +2,6 @@
 using System.Net.Sockets;
 using ServerTCP.DataBase;
 using ServerTCP.Models;
-using System.Security.Authentication;
-using System.Text;
-using System.Security.Cryptography.X509Certificates;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using ServerTCP.Properties;
-using ServerTCP.Сryptographies;
 
 namespace ServerTCP
 {
@@ -21,10 +13,11 @@ namespace ServerTCP
         private static string _publicKey;
         private static string _privateKey;
 
+        private static Random rand = new Random();
+
         static void Main(string[] args)
         {
-            LoadingRSA();
-
+            //LoadingRSA();
             var ipAddress = IPAddress.Parse(ip);
             var endPoint = new IPEndPoint(ipAddress, port);
 
@@ -71,8 +64,10 @@ namespace ServerTCP
                                 DataBaseCommands.Insert(user, MessageHeader.MessageType.Registration);
                                 break;
                             case MessageHeader.MessageType.TitleLoading:
-                                var tx = "Привет, славяне!";
-                                headerRequest = new MessageHeader(tx, MessageHeader.MessageType.TitleLoading);
+                                var text = rand.Next(0, 3) == 0
+                                    ? ResourcesHelper.LocalizationGet("LoadingText", header.Language)
+                                    : ResourcesHelper.LocalizationGet("LoadingTextTwo", header.Language);
+                                headerRequest = new MessageHeader(text, MessageHeader.MessageType.TitleLoading);
                                 break;
                             case MessageHeader.MessageType.Version:
                                 var version = DataBaseCommands.Select(MessageHeader.MessageType.Version);
@@ -103,13 +98,11 @@ namespace ServerTCP
             }
         }
 
-
-
-        private static void LoadingRSA()
-        {
-            var (publicKey, privateKey) = CryptoRsa.GenerateKey();
-            _publicKey = publicKey;
-            _privateKey = privateKey;
-        }
+        //private static void LoadingRSA()
+        //{
+        //    var (publicKey, privateKey) = CryptoRsa.GenerateKey();
+        //    _publicKey = publicKey;
+        //    _privateKey = privateKey;
+        //}
     }
 }

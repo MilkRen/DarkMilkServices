@@ -146,4 +146,16 @@
 	<data name="Email" xml:space="preserve">
 		<value>Почта</value>
 	</data>
+	<data name="Version" xml:space="preserve">
+		<value>Версия:</value>
+	</data>
+	<data name="Settings" xml:space="preserve">
+		<value>Настройки</value>
+	</data>
+	<data name="SettingsSmall" xml:space="preserve">
+		<value>Маленькие настройки</value>
+	</data>
+	<data name="AboutSmallText" xml:space="preserve">
+		<value>Данная программа была создана маленьким энтузиастом!</value>
+	</data>
 </root>

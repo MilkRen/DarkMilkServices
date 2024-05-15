@@ -42,7 +42,7 @@
 
         <Grid Grid.Row="1">
             <Border Background="White" Height="2" VerticalAlignment="Top" Margin="2,0,2,0"/>
-            <Label Content="{Binding DescInfoConnect}" Margin="5" FontSize="10" Style="{StaticResource DescFont}"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding DescInfoConnect}" Margin="8" FontSize="10" Style="{StaticResource DescFont}"/>
         </Grid>
 
     </Grid>

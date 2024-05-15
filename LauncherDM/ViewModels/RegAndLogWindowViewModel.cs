@@ -4,6 +4,7 @@ using LauncherDM.ViewModels.UserControlsVM;
 using System.Reflection;
 using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Infastructure.Commands;
+using LauncherDM.Models;
 
 namespace LauncherDM.ViewModels
 {
@@ -37,7 +38,7 @@ namespace LauncherDM.ViewModels
 
         public string ForgotPasswordText => _resourcesHelper.LocalizationGet("ForgotPassword");
 
-        public string VersionText => string.Concat("Version: ", Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty);
+        public string VersionText => string.Concat(_resourcesHelper.LocalizationGet("Version"), "", StaticFields.VersionPatch);
 
         #region ToolBar
 

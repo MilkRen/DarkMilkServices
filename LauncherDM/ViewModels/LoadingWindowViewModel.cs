@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using LauncherDM.Properties;
 
 namespace LauncherDM.ViewModels
 {
@@ -116,8 +117,8 @@ namespace LauncherDM.ViewModels
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
             ILoadingWindowService server = new LoadingWindowService(new ServerRequestService());
-            OpenWindow();
-            return;
+            SettingsApp.Default.OfflineMode = false;
+            SettingsApp.Default.Save();
 
             Task.Run(() =>
             {
@@ -145,6 +146,8 @@ namespace LauncherDM.ViewModels
                         {
                             IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
                             dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ServerClose"));
+                            SettingsApp.Default.OfflineMode = true;
+                            SettingsApp.Default.Save();
                             OpenWindow();
                             break;
                         }

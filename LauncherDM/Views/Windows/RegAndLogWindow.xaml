@@ -407,6 +407,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
+            <!--PasswordBox-->
             <TextBox x:Name="PasswordTB" Text="{Binding Password}" MaxLength="64" HorizontalAlignment="Center" Height="40" Margin="0,881,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="White" HorizontalAlignment="Center" Height="1" Margin="0,921,0,0" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
 

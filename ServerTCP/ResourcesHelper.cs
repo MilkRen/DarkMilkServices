@@ -1,23 +1,20 @@
-﻿using System;
-using LauncherDM.Services.Interfaces;
-using ServerTCP;
+﻿using ServerTCP.Properties;
 using System.Globalization;
-using LauncherDM.Properties;
 
-namespace LauncherDM.Services
+namespace ServerTCP
 {
-    internal class ResourcesHelperService : IResourcesHelperService
+    internal class ResourcesHelper
     {
-        public string LocalizationGet(string resource)
+        public static string LocalizationGet(string resource, MessageLanguages.Languages lang)
         {
             if (string.IsNullOrEmpty(resource))
                 throw new ArgumentNullException(nameof(resource));
 
             string resourceReady = string.Empty;
-            switch (MessageLanguages.Language)
+            switch (lang)
             {
                 case MessageLanguages.Languages.rus:
-                    resourceReady =  Resources.ResourceManager.GetString(resource, new CultureInfo("ru-RU"));
+                    resourceReady = Resources.ResourceManager.GetString(resource, new CultureInfo("ru-RU"));
                     break;
                 default:
                     resourceReady = Resources.ResourceManager.GetString(resource, new CultureInfo("en-GB"));

@@ -23,7 +23,8 @@ namespace LauncherDM.Services
             {
                 var authorization = new AuthorizationWindow();
                 authorization.DataContext = new AuthorizationWindowViewModel(authorization.DragMove ,authorization.Close,
-                    new ToolbarToWindowViewModel(new WindowService(authorization), visibilitySettings: Visibility.Visible)); 
+                    new ToolbarToWindowViewModel(new WindowService(authorization), visibilitySettings: Visibility.Visible));
+                authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
                 return;
             }
@@ -33,6 +34,15 @@ namespace LauncherDM.Services
                 regAndLogWindow.DataContext = new RegAndLogWindowViewModel(new ToolbarToWindowViewModel(new WindowService(regAndLogWindow)), 
                     new ResourcesHelperService());
                 regAndLogWindow.Show();
+                return;
+            }
+            else if (viewModel is ToolbarToWindowViewModel)
+            {
+                var settingsMini = new SettingsMiniWindow();
+                settingsMini.DataContext = new SettingsMiniWindowViewModel(settingsMini.DragMove, 
+                    new ToolbarToWindowViewModel(new WindowService(settingsMini), settingsMini.Close, visibilityMinBut:Visibility.Hidden),
+                    new ResourcesHelperService());
+                settingsMini.ShowDialog();
                 return;
             }
             else if (viewModel is RegAndLogWindowViewModel)

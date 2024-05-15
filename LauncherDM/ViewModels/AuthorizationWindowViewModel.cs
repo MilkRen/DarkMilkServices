@@ -89,7 +89,7 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public AuthorizationWindowViewModel(Action dragMove, Action closeWindowAction ,ToolbarToWindowViewModel toolbarVM)
+        public AuthorizationWindowViewModel(Action dragMove, Action closeWindowAction, ToolbarToWindowViewModel toolbarVM)
         {
             _dragMoveAction = dragMove;
             _closeAction = closeWindowAction;

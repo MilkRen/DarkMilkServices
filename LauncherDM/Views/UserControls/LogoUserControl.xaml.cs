@@ -9,17 +9,16 @@ namespace LauncherDM.Views.UserControls
     /// </summary>
     public partial class LogoUserControl : UserControl
     {
-        DispatcherTimer dispatcherTimer = new();
+        //DispatcherTimer dispatcherTimer = new();
         public LogoUserControl()
         {
             InitializeComponent();
-            dispatcherTimer.Tick += (s, e) =>
-            {
-                dispatcherTimer.Stop();
-                //NavigationService.Navigate(new MenuPage());
-            };
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
-            dispatcherTimer.Start();
+            //dispatcherTimer.Tick += (s, e) =>
+            //{
+            //    dispatcherTimer.Stop();
+            //};
+            //dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            //dispatcherTimer.Start();
         }
     }
 }

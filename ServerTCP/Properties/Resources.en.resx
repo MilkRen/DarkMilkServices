@@ -14,4 +14,10 @@
 	<data name="Test" xml:space="preserve">
 		<value>s</value>
 	</data>
+	<data name="LoadingText" xml:space="preserve">
+		<value>Good day!</value>
+	</data>
+	<data name="LoadingTextTwo" xml:space="preserve">
+		<value>"The main problem with quotations on the Internet is that people immediately believe in their authenticity" V. I. Lenin</value>
+	</data>
 </root>

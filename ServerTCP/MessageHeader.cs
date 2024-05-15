@@ -1,7 +1,4 @@
-﻿using ServerTCP.DataBase;
-using ServerTCP.Models;
-using System.Buffers.Binary;
-using System.Text;
+﻿using System.Text;
 
 namespace ServerTCP
 {
@@ -169,12 +166,12 @@ namespace ServerTCP
         {
             switch ((MessageType)buffer[0])
             {
-                case MessageHeader.MessageType.TitleLoading:
                 case MessageHeader.MessageType.Version:
                 case MessageHeader.MessageType.PublicKey:
-                case MessageHeader.MessageType.Check:
                 case MessageHeader.MessageType.Login:
-                    return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0]);  
+                case MessageHeader.MessageType.TitleLoading:
+                case MessageHeader.MessageType.Check: 
+                    return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], (MessageLanguages.Languages)buffer[1]);  
                     break;
                 case MessageHeader.MessageType.Session:
                     //return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..])); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты

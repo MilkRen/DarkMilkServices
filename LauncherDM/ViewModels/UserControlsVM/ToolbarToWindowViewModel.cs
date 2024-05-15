@@ -27,7 +27,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-        #region Properties
+        #region Binding
 
         private Visibility _visibilityMaxBut;
 
@@ -110,9 +110,22 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
+        #region Minimize
+
+        public Command ShowSettingsMiniCommand { get; }
+
+        private bool CanShowSettingsMiniCommandExecute(object p) => true;
+
+        private void OnShowSettingsMiniCommandExecuted(object p)
+        {
+            _windowService.OpenWindow(this);
+        }
+
         #endregion
 
-        public ToolbarToWindowViewModel(WindowService window, Action closeWidnow = null, Visibility visibilitySettings = Visibility.Hidden)
+        #endregion
+
+        public ToolbarToWindowViewModel(WindowService window, Action closeWidnow = null, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible)
         {
             if (closeWidnow is not null)
             {
@@ -124,9 +137,11 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
             _window = window;
             VisibilitySettingsBut = visibilitySettings;
+            VisibilityMinBut = visibilityMinBut;
             _windowService = new DialogWindowService();
             MinimizeWindowCommand = new lambdaCommand(OnMinimizeWindowCommandExecuted, CanMinimizeWindowCommandExecute);
             MaximizeWindowCommand = new lambdaCommand(OnMaximizeWindowCommandExecuted, CanMaximizeWindowCommandExecute);
+            ShowSettingsMiniCommand = new lambdaCommand(OnShowSettingsMiniCommandExecuted, CanShowSettingsMiniCommandExecute);
         }
     }
 }

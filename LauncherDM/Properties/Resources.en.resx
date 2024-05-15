@@ -59,4 +59,16 @@
 	<data name="Email" xml:space="preserve">
 		<value>Email</value>
 	</data>
+	<data name="Version" xml:space="preserve">
+		<value>Version:</value>
+	</data>
+	<data name="Settings" xml:space="preserve">
+		<value>Settings</value>
+	</data>
+	<data name="SettingsSmall" xml:space="preserve">
+		<value>Small settings</value>
+	</data>
+	<data name="AboutSmallText" xml:space="preserve">
+		<value>This program was created by a small enthusiast!</value>
+	</data>
 </root>

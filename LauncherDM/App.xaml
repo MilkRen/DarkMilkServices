@@ -8,6 +8,8 @@
 
                 <ResourceDictionary Source="Styles/Other/DockPanelStyles.xaml"/>
                 <ResourceDictionary Source="Styles/Other/LabelStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/BorderStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ContextMenuStyle.xaml"/>

@@ -61,11 +61,20 @@ namespace ServerTCP.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Доброго времени суток!.
         /// </summary>
-        internal static string Test {
+        internal static string LoadingText {
             get {
-                return ResourceManager.GetString("Test", resourceCulture);
+                return ResourceManager.GetString("LoadingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &quot;Главная проблема цитат в интернете в том, что люди сразу верят в их подлинность&quot; В. И. Ленин.
+        /// </summary>
+        internal static string LoadingTextTwo {
+            get {
+                return ResourceManager.GetString("LoadingTextTwo", resourceCulture);
             }
         }
     }
