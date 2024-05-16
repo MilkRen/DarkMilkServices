@@ -7,4 +7,12 @@
         <Setter Property="Background" Value="Transparent"/>
     </Style>
 
+    <Style x:Key="LangTextBlock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+
 </ResourceDictionary>

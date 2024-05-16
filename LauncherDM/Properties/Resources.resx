@@ -158,4 +158,13 @@
 	<data name="AboutSmallText" xml:space="preserve">
 		<value>Данная программа была создана маленьким энтузиастом!</value>
 	</data>
+	<data name="Languages" xml:space="preserve">
+		<value>Языки</value>
+	</data>
+	<data name="Russian" xml:space="preserve">
+		<value>Русский</value>
+	</data>
+	<data name="English" xml:space="preserve">
+		<value>Английский</value>
+	</data>
 </root>

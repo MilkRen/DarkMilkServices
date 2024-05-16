@@ -37,5 +37,11 @@ namespace LauncherDM.ViewModel.Base
             _disposed = true;
             // освобождение управляемых ресурсов
         }
+
+        public void AllPropertyChanged()
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(null));
+        }
     }
 }

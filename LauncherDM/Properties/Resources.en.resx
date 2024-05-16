@@ -71,4 +71,13 @@
 	<data name="AboutSmallText" xml:space="preserve">
 		<value>This program was created by a small enthusiast!</value>
 	</data>
+	<data name="Languages" xml:space="preserve">
+		<value>Languages</value>
+	</data>
+	<data name="Russian" xml:space="preserve">
+		<value>Russian</value>
+	</data>
+	<data name="English" xml:space="preserve">
+		<value>English</value>
+	</data>
 </root>

@@ -110,7 +110,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-        #region Minimize
+        #region ShowSettings
 
         public Command ShowSettingsMiniCommand { get; }
 
