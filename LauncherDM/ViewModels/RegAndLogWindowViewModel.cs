@@ -5,6 +5,7 @@ using System.Reflection;
 using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Models;
+using System;
 
 namespace LauncherDM.ViewModels
 {
@@ -17,6 +18,12 @@ namespace LauncherDM.ViewModels
         private readonly IDialogWindowService _dialogWindow;
 
         private readonly IRegAndLogWindowService _regAndLogWindowService;
+
+        #endregion
+
+        #region Fields
+
+        private Action _closeAction;
 
         #endregion
 
@@ -124,7 +131,9 @@ namespace LauncherDM.ViewModels
             IAuthorizationService authorization = new AuthorizationService();
             if (authorization.Authorization(Login, Password))
             {
-
+                _dialogWindow.OpenWindow(this);
+                _dialogWindow.CloseAction = _closeAction;
+                _dialogWindow.CloseWindow();
             }
             else
             {
@@ -141,6 +150,16 @@ namespace LauncherDM.ViewModels
         private bool CanSignUpCommandExecute(object p) => true;
         private void OnSignUpCommandExecuted(object p)
         {
+            ISignUpService signUpService = new SignUpService();
+            if (signUpService.SignUp(RegLogin, Email, RegPassword))
+            {
+                
+            }
+            else
+            {
+                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+            }
 
         }
 
@@ -148,9 +167,10 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        public RegAndLogWindowViewModel(ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper)
+        public RegAndLogWindowViewModel(Action closeWindow ,ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper)
         {
             _resourcesHelper = resourcesHelper;
+            _closeAction = closeWindow;
             ToolbarVM = toolbarViewModel;
             _dialogWindow = new DialogWindowService();
             _regAndLogWindowService = new RegAndLogWindowServiceService();

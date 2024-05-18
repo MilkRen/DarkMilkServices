@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
+using System.Text;
 using ServerTCP.DataBase;
 using ServerTCP.Models;
 
@@ -14,6 +16,8 @@ namespace ServerTCP
         private static string _privateKey;
 
         private static Random rand = new Random();
+
+        private static string SaltPassword = "sdlfjkpo213ndarkmilk";
 
         static void Main(string[] args)
         {
@@ -50,29 +54,54 @@ namespace ServerTCP
                             case MessageHeader.MessageType.Check:
                                 headerRequest = new MessageHeader("1", MessageHeader.MessageType.Check);
                                 break;
+
                             case MessageHeader.MessageType.Login:
-                              //  byte[] s = (byte[])header.Message;
-                              //var r =  CryptoRsa.Decrypt(_privateKey, s);
-                              //Console.WriteLine(r);
-                              Console.WriteLine(header.Message.ToString());
+                                var userInfo = header.Message.ToString().Split(',');
+                                var hashLogin = SHA256.HashData(Encoding.UTF8.GetBytes(userInfo[1] + SaltPassword));
+                                var convertHashLogin = Convert.ToHexString(hashLogin);
+
+                                var login = DataBaseCommands.Select(MessageHeader.MessageType.Login, userInfo[0], convertHashLogin);
+
+                                if ((bool)login)
+                                {
+                                    headerRequest = new MessageHeader(Token.GenerateToken(userInfo[0], convertHashLogin),
+                                        MessageHeader.MessageType.Login);
+                                }
+                                else
+                                    headerRequest = new MessageHeader("0", MessageHeader.MessageType.Login);
                                 break;
+
                             case MessageHeader.MessageType.Registration:
+                                var newuserInfo = header.Message.ToString().Split(',');
+
+                                if (newuserInfo.Length < 3)
+                                    throw new ArgumentException(newuserInfo.Length.ToString());
+
+                                var hash = SHA256.HashData(Encoding.UTF8.GetBytes(newuserInfo[1] + SaltPassword));
+                                var convertHash = Convert.ToHexString(hash);
                                 var user = new User
                                 {
-                                    id = 1, login = "Gustaf", email = "gustavo@milk.su", username = "Gustavo", password = "sjafhfjhlkj12pje12j31kl23j1l123j"
+                                    login = newuserInfo[0], email = newuserInfo[2], username = newuserInfo[0], password = convertHash
                                 };
-                                DataBaseCommands.Insert(user, MessageHeader.MessageType.Registration);
+                                var result = DataBaseCommands.Insert(user, MessageHeader.MessageType.Registration);
+
+                                headerRequest = result
+                                    ? new MessageHeader("1", MessageHeader.MessageType.Registration) 
+                                    : new MessageHeader("0", MessageHeader.MessageType.Registration);
                                 break;
+
                             case MessageHeader.MessageType.TitleLoading:
                                 var text = rand.Next(0, 3) == 0
                                     ? ResourcesHelper.LocalizationGet("LoadingText", header.Language)
                                     : ResourcesHelper.LocalizationGet("LoadingTextTwo", header.Language);
                                 headerRequest = new MessageHeader(text, MessageHeader.MessageType.TitleLoading);
                                 break;
+
                             case MessageHeader.MessageType.Version:
                                 var version = DataBaseCommands.Select(MessageHeader.MessageType.Version);
                                 headerRequest = new MessageHeader(version.ToString(), MessageHeader.MessageType.Version);
                                 break;
+
                             case MessageHeader.MessageType.PublicKey:
                                 headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
                                 break;

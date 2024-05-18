@@ -90,9 +90,9 @@ namespace ServerTCP
 
             switch (Type)
             {
-                case MessageType.Login:
-                    //message = (byte[])Message;
-                    Encoding.UTF8.GetBytes(Message.ToString());
+                case MessageType.Login: 
+                case MessageType.Registration: 
+                    message = Encoding.UTF8.GetBytes(Message.ToString());
                     break;
             }
 
@@ -112,6 +112,7 @@ namespace ServerTCP
             switch (Type)
             {
                 case MessageType.Login:
+                case MessageType.Registration:
                     Array.Copy(bytes, 0, result, 3, bytes.Length);
                     Array.Copy(message ?? [0], 0, result, LengthAndDataType, messageLength);
                     break;
@@ -132,6 +133,8 @@ namespace ServerTCP
             switch (Type)
             {
                 case MessageType.Token:
+                case MessageType.Login:
+                case MessageType.Registration:
                 case MessageType.TitleLoading:
                 case MessageType.PublicKey:
                 case MessageType.Version:
@@ -169,6 +172,7 @@ namespace ServerTCP
                 case MessageHeader.MessageType.Version:
                 case MessageHeader.MessageType.PublicKey:
                 case MessageHeader.MessageType.Login:
+                case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.TitleLoading:
                 case MessageHeader.MessageType.Check: 
                     return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], (MessageLanguages.Languages)buffer[1]);  
@@ -188,12 +192,6 @@ namespace ServerTCP
                 //    return new MessageHeader(result.ToArray(),
                 //       (MessageType)buffer[0]);
                 //    break;
-                case MessageHeader.MessageType.Registration:
-                case MessageHeader.MessageType.Log:
-                case MessageHeader.MessageType.File:
-                case MessageHeader.MessageType.Photo:
-                case MessageHeader.MessageType.Data:
-                case MessageHeader.MessageType.Title:
                 default:
                     return null;
                 break;
