@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:LauncherDM.ViewModel"
+        xmlns:userControls="clr-namespace:LauncherDM.Views.UserControls"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LauncherDM"
         mc:Ignorable="d"
         Title="MainWindow" 
@@ -11,17 +13,19 @@
         AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip" 
         WindowStartupLocation="CenterScreen" WindowStyle="None">
 
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="MouseDown" >
+            <behaviors:InvokeCommandAction Command="{Binding MoveWindowCommand}" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
 
-<Grid>
+    <Grid>
     <Grid.RowDefinitions>
         <RowDefinition Height="30"/>
         <RowDefinition/>
     </Grid.RowDefinitions>
 
-    <Border Grid.Row="0" Grid.RowSpan="2" Background="Wheat" CornerRadius="5" >
+    <Border Grid.Row="0" Grid.RowSpan="2" BorderThickness="0" Background="Black" CornerRadius="5" >
         <DockPanel LastChildFill="True">
             <StatusBar DockPanel.Dock="Bottom">
                     <StatusBarItem >
@@ -32,40 +36,27 @@
                     </StatusBarItem>
                 </StatusBar>
 
-            <TabControl>
-                    <TabControl.Resources>
-                        <Style TargetType="{x:Type TabPanel}">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </TabControl.Resources>
+            <TabControl Background="Transparent" BorderThickness="0">
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabPanel}">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                </TabControl.Resources>
 
                 <TabItem x:Name="StoreTI">
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Мастерская | Каталог"/>
-                            <Image Source="C:\Users\rinat\Downloads\free-icon-store-front-8723059 (1).png" Margin="5"/>
-                        </StackPanel>
-                    </TabItem.Header>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Мастерская | Каталог"/>
+                        <Image Source="C:\Users\rinat\Downloads\free-icon-store-front-8723059 (1).png" Margin="5"/>
+                    </StackPanel>
+                </TabItem.Header>
 
-                    <Grid>
-
-                    </Grid>
+                <Grid Background="Black" Margin="10" >
+                    <userControls:StoreUserControl />
+                </Grid>
                 </TabItem>
 
-
-                    <TabItem x:Name="ProgramTI">
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Программы"/>
-                            </StackPanel>
-                        </TabItem.Header>
-
-                        <Grid>
-
-                        </Grid>
-                    </TabItem>
-
-                    <TabItem x:Name="TeamTI">
+                <TabItem x:Name="TeamTI">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Форум"/>
@@ -89,7 +80,7 @@
                     </Grid>
                 </TabItem>
 
-                    <TabItem x:Name="SettingsTI">
+                <TabItem x:Name="SettingsTI">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Настройки"/>
@@ -101,13 +92,13 @@
                         </Grid>
                     </TabItem>
 
-                </TabControl>
+            </TabControl>
         </DockPanel>
     </Border>
 
     <Grid Grid.Row="0">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button x:Name="MinimizeBtn" Background="Black" BorderThickness="0" Margin="0,0,0,0" Width="30"/>
+                <userControls:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" />
         </StackPanel>
     </Grid>
 

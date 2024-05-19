@@ -2,7 +2,7 @@
 
 namespace ServerTCP.Сryptographies
 {
-    internal class CryptoAes
+    public class CryptoAes
     {
         public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
         {

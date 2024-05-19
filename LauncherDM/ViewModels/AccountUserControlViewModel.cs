@@ -29,8 +29,8 @@ namespace LauncherDM.ViewModels
         private void OnShowRegAndLogFormCommandExecuted(object p)
         {
             _windowService.OpenWindow(this);
-            _windowService.CloseAction = _closeAction;
-            _windowService.CloseWindow();
+            //_windowService.CloseAction = _closeAction;
+            //_windowService.CloseWindow();
         }
 
         #endregion
@@ -69,7 +69,7 @@ namespace LauncherDM.ViewModels
             DisplayedImagePath = imagePath;
             _closeAction = closeMainWindow;
             _windowService = new DialogWindowService();
-            ShowRegAndLogFormCommand = new lambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
+            ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
         }
     }
 }

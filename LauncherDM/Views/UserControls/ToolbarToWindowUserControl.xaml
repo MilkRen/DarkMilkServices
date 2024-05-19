@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" UseLayoutRounding="True">
     <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,2,2,0">
+            <Label Content="{Binding Title}" FontSize="10" Style="{StaticResource AccountFont}" />
+        </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,2,0" >
             <Button Command="{Binding ShowSettingsMiniCommand}" Style="{StaticResource ButtonSettings}" Visibility="{Binding VisibilitySettingsBut}">
                 <Button.ContextMenu>
@@ -16,6 +19,7 @@
                 </Button.ContextMenu>
             </Button>
             <Button Command="{Binding MinimizeWindowCommand}" Style="{StaticResource ButtonMinimize}" Visibility="{Binding VisibilityMinBut}"/>
+            <Button Command="{Binding MaximizeWindowCommand}" Style="{StaticResource ButtonMaximize}" Width="{Binding WidthMax}"/>
             <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonClose}"/>
         </StackPanel>
     </Grid>

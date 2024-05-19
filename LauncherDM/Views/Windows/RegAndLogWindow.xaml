@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:toolbarControl="clr-namespace:LauncherDM.Views.UserControls"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
         Title="{Binding Title}" 
@@ -12,6 +13,12 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
 
     <!--Test View to Bland-->
+
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="MouseDown" >
+            <behaviors:InvokeCommandAction Command="{Binding MoveWindowCommand}" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
 
     <Window.Resources>
         <Storyboard x:Key="StoryboardReg">
@@ -364,6 +371,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
+
     <Grid>
         <Path x:Name="path" Data="M0.33333333,390.37333 L1.8333333,-1.0866785 751.08335,0.45513326 751.08335,391.91513 C740.59384,398.03961 732.85159,440.95536 680.65373,440.95536 628.45587,440.95536 567.01725,325.48437 520.3139,325.48437 473.61055,325.48437 474.85931,368.82183 452.13201,390.49055 z" Fill="Black" HorizontalAlignment="Center" Height="222" Margin="0,-1,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="304" RenderTransformOrigin="0.5,0.5">
             <Path.RenderTransform>

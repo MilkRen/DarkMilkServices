@@ -70,6 +70,33 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Список аккаунтов переполнен. Уберите ненужные аккаунты..
+        /// </summary>
+        internal static string AccountListIsFull {
+            get {
+                return ResourceManager.GetString("AccountListIsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Внимание!.
+        /// </summary>
+        internal static string Attention {
+            get {
+                return ResourceManager.GetString("Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Авторизация.
         /// </summary>
         internal static string Authorization {
@@ -115,7 +142,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Английский.
         /// </summary>
         internal static string English {
             get {
@@ -129,6 +156,24 @@ namespace LauncherDM.Properties {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Неправильный логин или пароль..
+        /// </summary>
+        internal static string ErrorLogin {
+            get {
+                return ResourceManager.GetString("ErrorLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Этот аккаунт уже авторизован..
+        /// </summary>
+        internal static string ErrorLoginloggedIn {
+            get {
+                return ResourceManager.GetString("ErrorLoginloggedIn", resourceCulture);
             }
         }
         

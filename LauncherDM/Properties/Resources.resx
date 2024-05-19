@@ -167,4 +167,19 @@
 	<data name="English" xml:space="preserve">
 		<value>Английский</value>
 	</data>
+	<data name="ErrorLogin" xml:space="preserve">
+		<value>Неправильный логин или пароль.</value>
+	</data>
+	<data name="ErrorLoginloggedIn" xml:space="preserve">
+		<value>Этот аккаунт уже авторизован.</value>
+	</data>
+	<data name="Attention" xml:space="preserve">
+		<value>Внимание!</value>
+	</data>
+	<data name="AccountListIsFull" xml:space="preserve">
+		<value>Список аккаунтов переполнен. Уберите ненужные аккаунты.</value>
+	</data>
+	<data name="Account" xml:space="preserve">
+		<value>Аккаунт</value>
+	</data>
 </root>

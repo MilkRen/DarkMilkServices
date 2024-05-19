@@ -111,7 +111,6 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-
         #region EnglishLangCommand
 
         public Command EnglishLangCommand { get; }
@@ -126,7 +125,6 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-
         #endregion
 
         public SettingsMiniWindowViewModel(Action dragMove, ToolbarToWindowViewModel toolbarVM, ResourcesHelperService resourcesHelper)
@@ -135,9 +133,9 @@ namespace LauncherDM.ViewModels
             ToolbarVM = toolbarVM;
             _resourcesHelper = resourcesHelper;
             _windowService = new DialogWindowService();
-            MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
-            RussianLangCommand = new lambdaCommand(OnRussianLangCommandExecuted, CanRussianLangCommandExecute);
-            EnglishLangCommand = new lambdaCommand(OnEnglishLangCommandExecuted, CanEnglishLangCommandExecute);
+            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+            RussianLangCommand = new LambdaCommand(OnRussianLangCommandExecuted, CanRussianLangCommandExecute);
+            EnglishLangCommand = new LambdaCommand(OnEnglishLangCommandExecuted, CanEnglishLangCommandExecute);
 
             if (MessageLanguages.Language == MessageLanguages.Languages.eng)
                 EnglishEnabled = Brushes.Green;

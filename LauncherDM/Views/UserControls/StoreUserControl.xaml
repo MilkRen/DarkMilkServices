@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="LauncherDM.Views.UserControls.StoreUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LauncherDM.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="StoreControl">
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="StoreControl" From="0.5" To="1.0" Storyboard.TargetProperty="Opacity" Duration="0:0:1.2" >
+                        <DoubleAnimation.EasingFunction>
+                            <CircleEase/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <ThicknessAnimation Storyboard.TargetName="StoreControl" From="0 -25 0 0" To="0 0 0 0" Storyboard.TargetProperty="Margin" Duration="0:0:1.2" >
+                        <ThicknessAnimation.EasingFunction>
+                            <BackEase/>
+                        </ThicknessAnimation.EasingFunction>
+                    </ThicknessAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.ColumnSpan="2">
+            <Border Background="White" CornerRadius="20"></Border>
+        </Grid>
+            
+    </Grid>
+</UserControl>

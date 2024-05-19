@@ -10,6 +10,9 @@ namespace ServerTCP.Models.Data
         public DbSet<User> users { get; set; }
         public DbSet<Apps> apps { get; set; }
 
+        private const string ConnectionString =
+            "Host=81.31.246.203;Port=5432;Database=DarkMilkBD;Username=gen_user;Password=lY8\\b@slc^g\\xJ";
+
         public ApplicationContext()
         {
             //Database.EnsureCreated(); // гарантирует, что БД существует или создаст её и таблицы там 
@@ -26,7 +29,7 @@ namespace ServerTCP.Models.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) // подключение к бд
         {
-            optionsBuilder.UseNpgsql("Host=81.31.246.203;Port=5432;Database=DarkMilkBD;Username=gen_user;Password=lY8\\b@slc^g\\xJ");
+            optionsBuilder.UseNpgsql(ConnectionString);
         }
     }
 }

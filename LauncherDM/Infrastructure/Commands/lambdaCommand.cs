@@ -3,12 +3,12 @@ using System;
 
 namespace LauncherDM.Infastructure.Commands
 {
-    public class lambdaCommand : Command
+    public class LambdaCommand : Command
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
 
-        public lambdaCommand(Action<object> Execute, Func<object, bool> CanExecute = null)
+        public LambdaCommand(Action<object> Execute, Func<object, bool> CanExecute = null)
         {
             _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
             _canExecute = CanExecute;

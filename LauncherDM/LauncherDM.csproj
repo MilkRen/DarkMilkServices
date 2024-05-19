@@ -20,6 +20,7 @@
     <None Remove="Source\Images\ToolBar\Down.png" />
     <None Remove="Source\Images\ToolBar\DownBlack.png" />
     <None Remove="Source\Images\ToolBar\Maximize.png" />
+    <None Remove="Source\Images\ToolBar\MaximizeBlack.png" />
     <None Remove="Source\Images\ToolBar\MaximizeRev.png" />
     <None Remove="Source\Images\ToolBar\Minimize.png" />
     <None Remove="Source\Images\ToolBar\MinimizeBlack.png" />
@@ -85,6 +86,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\Images\ToolBar\Maximize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\MaximizeBlack.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\Images\ToolBar\MaximizeRev.png">

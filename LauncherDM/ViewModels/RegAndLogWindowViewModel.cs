@@ -6,6 +6,9 @@ using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Models;
 using System;
+using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LauncherDM.ViewModels
 {
@@ -17,13 +20,13 @@ namespace LauncherDM.ViewModels
 
         private readonly IDialogWindowService _dialogWindow;
 
-        private readonly IRegAndLogWindowService _regAndLogWindowService;
-
         #endregion
 
         #region Fields
 
         private Action _closeAction;
+
+        private Action _dragMoveAction;
 
         #endregion
 
@@ -111,6 +114,21 @@ namespace LauncherDM.ViewModels
 
         #region Commmands
 
+        #region MoveWindowCommand
+
+        public Command MoveWindowCommand { get; }
+        private bool CanMoveWindowCommandExecute(object p) => true;
+        private void OnMoveWindowCommandExecuted(object p)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                _dialogWindow.DragMoveAction = _dragMoveAction;
+                _dialogWindow.DragMoveWindow();
+            }
+        }
+
+        #endregion
+
         #region AccountRecoveryWindow
 
         public Command ShowAccountRecoveryWindowCommand { get; }
@@ -129,8 +147,33 @@ namespace LauncherDM.ViewModels
         private void OnLoginCommandExecuted(object p)
         {
             IAuthorizationService authorization = new AuthorizationService();
+            IXmlService xmlService = new XmlService();
             if (authorization.Authorization(Login, Password))
             {
+                var userlist = xmlService.DeserializeUsersXMl();
+                var user = new Users(Login, Password, string.Empty);
+                user.cryptPassword();
+                if(!userlist.UserList.Exists(x => x.Login == user.Login))
+                    userlist.UserList.Add(user);
+                else
+                {
+                    IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                    dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ErrorLoginloggedIn"),
+                        messageBoxImage: CustomMessageBoxImage.Error);
+                    _dialogWindow.CloseAction = _closeAction;
+                    _dialogWindow.CloseWindow();
+                    return;
+                }
+
+                if(userlist.UserList.Count <= 5)
+                    xmlService.SerializationUsersXml(userlist);
+                else
+                {
+                    IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                    dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"), _resourcesHelper.LocalizationGet("AccountListIsFull"));
+                    return;
+                }
+
                 _dialogWindow.OpenWindow(this);
                 _dialogWindow.CloseAction = _closeAction;
                 _dialogWindow.CloseWindow();
@@ -138,7 +181,8 @@ namespace LauncherDM.ViewModels
             else
             {
                 IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ErrorLogin"),
+                    messageBoxImage:CustomMessageBoxImage.Error);
             }
         }
 
@@ -167,16 +211,17 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        public RegAndLogWindowViewModel(Action closeWindow ,ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper)
+        public RegAndLogWindowViewModel(Action dragMove, Action closeWindow ,ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper)
         {
             _resourcesHelper = resourcesHelper;
             _closeAction = closeWindow;
             ToolbarVM = toolbarViewModel;
+            _dragMoveAction = dragMove;
             _dialogWindow = new DialogWindowService();
-            _regAndLogWindowService = new RegAndLogWindowServiceService();
-            ShowAccountRecoveryWindowCommand = new lambdaCommand(OnShowAccountRecoveryWindowCommandExecuted, CanShowAccountRecoveryWindowCommandExecute);
-            LoginCommand = new lambdaCommand(OnLoginCommandExecuted, CanLoginCommandExecute);
-            SignUpCommand = new lambdaCommand(OnSignUpCommandExecuted, CanSignUpCommandExecute);
+            ShowAccountRecoveryWindowCommand = new LambdaCommand(OnShowAccountRecoveryWindowCommandExecuted, CanShowAccountRecoveryWindowCommandExecute);
+            LoginCommand = new LambdaCommand(OnLoginCommandExecuted, CanLoginCommandExecute);
+            SignUpCommand = new LambdaCommand(OnSignUpCommandExecuted, CanSignUpCommandExecute);
+            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
     }
 }

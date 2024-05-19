@@ -29,12 +29,12 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #region Binding
 
-        private Visibility _visibilityMaxBut;
+        private string _title;
 
-        public Visibility VisibilityMaxBut
+        public string Title
         {
-            get => _visibilityMaxBut;
-            set => Set(ref _visibilityMaxBut, value);
+            get => _title;
+            set => Set(ref _title, value);
         }
 
         private Visibility _visibilityMinBut;
@@ -53,6 +53,13 @@ namespace LauncherDM.ViewModels.UserControlsVM
             set => Set(ref _visibilitySettingsBut, value);
         }
 
+        public int _widthMax;
+
+        public int WidthMax
+        {
+            get => _widthMax;
+            set => Set(ref _widthMax, value);
+        }
 
         #endregion
 
@@ -68,6 +75,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
         {
             _windowService.CloseAction = _closeWidnowAction;
             _windowService.CloseWindow();
+            //this.Dispose();
         }
 
         #endregion
@@ -92,7 +100,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         private void OnMaximizeWindowCommandExecuted(object p)
         {
-            _window.Window.WindowState = WindowState.Maximized;
+            _window.Window.WindowState = _window.Window.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         }
 
         #endregion
@@ -125,23 +133,25 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-        public ToolbarToWindowViewModel(WindowService window, Action closeWidnow = null, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible)
+        public ToolbarToWindowViewModel(WindowService window, Action closeWidnow = null, string title = null, int widthMax = 0, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible)
         {
             if (closeWidnow is not null)
             {
                 _closeWidnowAction = closeWidnow;
-                CloseWindowActionCommand = new lambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+                CloseWindowActionCommand = new LambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
             }
             else 
-                CloseWindowActionCommand = new lambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
+                CloseWindowActionCommand = new LambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
 
             _window = window;
             VisibilitySettingsBut = visibilitySettings;
             VisibilityMinBut = visibilityMinBut;
+            Title = title;
+            WidthMax = widthMax;
             _windowService = new DialogWindowService();
-            MinimizeWindowCommand = new lambdaCommand(OnMinimizeWindowCommandExecuted, CanMinimizeWindowCommandExecute);
-            MaximizeWindowCommand = new lambdaCommand(OnMaximizeWindowCommandExecuted, CanMaximizeWindowCommandExecute);
-            ShowSettingsMiniCommand = new lambdaCommand(OnShowSettingsMiniCommandExecuted, CanShowSettingsMiniCommandExecute);
+            MinimizeWindowCommand = new LambdaCommand(OnMinimizeWindowCommandExecuted, CanMinimizeWindowCommandExecute);
+            MaximizeWindowCommand = new LambdaCommand(OnMaximizeWindowCommandExecuted, CanMaximizeWindowCommandExecute);
+            ShowSettingsMiniCommand = new LambdaCommand(OnShowSettingsMiniCommandExecuted, CanShowSettingsMiniCommandExecute);
         }
     }
 }
