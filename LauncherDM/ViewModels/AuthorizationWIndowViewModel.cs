@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using LauncherDM.ViewModels.UserControlsVM;
 using System.Windows.Controls;
+using LauncherDM.Models;
 
 namespace LauncherDM.ViewModels
 {
@@ -26,6 +27,8 @@ namespace LauncherDM.ViewModels
         private readonly IResourcesHelperService _resourcesHelper;
 
         private readonly IDialogWindowService _windowService;
+
+        private readonly IXmlService _xmlService;
 
         #endregion
 
@@ -47,7 +50,11 @@ namespace LauncherDM.ViewModels
 
         private ObservableCollection<AccountUserControlViewModel> _accountList;
 
-        public IEnumerable<AccountUserControlViewModel> AccountControls => _accountList;
+        public ObservableCollection<AccountUserControlViewModel> AccountControls
+        {
+            get => _accountList;
+            set => Set(ref _accountList, value);
+        }
 
         #endregion
 
@@ -89,24 +96,26 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public AuthorizationWindowViewModel(Action dragMove, Action closeWindowAction, ToolbarToWindowViewModel toolbarVM)
+        public AuthorizationWindowViewModel(Action dragMove, Action closeWindowAction, ToolbarToWindowViewModel toolbarVM, ResourcesHelperService resourcesHelperService)
         {
             _dragMoveAction = dragMove;
             _closeAction = closeWindowAction;
             ToolbarVM = toolbarVM;
+            _resourcesHelper = resourcesHelperService;
 
-            _accountList = new ObservableCollection<AccountUserControlViewModel>()
-            {
-                new AccountUserControlViewModel(closeWindowAction,"Sex", "/Source/Images/Logo/MilkBottle.png"),
-                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
-                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
-                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
-                new AccountUserControlViewModel(closeWindowAction,"Sex", ""),
-            };
+            _accountList = new ObservableCollection<AccountUserControlViewModel>();
+            _xmlService = new XmlService();
+            var xmlUsersList = _xmlService.DeserializeUsersXMl();
+
+            if (xmlUsersList.UserList.Count == 0)
+                _accountList.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account"), string.Empty));
+            else
+                foreach (var user in xmlUsersList.UserList)
+                    _accountList.Add(new AccountUserControlViewModel(closeWindowAction, user.Login, user.ImagePath));
 
             _windowService = new DialogWindowService();
-            ShowRegAndLogFormCommand = new lambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
-            MoveWindowCommand = new lambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+            ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
+            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
 
         #endregion
