@@ -1,6 +1,8 @@
 ﻿using System;
+using Amazon.Runtime;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Models;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 
@@ -22,15 +24,27 @@ namespace LauncherDM.ViewModels
 
         #region Commands
 
-        public Command ShowRegAndLogFormCommand { get; }
+        public Command ShowRegAndLogOrMainFormCommand { get; }
 
-        private bool CanShowRegAndLogFormCommandExecute(object p) => true;
+        private bool CanShowRegAndLogOrMainFormCommandExecute(object p) => true;
 
-        private void OnShowRegAndLogFormCommandExecuted(object p)
+        private void OnShowRegAndLogOrMainFormCommandExecuted(object p)
         {
-            _windowService.OpenWindow(this);
-            //_windowService.CloseAction = _closeAction;
-            //_windowService.CloseWindow();
+            if (Password is not null)
+            {
+                IAuthorizationService authorization = new AuthorizationService();
+                IXmlService xmlService = new XmlService();
+                var user = new Users();
+                user.PasswordArray = Password;
+                
+                if (authorization.Authorization(AccountName, user.DecryptPassword()))
+                    _windowService.OpenMainWindow();
+            }
+            else
+                _windowService.OpenWindow(this);
+
+            _windowService.CloseAction = _closeAction;
+            _windowService.CloseWindow();
         }
 
         #endregion
@@ -61,15 +75,49 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region Password
+
+        private byte[] _password;
+
+        public byte[] Password
+        {
+            get => _password;
+            set => Set(ref _password, value);
+        }
+
         #endregion
 
-        public AccountUserControlViewModel(Action closeMainWindow, string accountName, string imagePath)
+        #region ButtonText
+
+        private string _buttonText = "+";
+
+        public string ButtonText
         {
-            AccountName = accountName;
-            DisplayedImagePath = imagePath;
+            get => _buttonText;
+            set => Set(ref _buttonText, value);
+        }
+
+        #endregion
+
+        #endregion
+
+        public AccountUserControlViewModel(Action closeMainWindow, Users user)
+        {
+            AccountName = user.Login;
+            DisplayedImagePath = user.ImagePath;
+            Password = user.PasswordArray;
+            _closeAction = closeMainWindow;
+            ButtonText = $"[{AccountName[0]}]";
+            _windowService = new DialogWindowService();
+            ShowRegAndLogOrMainFormCommand = new LambdaCommand(OnShowRegAndLogOrMainFormCommandExecuted, CanShowRegAndLogOrMainFormCommandExecute);
+        }
+
+        public AccountUserControlViewModel(Action closeMainWindow, string titleName)
+        {
+            AccountName = titleName;
             _closeAction = closeMainWindow;
             _windowService = new DialogWindowService();
-            ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
+            ShowRegAndLogOrMainFormCommand = new LambdaCommand(OnShowRegAndLogOrMainFormCommandExecuted, CanShowRegAndLogOrMainFormCommandExecute);
         }
     }
 }

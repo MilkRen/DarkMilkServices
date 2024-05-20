@@ -11,32 +11,46 @@ namespace LauncherDM.Models
     {
         public string Login { get; set; }
 
-        public string Password { get; set; }
+        public byte[] PasswordArray { get; set; }
 
         public string ImagePath { get; set; }
 
         private string Key = "fdjiaobzfddarkmilk";
         public Users() { }
 
-        public Users(string login, string password, string imagePath)
+        public Users(string login, string imagePath, byte[] passwordArray = null)
         {
             Login = login;
-            Password = password;
+            PasswordArray = passwordArray;
             ImagePath = imagePath;
         }
 
-        public void cryptPassword()
+        public byte[] CryptPassword(string password)
         {
-            var hash = SHA256.HashData(Encoding.UTF8.GetBytes(Password));
-            var convertHash = Convert.ToHexString(hash);
+            //var hash = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            //var convertHash = Convert.ToHexString(hash);
             using (var myAes = Aes.Create())
             {
                 byte[] aesKey = SHA256Managed.Create().ComputeHash(Encoding.UTF8.GetBytes(Key));
                 byte[] aesIV = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(Key));
                 myAes.Key = aesKey;
                 myAes.IV = aesIV;
-                var tokenResult = Convert.ToBase64String(CryptoAes.EncryptStringToBytes_Aes(convertHash, myAes.Key, myAes.IV));
-                Password = tokenResult;
+                PasswordArray = CryptoAes.EncryptStringToBytes_Aes(password, myAes.Key, myAes.IV);
+                //Password = Convert.ToBase64String(PasswordArray);
+            }
+
+            return PasswordArray;
+        }
+
+        public string DecryptPassword()
+        {
+            using (var myAes = Aes.Create())
+            {
+                byte[] aesKey = SHA256Managed.Create().ComputeHash(Encoding.UTF8.GetBytes(Key));
+                byte[] aesIV = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(Key));
+                myAes.Key = aesKey;
+                myAes.IV = aesIV;
+                return CryptoAes.DecryptStringFromBytes_Aes(PasswordArray, myAes.Key, myAes.IV);
             }
         }
     }

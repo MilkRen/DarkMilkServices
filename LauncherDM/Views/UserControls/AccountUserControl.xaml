@@ -19,7 +19,7 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
-            <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowRegAndLogFormCommand}" Content="+"/>
+            <Button Margin="5" Style="{StaticResource ButtonAuthorizationAccount}" Command="{Binding ShowRegAndLogOrMainFormCommand}" Content="{Binding ButtonText}"/>
             <Image IsHitTestVisible="False" Width="80" UseLayoutRounding="True" Source="{Binding DisplayedImagePath}" Style="{StaticResource WhiteHighLiteImage}"/>
         </Grid>
     </Grid>

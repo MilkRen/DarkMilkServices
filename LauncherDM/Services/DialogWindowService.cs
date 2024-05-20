@@ -53,12 +53,7 @@ namespace LauncherDM.Services
             else if (viewModel is RegAndLogWindowViewModel)
             {
                 //((ViewModel.Base.ViewModel)viewModel).Dispose();
-                var mainWindow = new MainWindow(); 
-                mainWindow.DataContext = new MainWindowViewModel(mainWindow.DragMove, 
-                    new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Close, widthMax:30),
-                    ResourcesHelperService);
-                //mainWindow.Owner = Application.Current.MainWindow;
-                mainWindow.Show();
+                OpenMainWindow();
                 return;
             }
         }
@@ -91,6 +86,16 @@ namespace LauncherDM.Services
             var accountRecovery = new AccountRecoveryWindow();
             accountRecovery.DataContext = new AccountRecoveryWindowViewModel();
             accountRecovery.Show();
+        }
+
+        public void OpenMainWindow()
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.DataContext = new MainWindowViewModel(mainWindow.DragMove,
+                new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Close, widthMax: 30),
+                ResourcesHelperService);
+            //mainWindow.Owner = Application.Current.MainWindow;
+            mainWindow.Show();
         }
     }
 }

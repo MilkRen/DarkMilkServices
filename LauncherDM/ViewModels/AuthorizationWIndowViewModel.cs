@@ -108,11 +108,16 @@ namespace LauncherDM.ViewModels
             var xmlUsersList = _xmlService.DeserializeUsersXMl();
 
             if (xmlUsersList.UserList.Count == 0)
-                _accountList.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account"), string.Empty));
+                _accountList.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
             else
+            {
                 foreach (var user in xmlUsersList.UserList)
-                    _accountList.Add(new AccountUserControlViewModel(closeWindowAction, user.Login, user.ImagePath));
+                    _accountList.Add(new AccountUserControlViewModel(closeWindowAction, user));
 
+                if (xmlUsersList.UserList.Count <= 5)
+                    _accountList.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
+            }
+            
             _windowService = new DialogWindowService();
             ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);

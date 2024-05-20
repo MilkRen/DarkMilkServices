@@ -151,9 +151,10 @@ namespace LauncherDM.ViewModels
             if (authorization.Authorization(Login, Password))
             {
                 var userlist = xmlService.DeserializeUsersXMl();
-                var user = new Users(Login, Password, string.Empty);
-                user.cryptPassword();
-                if(!userlist.UserList.Exists(x => x.Login == user.Login))
+                var user = new Users(Login, string.Empty);
+                user.PasswordArray = user.CryptPassword(Password);
+
+                if (!userlist.UserList.Exists(x => x.Login == user.Login))
                     userlist.UserList.Add(user);
                 else
                 {
