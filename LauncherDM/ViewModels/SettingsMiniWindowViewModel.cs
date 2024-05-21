@@ -8,7 +8,6 @@ using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.Models;
 using ServerTCP;
-using Color = System.Drawing.Color;
 
 namespace LauncherDM.ViewModels
 {

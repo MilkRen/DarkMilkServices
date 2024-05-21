@@ -12,7 +12,7 @@
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
                 <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="StoreControl" From="0.5" To="1.0" Storyboard.TargetProperty="Opacity" Duration="0:0:1.2" >
+                    <DoubleAnimation Storyboard.TargetName="StoreControl" From="0.3" To="1.0" Storyboard.TargetProperty="Opacity" Duration="0:0:1.2" >
                         <DoubleAnimation.EasingFunction>
                             <CircleEase/>
                         </DoubleAnimation.EasingFunction>

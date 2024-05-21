@@ -44,4 +44,10 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
+    <Style x:Key="TabItemFont" TargetType="Label">
+        <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
 </ResourceDictionary>

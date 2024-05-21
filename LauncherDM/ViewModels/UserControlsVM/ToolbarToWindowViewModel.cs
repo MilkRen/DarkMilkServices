@@ -133,11 +133,11 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-        public ToolbarToWindowViewModel(WindowService window, Action closeWidnow = null, string title = null, int widthMax = 0, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible)
+        public ToolbarToWindowViewModel(WindowService window, Action closeWidnowOrHide = null, string title = null, int widthMax = 0, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible)
         {
-            if (closeWidnow is not null)
+            if (closeWidnowOrHide is not null)
             {
-                _closeWidnowAction = closeWidnow;
+                _closeWidnowAction = closeWidnowOrHide;
                 CloseWindowActionCommand = new LambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
             }
             else 

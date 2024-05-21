@@ -89,7 +89,6 @@ namespace LauncherDM.ViewModel
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
-        } 
-
+        }
     }
 }

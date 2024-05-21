@@ -115,6 +115,16 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CloseBlack {
+            get {
+                object obj = ResourceManager.GetObject("CloseBlack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Подтвердите пароль.
         /// </summary>
         internal static string ConfirmPassword {
@@ -196,7 +206,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Форум.
         /// </summary>
         internal static string Forum {
             get {
@@ -219,6 +229,36 @@ namespace LauncherDM.Properties {
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon OnlyLogo {
+            get {
+                object obj = ResourceManager.GetObject("OnlyLogo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon OnlyLogoTwo {
+            get {
+                object obj = ResourceManager.GetObject("OnlyLogoTwo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OnlyLogoTwoImage {
+            get {
+                object obj = ResourceManager.GetObject("OnlyLogoTwoImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

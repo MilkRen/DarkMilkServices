@@ -92,7 +92,7 @@ namespace LauncherDM.Services
         {
             var mainWindow = new MainWindow();
             mainWindow.DataContext = new MainWindowViewModel(mainWindow.DragMove,
-                new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Close, widthMax: 30),
+                new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Hide, widthMax: 30),
                 ResourcesHelperService);
             //mainWindow.Owner = Application.Current.MainWindow;
             mainWindow.Show();
