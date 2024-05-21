@@ -9,6 +9,8 @@ using System;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace LauncherDM.ViewModels
 {
@@ -196,17 +198,42 @@ namespace LauncherDM.ViewModels
         private void OnSignUpCommandExecuted(object p)
         {
             ISignUpService signUpService = new SignUpService();
-            if (signUpService.SignUp(RegLogin, Email, RegPassword))
+
+            if (Regex.IsMatch(RegLogin, "^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\\d.-]{0,19}$"))
             {
-                
-            }
-            else
-            {
-                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
             }
 
+            if (IsValid(Email))
+            {
+
+            }
+
+            //if (signUpService.SignUp(RegLogin, Email, RegPassword))
+            //{
+                
+            //}
+            //else
+            //{
+            //    IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+            //    dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+            //}
+
         }
+
+        public bool IsValid(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
 
         #endregion
 

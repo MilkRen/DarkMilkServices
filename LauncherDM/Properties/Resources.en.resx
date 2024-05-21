@@ -95,4 +95,10 @@
 	<data name="Account" xml:space="preserve">
 		<value>Account</value>
 	</data>
+	<data name="Store" xml:space="preserve">
+		<value>Workshop | Catalog</value>
+	</data>
+	<data name="Forum" xml:space="preserve">
+		<value>Forum</value>
+	</data>
 </root>

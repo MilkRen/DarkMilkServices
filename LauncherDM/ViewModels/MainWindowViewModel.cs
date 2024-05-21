@@ -29,15 +29,24 @@ namespace LauncherDM.ViewModel
         #endregion
 
         #region Binding
-        private string _title = "Главное меню";
 
-        /// <summary>Заголовок окна</summary>
+        public string StoreText => _resourcesHelper.LocalizationGet("Store");
+
+        public string ForumText => _resourcesHelper.LocalizationGet("Forum");
+
+        public string AccountText => _resourcesHelper.LocalizationGet("Account");
+
+        #region Title
+
+        private string _title = "DarkMilk";
+
         public string Title
         {
             get => _title;
             set => Set(ref _title, value);
         }
 
+        #endregion
 
         #region ToolBar
 
@@ -50,7 +59,6 @@ namespace LauncherDM.ViewModel
         }
 
         #endregion
-
 
         #endregion
 
@@ -81,8 +89,6 @@ namespace LauncherDM.ViewModel
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
-
-
         } 
 
     }

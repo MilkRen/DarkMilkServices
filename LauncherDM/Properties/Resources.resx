@@ -182,4 +182,10 @@
 	<data name="Account" xml:space="preserve">
 		<value>Аккаунт</value>
 	</data>
+	<data name="Store" xml:space="preserve">
+		<value>Мастерская | Каталог</value>
+	</data>
+	<data name="Forum" xml:space="preserve">
+		<value>Форум</value>
+	</data>
 </root>
