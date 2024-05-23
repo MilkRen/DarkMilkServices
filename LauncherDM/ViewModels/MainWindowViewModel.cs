@@ -6,6 +6,8 @@ using LauncherDM.ViewModels.UserControlsVM;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using LauncherDM.ViewModels;
+using LauncherDM.Views.UserControls;
 
 namespace LauncherDM.ViewModel
 {
@@ -22,8 +24,6 @@ namespace LauncherDM.ViewModel
 
         #region Fields
 
-        private Action _closeAction;
-
         private Action _dragMoveAction;
 
         #endregion
@@ -35,6 +35,10 @@ namespace LauncherDM.ViewModel
         public string ForumText => _resourcesHelper.LocalizationGet("Forum");
 
         public string AccountText => _resourcesHelper.LocalizationGet("Account");
+
+        public string LibraryText => _resourcesHelper.LocalizationGet("Library");
+
+        public string FriendsText => _resourcesHelper.LocalizationGet("Friends");
 
         #region Title
 
@@ -56,6 +60,18 @@ namespace LauncherDM.ViewModel
         {
             get => _toolbarVM;
             set => Set(ref _toolbarVM, value);
+        }
+
+        #endregion
+
+        #region StoreUserControlVM
+
+        private StoreUserControlViewModel _storeUserControlVM;
+
+        public StoreUserControlViewModel StoreUserControlVM
+        {
+            get => _storeUserControlVM;
+            set => Set(ref _storeUserControlVM, value);
         }
 
         #endregion
@@ -88,6 +104,7 @@ namespace LauncherDM.ViewModel
             ToolbarVM = toolbarViewModel;
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
+            StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
     }

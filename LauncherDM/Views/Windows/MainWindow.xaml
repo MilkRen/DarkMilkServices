@@ -11,7 +11,7 @@
         Title="{Binding Title}" 
         Height="720" Width="1280" 
         AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip" 
-        WindowStartupLocation="CenterScreen" WindowStyle="None">
+        WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized">
 
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="MouseDown" >
@@ -76,9 +76,21 @@
                     </TabItem.Header>
 
                     <Grid Background="Black" Margin="10" >
-                        <userControls:StoreUserControl />
+                        <userControls:StoreUserControl DataContext="{Binding StoreUserControlVM}"/>
                     </Grid>
                 </TabItem>
+
+                <TabItem x:Name="LibIT">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding LibraryText}" Style="{StaticResource TabItemFont}"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                
+                    <Grid Background="Black" Margin="10" >
+                    </Grid>
+                </TabItem>
+
 
                 <TabItem x:Name="TeamTI">
                     <TabItem.Header>
@@ -89,6 +101,19 @@
 
                     <Grid>
 
+                    </Grid>
+                </TabItem>
+
+
+                <TabItem x:Name="FriendsTI">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding FriendsText}" Style="{StaticResource TabItemFont}"/>
+                        </StackPanel>
+                    </TabItem.Header>
+            
+                    <Grid>
+            
                     </Grid>
                 </TabItem>
 

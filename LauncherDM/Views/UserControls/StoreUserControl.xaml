@@ -26,20 +26,111 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="2">
-            <Border Background="White" CornerRadius="20"></Border>
+            <Grid Grid.ColumnSpan="2">
+                <Border Background="White" CornerRadius="20"/>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Margin="5">
+                <TextBlock Text="{Binding GamesText}" FontSize="20" Style="{StaticResource TitleProgramTextBlock}" HorizontalAlignment="Center"/>
+                <Border Style="{StaticResource BorderRounded}" Width="150" Margin="0,1,0,0"/>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Margin="0,5,5,0" >
+                <ListView ItemsSource="{Binding ProgramsListView}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button Background="Transparent" Command="{Binding ClickProgramCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                        <StackPanel >
+                                            <Image Source="{Binding ImagePath}" Width="250" Height="150"  Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5"/>
+                                            <Border Width="250" Height="33" Background="#202227" BorderThickness="0">
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="{Binding Title}" FontSize="16" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                    <TextBlock Text="{Binding Price, StringFormat={}{0:N2} RUB}" FontSize="12" Foreground="Silver" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <StackPanel Grid.Column="2" Grid.Row="1" Margin="5">
+                <TextBlock Text="{Binding ProgramText}" FontSize="20" Style="{StaticResource TitleProgramTextBlock}" HorizontalAlignment="Center"/>
+                <Border Style="{StaticResource BorderRounded}" Width="150" Margin="0,1,0,0" />
+            </StackPanel>
+
+            <Grid Grid.Column="2" Grid.Row="2" Margin="5,5,0,0">
+                <ListView ItemsSource="{Binding ProgramsListView}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button Background="Transparent" Command="{Binding ClickProgramCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                        <StackPanel >
+                                            <Image Source="{Binding ImagePath}" Width="250" Height="150"  Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5"/>
+                                            <Border Width="250" Height="33" Background="#202227" BorderThickness="0">
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="{Binding Title}" FontSize="16" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                    <TextBlock Text="{Binding Price, StringFormat={}{0:N2} RUB}" FontSize="12" Foreground="Silver" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
         </Grid>
-            
+
+        <Grid HorizontalAlignment="Right">
+            <Border CornerRadius="18" Background="#35383f" x:Name="Borderz">
+                <!--<Border.Triggers>
+                    <EventTrigger RoutedEvent="MouseDown">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width"
+                                                 From="0" To="400" Duration="0:0:5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>-->
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Styles/Other/ImageStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/TabControlStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/TabPanelStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ScrollbarStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

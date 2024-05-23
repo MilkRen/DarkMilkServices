@@ -220,4 +220,16 @@
   <data name="OnlyLogoTwoImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Source\Images\Logo\OnlyLogoTwo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Programs" xml:space="preserve">
+	  <value>Программы</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+	  <value>Игры</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+	  <value>Библиотека</value>
+  </data>
+  <data name="Friends" xml:space="preserve">
+	  <value>Друзья</value>
+  </data>
 </root>

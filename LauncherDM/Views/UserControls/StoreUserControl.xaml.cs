@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace LauncherDM.Views.UserControls
 {
@@ -9,7 +11,13 @@ namespace LauncherDM.Views.UserControls
     {
         public StoreUserControl()
         {
-            InitializeComponent();
+                InitializeComponent();
+
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = Borderz.ActualWidth;
+                buttonAnimation.To = 150;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(3);
+                Borderz.BeginAnimation(Button.WidthProperty, buttonAnimation);
         }
     }
 }
