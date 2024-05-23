@@ -1,4 +1,5 @@
-﻿using LauncherDM.ViewModels.UserControlsVM;
+﻿using System;
+using LauncherDM.ViewModels.UserControlsVM;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -61,6 +62,17 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region Price
+
+        private string _toolTipProgramsText;
+
+        public string ToolTipProgramsText
+        {
+            get => _toolTipProgramsText;
+            set => Set(ref _toolTipProgramsText, value);
+        }
+
+        #endregion
 
 
         #endregion
@@ -68,21 +80,17 @@ namespace LauncherDM.ViewModels
         #region Command
 
         public Command ClickProgramCommand { get; }
-        private bool CanClickProgramCommandExecute(object p) => true;
-        private void OnClickProgramCommandExecuted(object p)
-        {
-            MessageBox.Show("sd");
-        }
-
+        
         #endregion
 
-        public ProgramsViewModel(Programs prog)
+        public ProgramsViewModel(Programs prog, LambdaCommand lambdaCommand = null)
         {
             Title = prog.Title;
-            ImagePath = prog.ImagePath;
+            ImagePath = prog.ImageMainPath;
             Price = prog.Price;
             Description = prog.Description;
-            ClickProgramCommand = new LambdaCommand(OnClickProgramCommandExecuted, CanClickProgramCommandExecute);
+            ToolTipProgramsText = string.Concat(prog.Description.Substring(0, prog.Description.Length / 4), "...");
+            ClickProgramCommand = lambdaCommand;
         }
     }
 }

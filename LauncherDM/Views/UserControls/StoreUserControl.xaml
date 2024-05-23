@@ -57,6 +57,13 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#6E00FF" Opacity="0.8" >
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ToolTipProgramsText}" Width="150" Height="100" TextWrapping="Wrap" Margin="3" Style="{StaticResource ToolTipTextBlock}"/>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
@@ -94,6 +101,13 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#6E00FF" Opacity="0.8" >
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ToolTipProgramsText}" Width="150" Height="100" TextWrapping="Wrap" Margin="3" Style="{StaticResource ToolTipTextBlock}"/>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
@@ -119,50 +133,71 @@
         </Grid>
 
         <Grid HorizontalAlignment="Right">
-            <Border CornerRadius="18" Background="#35383f" x:Name="Borderz" Width="400">
+            <Border CornerRadius="18" Background="#35383f" x:Name="BorderItem" Width="0">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width" To="400" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="205"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <Grid VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Center" Text="Title" FontSize="20" Style="{StaticResource TitleProgramTextBlock}"/>
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding TitleItem}" FontSize="20" Style="{StaticResource TitleProgramTextBlock}"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" VerticalAlignment="Center">
                         <StackPanel>
-                            <Image Width="250" Height="150"/>
-                            <ListView/>
+                            <Image Source="{Binding ImageItem}" Width="250" Height="150"/>
+                            <ListView ItemsSource="{Binding ItemListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderThickness="0">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button Background="Transparent" Command="{Binding ClickItemCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                                <Image Width="50" Source="{Binding ImageItemPath}" Margin="10"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </StackPanel>
 
                     </Grid>
 
                     <Grid Grid.Row="2" VerticalAlignment="Center">
-                        <TextBlock Text="Tagi"/>
+                        <TextBlock Text="sa"/>
                     </Grid>
 
                     <Grid Grid.Row="3">
-                        <TextBlock Text="sdadфывфывфывфывфыas" TextWrapping="Wrap" FontSize="10" Style="{StaticResource TitleProgramTextBlock}"></TextBlock>
+                        <TextBlock Text="{Binding DescItem}" TextWrapping="Wrap" FontSize="10" Style="{StaticResource TitleProgramTextBlock}"/>
                     </Grid>
 
-                    <Grid Grid.Row="4">
-
+                    <Grid Grid.Row="4" VerticalAlignment="Center">
+                        <Button Command="{Binding AddCommand}" Height="30" Margin="10" Content="Сбросить" Foreground="White" Background="#738aea" Style="{StaticResource ButtonDefault}"/>
                     </Grid>
                 </Grid>
-                <!--<Border.Triggers>
-                    <EventTrigger RoutedEvent="MouseDown">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Width"
-                                                 From="0" To="400" Duration="0:0:5"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Border.Triggers>-->
             </Border>
         </Grid>
     </Grid>
