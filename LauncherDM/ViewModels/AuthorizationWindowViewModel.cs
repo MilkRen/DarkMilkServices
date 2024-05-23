@@ -103,19 +103,19 @@ namespace LauncherDM.ViewModels
             ToolbarVM = toolbarVM;
             _resourcesHelper = resourcesHelperService;
 
-            _accountList = new ObservableCollection<AccountUserControlViewModel>();
+            AccountControls = new ObservableCollection<AccountUserControlViewModel>();
             _xmlService = new XmlService();
             var xmlUsersList = _xmlService.DeserializeUsersXMl();
 
             if (xmlUsersList.UserList.Count == 0)
-                _accountList.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
+                AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
             else
             {
                 foreach (var user in xmlUsersList.UserList)
-                    _accountList.Add(new AccountUserControlViewModel(closeWindowAction, user));
+                    AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, user));
 
                 if (xmlUsersList.UserList.Count <= 5)
-                    _accountList.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
+                    AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
             }
             
             _windowService = new DialogWindowService();
