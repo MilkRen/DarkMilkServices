@@ -80,11 +80,15 @@ namespace LauncherDM.ViewModels
         // Todo: надо убрать это безобразие 
         public static Border ItemProgram;
 
-        public StoreUserControlViewModel(ResourcesHelperService resourcesHelper)
+        public StoreUserControlViewModel(ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _resourcesHelper = resourcesHelper;
             ProgramsListView = new ObservableCollection<ProgramsViewModel>();
             ItemListView = new ObservableCollection<ProgramItemViewModel>();
+            LoadStore(serverRequest);
+
+
+
             int a = 0;
             while (a < 10)
             {
@@ -102,15 +106,35 @@ namespace LauncherDM.ViewModels
                         ImageItem = prog.ImageMainPath;
                         DescItem = prog.Description;
 
-                        var buttonAnimation = new DoubleAnimation();
-                        buttonAnimation.From = ItemProgram.ActualWidth;
-                        buttonAnimation.To = 400;
-                        buttonAnimation.Duration = TimeSpan.FromSeconds(1);
-                        ItemProgram.BeginAnimation(Button.WidthProperty, buttonAnimation);
+                        AnimationItemShow();
 
                     }, o => true)));
                 a++;
             }
+
+            a = 0;
+            while (a < 10)
+            {
+                var prog = new Programs()
+                {
+                    Title = "StrikeJo",
+                    ImageMainPath = "https://darkmilk.store/Launcher/ProgramImage/ClassicClicker.png",
+                    Price = "4999",
+                    Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
+                };
+
+                ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
+                {
+                    TitleItem = prog.Title;
+                    ImageItem = prog.ImageMainPath;
+                    DescItem = prog.Description;
+
+                    AnimationItemShow();
+
+                }, o => true)));
+                a++;
+            }
+
 
             a = 0;
             while (a < 10)
@@ -135,15 +159,25 @@ namespace LauncherDM.ViewModels
                     ImageItem = prog.ImageMainPath;
                     DescItem = prog.Description;
 
-                    var buttonAnimation = new DoubleAnimation();
-                    buttonAnimation.From = ItemProgram.ActualWidth;
-                    buttonAnimation.To = 400;
-                    buttonAnimation.Duration = TimeSpan.FromSeconds(1);
-                    ItemProgram.BeginAnimation(Button.WidthProperty, buttonAnimation);
-
+                    AnimationItemShow();
                 }, o => true)));
                 a++;
             }
+        }
+
+        public void LoadStore(ServerRequestService serverRequest)
+        {
+            IStoreUserControlService store = new StoreUserControlService(serverRequest);
+            store.GetPrograms();
+        }
+
+        public void AnimationItemShow()
+        {
+            var buttonAnimation = new DoubleAnimation();
+            buttonAnimation.From = ItemProgram.ActualWidth;
+            buttonAnimation.To = 400;
+            buttonAnimation.Duration = TimeSpan.FromSeconds(1);
+            ItemProgram.BeginAnimation(Button.WidthProperty, buttonAnimation);
         }
     }
 }

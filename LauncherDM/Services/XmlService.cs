@@ -11,24 +11,24 @@ namespace LauncherDM.Services
     {
         private const string FileName = "Users.xml";
 
-        public void SerializationUsersXml(UsersList userlist)
+        public void SerializationUsersXml(UsersForXml userlist)
         {
-            var xml = new XmlSerializer(typeof(UsersList));
+            var xml = new XmlSerializer(typeof(UsersForXml));
             using (var fs = new FileStream(FileName, FileMode.OpenOrCreate))
             {
                 xml.Serialize(fs, userlist);
             }
         }
 
-        public UsersList DeserializeUsersXMl()
+        public UsersForXml DeserializeUsersXMl()
         {
-            var userslist = new UsersList();
-            var xml = new XmlSerializer(typeof(UsersList));
+            var userslist = new UsersForXml();
+            var xml = new XmlSerializer(typeof(UsersForXml));
             using (var fs = File.Open(FileName, FileMode.OpenOrCreate))
             {
                 try
                 {
-                    userslist = (UsersList)xml.Deserialize(fs);
+                    userslist = (UsersForXml)xml.Deserialize(fs);
                 }
                 catch 
                 {

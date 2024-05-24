@@ -56,7 +56,7 @@ namespace LauncherDM.Models
     }
 
     [Serializable]
-    public class UsersList
+    public class UsersForXml
     {
         public List<Users> UserList { get; set; } = new List<Users>();
     }

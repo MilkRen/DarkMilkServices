@@ -43,7 +43,7 @@ namespace ServerTCP
                     do
                     {
                         size = listener.Receive(buffer); // получение данных, количество, значение
-                        var header = MessageHeader.FromArray(buffer.Take(size).ToArray());
+                        var header = MessageHeader.ServerFromArray(buffer.Take(size).ToArray());
 
                         MessageHeader headerRequest = null;
                         byte[] headerRequestBytes;
@@ -52,7 +52,7 @@ namespace ServerTCP
                         switch (header.Type)
                         {
                             case MessageHeader.MessageType.Check:
-                                headerRequest = new MessageHeader("1", MessageHeader.MessageType.Check);
+                                headerRequest = new MessageHeader("1", header.Type);
                                 break;
 
                             case MessageHeader.MessageType.Login:
@@ -60,15 +60,15 @@ namespace ServerTCP
                                 var hashLogin = SHA256.HashData(Encoding.UTF8.GetBytes(userInfo[1] + SaltPassword));
                                 var convertHashLogin = Convert.ToHexString(hashLogin);
 
-                                var login = DataBaseCommands.Select(MessageHeader.MessageType.Login, userInfo[0], convertHashLogin);
+                                var login = DataBaseCommands.Select(header.Type, userInfo[0], convertHashLogin);
 
                                 if ((bool)login)
                                 {
                                     headerRequest = new MessageHeader(Token.GenerateToken(userInfo[0], convertHashLogin),
-                                        MessageHeader.MessageType.Login);
+                                        header.Type);
                                 }
                                 else
-                                    headerRequest = new MessageHeader("0", MessageHeader.MessageType.Login);
+                                    headerRequest = new MessageHeader("0", header.Type);
                                 break;
 
                             case MessageHeader.MessageType.Registration:
@@ -83,27 +83,36 @@ namespace ServerTCP
                                 {
                                     login = newuserInfo[0], email = newuserInfo[2], username = newuserInfo[0], password = convertHash
                                 };
-                                var result = DataBaseCommands.Insert(user, MessageHeader.MessageType.Registration);
+                                var result = DataBaseCommands.Insert(user, header.Type);
 
                                 headerRequest = result
-                                    ? new MessageHeader("1", MessageHeader.MessageType.Registration) 
-                                    : new MessageHeader("0", MessageHeader.MessageType.Registration);
+                                    ? new MessageHeader("1", header.Type) 
+                                    : new MessageHeader("0", header.Type);
                                 break;
 
                             case MessageHeader.MessageType.TitleLoading:
                                 var text = rand.Next(0, 3) == 0
                                     ? ResourcesHelper.LocalizationGet("LoadingText", header.Language)
                                     : ResourcesHelper.LocalizationGet("LoadingTextTwo", header.Language);
-                                headerRequest = new MessageHeader(text, MessageHeader.MessageType.TitleLoading);
+                                headerRequest = new MessageHeader(text, header.Type);
                                 break;
 
                             case MessageHeader.MessageType.Version:
-                                var version = DataBaseCommands.Select(MessageHeader.MessageType.Version);
-                                headerRequest = new MessageHeader(version.ToString(), MessageHeader.MessageType.Version);
+                                var version = DataBaseCommands.Select(header.Type);
+                                headerRequest = new MessageHeader(version.ToString(), header.Type);
                                 break;
 
                             case MessageHeader.MessageType.PublicKey:
-                                headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
+                                headerRequest = new MessageHeader(_privateKey, header.Type);
+                                break;
+
+                            case MessageHeader.MessageType.Games:
+                                //headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
+                                break;
+
+                            case MessageHeader.MessageType.Programs:
+                                var prog = DataBaseCommands.Select(header.Type);
+                                headerRequest = new MessageHeader(prog, header.Type);
                                 break;
                         }
 

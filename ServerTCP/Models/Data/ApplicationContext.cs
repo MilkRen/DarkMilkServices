@@ -8,7 +8,12 @@ namespace ServerTCP.Models.Data
     internal class ApplicationContext : DbContext
     {
         public DbSet<User> users { get; set; }
+
         public DbSet<Apps> apps { get; set; }
+
+        public DbSet<Games> games { get; set; }
+
+        public DbSet<Programs> programs { get; set; }
 
         private const string ConnectionString =
             "Host=81.31.246.203;Port=5432;Database=DarkMilkBD;Username=gen_user;Password=lY8\\b@slc^g\\xJ";

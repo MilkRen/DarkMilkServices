@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Xml.Serialization;
+using ServerTCP.Models;
 
 namespace ServerTCP
 {
@@ -17,6 +21,8 @@ namespace ServerTCP
             Login,
             Registration,
             Version,
+            Programs,
+            Games,
             Log,
             File,
             Photo,
@@ -141,6 +147,14 @@ namespace ServerTCP
                 case MessageType.Check:
                     message = Encoding.UTF8.GetBytes(Message.ToString());
                     break;
+                case MessageType.Programs:
+                    var xml = new XmlSerializer(typeof(ProgramsForXml));
+                    using (StringWriter textWriter = new StringWriter())
+                    {
+                        xml.Serialize(textWriter, Message);
+                        message = Encoding.UTF8.GetBytes(textWriter.ToString());
+                    }
+                    break;
             }
 
             var messageLength = message.Length;
@@ -174,6 +188,8 @@ namespace ServerTCP
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.TitleLoading:
+                case MessageHeader.MessageType.Programs:
+                case MessageHeader.MessageType.Games:
                 case MessageHeader.MessageType.Check: 
                     return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], (MessageLanguages.Languages)buffer[1]);  
                     break;
@@ -195,6 +211,47 @@ namespace ServerTCP
                 default:
                     return null;
                 break;
+            }
+        }
+
+
+        /// <summary>
+        /// Распаковка сообщения для сервера
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        public static MessageHeader ServerFromArray(ReadOnlySpan<byte> buffer)
+        {
+            switch ((MessageType)buffer[0])
+            {
+                case MessageHeader.MessageType.Version:
+                case MessageHeader.MessageType.PublicKey:
+                case MessageHeader.MessageType.Login:
+                case MessageHeader.MessageType.Programs:
+                case MessageHeader.MessageType.Games:
+                case MessageHeader.MessageType.Registration:
+                case MessageHeader.MessageType.TitleLoading:
+                case MessageHeader.MessageType.Check:
+                    return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], (MessageLanguages.Languages)buffer[1]);
+                    break;
+                case MessageHeader.MessageType.Session:
+                    //return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], BinaryPrimitives.ReadInt32LittleEndian(buffer[1..])); // сохраняем, добавляем данные. Данные передаются в кодированном формате, будем использовать кодировку UTF8, раскодируем байты
+                    return new MessageHeader((MessageType)buffer[0],
+                        (MessageLanguages.Languages)buffer[1],
+                        Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType));
+                    break;
+                case MessageHeader.MessageType.Token:
+                    return new MessageHeader((MessageType)buffer[0],
+                        Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType));
+                    break;
+                //case MessageHeader.MessageType.Login:
+                //    var result = buffer[LengthAndDataType..buffer.Length];
+                //    return new MessageHeader(result.ToArray(),
+                //       (MessageType)buffer[0]);
+                //    break;
+                default:
+                    return null;
+                    break;
             }
         }
     }

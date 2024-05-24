@@ -99,7 +99,7 @@ namespace LauncherDM.ViewModels
 
         #region Ctor
 
-        public LoadingWindowViewModel(Action dragMoveWindow, Action hideWindow, WindowService window, ResourcesHelperService resourcesHelper)
+        public LoadingWindowViewModel(Action dragMoveWindow, Action hideWindow, WindowService window, ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _dragMoveAction = dragMoveWindow;
             _resourcesHelper = resourcesHelper;
@@ -108,15 +108,15 @@ namespace LauncherDM.ViewModels
             _windowService = new DialogWindowService();
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
             CloseWindowCommand = new LambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
-            Loading();
+            Loading(serverRequest);
         }
 
         #endregion
 
-        private void Loading()
+        private void Loading(ServerRequestService serverRequest)
         {
             ICheckNetworkService checkNetwork = new CheckNetworkService();
-            ILoadingWindowService server = new LoadingWindowService(new ServerRequestService());
+            ILoadingWindowService server = new LoadingWindowService(serverRequest);
             SettingsApp.Default.OfflineMode = false;
             SettingsApp.Default.Save();
 

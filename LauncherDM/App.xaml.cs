@@ -27,6 +27,12 @@ namespace LauncherDM
                 windowService.OpenLoadingWindow();
                 mutex.ReleaseMutex();
             }
+            else
+            {
+                //IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                //dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                Environment.Exit(0);
+            }
         }
     }
 }

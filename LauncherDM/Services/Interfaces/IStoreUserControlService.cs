@@ -2,5 +2,7 @@
 {
     interface IStoreUserControlService
     {
+        void GetPrograms();
+        void GetGames();
     }
 }

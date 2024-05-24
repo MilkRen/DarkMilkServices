@@ -18,7 +18,9 @@ namespace LauncherDM.Services
 
         public Action DragMoveAction { get; set; }
 
-        public ResourcesHelperService ResourcesHelperService = new ResourcesHelperService();
+        public ResourcesHelperService ResourcesHelper = new ResourcesHelperService();
+
+        public ServerRequestService ServerRequest = new ServerRequestService();
 
         public void OpenWindow(object viewModel)
         {
@@ -27,7 +29,7 @@ namespace LauncherDM.Services
                 var authorization = new AuthorizationWindow();
                 authorization.DataContext = new AuthorizationWindowViewModel(authorization.DragMove, authorization.Close,
                     new ToolbarToWindowViewModel(new WindowService(authorization), visibilitySettings: Visibility.Visible),
-                    ResourcesHelperService);
+                    ResourcesHelper);
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
                 return;
@@ -37,7 +39,7 @@ namespace LauncherDM.Services
                 var regAndLogWindow = new RegAndLogWindow();
                 regAndLogWindow.DataContext = new RegAndLogWindowViewModel(regAndLogWindow.DragMove, regAndLogWindow.Close, 
                     new ToolbarToWindowViewModel(new WindowService(regAndLogWindow), regAndLogWindow.Close),
-                    ResourcesHelperService);
+                    ResourcesHelper);
                 regAndLogWindow.ShowDialog();
                 return;
             }
@@ -45,8 +47,8 @@ namespace LauncherDM.Services
             {
                 var settingsMini = new SettingsMiniWindow();
                 settingsMini.DataContext = new SettingsMiniWindowViewModel(settingsMini.DragMove, 
-                    new ToolbarToWindowViewModel(new WindowService(settingsMini), settingsMini.Close, ResourcesHelperService.LocalizationGet("Settings"),
-                        visibilityMinBut:Visibility.Hidden), ResourcesHelperService);
+                    new ToolbarToWindowViewModel(new WindowService(settingsMini), settingsMini.Close, ResourcesHelper.LocalizationGet("Settings"),
+                        visibilityMinBut:Visibility.Hidden), ResourcesHelper);
                 settingsMini.ShowDialog();
                 return;
             }
@@ -77,7 +79,7 @@ namespace LauncherDM.Services
         {
             var loadingWindow = new LoadingWindow();
             loadingWindow.DataContext = new LoadingWindowViewModel(loadingWindow.DragMove, loadingWindow.Hide,
-                new WindowService(loadingWindow), ResourcesHelperService);
+                new WindowService(loadingWindow), ResourcesHelper, ServerRequest);
             loadingWindow.Show();
         }
 
@@ -93,7 +95,7 @@ namespace LauncherDM.Services
             var mainWindow = new MainWindow();
             mainWindow.DataContext = new MainWindowViewModel(mainWindow.DragMove,
                 new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Hide, widthMax: 30),
-                ResourcesHelperService);
+                ResourcesHelper, ServerRequest);
             //mainWindow.Owner = Application.Current.MainWindow;
             mainWindow.Show();
         }

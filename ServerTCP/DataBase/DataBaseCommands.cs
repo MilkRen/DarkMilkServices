@@ -5,10 +5,6 @@ namespace ServerTCP.DataBase
 {
     internal class DataBaseCommands
     {
-
-        public const string SaltPassword = "1asdjh192jd1286sdarkmilk";
-        public const string PaperPassword = "jf10hdsj12fbzd12darkmilk";
-
         public static bool Insert(object table, MessageHeader.MessageType messageType)
         {
             using (var db = new ApplicationContext())
@@ -41,6 +37,12 @@ namespace ServerTCP.DataBase
                     case MessageHeader.MessageType.Login:
                         var user = db.users.Where(x => x.username == data[0] && x.password == data[1]).ToArray();
                         result = user.Length > 0;
+                        break;
+                    case MessageHeader.MessageType.Programs:
+                        var prog = db.programs;
+                        var progArray = new ProgramsForXml();
+                        progArray.Programs = prog.ToArray();
+                        return progArray;
                         break;
                     default: 
                         result = null;                     

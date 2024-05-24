@@ -5,8 +5,8 @@ namespace LauncherDM.Services.Interfaces
 {
     internal interface IXmlService
     {
-        void SerializationUsersXml(UsersList userlist);
+        void SerializationUsersXml(UsersForXml userlist);
 
-        UsersList DeserializeUsersXMl();
+        UsersForXml DeserializeUsersXMl();
     }
 }

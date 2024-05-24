@@ -98,13 +98,13 @@ namespace LauncherDM.ViewModel
         #endregion
 
 
-        public MainWindowViewModel(Action dragMove, ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper)
+        public MainWindowViewModel(Action dragMove, ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _dragMoveAction = dragMove;
             ToolbarVM = toolbarViewModel;
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
-            StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper);
+            StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper, serverRequest);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
     }
