@@ -18,7 +18,7 @@ namespace LauncherDM.Services
             _serverRequest = serverRequest;
         }
 
-        public void GetPrograms()
+        public ProgramsForXml GetPrograms()
         {
             var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.Programs);
 
@@ -35,12 +35,26 @@ namespace LauncherDM.Services
                 }
             }
 
+            return programsForXml;
             //return requestMessageServer?.Message.ToString() == "1";
         }
 
-        public void GetGames()
+        public string GetProgramsPath()
+        {
+            var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.ProgramsPath);
+            return requestMessageServer.Message.ToString();
+        }
+
+        public object GetGames()
         {
             var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.Games);
+            return null;
+        }
+
+        public string GetGamesPath()
+        {
+            var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.GamesPath);
+            return null;
         }
     }
 }

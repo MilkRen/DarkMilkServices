@@ -1,10 +1,6 @@
 ﻿using LauncherDM.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LauncherDM.Services
 {
@@ -26,6 +22,27 @@ namespace LauncherDM.Services
             catch (PingException)
             {
                 dialogMessageBox.DialogShow(resourcesHelper.LocalizationGet("Error"), resourcesHelper.LocalizationGet("EthernetClose"));
+                return false;
+            }
+        }
+
+        public bool CheckingUriFileConnection(string uriFile)
+        {
+            //using (var client = new HttpClient())
+            //using (var response = client.GetAsync(uriFile))
+            //    return response.Id == 192;
+
+
+            try
+            {
+                using var ping = new Ping();
+                {
+                    PingReply reply= ping.Send(uriFile, 3000);
+                    return reply.Status == IPStatus.Success;
+                }
+            }
+            catch
+            {
                 return false;
             }
         }

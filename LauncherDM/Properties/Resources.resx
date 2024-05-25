@@ -232,4 +232,7 @@
   <data name="Friends" xml:space="preserve">
 	  <value>Друзья</value>
   </data>
+  <data name="AppMutexOn" xml:space="preserve">
+	  <value>Не удалось запустить приложе (приложение уже запущено).</value>
+  </data>
 </root>

@@ -88,6 +88,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string AppMutexOn {
+            get {
+                return ResourceManager.GetString("AppMutexOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Внимание!.
         /// </summary>
         internal static string Attention {
@@ -215,7 +224,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Друзья.
         /// </summary>
         internal static string Friends {
             get {

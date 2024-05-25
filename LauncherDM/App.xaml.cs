@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using LauncherDM.Properties;
 using ServerTCP;
 
 namespace LauncherDM
@@ -22,15 +23,23 @@ namespace LauncherDM
             if (mutex.WaitOne(TimeSpan.Zero, true))
             {
                 base.OnStartup(e);
-                MessageLanguages.Language = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru" ? MessageLanguages.Languages.rus : MessageLanguages.Languages.eng;
+
+                if (SettingsApp.Default.Language == "ru")
+                    MessageLanguages.Language = MessageLanguages.Languages.rus;
+                else if (SettingsApp.Default.Language == "en")
+                    MessageLanguages.Language = MessageLanguages.Languages.eng;
+                else
+                    MessageLanguages.Language = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru" ? MessageLanguages.Languages.rus : MessageLanguages.Languages.eng;
+                
                 IDialogWindowService windowService = new DialogWindowService();
                 windowService.OpenLoadingWindow();
                 mutex.ReleaseMutex();
             }
             else
             {
-                //IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                //dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                IResourcesHelperService resourcesHelper = new ResourcesHelperService();
+                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
+                dialogMessageBox.DialogShow(resourcesHelper.LocalizationGet("Attention"), resourcesHelper.LocalizationGet("AppMutexOn"));
                 Environment.Exit(0);
             }
         }

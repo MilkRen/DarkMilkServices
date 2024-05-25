@@ -1,11 +1,8 @@
-﻿using LauncherDM.Models;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
-using LauncherDM.Views.UserControls;
 using System.Windows.Media.Animation;
 using System;
 
@@ -13,6 +10,11 @@ namespace LauncherDM.ViewModels
 {
     internal class StoreUserControlViewModel : ViewModel.Base.ViewModel
     {
+        #region Fields
+
+        private const int MaxImageToItem = 5;
+
+        #endregion
 
         #region Services
 
@@ -89,86 +91,116 @@ namespace LauncherDM.ViewModels
 
 
 
-            int a = 0;
-            while (a < 10)
-            {
-                var prog = new Programs()
-                {
-                   Title = "StrikeJo",
-                   ImageMainPath = "https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/02/every-joestar-in-jojo-s-bizarre-adventure.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
-                   Price = "4999",
-                   Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
-                };
+            //int a = 0;
+            //while (a < 10)
+            //{
+            //    var prog = new Programs()
+            //    {
+            //       Title = "StrikeJo",
+            //       ImageMainPath = "https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/02/every-joestar-in-jojo-s-bizarre-adventure.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
+            //       Price = "4999",
+            //       Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
+            //    };
 
-                ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
-                    {
-                        TitleItem = prog.Title;
-                        ImageItem = prog.ImageMainPath;
-                        DescItem = prog.Description;
+            //    ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
+            //        {
+            //            TitleItem = prog.Title;
+            //            ImageItem = prog.ImageMainPath;
+            //            DescItem = prog.Description;
 
-                        AnimationItemShow();
+            //            AnimationItemShow();
 
-                    }, o => true)));
-                a++;
-            }
+            //        }, o => true)));
+            //    a++;
+            //}
 
-            a = 0;
-            while (a < 10)
-            {
-                var prog = new Programs()
-                {
-                    Title = "StrikeJo",
-                    ImageMainPath = "https://darkmilk.store/Launcher/ProgramImage/ClassicClicker.png",
-                    Price = "4999",
-                    Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
-                };
+            //a = 0;
+            //while (a < 10)
+            //{
+            //    var prog = new Programs()
+            //    {
+            //        Title = "StrikeJo",
+            //        ImageMainPath = "https://darkmilk.store/Launcher/ProgramImage/ClassicClicker.png",
+            //        Price = "4999",
+            //        Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
+            //    };
 
-                ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
-                {
-                    TitleItem = prog.Title;
-                    ImageItem = prog.ImageMainPath;
-                    DescItem = prog.Description;
+            //    ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
+            //    {
+            //        TitleItem = prog.Title;
+            //        ImageItem = prog.ImageMainPath;
+            //        DescItem = prog.Description;
 
-                    AnimationItemShow();
+            //        AnimationItemShow();
 
-                }, o => true)));
-                a++;
-            }
+            //    }, o => true)));
+            //    a++;
+            //}
 
 
-            a = 0;
-            while (a < 10)
-            {
-                var prog = new Programs()
-                {
-                    Title = "StrikeJo",
-                    ImageMainPath = "https://newcdn.igromania.ru/mnt/articles/9/3/c/8/9/a/32337/html/more/_fdd363ee92996e66c33571d_1920xH.webp",
-                    Price = "4999",
-                    Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
-                };
+            //a = 0;
+            //while (a < 10)
+            //{
+            //    var prog = new Programs()
+            //    {
+            //        Title = "StrikeJo",
+            //        ImageMainPath = "https://newcdn.igromania.ru/mnt/articles/9/3/c/8/9/a/32337/html/more/_fdd363ee92996e66c33571d_1920xH.webp",
+            //        Price = "4999",
+            //        Description = "Во все большем количестве российских изданий \u2212 как печатных, так и онлайновых \u2212 появляются объемные материалы особого типа, за которыми в журналистской среде закрепилось название «длинные тексты» (англ. – long forms) или лонгриды (от англ. \u2212 long read – материал, предназначенный для длительного прочтения, в отличие от маленькой заметки).\r\n\r\nСразу же следует оговориться, что объем материала – хотя и наиболее заметная, но не ключевая характеристика лонгрида. Объемными могут быть и материалы других жанров, поэтому сам по себе большой объем текста вовсе не означает, что перед нами лонгрид. Как будет показано в исследовании, лонгриды отличает также особый подход к выбору темы, требования к качеству собранной информации и способ подачи материала.\r\n\r\nВ исследовании предпринята попытка описать типологические характеристики лонгридов, разобрать особенности их подготовки, а также выявить распространенность лонгридов в современной российской прессе. Еще одной целью исследования является оценка перспектив этого жанра, о котором можно говорить если не как о сложившемся (в принятых на сегодняшний день в научной среде жанровых классификациях лонгрид отсутствует), то как о складывающемся и проникающем во все большее количество изданий."
+            //    };
 
-                if (ItemListView.Count < 5)
-                    ItemListView.Add(new ProgramItemViewModel(prog.ImageMainPath, new LambdaCommand(o =>
-                    {
-                        ImageItem = prog.ImageMainPath;
-                    }, o => true)));
+            //    if (ItemListView.Count < 5)
+            //        ItemListView.Add(new ProgramItemViewModel(prog.ImageMainPath, new LambdaCommand(o =>
+            //        {
+            //            ImageItem = prog.ImageMainPath;
+            //        }, o => true)));
 
-                ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
-                {
-                    TitleItem = prog.Title;
-                    ImageItem = prog.ImageMainPath;
-                    DescItem = prog.Description;
+            //    ProgramsListView.Add(new ProgramsViewModel(prog, new LambdaCommand(o =>
+            //    {
+            //        TitleItem = prog.Title;
+            //        ImageItem = prog.ImageMainPath;
+            //        DescItem = prog.Description;
 
-                    AnimationItemShow();
-                }, o => true)));
-                a++;
-            }
+            //        AnimationItemShow();
+            //    }, o => true)));
+            //    a++;
+            //}
         }
 
         public void LoadStore(ServerRequestService serverRequest)
         {
             IStoreUserControlService store = new StoreUserControlService(serverRequest);
-            store.GetPrograms();
+            ICheckNetworkService networkService = new CheckNetworkService();
+            var progArray = store.GetPrograms();
+            var progPath = store.GetProgramsPath();
+            foreach (var prog in progArray.Programs)
+            {
+                ProgramsListView.Add(new ProgramsViewModel(prog, progPath, new LambdaCommand(o =>
+                {
+                    TitleItem = prog.name;
+                    ImageItem = string.Concat(progPath, TitleItem, ".png"); 
+                    DescItem = prog.description;
+                    var countLoadImage = 1;
+
+                    while (MaxImageToItem >= countLoadImage)
+                    {
+                        if (networkService.CheckingUriFileConnection(string.Concat(progPath, TitleItem,
+                                countLoadImage.ToString(), ".png")))
+                        {
+
+                            ItemListView.Add(new ProgramItemViewModel(progPath, new LambdaCommand(o =>
+                            {
+                                //ImageItem = prog.ImageMainPath;
+                            }, o => true)));
+                        }
+                        countLoadImage++;
+
+
+                    }
+
+                    AnimationItemShow();
+                }, o => true)));
+            }
         }
 
         public void AnimationItemShow()

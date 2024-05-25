@@ -16,9 +16,9 @@ namespace ServerTCP
         private static string _privateKey;
 
         private static Random rand = new Random();
-
         private static string SaltPassword = "sdlfjkpo213ndarkmilk";
 
+        private const string ProgramsPathConst = @"https://darkmilk.store/Launcher/ProgramImage/";
         static void Main(string[] args)
         {
             //LoadingRSA();
@@ -110,9 +110,17 @@ namespace ServerTCP
                                 //headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
                                 break;
 
+                            case MessageHeader.MessageType.GamesPath:
+                                //headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
+                                break;
+
                             case MessageHeader.MessageType.Programs:
                                 var prog = DataBaseCommands.Select(header.Type);
                                 headerRequest = new MessageHeader(prog, header.Type);
+                                break;
+
+                            case MessageHeader.MessageType.ProgramsPath:
+                                headerRequest = new MessageHeader(ProgramsPathConst, header.Type);
                                 break;
                         }
 

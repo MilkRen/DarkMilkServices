@@ -22,7 +22,9 @@ namespace ServerTCP
             Registration,
             Version,
             Programs,
+            ProgramsPath,
             Games,
+            GamesPath,
             Log,
             File,
             Photo,
@@ -142,6 +144,8 @@ namespace ServerTCP
                 case MessageType.Login:
                 case MessageType.Registration:
                 case MessageType.TitleLoading:
+                case MessageType.ProgramsPath:
+                case MessageType.GamesPath:
                 case MessageType.PublicKey:
                 case MessageType.Version:
                 case MessageType.Check:
@@ -189,7 +193,9 @@ namespace ServerTCP
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.TitleLoading:
                 case MessageHeader.MessageType.Programs:
+                case MessageHeader.MessageType.ProgramsPath:
                 case MessageHeader.MessageType.Games:
+                case MessageHeader.MessageType.GamesPath:
                 case MessageHeader.MessageType.Check: 
                     return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], (MessageLanguages.Languages)buffer[1]);  
                     break;
@@ -228,7 +234,9 @@ namespace ServerTCP
                 case MessageHeader.MessageType.PublicKey:
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Programs:
+                case MessageHeader.MessageType.ProgramsPath:
                 case MessageHeader.MessageType.Games:
+                case MessageHeader.MessageType.GamesPath:
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.TitleLoading:
                 case MessageHeader.MessageType.Check:

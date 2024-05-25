@@ -9,5 +9,7 @@ namespace LauncherDM.Services.Interfaces
     interface ICheckNetworkService
     {
         public bool CheckingNetworkConnection();
+
+        public bool CheckingUriFileConnection(string uriFile);
     }
 }

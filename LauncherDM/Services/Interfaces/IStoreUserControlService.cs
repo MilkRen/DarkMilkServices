@@ -1,8 +1,15 @@
-﻿namespace LauncherDM.Services.Interfaces
+﻿using ServerTCP.Models;
+
+namespace LauncherDM.Services.Interfaces
 {
     interface IStoreUserControlService
     {
-        void GetPrograms();
-        void GetGames();
+        ProgramsForXml GetPrograms();
+        
+        string GetProgramsPath();
+        
+        object GetGames();
+
+        string GetGamesPath();
     }
 }

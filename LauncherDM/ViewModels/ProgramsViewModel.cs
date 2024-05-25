@@ -6,6 +6,8 @@ using System.Windows.Input;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
 using LauncherDM.Models;
+using ServerTCP;
+using ServerTCP.Models;
 
 namespace LauncherDM.ViewModels
 {
@@ -83,13 +85,13 @@ namespace LauncherDM.ViewModels
         
         #endregion
 
-        public ProgramsViewModel(Programs prog, LambdaCommand lambdaCommand = null)
+        public  ProgramsViewModel(Programs prog, string progPath, LambdaCommand lambdaCommand = null)
         {
-            Title = prog.Title;
-            ImagePath = prog.ImageMainPath;
-            Price = prog.Price;
-            Description = prog.Description;
-            ToolTipProgramsText = string.Concat(prog.Description.Substring(0, prog.Description.Length / 4), "...");
+            Title = prog.name;
+            ImagePath = string.Concat(progPath, Title, ".png");
+            Price = prog.price.ToString();
+            Description = MessageLanguages.Language == MessageLanguages.Languages.rus ? prog.description : prog.descriptionEng ;
+            ToolTipProgramsText = string.Concat(Description.Substring(0, Description.Length / 4), "...");
             ClickProgramCommand = lambdaCommand;
         }
     }
