@@ -235,4 +235,7 @@
   <data name="AppMutexOn" xml:space="preserve">
 	  <value>Не удалось запустить приложе (приложение уже запущено).</value>
   </data>
+  <data name="AddLibrary" xml:space="preserve">
+	  <value>Добавить в библиотеку</value>
+  </data>
 </root>

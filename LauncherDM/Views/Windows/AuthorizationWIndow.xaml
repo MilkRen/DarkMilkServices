@@ -90,7 +90,7 @@
         </Grid>
 
         <Grid Grid.Row="3">
-            <Button x:Name="ButtonRegistration" Style="{StaticResource ButtonRegistrationAccount}" Command="{Binding ShowRegAndLogFormCommand}" Content="Регистрация"/>
+            <Button x:Name="ButtonRegistration" Style="{StaticResource ButtonRegistrationAccount}" Command="{Binding ShowRegAndLogFormCommand}" Content="{Binding RegText}"/>
         </Grid>
 
     </Grid>

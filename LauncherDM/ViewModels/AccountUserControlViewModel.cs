@@ -1,24 +1,28 @@
 ﻿using System;
-using Amazon.Runtime;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Infrastructure.ReactiveUI;
 using LauncherDM.Models;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 
 namespace LauncherDM.ViewModels
 {
-    public class AccountUserControlViewModel : ViewModel.Base.ViewModel
+    public class AccountUserControlViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LanguagesUpdate>
     {
         #region Fields
 
         private Action _closeAction;
+
+        private string _titleResource;
 
         #endregion
 
         #region Services
 
         private readonly IDialogWindowService _windowService;
+
+        private readonly IResourcesHelperService _resourcesHelper;
 
         #endregion
 
@@ -112,12 +116,28 @@ namespace LauncherDM.ViewModels
             ShowRegAndLogOrMainFormCommand = new LambdaCommand(OnShowRegAndLogOrMainFormCommandExecuted, CanShowRegAndLogOrMainFormCommandExecute);
         }
 
-        public AccountUserControlViewModel(Action closeMainWindow, string titleName)
+        public AccountUserControlViewModel(Action closeMainWindow, string NameResource, ResourcesHelperService resourcesHelperService)
         {
-            AccountName = titleName;
+            _resourcesHelper = resourcesHelperService;
+            _titleResource = NameResource;
+            SetAccountName(_titleResource, _resourcesHelper);
             _closeAction = closeMainWindow;
             _windowService = new DialogWindowService();
             ShowRegAndLogOrMainFormCommand = new LambdaCommand(OnShowRegAndLogOrMainFormCommandExecuted, CanShowRegAndLogOrMainFormCommandExecute);
+        }
+
+        private void SetAccountName(string titleResource, IResourcesHelperService resourcesHelper)
+        {
+            AccountName = resourcesHelper.LocalizationGet(titleResource);
+        }
+
+        public void Update(LanguagesUpdate data)
+        {
+            if (data.UpdateUI)
+            {
+                AllPropertyChanged();
+                SetAccountName(_titleResource, _resourcesHelper);
+            }
         }
     }
 }

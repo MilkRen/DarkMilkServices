@@ -1,4 +1,4 @@
-﻿namespace LauncherDM.Infrastructure.ReactiveUI
+﻿namespace LauncherDM.Infrastructure.ReactiveUI.Base
 {
     public interface IObservable<TypeDefinition>
     {

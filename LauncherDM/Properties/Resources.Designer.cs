@@ -90,6 +90,15 @@ namespace LauncherDM.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на .
         /// </summary>
+        internal static string AddLibrary {
+            get {
+                return ResourceManager.GetString("AddLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не удалось запустить приложе (приложение уже запущено)..
+        /// </summary>
         internal static string AppMutexOn {
             get {
                 return ResourceManager.GetString("AppMutexOn", resourceCulture);

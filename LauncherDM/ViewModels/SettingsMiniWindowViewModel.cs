@@ -4,9 +4,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Infrastructure;
+using LauncherDM.Infrastructure.ReactiveUI;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.Models;
+using LauncherDM.Properties;
 using ServerTCP;
 
 namespace LauncherDM.ViewModels
@@ -103,8 +106,11 @@ namespace LauncherDM.ViewModels
         private void OnRussianLangCommandExecuted(object p)
         {
             MessageLanguages.Language = MessageLanguages.Languages.rus;
+            SettingsApp.Default.Language = "ru";
+            SettingsApp.Default.Save();
             EnglishEnabled = Brushes.Transparent;
             RussianEnabled = Brushes.Green;
+            UpdateUI.LanguagesPull.Notify(new LanguagesUpdate(true));
             AllPropertyChanged();
         }
 
@@ -117,8 +123,11 @@ namespace LauncherDM.ViewModels
         private void OnEnglishLangCommandExecuted(object p)
         {
             MessageLanguages.Language = MessageLanguages.Languages.eng;
+            SettingsApp.Default.Language = "en";
+            SettingsApp.Default.Save();
             EnglishEnabled = Brushes.Green;
             RussianEnabled = Brushes.Transparent;
+            UpdateUI.LanguagesPull.Notify(new LanguagesUpdate(true));
             AllPropertyChanged();
         }
 

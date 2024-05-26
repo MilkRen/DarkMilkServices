@@ -6,14 +6,14 @@ using LauncherDM.Properties;
 
 namespace LauncherDM.Services
 {
-    internal class ResourcesHelperService : IResourcesHelperService
+    public class ResourcesHelperService : IResourcesHelperService
     {
         public string LocalizationGet(string resource)
         {
             if (string.IsNullOrEmpty(resource))
                 throw new ArgumentNullException(nameof(resource));
 
-            string resourceReady = string.Empty;
+            var resourceReady = string.Empty;
             switch (MessageLanguages.Language)
             {
                 case MessageLanguages.Languages.rus:

@@ -116,4 +116,7 @@
 	<data name="AppMutexOn" xml:space="preserve">
 		<value>The application could not be started (the application is already running).</value>
 	</data>
+	<data name="AddLibrary" xml:space="preserve">
+		<value>Add to library</value>
+	</data>
 </root>

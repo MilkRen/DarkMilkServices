@@ -7,32 +7,40 @@ using System.Windows;
 using LauncherDM.ViewModels.UserControlsVM;
 using System.Net;
 using System.ComponentModel;
+using LauncherDM.Infrastructure.ReactiveUI;
+using LauncherDM.Infrastructure;
 
 namespace LauncherDM.Services
 {
     class DialogWindowService : IDialogWindowService
     {
+
+        #region Service
+
+        public ResourcesHelperService ResourcesHelper = new ResourcesHelperService();
+
+        public ServerRequestService ServerRequest = new ServerRequestService();
+
+        #endregion
+
         public Action CloseAction { get; set; }
 
         public Action HideAction { get; set; }
 
         public Action DragMoveAction { get; set; }
 
-        public ResourcesHelperService ResourcesHelper = new ResourcesHelperService();
-
-        public ServerRequestService ServerRequest = new ServerRequestService();
-
         public void OpenWindow(object viewModel)
         {
             if (viewModel is LoadingWindowViewModel)
             {
                 var authorization = new AuthorizationWindow();
-                authorization.DataContext = new AuthorizationWindowViewModel(authorization.DragMove, authorization.Close,
+                var authorizationVM = new AuthorizationWindowViewModel(authorization.DragMove, authorization.Close,
                     new ToolbarToWindowViewModel(new WindowService(authorization), visibilitySettings: Visibility.Visible),
                     ResourcesHelper);
+                UpdateUI.LanguagesPull.Subscribe(authorizationVM);
+                authorization.DataContext = authorizationVM;
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
-                return;
             }
             else if (viewModel is AccountUserControlViewModel or AuthorizationWindowViewModel)
             {
@@ -41,22 +49,21 @@ namespace LauncherDM.Services
                     new ToolbarToWindowViewModel(new WindowService(regAndLogWindow), regAndLogWindow.Close),
                     ResourcesHelper);
                 regAndLogWindow.ShowDialog();
-                return;
             }
             else if (viewModel is ToolbarToWindowViewModel)
             {
                 var settingsMini = new SettingsMiniWindow();
-                settingsMini.DataContext = new SettingsMiniWindowViewModel(settingsMini.DragMove, 
-                    new ToolbarToWindowViewModel(new WindowService(settingsMini), settingsMini.Close, ResourcesHelper.LocalizationGet("Settings"),
-                        visibilityMinBut:Visibility.Hidden), ResourcesHelper);
+                var toolbarVM = new ToolbarToWindowViewModel(new WindowService(settingsMini), settingsMini.Close,
+                    "Settings",
+                    visibilityMinBut: Visibility.Hidden, resourcesHelper: ResourcesHelper);
+                UpdateUI.LanguagesPull.Subscribe(toolbarVM);
+                settingsMini.DataContext = new SettingsMiniWindowViewModel(settingsMini.DragMove, toolbarVM, ResourcesHelper);
                 settingsMini.ShowDialog();
-                return;
             }
             else if (viewModel is RegAndLogWindowViewModel)
             {
                 //((ViewModel.Base.ViewModel)viewModel).Dispose();
                 OpenMainWindow();
-                return;
             }
         }
 
@@ -96,7 +103,7 @@ namespace LauncherDM.Services
             mainWindow.DataContext = new MainWindowViewModel(mainWindow.DragMove,
                 new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Hide, widthMax: 30),
                 ResourcesHelper, ServerRequest);
-            //mainWindow.Owner = Application.Current.MainWindow;
+            mainWindow.Owner = Application.Current.MainWindow;
             mainWindow.Show();
         }
     }

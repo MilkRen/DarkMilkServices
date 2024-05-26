@@ -132,7 +132,7 @@
 
         </Grid>
 
-        <Grid HorizontalAlignment="Right">
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Center">
             <Border CornerRadius="18" Background="#35383f" x:Name="BorderItem" Width="0">
                 <Border.Triggers>
                     <EventTrigger RoutedEvent="MouseLeave">
@@ -155,8 +155,8 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="205"/>
                         <RowDefinition Height="40"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid VerticalAlignment="Center">
@@ -187,7 +187,9 @@
                     </Grid>
 
                     <Grid Grid.Row="2" VerticalAlignment="Center">
-                        <TextBlock Text="sa"/>
+                        <Border Background="BlueViolet" CornerRadius="10">
+                            <TextBlock Text="{Binding TagText}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}"/>
+                        </Border>
                     </Grid>
 
                     <Grid Grid.Row="3">
@@ -195,7 +197,7 @@
                     </Grid>
 
                     <Grid Grid.Row="4" VerticalAlignment="Center">
-                        <Button Command="{Binding AddCommand}" Height="30" Margin="10" Content="Сбросить" Foreground="White" Background="#738aea" Style="{StaticResource ButtonDefault}"/>
+                        <Button Command="{Binding AddCommand}" Content="{Binding PayButtonText}" Height="30" Margin="10" Foreground="White" Background="#738aea" Style="{StaticResource ButtonDefault}"/>
                     </Grid>
                 </Grid>
             </Border>

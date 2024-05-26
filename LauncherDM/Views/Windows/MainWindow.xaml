@@ -11,7 +11,7 @@
         Title="{Binding Title}" 
         Height="720" Width="1280" 
         AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip" 
-        WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowStyle="None">
 
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="MouseDown" >

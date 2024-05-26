@@ -1,6 +1,7 @@
-﻿using LauncherDM.Services.Interfaces;
-using System.Net.Http;
+﻿using System;
+using LauncherDM.Services.Interfaces;
 using System.Net.NetworkInformation;
+using System.Net;
 
 namespace LauncherDM.Services
 {
@@ -28,18 +29,13 @@ namespace LauncherDM.Services
 
         public bool CheckingUriFileConnection(string uriFile)
         {
-            //using (var client = new HttpClient())
-            //using (var response = client.GetAsync(uriFile))
-            //    return response.Id == 192;
-
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uriFile);
+            request.Method = "HEAD";
 
             try
             {
-                using var ping = new Ping();
-                {
-                    PingReply reply= ping.Send(uriFile, 3000);
-                    return reply.Status == IPStatus.Success;
-                }
+                var response = request.GetResponse() as HttpWebResponse;
+                return response?.StatusCode == HttpStatusCode.OK;
             }
             catch
             {

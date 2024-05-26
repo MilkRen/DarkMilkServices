@@ -4,14 +4,17 @@ using System;
 using LauncherDM.Infastructure.Commands;
 using System.Windows;
 using LauncherDM.Services.Interfaces;
+using LauncherDM.Infrastructure.ReactiveUI;
 
 namespace LauncherDM.ViewModels.UserControlsVM
 {
-    public class ToolbarToWindowViewModel : ViewModel.Base.ViewModel
+    public class ToolbarToWindowViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LanguagesUpdate>
     {
         #region Fields
 
         private Action _closeWidnowAction;
+
+        private string _titleResource;
 
         #endregion
 
@@ -20,6 +23,8 @@ namespace LauncherDM.ViewModels.UserControlsVM
         private readonly IWindowService _window;
 
         private readonly IDialogWindowService _windowService;
+
+        private readonly IResourcesHelperService _resourcesHelper;
 
         #endregion
 
@@ -49,7 +54,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
             set => Set(ref _visibilitySettingsBut, value);
         }
 
-        public int _widthMax;
+        private int _widthMax;
 
         public int WidthMax
         {
@@ -129,7 +134,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
 
         #endregion
 
-        public ToolbarToWindowViewModel(WindowService window, Action closeWidnowOrHide = null, string title = null, int widthMax = 0, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible)
+        public ToolbarToWindowViewModel(WindowService window, Action closeWidnowOrHide = null, string titleResource = null, int widthMax = 0, Visibility visibilitySettings = Visibility.Hidden, Visibility visibilityMinBut = Visibility.Visible, ResourcesHelperService resourcesHelper = null)
         {
             if (closeWidnowOrHide is not null)
             {
@@ -139,15 +144,35 @@ namespace LauncherDM.ViewModels.UserControlsVM
             else 
                 CloseWindowActionCommand = new LambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
 
+            if (resourcesHelper is not null)
+            {
+                _resourcesHelper = resourcesHelper;
+                _titleResource = titleResource;
+                SetTitle(_titleResource, _resourcesHelper);
+            }
+
             _window = window;
             VisibilitySettingsBut = visibilitySettings;
             VisibilityMinBut = visibilityMinBut;
-            Title = title;
             WidthMax = widthMax;
             _windowService = new DialogWindowService();
             MinimizeWindowCommand = new LambdaCommand(OnMinimizeWindowCommandExecuted, CanMinimizeWindowCommandExecute);
             MaximizeWindowCommand = new LambdaCommand(OnMaximizeWindowCommandExecuted, CanMaximizeWindowCommandExecute);
             ShowSettingsMiniCommand = new LambdaCommand(OnShowSettingsMiniCommandExecuted, CanShowSettingsMiniCommandExecute);
+        }
+
+        private void SetTitle(string titleResource, IResourcesHelperService resourcesHelper)
+        {
+            Title = resourcesHelper.LocalizationGet(titleResource);
+        }
+
+        public void Update(LanguagesUpdate data)
+        {
+            if (data.UpdateUI)
+            {
+                AllPropertyChanged();
+                SetTitle(_titleResource, _resourcesHelper);
+            }
         }
     }
 }
