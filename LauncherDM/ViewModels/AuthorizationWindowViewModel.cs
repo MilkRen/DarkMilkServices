@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using LauncherDM.Infrastructure;
 using LauncherDM.Models;
 using LauncherDM.Infrastructure.ReactiveUI;
+using LauncherDM.Views.Windows;
 
 namespace LauncherDM.ViewModels
 {
@@ -35,6 +36,8 @@ namespace LauncherDM.ViewModels
         #endregion
 
         #region Bindings
+
+        public string Title => _resourcesHelper.LocalizationGet("Authorization");
 
         public string RegText => _resourcesHelper.LocalizationGet("SignUp");
 
@@ -75,8 +78,12 @@ namespace LauncherDM.ViewModels
         private void OnShowRegAndLogFormCommandExecuted(object p)
         {
             _windowService.OpenWindow(this);
-            _windowService.CloseAction = _closeAction;
-            _windowService.CloseWindow();
+            // Todo: исправить 
+            if (RegAndLogWindow.CloseShow) // костыль 
+            {
+                _windowService.CloseAction = _closeAction;
+                _windowService.CloseWindow();
+            }
         }
 
         #endregion
