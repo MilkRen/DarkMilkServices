@@ -8,11 +8,13 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using LauncherDM.ViewModels.UserControlsVM;
 using System.Windows.Controls;
+using LauncherDM.Infrastructure;
 using LauncherDM.Models;
+using LauncherDM.Infrastructure.ReactiveUI;
 
 namespace LauncherDM.ViewModels
 {
-    class AuthorizationWindowViewModel : ViewModel.Base.ViewModel  
+    class AuthorizationWindowViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LanguagesUpdate>
     {
         #region Fields
 
@@ -24,7 +26,7 @@ namespace LauncherDM.ViewModels
 
         #region Services
 
-        private readonly IResourcesHelperService _resourcesHelper;
+        private IResourcesHelperService _resourcesHelper;
 
         private readonly IDialogWindowService _windowService;
 
@@ -33,6 +35,8 @@ namespace LauncherDM.ViewModels
         #endregion
 
         #region Bindings
+
+        public string RegText => _resourcesHelper.LocalizationGet("SignUp");
 
         #region Toolbar
 
@@ -108,19 +112,33 @@ namespace LauncherDM.ViewModels
             var xmlUsersList = _xmlService.DeserializeUsersXMl();
 
             if (xmlUsersList.UserList.Count == 0)
-                AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
+            {
+                var accountUserVm = new AccountUserControlViewModel(closeWindowAction, "Account", resourcesHelperService);
+                UpdateUI.LanguagesPull.Subscribe(accountUserVm);
+                AccountControls.Add(accountUserVm);
+            }
             else
             {
                 foreach (var user in xmlUsersList.UserList)
                     AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, user));
 
                 if (xmlUsersList.UserList.Count <= 5)
-                    AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, _resourcesHelper.LocalizationGet("Account")));
+                {
+                    var accountUserVm = new AccountUserControlViewModel(closeWindowAction, "Account", resourcesHelperService);
+                    UpdateUI.LanguagesPull.Subscribe(accountUserVm);
+                    AccountControls.Add(accountUserVm);
+                }
             }
             
             _windowService = new DialogWindowService();
             ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+        }
+
+        public void Update(LanguagesUpdate languagesUpdate)
+        {
+            if (languagesUpdate.UpdateUI)
+                AllPropertyChanged();
         }
 
         #endregion
