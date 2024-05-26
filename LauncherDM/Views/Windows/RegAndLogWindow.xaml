@@ -386,7 +386,7 @@
         <TextBlock Text="{Binding VersionText}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="9" Margin="7.6,423,0,0" Width="228" Foreground="Black" FontSize="6" FontFamily="Cascadia Mono Light"/>
         <Grid x:Name="Login" Margin="0,-770,0,0">
             <toolbarControl:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" Margin="0,365,-2,0" />
-            <TextBlock x:Name="textBlock2"  Text="{Binding Title}" HorizontalAlignment="Left" Height="28" Margin="10,802,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="22" FontFamily="Cascadia Mono"/>
+            <TextBlock x:Name="textBlock2"  Text="{Binding Title}" HorizontalAlignment="Left" Height="28" Margin="10,802,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Foreground="White" FontSize="22" FontFamily="Cascadia Mono"/>
 
             <TextBlock x:Name="textBlock1" Text="{Binding LoginText}" Foreground="Silver" Height="20" FontFamily="Cascadia Mono Light" Margin="13,848,7,334">
                 <TextBlock.Style>
