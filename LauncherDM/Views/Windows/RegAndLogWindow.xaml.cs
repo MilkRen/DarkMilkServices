@@ -20,6 +20,7 @@ namespace LauncherDM.Views.Windows
     /// </summary>
     public partial class RegAndLogWindow : Window
     {
+        public static bool CloseShow;
         public RegAndLogWindow()
         {
             InitializeComponent();

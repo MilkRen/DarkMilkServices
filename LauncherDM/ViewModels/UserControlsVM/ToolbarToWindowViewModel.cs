@@ -5,6 +5,7 @@ using LauncherDM.Infastructure.Commands;
 using System.Windows;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.Infrastructure.ReactiveUI;
+using LauncherDM.Views.Windows;
 
 namespace LauncherDM.ViewModels.UserControlsVM
 {
@@ -76,6 +77,9 @@ namespace LauncherDM.ViewModels.UserControlsVM
         {
             _windowService.CloseAction = _closeWidnowAction;
             _windowService.CloseWindow();
+
+            // Todo: исправить 
+            RegAndLogWindow.CloseShow = false; // костыль
             //this.Dispose();
         }
 

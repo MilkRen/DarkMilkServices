@@ -5,6 +5,7 @@ using LauncherDM.Infrastructure.ReactiveUI;
 using LauncherDM.Models;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
+using LauncherDM.Views.Windows;
 
 namespace LauncherDM.ViewModels
 {
@@ -34,6 +35,7 @@ namespace LauncherDM.ViewModels
 
         private void OnShowRegAndLogOrMainFormCommandExecuted(object p)
         {
+            _windowService.CloseAction = _closeAction;
             if (Password is not null)
             {
                 IAuthorizationService authorization = new AuthorizationService();
@@ -43,12 +45,16 @@ namespace LauncherDM.ViewModels
                 
                 if (authorization.Authorization(AccountName, user.DecryptPassword()))
                     _windowService.OpenMainWindow();
+
+                _windowService.CloseWindow();
             }
             else
+            { 
                 _windowService.OpenWindow(this);
-
-            _windowService.CloseAction = _closeAction;
-            _windowService.CloseWindow();
+                // Todo: исправить 
+                if (RegAndLogWindow.CloseShow) // костыль 
+                    _windowService.CloseWindow();
+            }
         }
 
         #endregion

@@ -42,14 +42,6 @@ namespace LauncherDM.Services
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
             }
-            else if (viewModel is AccountUserControlViewModel or AuthorizationWindowViewModel)
-            {
-                var regAndLogWindow = new RegAndLogWindow();
-                regAndLogWindow.DataContext = new RegAndLogWindowViewModel(regAndLogWindow.DragMove, regAndLogWindow.Close, 
-                    new ToolbarToWindowViewModel(new WindowService(regAndLogWindow), regAndLogWindow.Close),
-                    ResourcesHelper);
-                regAndLogWindow.ShowDialog();
-            }
             else if (viewModel is ToolbarToWindowViewModel)
             {
                 var settingsMini = new SettingsMiniWindow();
@@ -59,6 +51,14 @@ namespace LauncherDM.Services
                 UpdateUI.LanguagesPull.Subscribe(toolbarVM);
                 settingsMini.DataContext = new SettingsMiniWindowViewModel(settingsMini.DragMove, toolbarVM, ResourcesHelper);
                 settingsMini.ShowDialog();
+            }
+            else if (viewModel is AccountUserControlViewModel or AuthorizationWindowViewModel)
+            {
+                var regAndLogWindow = new RegAndLogWindow();
+                regAndLogWindow.DataContext = new RegAndLogWindowViewModel(regAndLogWindow.DragMove, regAndLogWindow.Close,
+                    new ToolbarToWindowViewModel(new WindowService(regAndLogWindow), regAndLogWindow.Close),
+                    ResourcesHelper);
+                regAndLogWindow.ShowDialog();
             }
             else if (viewModel is RegAndLogWindowViewModel)
             {

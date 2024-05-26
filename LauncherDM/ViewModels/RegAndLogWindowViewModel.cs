@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using LauncherDM.Views.Windows;
 
 namespace LauncherDM.ViewModels
 {
@@ -177,6 +178,9 @@ namespace LauncherDM.ViewModels
                     return;
                 }
 
+                // Todo: исправить 
+                RegAndLogWindow.CloseShow = true; // костыль
+
                 _dialogWindow.OpenWindow(this);
                 _dialogWindow.CloseAction = _closeAction;
                 _dialogWindow.CloseWindow();
@@ -208,9 +212,12 @@ namespace LauncherDM.ViewModels
 
             }
 
+            // Todo: исправить 
+            RegAndLogWindow.CloseShow = true; // костыль
+
             //if (signUpService.SignUp(RegLogin, Email, RegPassword))
             //{
-                
+
             //}
             //else
             //{
