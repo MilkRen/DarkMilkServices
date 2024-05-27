@@ -202,28 +202,39 @@ namespace LauncherDM.ViewModels
         private void OnSignUpCommandExecuted(object p)
         {
             ISignUpService signUpService = new SignUpService();
+            IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
 
-            if (Regex.IsMatch(RegLogin, "^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\\d.-]{0,19}$"))
+            var haslatAndNom = new Regex(@"^(?=.*[A-Za-z0-9]$)");
+            var ban = new Regex(@"[^!@#$%^&*()_]");
+            if (!(haslatAndNom.IsMatch(RegLogin) && ban.IsMatch(RegLogin)))
             {
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
             }
 
-            if (IsValid(Email))
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasMinimum8Chars = new Regex(@".{8,}");
+            if (!(hasNumber.IsMatch(RegPassword) && hasUpperChar.IsMatch(RegPassword) && hasMinimum8Chars.IsMatch(RegPassword)))
             {
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+            }
 
+            if (!IsValid(Email))
+            {
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
             }
 
             // Todo: исправить 
             RegAndLogWindow.CloseShow = true; // костыль
 
-            //if (signUpService.SignUp(RegLogin, Email, RegPassword))
-            //{
+            if (signUpService.SignUp(RegLogin, Email, RegPassword))
+            {
 
-            //}
-            //else
-            //{
-            //    IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-            //    dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
-            //}
+            }
+            else
+            {
+                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+            }
 
         }
 
