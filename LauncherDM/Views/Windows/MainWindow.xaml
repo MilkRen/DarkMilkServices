@@ -91,8 +91,7 @@
                     </Grid>
                 </TabItem>
 
-
-                <TabItem x:Name="TeamTI">
+                <!--<TabItem x:Name="TeamTI">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding ForumText}" Style="{StaticResource TabItemFont}"/>
@@ -104,7 +103,6 @@
                     </Grid>
                 </TabItem>
 
-
                 <TabItem x:Name="FriendsTI">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -115,7 +113,7 @@
                     <Grid>
             
                     </Grid>
-                </TabItem>
+                </TabItem>-->
 
                 <TabItem x:Name="AccountTI">
                     <TabItem.Header>

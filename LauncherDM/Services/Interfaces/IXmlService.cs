@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LauncherDM.Models;
 
 namespace LauncherDM.Services.Interfaces
@@ -8,5 +9,7 @@ namespace LauncherDM.Services.Interfaces
         void SerializationUsersXml(UsersForXml userlist);
 
         UsersForXml DeserializeUsersXMl();
+
+        void DeleteFileUsers();
     }
 }

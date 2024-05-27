@@ -30,6 +30,10 @@ namespace ServerTCP.Models.Data
                 {
                     builder.HasNoKey();
                 });
+
+            //modelBuilder.Entity<User>()
+            //    .Property(f => f.id)
+            //    .ValueGeneratedOnAdd();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) // подключение к бд

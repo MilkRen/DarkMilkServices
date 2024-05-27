@@ -15,10 +15,14 @@ namespace ServerTCP.DataBase
                 {
                     case MessageHeader.MessageType.Registration:
                         if (table is User user)
+                        {
+                            var idMax = db.users.Max(x => x.id);
+                            user.id = idMax + 1;
                             db.users.Add(user);
+                        }
                         break;
-                }
-                return db.SaveChanges() == 1;
+                } 
+               return db.SaveChanges() == 1;
             }
         }
 
@@ -43,6 +47,10 @@ namespace ServerTCP.DataBase
                         var progArray = new ProgramsForXml();
                         progArray.Programs = prog.ToArray();
                         return progArray;
+                        break;
+                    case MessageHeader.MessageType.Registration:
+                        var userCheck = db.users.Where(x => x.username == data[0]).ToArray();
+                        result = userCheck.Length > 0;
                         break;
                     default: 
                         result = null;                     

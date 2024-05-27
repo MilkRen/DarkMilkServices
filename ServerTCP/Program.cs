@@ -33,12 +33,13 @@ namespace ServerTCP
 
             while (true)
             {
+                Console.WriteLine("Ожидаем соединение через порт {0}", endPoint);
+                var listener = tcpSocket.Accept(); // новый с   окет для нового клиента
                 try
                 {
-                    Console.WriteLine("Ожидаем соединение через порт {0}", endPoint);
-                    var listener = tcpSocket.Accept(); // новый с   окет для нового клиента
                     Console.WriteLine("Подключился!");
-                    var buffer = new byte[listener.ReceiveBufferSize]; // размер буфера .  максимум сообщение из 256 байт 
+                    var buffer =
+                        new byte[listener.ReceiveBufferSize]; // размер буфера .  максимум сообщение из 256 байт 
                     var size = 0; // количество реально полученных количества байт, потом чтобы оптимизировать память 
                     do
                     {
@@ -64,11 +65,13 @@ namespace ServerTCP
 
                                 if ((bool)login)
                                 {
-                                    headerRequest = new MessageHeader(Token.GenerateToken(userInfo[0], convertHashLogin),
+                                    headerRequest = new MessageHeader(
+                                        Token.GenerateToken(userInfo[0], convertHashLogin),
                                         header.Type);
                                 }
                                 else
                                     headerRequest = new MessageHeader("0", header.Type);
+
                                 break;
 
                             case MessageHeader.MessageType.Registration:
@@ -81,12 +84,18 @@ namespace ServerTCP
                                 var convertHash = Convert.ToHexString(hash);
                                 var user = new User
                                 {
-                                    login = newuserInfo[0], email = newuserInfo[2], username = newuserInfo[0], password = convertHash
+                                    login = newuserInfo[0], email = newuserInfo[2], username = newuserInfo[0],
+                                    password = convertHash
                                 };
-                                var result = DataBaseCommands.Insert(user, header.Type);
+
+                                bool result;
+                                if ((bool)DataBaseCommands.Select(header.Type, user.login))
+                                    result = false;
+                                else
+                                 result = DataBaseCommands.Insert(user, header.Type);
 
                                 headerRequest = result
-                                    ? new MessageHeader("1", header.Type) 
+                                    ? new MessageHeader("1", header.Type)
                                     : new MessageHeader("0", header.Type);
                                 break;
 
@@ -129,17 +138,21 @@ namespace ServerTCP
                             headerRequestBytes = headerRequest.MessageServerToArray(loadToken);
                             listener.Send(headerRequestBytes);
                         }
-                    }
-                    while (listener.Available > 0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
+                    } while
+                        (listener.Available >
+                         0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
 
                     // надо отправить ответ, чтобы показать, что мы получили
                     //listener.Send(Encoding.UTF8.GetBytes("Сервер: Успех!")); // кодируем данные 
-                    listener.Shutdown(SocketShutdown.Both); // закрываем подкоючение сокета и клиента, и у сервера 
-                    listener.Close(); // отключает, закрывает сокет и освобождает ресурсы
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    listener.Shutdown(SocketShutdown.Both); // закрываем подкоючение сокета и клиента, и у сервера 
+                    listener.Close(); // отключает, закрывает сокет и освобождает ресурсы
                 }
             }
         }

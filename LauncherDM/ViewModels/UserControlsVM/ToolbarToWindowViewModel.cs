@@ -9,7 +9,7 @@ using LauncherDM.Views.Windows;
 
 namespace LauncherDM.ViewModels.UserControlsVM
 {
-    public class ToolbarToWindowViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LanguagesUpdate>
+    public class ToolbarToWindowViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         #region Fields
 
@@ -170,7 +170,7 @@ namespace LauncherDM.ViewModels.UserControlsVM
             Title = resourcesHelper.LocalizationGet(titleResource);
         }
 
-        public void Update(LanguagesUpdate data)
+        public void Update(LoadUI data)
         {
             if (data.UpdateUI)
             {

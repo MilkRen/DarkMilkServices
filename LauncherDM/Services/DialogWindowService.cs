@@ -37,7 +37,7 @@ namespace LauncherDM.Services
                 var authorizationVM = new AuthorizationWindowViewModel(authorization.DragMove, authorization.Close,
                     new ToolbarToWindowViewModel(new WindowService(authorization), visibilitySettings: Visibility.Visible),
                     ResourcesHelper);
-                UpdateUI.LanguagesPull.Subscribe(authorizationVM);
+                UpdateUI.PullUi.Subscribe(authorizationVM);
                 authorization.DataContext = authorizationVM;
                 authorization.Owner = Application.Current.MainWindow;
                 authorization.Show();
@@ -48,7 +48,7 @@ namespace LauncherDM.Services
                 var toolbarVM = new ToolbarToWindowViewModel(new WindowService(settingsMini), settingsMini.Close,
                     "Settings",
                     visibilityMinBut: Visibility.Hidden, resourcesHelper: ResourcesHelper);
-                UpdateUI.LanguagesPull.Subscribe(toolbarVM);
+                UpdateUI.PullUi.Subscribe(toolbarVM);
                 settingsMini.DataContext = new SettingsMiniWindowViewModel(settingsMini.DragMove, toolbarVM, ResourcesHelper);
                 settingsMini.ShowDialog();
             }

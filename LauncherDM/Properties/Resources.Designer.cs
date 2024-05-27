@@ -88,7 +88,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Добавить в библиотеку.
         /// </summary>
         internal static string AddLibrary {
             get {
@@ -161,11 +161,29 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string DeleteAccount {
+            get {
+                return ResourceManager.GetString("DeleteAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Почта.
         /// </summary>
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Невалидный почтовый адрес..
+        /// </summary>
+        internal static string EmailError {
+            get {
+                return ResourceManager.GetString("EmailError", resourceCulture);
             }
         }
         
@@ -251,11 +269,38 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на В пункте &quot;{0}&quot;, &quot;{1}&quot; не может быть пустым..
+        /// </summary>
+        internal static string IsNotEmpty {
+            get {
+                return ResourceManager.GetString("IsNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Языки.
         /// </summary>
         internal static string Languages {
             get {
                 return ResourceManager.GetString("Languages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Длина логина регистрации должна быть больше {0}..
+        /// </summary>
+        internal static string LenghtMaxRegLogin {
+            get {
+                return ResourceManager.GetString("LenghtMaxRegLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Длина пароля регистрации должна быть больше {0}..
+        /// </summary>
+        internal static string LenghtMaxRegPassword {
+            get {
+                return ResourceManager.GetString("LenghtMaxRegPassword", resourceCulture);
             }
         }
         
@@ -274,6 +319,24 @@ namespace LauncherDM.Properties {
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Логин занят..
+        /// </summary>
+        internal static string LoginBusy {
+            get {
+                return ResourceManager.GetString("LoginBusy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Для логина разрешается использовать символы {0}..
+        /// </summary>
+        internal static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
             }
         }
         
@@ -313,6 +376,15 @@ namespace LauncherDM.Properties {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Для пароля обязательно использовать символы {0}..
+        /// </summary>
+        internal static string PasswordError {
+            get {
+                return ResourceManager.GetString("PasswordError", resourceCulture);
             }
         }
         

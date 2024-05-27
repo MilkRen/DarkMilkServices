@@ -32,7 +32,7 @@ namespace LauncherDM.ViewModels
 
         #region Bindings
 
-        public string VersionText => string.Concat(_resourcesHelper.LocalizationGet("Version"), "", StaticFields.VersionPatch);
+        public string VersionText => string.Concat(_resourcesHelper.LocalizationGet("Version"), " ", StaticFields.VersionPatch);
 
         public string Title => _resourcesHelper.LocalizationGet("SettingsSmall");
 
@@ -110,7 +110,7 @@ namespace LauncherDM.ViewModels
             SettingsApp.Default.Save();
             EnglishEnabled = Brushes.Transparent;
             RussianEnabled = Brushes.Green;
-            UpdateUI.LanguagesPull.Notify(new LanguagesUpdate(true));
+            UpdateUI.PullUi.Notify(new LoadUI(true));
             AllPropertyChanged();
         }
 
@@ -127,7 +127,7 @@ namespace LauncherDM.ViewModels
             SettingsApp.Default.Save();
             EnglishEnabled = Brushes.Green;
             RussianEnabled = Brushes.Transparent;
-            UpdateUI.LanguagesPull.Notify(new LanguagesUpdate(true));
+            UpdateUI.PullUi.Notify(new LoadUI(true));
             AllPropertyChanged();
         }
 

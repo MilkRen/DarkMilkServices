@@ -4,27 +4,27 @@ using LauncherDM.Infrastructure.ReactiveUI.Base;
 
 namespace LauncherDM.Infrastructure.ReactiveUI
 {
-    public class LanguagesPull : IObservable<LanguagesUpdate>
+    public class PullUI : IObservable<LoadUI>
     {
-        private readonly List<IObserver<LanguagesUpdate>> _observers;
+        private readonly List<IObserver<LoadUI>> _observers;
 
-        public LanguagesPull()
+        public PullUI()
         {
-            _observers = new List<IObserver<LanguagesUpdate>>();
+            _observers = new List<IObserver<LoadUI>>();
         }
 
-        public void Notify(LanguagesUpdate data)
+        public void Notify(LoadUI data)
         {
-            foreach (var subs in _observers)
+            foreach (var subs in _observers.ToArray())
                 subs.Update(data);
         }
 
-        public void Subscribe(IObserver<LanguagesUpdate> observer)
+        public void Subscribe(IObserver<LoadUI> observer)
         {
             _observers.Add(observer);
         }
 
-        public void Unsubscribe(IObserver<LanguagesUpdate> observer)
+        public void Unsubscribe(IObserver<LoadUI> observer)
         {
             _observers.Remove(observer);
         }

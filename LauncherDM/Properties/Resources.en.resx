@@ -119,4 +119,28 @@
 	<data name="AddLibrary" xml:space="preserve">
 		<value>Add to library</value>
 	</data>
+	<data name="IsNotEmpty" xml:space="preserve">
+		<value>In the paragraph "{0}", "{1}" it cannot be empty.</value>
+	</data>
+	<data name="LoginError" xml:space="preserve">
+		<value>It is allowed to use the characters {0} for the login.</value>
+	</data>
+	<data name="PasswordError" xml:space="preserve">
+		<value>The characters {0} must be used for the password.</value>
+	</data>
+	<data name="EmailError" xml:space="preserve">
+		<value>Invalid mailing address.</value>
+	</data>
+	<data name="LenghtMaxRegPassword" xml:space="preserve">
+		<value>The length of the registration password must be greater than {0}.</value>
+	</data>
+	<data name="LenghtMaxRegLogin" xml:space="preserve">
+		<value>The length of the registration login must be greater than {0}.</value>
+	</data>
+	<data name="LoginBusy" xml:space="preserve">
+		<value>The login is busy.</value>
+	</data>
+	<data name="DeleteAccount" xml:space="preserve">
+		<value>Delete account</value>
+	</data>
 </root>

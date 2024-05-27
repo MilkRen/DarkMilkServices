@@ -36,5 +36,10 @@ namespace LauncherDM.Services
             }
             return userslist;
         }
+
+        public void DeleteFileUsers()
+        {
+            File.Delete(FileName);
+        }
     }
 }

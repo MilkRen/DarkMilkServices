@@ -15,7 +15,7 @@ using LauncherDM.Views.Windows;
 
 namespace LauncherDM.ViewModels
 {
-    class AuthorizationWindowViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LanguagesUpdate>
+    class AuthorizationWindowViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         #region Fields
 
@@ -28,6 +28,8 @@ namespace LauncherDM.ViewModels
         #region Services
 
         private IResourcesHelperService _resourcesHelper;
+
+        private ResourcesHelperService _resourcesHelperLoad;
 
         private readonly IDialogWindowService _windowService;
 
@@ -113,39 +115,46 @@ namespace LauncherDM.ViewModels
             _closeAction = closeWindowAction;
             ToolbarVM = toolbarVM;
             _resourcesHelper = resourcesHelperService;
-
-            AccountControls = new ObservableCollection<AccountUserControlViewModel>();
+            _resourcesHelperLoad = resourcesHelperService;
             _xmlService = new XmlService();
+            _windowService = new DialogWindowService();
+            ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
+            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+            AccountLoad();
+        }
+
+        private void AccountLoad()
+        {
+            AccountControls = new ObservableCollection<AccountUserControlViewModel>();
             var xmlUsersList = _xmlService.DeserializeUsersXMl();
 
             if (xmlUsersList.UserList.Count == 0)
             {
-                var accountUserVm = new AccountUserControlViewModel(closeWindowAction, "Account", resourcesHelperService);
-                UpdateUI.LanguagesPull.Subscribe(accountUserVm);
+                var accountUserVm = new AccountUserControlViewModel(_closeAction, "Account", _resourcesHelperLoad);
+                UpdateUI.PullUi.Subscribe(accountUserVm);
                 AccountControls.Add(accountUserVm);
             }
             else
             {
                 foreach (var user in xmlUsersList.UserList)
-                    AccountControls.Add(new AccountUserControlViewModel(closeWindowAction, user));
+                    AccountControls.Add(new AccountUserControlViewModel(_closeAction, user, _resourcesHelperLoad));
 
                 if (xmlUsersList.UserList.Count <= 5)
                 {
-                    var accountUserVm = new AccountUserControlViewModel(closeWindowAction, "Account", resourcesHelperService);
-                    UpdateUI.LanguagesPull.Subscribe(accountUserVm);
+                    var accountUserVm = new AccountUserControlViewModel(_closeAction, "Account", _resourcesHelperLoad);
+                    UpdateUI.PullUi.Subscribe(accountUserVm);
                     AccountControls.Add(accountUserVm);
                 }
             }
-            
-            _windowService = new DialogWindowService();
-            ShowRegAndLogFormCommand = new LambdaCommand(OnShowRegAndLogFormCommandExecuted, CanShowRegAndLogFormCommandExecute);
-            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
 
-        public void Update(LanguagesUpdate languagesUpdate)
+        public void Update(LoadUI loadUi)
         {
-            if (languagesUpdate.UpdateUI)
+            if (loadUi.UpdateUI)
+            {
                 AllPropertyChanged();
+                AccountLoad();
+            }
         }
 
         #endregion

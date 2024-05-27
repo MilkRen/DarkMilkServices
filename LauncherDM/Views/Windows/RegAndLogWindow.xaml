@@ -504,7 +504,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox Text="{Binding RegPassword}" x:Name="PasswordRegTB" MaxLength="64" HorizontalAlignment="Left" Height="40" Margin="17,687,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
+            <TextBox Text="{Binding RegPassword}" x:Name="PasswordRegTB"  MaxLength="64" HorizontalAlignment="Left" Height="40" Margin="17,687,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" Background="{x:Null}" Foreground="Black" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="Black" HorizontalAlignment="Left" Height="1" Margin="20,727,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
             <CheckBox IsEnabled="False" IsChecked="True" Content="{Binding RememberMeText}" HorizontalAlignment="Left" Height="24" Margin="20,733,0,0" VerticalAlignment="Top" Width="220" Foreground="Black" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
         </Grid>

@@ -1,10 +1,10 @@
 ﻿namespace LauncherDM.Infrastructure.ReactiveUI
 {
-    public class LanguagesUpdate
+    public class LoadUI
     {
         public bool UpdateUI { get; set; }
 
-        public LanguagesUpdate(bool updateUI)
+        public LoadUI(bool updateUI)
         {
             UpdateUI = updateUI;
         }

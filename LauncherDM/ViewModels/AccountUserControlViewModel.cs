@@ -1,21 +1,26 @@
 ﻿using System;
+using System.Linq;
 using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Infrastructure;
 using LauncherDM.Infrastructure.ReactiveUI;
 using LauncherDM.Models;
 using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.Views.Windows;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace LauncherDM.ViewModels
 {
-    public class AccountUserControlViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LanguagesUpdate>
+    public class AccountUserControlViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         #region Fields
 
         private Action _closeAction;
 
         private string _titleResource;
+
+        private Users _user;
 
         #endregion
 
@@ -55,6 +60,23 @@ namespace LauncherDM.ViewModels
                 if (RegAndLogWindow.CloseShow) // костыль 
                     _windowService.CloseWindow();
             }
+        }
+
+
+        public Command DeleteAccountCommand { get; }
+
+        private bool CanDeleteAccountCommandExecute(object p) => true;
+
+        private void OnDeleteAccountCommandExecuted(object p)
+        {
+            // Todo: поправить. неправильное удаление 
+            IXmlService xmlService = new XmlService();
+            var userlist = xmlService.DeserializeUsersXMl();
+            var selectUser = userlist.UserList.First(x => x.Login == _user.Login);
+            userlist.UserList.Remove(selectUser);
+            xmlService.DeleteFileUsers();
+            xmlService.SerializationUsersXml(userlist);
+            UpdateUI.PullUi.Notify(new LoadUI(true));
         }
 
         #endregion
@@ -109,17 +131,26 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region ContextMenuText
+
+        public string MenuItemText => _resourcesHelper.LocalizationGet("DeleteAccount");
+
         #endregion
 
-        public AccountUserControlViewModel(Action closeMainWindow, Users user)
+        #endregion
+
+        public AccountUserControlViewModel(Action closeMainWindow, Users user, ResourcesHelperService resourcesHelperService)
         {
+            _user = user;
             AccountName = user.Login;
             DisplayedImagePath = user.ImagePath;
             Password = user.PasswordArray;
             _closeAction = closeMainWindow;
             ButtonText = $"[{AccountName[0]}]";
+            _resourcesHelper = resourcesHelperService;
             _windowService = new DialogWindowService();
             ShowRegAndLogOrMainFormCommand = new LambdaCommand(OnShowRegAndLogOrMainFormCommandExecuted, CanShowRegAndLogOrMainFormCommandExecute);
+            DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanDeleteAccountCommandExecute);
         }
 
         public AccountUserControlViewModel(Action closeMainWindow, string NameResource, ResourcesHelperService resourcesHelperService)
@@ -130,6 +161,7 @@ namespace LauncherDM.ViewModels
             _closeAction = closeMainWindow;
             _windowService = new DialogWindowService();
             ShowRegAndLogOrMainFormCommand = new LambdaCommand(OnShowRegAndLogOrMainFormCommandExecuted, CanShowRegAndLogOrMainFormCommandExecute);
+            DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanDeleteAccountCommandExecute);
         }
 
         private void SetAccountName(string titleResource, IResourcesHelperService resourcesHelper)
@@ -137,7 +169,7 @@ namespace LauncherDM.ViewModels
             AccountName = resourcesHelper.LocalizationGet(titleResource);
         }
 
-        public void Update(LanguagesUpdate data)
+        public void Update(LoadUI data)
         {
             if (data.UpdateUI)
             {

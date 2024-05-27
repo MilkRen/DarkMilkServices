@@ -7,6 +7,12 @@
              mc:Ignorable="d" 
              UseLayoutRounding="True">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu Style="{StaticResource ContextMenuLoadingForm}">
+                <MenuItem Header="{Binding MenuItemText}" Command="{Binding DeleteAccountCommand}"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="180"/>

@@ -238,4 +238,28 @@
   <data name="AddLibrary" xml:space="preserve">
 	  <value>Добавить в библиотеку</value>
   </data>
+  <data name="IsNotEmpty" xml:space="preserve">
+	  <value>В пункте "{0}", "{1}" не может быть пустым.</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+	  <value>Для логина разрешается использовать символы {0}.</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+	  <value>Для пароля обязательно использовать символы {0}.</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+	  <value>Невалидный почтовый адрес.</value>
+  </data>
+  <data name="LenghtMaxRegPassword" xml:space="preserve">
+	  <value>Длина пароля регистрации должна быть больше {0}.</value>
+  </data>
+  <data name="LenghtMaxRegLogin" xml:space="preserve">
+	  <value>Длина логина регистрации должна быть больше {0}.</value>
+  </data>
+  <data name="LoginBusy" xml:space="preserve">
+	  <value>Логин занят.</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+	  <value>Удалить учетную запись</value>
+  </data>
 </root>

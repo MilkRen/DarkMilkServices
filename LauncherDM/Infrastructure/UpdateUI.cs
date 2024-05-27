@@ -4,6 +4,6 @@ namespace LauncherDM.Infrastructure
 {
     public static class UpdateUI
     {
-        public static LanguagesPull LanguagesPull = new LanguagesPull();
+        public static PullUI PullUi = new PullUI();
     }
 }

@@ -23,6 +23,10 @@ namespace LauncherDM.ViewModels
 
         private readonly IDialogWindowService _dialogWindow;
 
+        private readonly IDialogMessageBoxService _dialogMessageBox;
+
+        private readonly IXmlService _xmlService;
+
         #endregion
 
         #region Fields
@@ -150,10 +154,23 @@ namespace LauncherDM.ViewModels
         private void OnLoginCommandExecuted(object p)
         {
             IAuthorizationService authorization = new AuthorizationService();
-            IXmlService xmlService = new XmlService();
+            if (string.IsNullOrEmpty(Login) || string.IsNullOrWhiteSpace(Login))
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("IsNotEmpty"), _resourcesHelper.LocalizationGet("Authorization"), _resourcesHelper.LocalizationGet("Login")));
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Password) || string.IsNullOrWhiteSpace(Password))
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("IsNotEmpty"), _resourcesHelper.LocalizationGet("Authorization"), _resourcesHelper.LocalizationGet("Password")));
+                return;
+            }
+
             if (authorization.Authorization(Login, Password))
             {
-                var userlist = xmlService.DeserializeUsersXMl();
+                var userlist = _xmlService.DeserializeUsersXMl();
                 var user = new Users(Login, string.Empty);
                 user.PasswordArray = user.CryptPassword(Password);
 
@@ -161,8 +178,7 @@ namespace LauncherDM.ViewModels
                     userlist.UserList.Add(user);
                 else
                 {
-                    IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                    dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ErrorLoginloggedIn"),
+                    _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ErrorLoginloggedIn"),
                         messageBoxImage: CustomMessageBoxImage.Error);
                     _dialogWindow.CloseAction = _closeAction;
                     _dialogWindow.CloseWindow();
@@ -170,11 +186,10 @@ namespace LauncherDM.ViewModels
                 }
 
                 if(userlist.UserList.Count <= 5)
-                    xmlService.SerializationUsersXml(userlist);
+                    _xmlService.SerializationUsersXml(userlist);
                 else
                 {
-                    IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                    dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"), _resourcesHelper.LocalizationGet("AccountListIsFull"));
+                    _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"), _resourcesHelper.LocalizationGet("AccountListIsFull"));
                     return;
                 }
 
@@ -187,8 +202,7 @@ namespace LauncherDM.ViewModels
             }
             else
             {
-                IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-                dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ErrorLogin"),
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ErrorLogin"),
                     messageBoxImage:CustomMessageBoxImage.Error);
             }
         }
@@ -202,38 +216,93 @@ namespace LauncherDM.ViewModels
         private void OnSignUpCommandExecuted(object p)
         {
             ISignUpService signUpService = new SignUpService();
-            IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
-
-            var haslatAndNom = new Regex(@"^(?=.*[A-Za-z0-9]$)");
-            var ban = new Regex(@"[^!@#$%^&*()_]");
-            if (!(haslatAndNom.IsMatch(RegLogin) && ban.IsMatch(RegLogin)))
+            if (string.IsNullOrEmpty(RegLogin) || string.IsNullOrWhiteSpace(RegLogin))
             {
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("IsNotEmpty"), _resourcesHelper.LocalizationGet("SignUp"), _resourcesHelper.LocalizationGet("Login")));
+                return;
             }
 
-            var hasNumber = new Regex(@"[0-9]+");
-            var hasUpperChar = new Regex(@"[A-Z]+");
-            var hasMinimum8Chars = new Regex(@".{8,}");
-            if (!(hasNumber.IsMatch(RegPassword) && hasUpperChar.IsMatch(RegPassword) && hasMinimum8Chars.IsMatch(RegPassword)))
+            if (string.IsNullOrEmpty(RegPassword) || string.IsNullOrWhiteSpace(RegPassword))
             {
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("IsNotEmpty"), _resourcesHelper.LocalizationGet("SignUp"), _resourcesHelper.LocalizationGet("Password")));
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrWhiteSpace(Email))
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("IsNotEmpty"), _resourcesHelper.LocalizationGet("SignUp"), _resourcesHelper.LocalizationGet("Email")));
+                return;
+            }
+
+            if (RegLogin.Length < 3)
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("LenghtMaxRegLogin"), "3"));
+                return;
+            }
+
+            var haslatAndNom = new Regex(@"^(?=.*[A-Za-z0-9]$)");
+            var banСharacter = new Regex(@"[^!@#$%^&*()_]");
+            if (!(haslatAndNom.IsMatch(RegLogin) && banСharacter.IsMatch(RegLogin)))
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("LoginError"), "[A-Z], [a-z], [0-9]"));
+                return;
             }
 
             if (!IsValid(Email))
             {
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    _resourcesHelper.LocalizationGet("EmailError"));
+                return;
+            }
+
+            if (RegPassword.Length < 8)
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("LenghtMaxRegPassword"), "8"));
+                return;
+            }
+
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            if (!(hasNumber.IsMatch(RegPassword) && hasUpperChar.IsMatch(RegPassword)))
+            {
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
+                    string.Format(_resourcesHelper.LocalizationGet("PasswordError"), "[0-9][A-Z]"));
+                return;
             }
 
             // Todo: исправить 
             RegAndLogWindow.CloseShow = true; // костыль
-
             if (signUpService.SignUp(RegLogin, Email, RegPassword))
             {
+                // Todo: исправить 
+                RegAndLogWindow.CloseShow = true; // костыль
 
+                var userlist = _xmlService.DeserializeUsersXMl();
+                var user = new Users(RegLogin, string.Empty);
+                user.PasswordArray = user.CryptPassword(RegPassword);
+                userlist.UserList.Add(user);
+
+                if (userlist.UserList.Count <= 5)
+                    _xmlService.SerializationUsersXml(userlist);
+                else
+                {
+                    _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"), _resourcesHelper.LocalizationGet("AccountListIsFull"));
+                    return;
+                }
+
+                _dialogWindow.OpenWindow(this);
+                _dialogWindow.CloseAction = _closeAction;
+                _dialogWindow.CloseWindow();
             }
             else
             {
-                dialogMessageBox.DialogShow("Error Server Reques", "Error Server Reques");
+                _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"), _resourcesHelper.LocalizationGet("LoginBusy"));
             }
 
         }
@@ -264,6 +333,8 @@ namespace LauncherDM.ViewModels
             ToolbarVM = toolbarViewModel;
             _dragMoveAction = dragMove;
             _dialogWindow = new DialogWindowService();
+            _dialogMessageBox = new DialogMessageBoxService();
+            _xmlService = new XmlService();
             ShowAccountRecoveryWindowCommand = new LambdaCommand(OnShowAccountRecoveryWindowCommandExecuted, CanShowAccountRecoveryWindowCommandExecute);
             LoginCommand = new LambdaCommand(OnLoginCommandExecuted, CanLoginCommandExecute);
             SignUpCommand = new LambdaCommand(OnSignUpCommandExecuted, CanSignUpCommandExecute);
