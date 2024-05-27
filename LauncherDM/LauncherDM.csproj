@@ -34,6 +34,10 @@
     <None Remove="Source\Images\ToolBar\Up.png" />
     <None Remove="Source\Images\ToolBar\UpBlack.png" />
     <None Remove="Source\Images\ToolBar\World.png" />
+    <None Remove="Source\Video\wallpaper engine crescent moon %28red%29.mp4" />
+    <None Remove="Source\Video\wallpaper engine space.mp4" />
+    <None Remove="Source\Video\wallper1.mp4" />
+    <None Remove="Source\Video\wallper2.mp4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -128,6 +132,12 @@
     <Resource Include="Source\Images\ToolBar\World.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Source\Video\wallper1.mp4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Source\Video\wallper2.mp4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

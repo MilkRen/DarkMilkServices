@@ -16,6 +16,7 @@ namespace ServerTCP.DataBase
                     case MessageHeader.MessageType.Registration:
                         if (table is User user)
                         {
+                            //Todo: не уверен, что это правильно!
                             var idMax = db.users.Max(x => x.id);
                             user.id = idMax + 1;
                             db.users.Add(user);

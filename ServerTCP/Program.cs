@@ -147,7 +147,7 @@ namespace ServerTCP
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    ConsoleExtension.WriteLineColor(e.Message, ConsoleColor.DarkRed);
                 }
                 finally
                 {

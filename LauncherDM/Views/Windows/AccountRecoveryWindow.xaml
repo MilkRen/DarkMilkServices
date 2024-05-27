@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LauncherDM.Views.Windows"
         mc:Ignorable="d"
-        Title="AccountRecoveryWindow" Height="450" Width="800">
+        Title="AccountRecoveryWindow" Height="450" Width="800"
+        AllowsTransparency="True" 
+        Background="Black"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" >
     <Grid>
         
     </Grid>

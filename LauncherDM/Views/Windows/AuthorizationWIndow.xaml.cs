@@ -10,6 +10,7 @@ namespace LauncherDM.Views.Windows
         public AuthorizationWindow()
         {
             InitializeComponent();
+            //MainMediaElement.Source = new Uri(@"https://darkmilk.store/Launcher/Video/wallper2.mp4");
         }
     }
 }

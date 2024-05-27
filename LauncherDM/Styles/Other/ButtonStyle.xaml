@@ -118,8 +118,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <StackPanel Orientation="Vertical" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
-                        <Label x:Name="LabelRegistration" FontSize="{TemplateBinding FontSize}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Border Width="{TemplateBinding Width}" CornerRadius="2" Height="2" Background="{TemplateBinding Background}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="LabelRegistration" FontSize="{TemplateBinding FontSize}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label.Effect>
+                                <DropShadowEffect ShadowDepth="2" Color="Black" />
+                            </Label.Effect>
+                        </Label>
+                        <Border Width="{TemplateBinding Width}" CornerRadius="2" Height="2" Background="{TemplateBinding Background}"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="2" Color="Black" />
+                            </Border.Effect>
+                        </Border>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

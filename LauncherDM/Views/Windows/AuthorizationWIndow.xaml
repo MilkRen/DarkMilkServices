@@ -10,10 +10,10 @@
         Title="{Binding Title}"
         Height="350" Width="600"
         AllowsTransparency="True" 
-        Background="Black" 
+        Background="Black"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None">
+        WindowStyle="None" UseLayoutRounding="True">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -41,6 +41,15 @@
     </behaviors:Interaction.Triggers>
 
     <Grid>
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <StackPanel >
+                        <MediaElement x:Name="MainMediaElement" Source="https://darkmilk.store/Launcher/Video/wallper.mp4"  LoadedBehavior="Play"/>
+                    </StackPanel>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="70"/>
