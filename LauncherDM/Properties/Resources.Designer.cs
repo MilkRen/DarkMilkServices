@@ -79,6 +79,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сменить аккаунт.
+        /// </summary>
+        internal static string AccountChange {
+            get {
+                return ResourceManager.GetString("AccountChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Список аккаунтов переполнен. Уберите ненужные аккаунты..
         /// </summary>
         internal static string AccountListIsFull {
@@ -452,7 +461,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Sending error!.
         /// </summary>
         internal static string SendError {
             get {

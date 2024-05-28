@@ -277,4 +277,7 @@
   <data name="SendError" xml:space="preserve">
 	  <value>Sending error!</value>
   </data>
+  <data name="AccountChange" xml:space="preserve">
+	  <value>Сменить аккаунт</value>
+  </data>
 </root>

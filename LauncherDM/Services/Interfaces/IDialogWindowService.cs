@@ -24,6 +24,5 @@ namespace LauncherDM.Services.Interfaces
         void OpenAccountRecovery();
 
         void OpenMainWindow();
-
     }
 }

@@ -4,16 +4,13 @@ using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using LauncherDM.ViewModels.UserControlsVM;
 using System;
-using System.Windows;
 using System.Windows.Input;
 using LauncherDM.ViewModels;
-using LauncherDM.Views.UserControls;
 
 namespace LauncherDM.ViewModel
 {
     internal class MainWindowViewModel : Base.ViewModel
     {
-
         #region Services
 
         private readonly IResourcesHelperService _resourcesHelper;
@@ -76,6 +73,18 @@ namespace LauncherDM.ViewModel
 
         #endregion
 
+        #region SettingsUserControlVM
+
+        private SettingsUserControlViewModel _settingsUserControlVM;
+
+        public SettingsUserControlViewModel SettingsUserControlVM
+        {
+            get => _settingsUserControlVM;
+            set => Set(ref _settingsUserControlVM, value);
+        }
+
+        #endregion
+
         #endregion
 
         #region Command
@@ -98,13 +107,14 @@ namespace LauncherDM.ViewModel
         #endregion
 
 
-        public MainWindowViewModel(Action dragMove, ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
+        public MainWindowViewModel(Action closeAction, Action dragMove, ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _dragMoveAction = dragMove;
             ToolbarVM = toolbarViewModel;
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
             StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper, serverRequest);
+            SettingsUserControlVM = new SettingsUserControlViewModel(closeAction, resourcesHelper);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
     }

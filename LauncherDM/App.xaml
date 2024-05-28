@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Styles/Other/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/BorderStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/RadioButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ContextMenuStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ImageStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/TabControlStyle.xaml"/>

@@ -123,7 +123,7 @@
                     </TabItem.Header>
 
                     <Grid>
-
+                        <userControls:MyAccountUserControl DataContext="{Binding MyAccountUserControlVM}"/>
                     </Grid>
                 </TabItem>
 
@@ -135,7 +135,7 @@
                     </TabItem.Header>
 
                     <Grid>
-
+                        <userControls:SettingsUserControl DataContext="{Binding SettingsUserControlVM}"/>
                     </Grid>
                     </TabItem>
 

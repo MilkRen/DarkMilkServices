@@ -31,7 +31,7 @@ namespace LauncherDM.Services
 
         public void OpenWindow(object viewModel)
         {
-            if (viewModel is LoadingWindowViewModel)
+            if (viewModel is LoadingWindowViewModel or SettingsUserControlViewModel)
             {
                 var authorization = new AuthorizationWindow();
                 var authorizationVM = new AuthorizationWindowViewModel(authorization.DragMove, authorization.Close,
@@ -102,7 +102,7 @@ namespace LauncherDM.Services
         public void OpenMainWindow()
         {
             var mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainWindowViewModel(mainWindow.DragMove,
+            mainWindow.DataContext = new MainWindowViewModel(mainWindow.Close, mainWindow.DragMove,
                 new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Hide, widthMax: 30),
                 ResourcesHelper, ServerRequest);
             mainWindow.Owner = Application.Current.MainWindow;

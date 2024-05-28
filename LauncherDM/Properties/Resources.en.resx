@@ -158,4 +158,7 @@
 	<data name="SendError" xml:space="preserve">
 		<value>Ошибка отправки!</value>
 	</data>
+	<data name="AccountChange" xml:space="preserve">
+		<value>Change account</value>
+	</data>
 </root>
