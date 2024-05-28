@@ -16,10 +16,27 @@ namespace ServerTCP.DataBase
                     case MessageHeader.MessageType.Registration:
                         if (table is User user)
                         {
-                            //Todo: не уверен, что это правильно!
-                            var idMax = db.users.Max(x => x.id);
-                            user.id = idMax + 1;
+                            if (db.users.Count() != 0)
+                            {
+                                //Todo: не уверен, что это правильно!
+                                var idMax = db.users?.Max(x => x.id) ?? 0;
+                                if (idMax != 0)
+                                    user.id = idMax + 1;
+                            }
                             db.users.Add(user);
+                        }
+                        break;
+                    case MessageHeader.MessageType.RecoveryAccount:
+                        if (table is RecoveryAccount account)
+                        {
+                            //Todo: не уверен, что это правильно!
+                            if (db.recovery_account.Count() != 0)
+                            {
+                                var idMax = db.recovery_account?.Max(x => x.id) ?? 0;
+                                if (idMax != 0)
+                                    account.id = idMax + 1;
+                            }
+                            db.recovery_account.Add(account);
                         }
                         break;
                 } 

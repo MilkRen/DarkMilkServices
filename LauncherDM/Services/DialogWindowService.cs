@@ -93,8 +93,10 @@ namespace LauncherDM.Services
         public void OpenAccountRecovery()
         {
             var accountRecovery = new AccountRecoveryWindow();
-            accountRecovery.DataContext = new AccountRecoveryWindowViewModel();
-            accountRecovery.Show();
+            accountRecovery.DataContext = new AccountRecoveryWindowViewModel(accountRecovery.DragMove, accountRecovery.Close, 
+                new ToolbarToWindowViewModel(new WindowService(accountRecovery), accountRecovery.Close, "AccountRecovery", resourcesHelper: ResourcesHelper), 
+                ResourcesHelper);
+            accountRecovery.ShowDialog();
         }
 
         public void OpenMainWindow()

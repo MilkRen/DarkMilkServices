@@ -253,7 +253,7 @@ namespace LauncherDM.ViewModels
                 return;
             }
 
-            if (!IsValid(Email))
+            if (!IsValidEmail(Email))
             {
                 _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"),
                     _resourcesHelper.LocalizationGet("EmailError"));
@@ -307,12 +307,11 @@ namespace LauncherDM.ViewModels
 
         }
 
-        public bool IsValid(string emailaddress)
+        public bool IsValidEmail(string email)
         {
             try
             {
-                MailAddress m = new MailAddress(emailaddress);
-
+                var mail = new MailAddress(email);
                 return true;
             }
             catch (FormatException)

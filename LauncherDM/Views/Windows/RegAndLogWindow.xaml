@@ -419,7 +419,7 @@
             <TextBox x:Name="PasswordTB" Text="{Binding Password}" MaxLength="64" HorizontalAlignment="Center" Height="40" Margin="0,881,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Center" FontFamily="Cascadia Mono Light"/>
             <Path Data="M30,105 L417,105" Fill="White" HorizontalAlignment="Center" Height="1" Margin="0,921,0,0" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="280"/>
 
-            <Button x:Name="button" Content="{Binding ForgotPasswordText}" Style="{StaticResource ButtonForgot}" HorizontalAlignment="Left" Height="24" Margin="10,927,0,0" VerticalAlignment="Top" Width="140" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
+            <Button x:Name="button" Command="{Binding ShowAccountRecoveryWindowCommand}" Content="{Binding ForgotPasswordText}" Style="{StaticResource ButtonForgot}" HorizontalAlignment="Left" Height="24" Margin="10,927,0,0" VerticalAlignment="Top" Width="140" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" FontFamily="Cascadia Mono Light" FontSize="10"/>
         </Grid>
         <Button x:Name="ButtonUp" Command="{Binding SignUpCommand}" Style="{StaticResource ButtonLogin}" HorizontalAlignment="Left" Margin="189,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,0.527">
             <Button.RenderTransform>

@@ -262,4 +262,19 @@
   <data name="DeleteAccount" xml:space="preserve">
 	  <value>Удалить учетную запись</value>
   </data>
+  <data name="AccountRecovery" xml:space="preserve">
+	  <value>Восстановление учетной записи</value>
+  </data>
+  <data name="SupportRecovery" xml:space="preserve">
+	  <value>Введите логин и адрес электронной почты, чтобы служба поддержки связалась с вами.</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+	  <value>Отправить</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+	  <value>Заявка была отправлена!</value>
+  </data>
+  <data name="SendError" xml:space="preserve">
+	  <value>Sending error!</value>
+  </data>
 </root>

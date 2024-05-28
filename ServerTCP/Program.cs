@@ -131,6 +131,22 @@ namespace ServerTCP
                             case MessageHeader.MessageType.ProgramsPath:
                                 headerRequest = new MessageHeader(ProgramsPathConst, header.Type);
                                 break;
+
+                            case MessageHeader.MessageType.RecoveryAccount:
+                                var accountInfo = header.Message.ToString().Split(',');
+                                if (accountInfo.Length != 2)
+                                    throw new ArgumentException(accountInfo.Length.ToString());
+
+                                var recAcc = new RecoveryAccount()
+                                {
+                                    login = accountInfo[0],
+                                    email = accountInfo[1],
+                                };
+                                result = DataBaseCommands.Insert(recAcc, header.Type);
+                                headerRequest = result
+                                    ? new MessageHeader("1", header.Type)
+                                    : new MessageHeader("0", header.Type);
+                                break;
                         }
 
                         if (headerRequest is not null)

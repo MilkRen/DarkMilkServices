@@ -88,6 +88,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Восстановление учетной записи.
+        /// </summary>
+        internal static string AccountRecovery {
+            get {
+                return ResourceManager.GetString("AccountRecovery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Добавить в библиотеку.
         /// </summary>
         internal static string AddLibrary {
@@ -161,7 +170,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Удалить учетную запись.
         /// </summary>
         internal static string DeleteAccount {
             get {
@@ -434,6 +443,33 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Отправить.
+        /// </summary>
+        internal static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string SendError {
+            get {
+                return ResourceManager.GetString("SendError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявка была отправлена!.
+        /// </summary>
+        internal static string SendMessage {
+            get {
+                return ResourceManager.GetString("SendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сервер недоступен (автономный режим)..
         /// </summary>
         internal static string ServerClose {
@@ -475,6 +511,15 @@ namespace LauncherDM.Properties {
         internal static string Store {
             get {
                 return ResourceManager.GetString("Store", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Введите логин и адрес электронной почты, чтобы служба поддержки связалась с вами..
+        /// </summary>
+        internal static string SupportRecovery {
+            get {
+                return ResourceManager.GetString("SupportRecovery", resourceCulture);
             }
         }
         

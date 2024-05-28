@@ -25,6 +25,7 @@ namespace ServerTCP
             ProgramsPath,
             Games,
             GamesPath,
+            RecoveryAccount,
             Log,
             File,
             Photo,
@@ -100,6 +101,7 @@ namespace ServerTCP
             {
                 case MessageType.Login: 
                 case MessageType.Registration: 
+                case MessageType.RecoveryAccount: 
                     message = Encoding.UTF8.GetBytes(Message.ToString());
                     break;
             }
@@ -121,6 +123,7 @@ namespace ServerTCP
             {
                 case MessageType.Login:
                 case MessageType.Registration:
+                case MessageType.RecoveryAccount:
                     Array.Copy(bytes, 0, result, 3, bytes.Length);
                     Array.Copy(message ?? [0], 0, result, LengthAndDataType, messageLength);
                     break;
@@ -145,6 +148,7 @@ namespace ServerTCP
                 case MessageType.Registration:
                 case MessageType.TitleLoading:
                 case MessageType.ProgramsPath:
+                case MessageType.RecoveryAccount:
                 case MessageType.GamesPath:
                 case MessageType.PublicKey:
                 case MessageType.Version:
@@ -192,6 +196,7 @@ namespace ServerTCP
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.TitleLoading:
+                case MessageHeader.MessageType.RecoveryAccount:
                 case MessageHeader.MessageType.Programs:
                 case MessageHeader.MessageType.ProgramsPath:
                 case MessageHeader.MessageType.Games:
@@ -235,6 +240,7 @@ namespace ServerTCP
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Programs:
                 case MessageHeader.MessageType.ProgramsPath:
+                case MessageHeader.MessageType.RecoveryAccount:
                 case MessageHeader.MessageType.Games:
                 case MessageHeader.MessageType.GamesPath:
                 case MessageHeader.MessageType.Registration:
