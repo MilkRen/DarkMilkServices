@@ -156,10 +156,18 @@ namespace ServerTCP
                     message = Encoding.UTF8.GetBytes(Message.ToString());
                     break;
                 case MessageType.Programs:
-                    var xml = new XmlSerializer(typeof(ProgramsForXml));
-                    using (StringWriter textWriter = new StringWriter())
+                    var xmlProg = new XmlSerializer(typeof(ProgramsForXml));
+                    using (var textWriter = new StringWriter())
                     {
-                        xml.Serialize(textWriter, Message);
+                        xmlProg.Serialize(textWriter, Message);
+                        message = Encoding.UTF8.GetBytes(textWriter.ToString());
+                    }
+                    break;
+                case MessageType.Games:
+                    var xmlGame = new XmlSerializer(typeof(GamesForXml));
+                    using (var textWriter = new StringWriter())
+                    {
+                        xmlGame.Serialize(textWriter, Message);
                         message = Encoding.UTF8.GetBytes(textWriter.ToString());
                     }
                     break;

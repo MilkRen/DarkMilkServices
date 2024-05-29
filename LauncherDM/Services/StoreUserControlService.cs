@@ -31,10 +31,8 @@ namespace LauncherDM.Services
                     programsForXml = (ProgramsForXml)xml.Deserialize(textReader);
                 }
                 catch
-                {
-                }
+                { }
             }
-
             return programsForXml;
             //return requestMessageServer?.Message.ToString() == "1";
         }
@@ -45,16 +43,28 @@ namespace LauncherDM.Services
             return requestMessageServer.Message.ToString();
         }
 
-        public object GetGames()
+        public GamesForXml GetGames()
         {
             var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.Games);
-            return null;
+
+            var xml = new XmlSerializer(typeof(GamesForXml));
+            var programsForXml = new GamesForXml();
+            using (StringReader textReader = new StringReader(requestMessageServer.Message.ToString()))
+            {
+                try
+                {
+                    programsForXml = (GamesForXml)xml.Deserialize(textReader);
+                }
+                catch
+                { }
+            }
+            return programsForXml;
         }
 
         public string GetGamesPath()
         {
             var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.GamesPath);
-            return null;
+            return requestMessageServer.Message.ToString();
         }
     }
 }

@@ -19,6 +19,8 @@ namespace ServerTCP
         private static string SaltPassword = "sdlfjkpo213ndarkmilk";
 
         private const string ProgramsPathConst = @"https://darkmilk.store/Launcher/ProgramImage/";
+
+        private const string GamesPathConst = @"https://darkmilk.store/Launcher/GamesImage/";
         static void Main(string[] args)
         {
             //LoadingRSA();
@@ -116,11 +118,12 @@ namespace ServerTCP
                                 break;
 
                             case MessageHeader.MessageType.Games:
-                                //headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
+                                 var games = DataBaseCommands.Select(header.Type);
+                                headerRequest = new MessageHeader(games, header.Type);
                                 break;
 
                             case MessageHeader.MessageType.GamesPath:
-                                //headerRequest = new MessageHeader(_privateKey, MessageHeader.MessageType.PublicKey);
+                                headerRequest = new MessageHeader(GamesPathConst, header.Type);
                                 break;
 
                             case MessageHeader.MessageType.Programs:
@@ -154,9 +157,7 @@ namespace ServerTCP
                             headerRequestBytes = headerRequest.MessageServerToArray(loadToken);
                             listener.Send(headerRequestBytes);
                         }
-                    } while
-                        (listener.Available >
-                         0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
+                    } while (listener.Available > 0); // до тех пор, пока в нашем подключение есть данные, будет продолжаться считывание
 
                     // надо отправить ответ, чтобы показать, что мы получили
                     //listener.Send(Encoding.UTF8.GetBytes("Сервер: Успех!")); // кодируем данные 

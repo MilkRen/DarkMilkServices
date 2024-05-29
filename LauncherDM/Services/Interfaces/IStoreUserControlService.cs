@@ -8,7 +8,7 @@ namespace LauncherDM.Services.Interfaces
         
         string GetProgramsPath();
         
-        object GetGames();
+        GamesForXml GetGames();
 
         string GetGamesPath();
     }

@@ -3,7 +3,7 @@ using LauncherDM.Infastructure.Commands.Base;
 
 namespace LauncherDM.ViewModels
 {
-    class ProgramItemViewModel : ViewModel.Base.ViewModel  
+    class SelectItemViewModel : ViewModel.Base.ViewModel  
     {
         #region Binding
 
@@ -28,7 +28,7 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        public ProgramItemViewModel(string imageItemPath, LambdaCommand lambdaCommand = null)
+        public SelectItemViewModel(string imageItemPath, LambdaCommand lambdaCommand = null)
         {
             ImageItemPath = imageItemPath;
             ClickItemCommand = lambdaCommand;

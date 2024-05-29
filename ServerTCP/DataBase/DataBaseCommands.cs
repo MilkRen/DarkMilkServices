@@ -63,8 +63,14 @@ namespace ServerTCP.DataBase
                     case MessageHeader.MessageType.Programs:
                         var prog = db.programs;
                         var progArray = new ProgramsForXml();
-                        progArray.Programs = prog.ToArray();
+                        progArray.ProgramsArray = prog.ToArray();
                         return progArray;
+                        break;
+                    case MessageHeader.MessageType.Games:
+                        var games = db.games;
+                        var gamesArray = new GamesForXml();
+                        gamesArray.GamesArray = games.ToArray();
+                        return gamesArray;
                         break;
                     case MessageHeader.MessageType.Registration:
                         var userCheck = db.users.Where(x => x.username == data[0]).ToArray();

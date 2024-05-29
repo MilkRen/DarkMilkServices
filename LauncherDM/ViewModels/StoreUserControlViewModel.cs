@@ -32,12 +32,24 @@ namespace LauncherDM.ViewModels
 
         #region ProgramsViewModel
 
-        private ObservableCollection<ProgramsViewModel> _programsListView;
+        private ObservableCollection<ItemsViewModel> _programsListView;
 
-        public ObservableCollection<ProgramsViewModel> ProgramsListView
+        public ObservableCollection<ItemsViewModel> ProgramsListView
         {
             get => _programsListView;
             set => Set(ref _programsListView, value);
+        }
+
+        #endregion
+
+        #region GamesViewModel
+
+        private ObservableCollection<ItemsViewModel> _gamesListView;
+
+        public ObservableCollection<ItemsViewModel> GamesListView
+        {
+            get => _gamesListView;
+            set => Set(ref _gamesListView, value);
         }
 
         #endregion
@@ -76,9 +88,9 @@ namespace LauncherDM.ViewModels
             set => Set(ref _tagText, value);
         }
 
-        private ObservableCollection<ProgramItemViewModel> _itemListView;
+        private ObservableCollection<SelectItemViewModel> _itemListView;
 
-        public ObservableCollection<ProgramItemViewModel> ItemListView
+        public ObservableCollection<SelectItemViewModel> ItemListView
         {
             get => _itemListView;
             set => Set(ref _itemListView, value);
@@ -94,7 +106,8 @@ namespace LauncherDM.ViewModels
         public StoreUserControlViewModel(ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _resourcesHelper = resourcesHelper;
-            ProgramsListView = new ObservableCollection<ProgramsViewModel>();
+            ProgramsListView = new ObservableCollection<ItemsViewModel>();
+            GamesListView = new ObservableCollection<ItemsViewModel>();
             LoadStore(serverRequest);
         }
 
@@ -104,9 +117,9 @@ namespace LauncherDM.ViewModels
             ICheckNetworkService networkService = new CheckNetworkService();
             var progArray = store.GetPrograms();
             var progPath = store.GetProgramsPath();
-            foreach (var prog in progArray.Programs)
+            foreach (var prog in progArray.ProgramsArray)
             {
-                ProgramsListView.Add(new ProgramsViewModel(prog, progPath, new LambdaCommand(o =>
+                ProgramsListView.Add(new ItemsViewModel(prog, progPath, new LambdaCommand(o =>
                 {
                     TitleItem = prog.name;
                     TagText = prog.tag;
@@ -114,13 +127,45 @@ namespace LauncherDM.ViewModels
                     DescItem = prog.description;
 
                     var countLoadImage = 1;
-                    ItemListView = new ObservableCollection<ProgramItemViewModel>();
+                    ItemListView = new ObservableCollection<SelectItemViewModel>();
                     while (MaxImageToItem >= countLoadImage)
                     {
                         var image = string.Concat(progPath, TitleItem,
                             countLoadImage.ToString(), ".png");
                         if (networkService.CheckingUriFileConnection(image))
-                            ItemListView.Add(new ProgramItemViewModel(image, new LambdaCommand(o =>
+                            ItemListView.Add(new SelectItemViewModel(image, new LambdaCommand(o =>
+                            {
+                                ImageItem = image;
+                            }, o => true)));
+                        else
+                            break;
+
+                        countLoadImage++;
+                    }
+
+                    AnimationItemShow();
+                }, o => true)));
+            }
+
+            var gamesArray = store.GetGames();
+            var gamesPath = store.GetGamesPath();
+            foreach (var games in gamesArray.GamesArray)
+            {
+                GamesListView.Add(new ItemsViewModel(games, gamesPath, new LambdaCommand(o =>
+                {
+                    TitleItem = games.name;
+                    TagText = games.tag;
+                    ImageItem = string.Concat(gamesPath, TitleItem, ".png");
+                    DescItem = games.description;
+
+                    var countLoadImage = 1;
+                    ItemListView = new ObservableCollection<SelectItemViewModel>();
+                    while (MaxImageToItem >= countLoadImage)
+                    {
+                        var image = string.Concat(gamesPath, TitleItem,
+                            countLoadImage.ToString(), ".png");
+                        if (networkService.CheckingUriFileConnection(image))
+                            ItemListView.Add(new SelectItemViewModel(image, new LambdaCommand(o =>
                             {
                                 ImageItem = image;
                             }, o => true)));

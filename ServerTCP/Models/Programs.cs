@@ -6,7 +6,7 @@ namespace ServerTCP.Models
 
     public class ProgramsForXml
     {
-        public Programs[] Programs { get; set; }
+        public Programs[] ProgramsArray { get; set; }
     }
 
     public class Programs

@@ -3,7 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServerTCP.Models
 {
-    internal class Games
+    public class GamesForXml
+    {
+        public Games[] GamesArray { get; set; }
+    }
+    public class Games
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
@@ -11,6 +15,6 @@ namespace ServerTCP.Models
         public string tag { get; set; }
         public int price { get; set; }
         public string description { get; set; }
-        public string descriptionENG { get; set; }
+        public string descriptionEng { get; set; }
     }
 }
