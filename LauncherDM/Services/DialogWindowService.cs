@@ -108,5 +108,13 @@ namespace LauncherDM.Services
             mainWindow.Owner = Application.Current.MainWindow;
             mainWindow.Show();
         }
+
+        public void OpenImageItemWindow(string imagePath)
+        {
+            var imageWindow = new ImageItemWindow();
+            imageWindow.DataContext = new ImageItemWindowViewModel(imagePath, imageWindow.DragMove,
+                new ToolbarToWindowViewModel(new WindowService(imageWindow), imageWindow.Close, widthMax:30));
+            imageWindow.ShowDialog();
+        }
     }
 }

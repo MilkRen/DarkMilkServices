@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:LauncherDM"
         mc:Ignorable="d"
         Title="{Binding Title}" 
-        Height="720" Width="1280" 
+        Height="720" Width="1280" MinWidth="600" MinHeight="600"
         AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip" 
         WindowStartupLocation="CenterScreen" WindowStyle="None">
 
@@ -123,7 +123,7 @@
                     </TabItem.Header>
 
                     <Grid>
-                        <userControls:MyAccountUserControl DataContext="{Binding MyAccountUserControlVM}"/>
+                            <userControls:MyAccountUserControl DataContext="{Binding MyAccountUserControlVM}"/>
                     </Grid>
                 </TabItem>
 

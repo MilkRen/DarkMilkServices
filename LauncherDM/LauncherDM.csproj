@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <None Remove="Source\Fonts\Gloss_And_Bloom.ttf" />
+    <None Remove="Source\Images\Account\IconAdd.png" />
+    <None Remove="Source\Images\Account\Profile.png" />
     <None Remove="Source\Images\Logo\Logo.png" />
     <None Remove="Source\Images\Logo\MilkBottle.png" />
     <None Remove="Source\Images\Logo\OnlyLogo.png" />
@@ -45,6 +47,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Source\Images\Account\IconAdd.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\Account\Profile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Source\Images\Logo\OnlyLogoTwo.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

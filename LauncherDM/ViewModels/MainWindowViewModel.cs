@@ -85,6 +85,18 @@ namespace LauncherDM.ViewModel
 
         #endregion
 
+        #region MyAccountUserControlViewModel
+
+        private MyAccountUserControlViewModel _myAccountUserControlVM;
+
+        public MyAccountUserControlViewModel MyAccountUserControlVM
+        {
+            get => _myAccountUserControlVM;
+            set => Set(ref _myAccountUserControlVM, value);
+        }
+
+        #endregion
+
         #endregion
 
         #region Command
@@ -115,6 +127,7 @@ namespace LauncherDM.ViewModel
             _dialogWindow = new DialogWindowService();
             StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper, serverRequest);
             SettingsUserControlVM = new SettingsUserControlViewModel(closeAction, resourcesHelper);
+            MyAccountUserControlVM = new MyAccountUserControlViewModel();
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
     }

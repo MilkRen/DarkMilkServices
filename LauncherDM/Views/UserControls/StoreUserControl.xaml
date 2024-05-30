@@ -39,7 +39,20 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.ColumnSpan="2">
-                <Border Background="White" CornerRadius="20"/>
+                    <MediaElement x:Name="myMediaElement" Volume="0" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center" LoadedBehavior="Play" >
+                        <MediaElement.Triggers>
+                            <EventTrigger RoutedEvent="MediaElement.Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <MediaTimeline Source="https://darkmilk.store/Launcher/Video/wallperStore.mp4" Storyboard.TargetName="myMediaElement"  
+                                                           RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </MediaElement.Triggers>
+                    </MediaElement>
             </Grid>
 
             <StackPanel Grid.Row="1" Margin="5">
@@ -155,7 +168,7 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="215"/>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="80"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
@@ -165,7 +178,9 @@
 
                     <Grid Grid.Row="1" VerticalAlignment="Center">
                         <StackPanel>
-                            <Image Source="{Binding ImageItem}" Width="250" Height="150"/>
+                            <Button Background="Transparent" Command="{Binding ClickImageItemCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                <Image Source="{Binding ImageItem}" Width="250" Height="150"/>
+                            </Button>
                             <ListView ItemsSource="{Binding ItemListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderThickness="0">
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -192,7 +207,9 @@
                     </Grid>
 
                     <Grid Grid.Row="3">
-                        <TextBlock Text="{Binding DescItem}" TextWrapping="Wrap" FontSize="10" Style="{StaticResource TitleProgramTextBlock}"/>
+                        <ScrollViewer>
+                            <TextBlock Text="{Binding DescItem}" TextWrapping="Wrap" FontSize="10" Style="{StaticResource TitleProgramTextBlock}"/>
+                        </ScrollViewer>
                     </Grid>
 
                     <Grid Grid.Row="4" VerticalAlignment="Center">

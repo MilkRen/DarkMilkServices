@@ -5,6 +5,8 @@ using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using System.Windows.Media.Animation;
 using System;
+using System.Windows.Input;
+using LauncherDM.Infastructure.Commands.Base;
 
 namespace LauncherDM.ViewModels
 {
@@ -19,6 +21,8 @@ namespace LauncherDM.ViewModels
         #region Services
 
         private readonly IResourcesHelperService _resourcesHelper;
+
+        private readonly IDialogWindowService _dialogWindow;
 
         #endregion
 
@@ -100,14 +104,31 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region Command
+
+        #region ClickImageItemCommand
+
+        public Command ClickImageItemCommand { get; }
+        private bool CanClickImageItemCommandExecute(object p) => true;
+        private void OnClickImageItemCommandExecuted(object p)
+        {
+            _dialogWindow.OpenImageItemWindow(ImageItem);
+        }
+
+        #endregion
+
+        #endregion
+
         // Todo: надо убрать это безобразие 
         public static Border ItemProgram;
 
         public StoreUserControlViewModel(ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _resourcesHelper = resourcesHelper;
+            _dialogWindow = new DialogWindowService();
             ProgramsListView = new ObservableCollection<ItemsViewModel>();
             GamesListView = new ObservableCollection<ItemsViewModel>();
+            ClickImageItemCommand = new LambdaCommand(OnClickImageItemCommandExecuted, CanClickImageItemCommandExecute);
             LoadStore(serverRequest);
         }
 
