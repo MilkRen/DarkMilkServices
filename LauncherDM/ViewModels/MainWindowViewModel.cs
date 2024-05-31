@@ -6,6 +6,7 @@ using LauncherDM.ViewModels.UserControlsVM;
 using System;
 using System.Windows.Input;
 using LauncherDM.ViewModels;
+using LauncherDM.Views.UserControls;
 
 namespace LauncherDM.ViewModel
 {
@@ -97,6 +98,18 @@ namespace LauncherDM.ViewModel
 
         #endregion
 
+        #region LibraryUserControlViewModel
+
+        private LibraryUserControlViewModel _libraryUserControlVM;
+
+        public LibraryUserControlViewModel LibraryUserControlVM
+        {
+            get => _libraryUserControlVM;
+            set => Set(ref _libraryUserControlVM, value);
+        }
+
+        #endregion
+
         #endregion
 
         #region Command
@@ -128,6 +141,7 @@ namespace LauncherDM.ViewModel
             StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper, serverRequest);
             SettingsUserControlVM = new SettingsUserControlViewModel(closeAction, resourcesHelper);
             MyAccountUserControlVM = new MyAccountUserControlViewModel();
+            LibraryUserControlVM = new LibraryUserControlViewModel(resourcesHelper, serverRequest);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
     }

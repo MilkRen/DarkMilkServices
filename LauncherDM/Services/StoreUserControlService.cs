@@ -1,4 +1,5 @@
-﻿using LauncherDM.Models;
+﻿using System;
+using LauncherDM.Models;
 using LauncherDM.Services.Interfaces;
 using ServerTCP;
 using ServerTCP.Models;
@@ -65,6 +66,12 @@ namespace LauncherDM.Services
         {
             var requestMessageServer = _serverRequest.SendMessageRequest(MessageHeader.MessageType.GamesPath);
             return requestMessageServer.Message.ToString();
+        }
+
+        public bool SaleItem(string item)
+        {
+            var requestMessageServer = _serverRequest.SendMessageRequest(item, MessageHeader.MessageType.Sale, true);
+            return requestMessageServer.Message.ToString() == "1";
         }
     }
 }

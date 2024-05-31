@@ -4,7 +4,7 @@ using ServerTCP.Сryptographies;
 
 namespace ServerTCP
 {
-    internal class Token
+    public class Token
     {
         private static string Key = "sdkjoidarkmilk=";
 

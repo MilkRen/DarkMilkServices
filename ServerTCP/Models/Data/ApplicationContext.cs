@@ -17,6 +17,10 @@ namespace ServerTCP.Models.Data
 
         public DbSet<RecoveryAccount> recovery_account { get; set; }
 
+        public DbSet<SaleGames> sale_games { get; set; }
+
+        public DbSet<SalePrograms> sale_programs { get; set; }
+
         private const string ConnectionString =
             "Host=81.31.246.203;Port=5432;Database=DarkMilkBD;Username=gen_user;Password=lY8\\b@slc^g\\xJ";
 

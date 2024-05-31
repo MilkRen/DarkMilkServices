@@ -242,6 +242,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string ErrorSend {
+            get {
+                return ResourceManager.GetString("ErrorSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Нет подключения к интернету..
         /// </summary>
         internal static string EthernetClose {
@@ -283,6 +292,15 @@ namespace LauncherDM.Properties {
         internal static string Games {
             get {
                 return ResourceManager.GetString("Games", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string InTheLibrary {
+            get {
+                return ResourceManager.GetString("InTheLibrary", resourceCulture);
             }
         }
         

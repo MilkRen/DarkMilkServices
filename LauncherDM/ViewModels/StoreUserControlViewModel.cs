@@ -5,13 +5,23 @@ using LauncherDM.Services;
 using LauncherDM.Services.Interfaces;
 using System.Windows.Media.Animation;
 using System;
+using System.Drawing;
 using System.Windows.Input;
 using LauncherDM.Infastructure.Commands.Base;
+using System.Windows.Media;
+using ServerTCP.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
 
 namespace LauncherDM.ViewModels
 {
     internal class StoreUserControlViewModel : ViewModel.Base.ViewModel
     {
+        //Todo: убрать эти костыли 
+
+        public static GamesForXml gamesArray;
+
+        public static ProgramsForXml progArray;
+
         #region Fields
 
         private const int MaxImageToItem = 5;
@@ -24,6 +34,8 @@ namespace LauncherDM.ViewModels
 
         private readonly IDialogWindowService _dialogWindow;
 
+        private readonly IStoreUserControlService _storeService;
+
         #endregion
 
         #region Binding
@@ -32,7 +44,8 @@ namespace LauncherDM.ViewModels
 
         public string GamesText => _resourcesHelper.LocalizationGet("Games");
 
-        public string PayButtonText => _resourcesHelper.LocalizationGet("AddLibrary");
+        private string _payButtonText = "AddLibrary";
+        public string PayButtonText => _resourcesHelper.LocalizationGet(_payButtonText);
 
         #region ProgramsViewModel
 
@@ -100,6 +113,14 @@ namespace LauncherDM.ViewModels
             set => Set(ref _itemListView, value);
         }
 
+        private SolidColorBrush _backgroundButton;
+
+        public SolidColorBrush BackgroundButton
+        {
+            get => _backgroundButton;
+            set => Set(ref _backgroundButton, value);
+        }
+
         #endregion
 
         #endregion
@@ -117,6 +138,23 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
+        #region SaleItemCommand
+
+        public Command SaleItemCommand { get; }
+        private bool CanSaleItemCommandExecute(object p) => true;
+        private void OnSaleItemCommandExecuted(object p)
+        {
+            if (_storeService.SaleItem(TitleItem))
+            {
+
+            }
+            BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#33c02b");
+            _payButtonText = "InTheLibrary";
+            OnPropertyChanged("PayButtonText");
+        }
+
+        #endregion
+
         #endregion
 
         // Todo: надо убрать это безобразие 
@@ -124,20 +162,22 @@ namespace LauncherDM.ViewModels
 
         public StoreUserControlViewModel(ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
+            BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
             ProgramsListView = new ObservableCollection<ItemsViewModel>();
             GamesListView = new ObservableCollection<ItemsViewModel>();
             ClickImageItemCommand = new LambdaCommand(OnClickImageItemCommandExecuted, CanClickImageItemCommandExecute);
+            SaleItemCommand = new LambdaCommand(OnSaleItemCommandExecuted, CanSaleItemCommandExecute);
+            _storeService = new StoreUserControlService(serverRequest);
             LoadStore(serverRequest);
         }
 
         public void LoadStore(ServerRequestService serverRequest)
         {
-            IStoreUserControlService store = new StoreUserControlService(serverRequest);
             ICheckNetworkService networkService = new CheckNetworkService();
-            var progArray = store.GetPrograms();
-            var progPath = store.GetProgramsPath();
+            progArray = _storeService.GetPrograms();
+            var progPath = _storeService.GetProgramsPath();
             foreach (var prog in progArray.ProgramsArray)
             {
                 ProgramsListView.Add(new ItemsViewModel(prog, progPath, new LambdaCommand(o =>
@@ -164,12 +204,15 @@ namespace LauncherDM.ViewModels
                         countLoadImage++;
                     }
 
+                    BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
+                    _payButtonText = "AddLibrary";
+                    OnPropertyChanged("PayButtonText");
                     AnimationItemShow();
                 }, o => true)));
             }
 
-            var gamesArray = store.GetGames();
-            var gamesPath = store.GetGamesPath();
+            gamesArray = _storeService.GetGames();
+            var gamesPath = _storeService.GetGamesPath();
             foreach (var games in gamesArray.GamesArray)
             {
                 GamesListView.Add(new ItemsViewModel(games, gamesPath, new LambdaCommand(o =>
@@ -196,12 +239,15 @@ namespace LauncherDM.ViewModels
                         countLoadImage++;
                     }
 
+                    BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
+                    _payButtonText = "AddLibrary";
+                    OnPropertyChanged("PayButtonText");
                     AnimationItemShow();
                 }, o => true)));
             }
         }
 
-        public void AnimationItemShow()
+        private void AnimationItemShow()
         {
             var buttonAnimation = new DoubleAnimation();
             buttonAnimation.From = ItemProgram.ActualWidth;

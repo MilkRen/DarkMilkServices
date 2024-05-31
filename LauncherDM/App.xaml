@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Styles/Other/TabPanelStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/ScrollbarStyle.xaml"/>
                 <ResourceDictionary Source="Styles/Other/MediaElementStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ProgressBarStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

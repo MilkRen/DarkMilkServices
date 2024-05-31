@@ -11,5 +11,7 @@ namespace LauncherDM.Services.Interfaces
         GamesForXml GetGames();
 
         string GetGamesPath();
+
+        bool SaleItem(string item);
     }
 }

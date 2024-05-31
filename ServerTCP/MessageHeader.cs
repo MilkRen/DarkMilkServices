@@ -12,18 +12,21 @@ namespace ServerTCP
     public class MessageHeader
     {
         public const int LengthAndDataType = 6; // 1 байт тип данных, 5 байт размер 
-        public const int TokenLength = 10; // 10 байт под токен 
+
+        public const string EndMessage = "|0|"; // 1 байт тип данных, 5 байт размер 
 
         public enum MessageType : byte
         {
             Session,
             Token,
             Login,
+            Sale,
             Registration,
             Version,
             Programs,
             ProgramsPath,
             Games,
+            AllGamesOrPrograms,
             GamesPath,
             RecoveryAccount,
             Log,
@@ -96,6 +99,7 @@ namespace ServerTCP
         public byte[] MessageToArray(bool loadToken = false)
         {
             var message = new byte[]{};
+            var token = new byte[]{};
 
             switch (Type)
             {
@@ -104,10 +108,17 @@ namespace ServerTCP
                 case MessageType.RecoveryAccount: 
                     message = Encoding.UTF8.GetBytes(Message.ToString());
                     break;
+                case MessageType.Sale:
+                    message = Encoding.UTF8.GetBytes(Message.ToString() + EndMessage);
+                    break;
             }
 
+            if (loadToken)
+                token = Encoding.UTF8.GetBytes(Token);
+
+            var tokenLength = token.Length;
             var messageLength = message.Length;
-            int lengthByte = loadToken ? messageLength + TokenLength + LengthAndDataType : messageLength + LengthAndDataType;
+            var lengthByte = messageLength + tokenLength + LengthAndDataType;
 
             var result = new byte[lengthByte];
             result[0] = (byte)Type;
@@ -127,6 +138,14 @@ namespace ServerTCP
                     Array.Copy(bytes, 0, result, 3, bytes.Length);
                     Array.Copy(message ?? [0], 0, result, LengthAndDataType, messageLength);
                     break;
+                case MessageType.Sale:
+                    Array.Copy(bytes, 0, result, 3, bytes.Length);
+                    Array.Copy(message ?? [0], 0, result, LengthAndDataType, messageLength);
+                    Array.Copy(token ?? [0], 0, result, LengthAndDataType + messageLength, tokenLength);
+                    break;
+                case MessageType.AllGamesOrPrograms:
+                    Array.Copy(token ?? [0], 0, result, LengthAndDataType + messageLength, tokenLength);
+                    break;
             }
 
             return result;
@@ -140,11 +159,14 @@ namespace ServerTCP
         internal byte[] MessageServerToArray(bool loadToken = false)
         {
             var message = new byte[] { };
+            var token = new byte[] { };
 
             switch (Type)
             {
                 case MessageType.Token:
+                case MessageType.Sale:
                 case MessageType.Login:
+                case MessageType.AllGamesOrPrograms:
                 case MessageType.Registration:
                 case MessageType.TitleLoading:
                 case MessageType.ProgramsPath:
@@ -173,8 +195,14 @@ namespace ServerTCP
                     break;
             }
 
+
+            if (loadToken)
+                token = Encoding.UTF8.GetBytes(Token);
+
+            var tokenLength = token.Length;
             var messageLength = message.Length;
-            var lengthByte = loadToken ? messageLength + TokenLength + LengthAndDataType : messageLength + LengthAndDataType;
+            var lengthByte = messageLength + tokenLength + LengthAndDataType;
+
             var result = new byte[lengthByte];
             result[0] = (byte)Type;
             result[1] = (byte)Language;
@@ -200,9 +228,11 @@ namespace ServerTCP
             switch ((MessageType)buffer[0])
             {
                 case MessageHeader.MessageType.Version:
+                case MessageHeader.MessageType.Sale:
                 case MessageHeader.MessageType.PublicKey:
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Registration:
+                case MessageHeader.MessageType.AllGamesOrPrograms:
                 case MessageHeader.MessageType.TitleLoading:
                 case MessageHeader.MessageType.RecoveryAccount:
                 case MessageHeader.MessageType.Programs:
@@ -247,12 +277,14 @@ namespace ServerTCP
                 case MessageHeader.MessageType.PublicKey:
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Programs:
+                case MessageHeader.MessageType.AllGamesOrPrograms:
                 case MessageHeader.MessageType.ProgramsPath:
                 case MessageHeader.MessageType.RecoveryAccount:
                 case MessageHeader.MessageType.Games:
                 case MessageHeader.MessageType.GamesPath:
                 case MessageHeader.MessageType.Registration:
                 case MessageHeader.MessageType.TitleLoading:
+                case MessageHeader.MessageType.Sale:
                 case MessageHeader.MessageType.Check:
                     return new MessageHeader(Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType), (MessageType)buffer[0], (MessageLanguages.Languages)buffer[1]);
                     break;
@@ -266,11 +298,6 @@ namespace ServerTCP
                     return new MessageHeader((MessageType)buffer[0],
                         Encoding.UTF8.GetString(buffer.ToArray(), LengthAndDataType, buffer.Length - LengthAndDataType));
                     break;
-                //case MessageHeader.MessageType.Login:
-                //    var result = buffer[LengthAndDataType..buffer.Length];
-                //    return new MessageHeader(result.ToArray(),
-                //       (MessageType)buffer[0]);
-                //    break;
                 default:
                     return null;
                     break;

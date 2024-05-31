@@ -166,7 +166,7 @@
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="215"/>
+                        <RowDefinition Height="230"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="80"/>
                         <RowDefinition Height="Auto"/>
@@ -213,7 +213,7 @@
                     </Grid>
 
                     <Grid Grid.Row="4" VerticalAlignment="Center">
-                        <Button Command="{Binding AddCommand}" Content="{Binding PayButtonText}" Height="30" Margin="10" Foreground="White" Background="#738aea" Style="{StaticResource ButtonDefault}"/>
+                        <Button Command="{Binding SaleItemCommand}" Content="{Binding PayButtonText}" Background="{Binding BackgroundButton}" Height="30" Margin="10" Foreground="White" Style="{StaticResource ButtonItemSend}"/>
                     </Grid>
                 </Grid>
             </Border>

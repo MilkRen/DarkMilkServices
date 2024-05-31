@@ -1,5 +1,7 @@
 ﻿using ServerTCP.Models;
 using ServerTCP.Models.Data;
+using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ServerTCP.DataBase
 {
@@ -38,6 +40,62 @@ namespace ServerTCP.DataBase
                             }
                             db.recovery_account.Add(account);
                         }
+                        break;
+                    case MessageHeader.MessageType.Sale:
+                        var data = table.ToString().Split(",");
+
+                        var games = db.games.Where(x => x.name == data[0]).ToArray();
+                        var programs  = db.programs.Where(x => x.name == data[0]).ToArray();
+                        var users  = db.users.Where(x => x.login == data[1]).ToArray();
+
+                        SalePrograms salePrograms = null;
+                        SaleGames saleGames = null;
+
+                        if (games.Length > 0)
+                        {
+                            saleGames = new SaleGames()
+                            {
+                                id = 1,
+                                game_id = games[0].id,
+                                user_id = users[0].id
+                            };
+                            var checkData = db.sale_games.Where(x => x.id == saleGames.id 
+                                                                     && x.game_id == saleGames.game_id 
+                                                                     && x.user_id == saleGames.user_id).ToArray();
+                            if (checkData.Length > 0)
+                                return false;
+
+                            if (db.sale_games.Count() != 0)
+                            {
+                                var idMax = db.sale_games?.Max(x => x.id) ?? 0;
+                                if (idMax != 0)
+                                    saleGames.id = idMax + 1;
+                            }
+                            db.sale_games.Add(saleGames);
+                        }
+                        else
+                        {
+                            salePrograms = new SalePrograms()
+                            {
+                                id = 1,
+                                program_id = programs[0].id,
+                                user_id = users[0].id
+                            };
+                            var checkData = db.sale_programs.Where(x => x.id == salePrograms.id
+                                                                     && x.program_id == salePrograms.program_id
+                                                                     && x.user_id == salePrograms.user_id).ToArray();
+                            if (checkData.Length > 0)
+                                return false;
+
+                            if (db.sale_programs.Count() != 0)
+                            {
+                                var idMax = db.sale_programs?.Max(x => x.id) ?? 0;
+                                if (idMax != 0)
+                                    saleGames.id = idMax + 1;
+                            }
+                            db.sale_programs.Add(salePrograms);
+                        }
+
                         break;
                 } 
                return db.SaveChanges() == 1;

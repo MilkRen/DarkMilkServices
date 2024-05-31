@@ -40,8 +40,7 @@ namespace ServerTCP
                 try
                 {
                     Console.WriteLine("Подключился!");
-                    var buffer =
-                        new byte[listener.ReceiveBufferSize]; // размер буфера .  максимум сообщение из 256 байт 
+                    var buffer = new byte[listener.ReceiveBufferSize]; // размер буфера .  максимум сообщение из 256 байт 
                     var size = 0; // количество реально полученных количества байт, потом чтобы оптимизировать память 
                     do
                     {
@@ -52,6 +51,7 @@ namespace ServerTCP
                         byte[] headerRequestBytes;
                         string message = string.Empty;
                         bool loadToken = false;
+                        bool result;
                         switch (header.Type)
                         {
                             case MessageHeader.MessageType.Check:
@@ -90,7 +90,6 @@ namespace ServerTCP
                                     password = convertHash
                                 };
 
-                                bool result;
                                 if ((bool)DataBaseCommands.Select(header.Type, user.login))
                                     result = false;
                                 else
@@ -146,6 +145,34 @@ namespace ServerTCP
                                     email = accountInfo[1],
                                 };
                                 result = DataBaseCommands.Insert(recAcc, header.Type);
+                                headerRequest = result
+                                    ? new MessageHeader("1", header.Type)
+                                    : new MessageHeader("0", header.Type);
+                                break;
+
+                            case MessageHeader.MessageType.Sale:
+                                var messageSale = header.Message.ToString().Split(MessageHeader.EndMessage);
+                                if (messageSale.Length != 2)
+                                    throw new ArgumentException(messageSale.Length.ToString());
+
+                                var token = string.Empty;
+                                try
+                                {
+                                    token = Token.Tokens[messageSale[1]];
+                                }
+                                catch 
+                                {
+                                    ConsoleExtension.WriteLineColor("Токена не существует!", ConsoleColor.DarkRed);
+                                }
+
+                                if(string.IsNullOrEmpty(token))
+                                    result = false;
+                                else
+                                {
+                                    var insertMessage = messageSale[0].ToString() + "," + token;
+                                    result = DataBaseCommands.Insert(insertMessage, header.Type);
+                                }
+
                                 headerRequest = result
                                     ? new MessageHeader("1", header.Type)
                                     : new MessageHeader("0", header.Type);

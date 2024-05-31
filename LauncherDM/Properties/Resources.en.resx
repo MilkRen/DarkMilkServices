@@ -161,4 +161,7 @@
 	<data name="AccountChange" xml:space="preserve">
 		<value>Change account</value>
 	</data>
+	<data name="InTheLibrary" xml:space="preserve">
+		<value>In the library</value>
+	</data>
 </root>

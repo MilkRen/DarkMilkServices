@@ -280,4 +280,10 @@
   <data name="AccountChange" xml:space="preserve">
 	  <value>Сменить аккаунт</value>
   </data>
+  <data name="ErrorSend" xml:space="preserve">
+	  <value />
+  </data>
+  <data name="InTheLibrary" xml:space="preserve">
+	  <value>В библиотеке</value>
+  </data>
 </root>

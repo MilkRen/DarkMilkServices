@@ -3,11 +3,18 @@ using LauncherDM.Infastructure.Commands.Base;
 
 namespace LauncherDM.ViewModels
 {
-    class SelectItemViewModel : ViewModel.Base.ViewModel  
+    class LibrarySelectItemViewModel : ViewModel.Base.ViewModel
     {
-        #region Binding
+        private string _nameItem;
 
-        #region Title
+        public string NameItem
+        {
+            get => _nameItem;
+            set => Set(ref _nameItem, value);
+        }
+
+
+        #region ImageItemPath
 
         private string _imageItemPath;
 
@@ -19,16 +26,15 @@ namespace LauncherDM.ViewModels
 
         #endregion
 
-        #endregion
-
         #region Command
 
         public Command ClickItemCommand { get; }
 
         #endregion
 
-        public SelectItemViewModel(string imageItemPath, LambdaCommand lambdaCommand = null)
+        public LibrarySelectItemViewModel(string nameItem, string imageItemPath, LambdaCommand lambdaCommand = null)
         {
+            NameItem = nameItem;
             ImageItemPath = imageItemPath;
             ClickItemCommand = lambdaCommand;
         }

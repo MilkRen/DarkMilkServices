@@ -27,12 +27,12 @@
 
     <Border Grid.Row="0" Grid.RowSpan="2" BorderThickness="0" Background="Black" CornerRadius="5" >
         <DockPanel LastChildFill="True" >
-            <StatusBar DockPanel.Dock="Bottom">
-                    <StatusBarItem >
+                <StatusBar DockPanel.Dock="Bottom" Background="#1c1c1c">
+                    <StatusBarItem  >
                         <TextBlock Text="{Binding Status}"/>
                     </StatusBarItem>
-                    <StatusBarItem>
-                        <ProgressBar Width="120" Height="14" Value="30"/>
+                    <StatusBarItem VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <ProgressBar Width="150" Height="3" Value="30" Style="{StaticResource ProgressBarStyle}"/>
                     </StatusBarItem>
                 </StatusBar>
 
@@ -88,6 +88,7 @@
                     </TabItem.Header>
                 
                     <Grid Background="Black" Margin="10" >
+                            <userControls:LibraryUserControl DataContext="{Binding LibraryUserControlVM}"/>
                     </Grid>
                 </TabItem>
 
@@ -115,7 +116,7 @@
                     </Grid>
                 </TabItem>-->
 
-                <TabItem x:Name="AccountTI">
+                <!--<TabItem x:Name="AccountTI">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding AccountText}" Style="{StaticResource TabItemFont}"/>
@@ -125,7 +126,7 @@
                     <Grid>
                             <userControls:MyAccountUserControl DataContext="{Binding MyAccountUserControlVM}"/>
                     </Grid>
-                </TabItem>
+                </TabItem>-->
 
                 <TabItem x:Name="SettingsTI">
                     <TabItem.Header>
@@ -149,5 +150,6 @@
         </StackPanel>
     </Grid>
 
+        <Border Grid.Row="0" Grid.RowSpan="2" BorderBrush="White" Opacity="0.5" Margin="1,1,1,23" BorderThickness="1" />
     </Grid>
 </Window>
