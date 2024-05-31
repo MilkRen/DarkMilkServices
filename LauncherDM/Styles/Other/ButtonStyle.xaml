@@ -568,4 +568,71 @@
         </Style.Triggers>-->
     </Style>
 
+
+    <Style x:Key="ButtonDownload" TargetType="Button">
+        <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
+        <Setter Property="Background" Value="#FF2BA9FF" />
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="#33c02b" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="#FF2BA9FF" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonRun" TargetType="Button">
+        <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
+        <Setter Property="Background" Value="#33c02b" />
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="#FF2BA9FF" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="#33c02b" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

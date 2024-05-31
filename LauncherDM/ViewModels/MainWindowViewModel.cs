@@ -7,10 +7,12 @@ using System;
 using System.Windows.Input;
 using LauncherDM.ViewModels;
 using LauncherDM.Views.UserControls;
+using LauncherDM.Infrastructure.ReactiveUI;
+using LauncherDM.Infrastructure;
 
 namespace LauncherDM.ViewModel
 {
-    internal class MainWindowViewModel : Base.ViewModel
+    internal class MainWindowViewModel : Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         #region Services
 
@@ -139,10 +141,20 @@ namespace LauncherDM.ViewModel
             _resourcesHelper = resourcesHelper;
             _dialogWindow = new DialogWindowService();
             StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper, serverRequest);
+            UpdateUI.PullUi.Subscribe(StoreUserControlVM);
             SettingsUserControlVM = new SettingsUserControlViewModel(closeAction, resourcesHelper);
             MyAccountUserControlVM = new MyAccountUserControlViewModel();
             LibraryUserControlVM = new LibraryUserControlViewModel(resourcesHelper, serverRequest);
+            UpdateUI.PullUi.Subscribe(LibraryUserControlVM);
             MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+        }
+
+        public void Update(LoadUI data)
+        {
+            if (data.UpdateUI)
+            {
+                AllPropertyChanged();
+            }
         }
     }
 }

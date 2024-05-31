@@ -1,11 +1,12 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Infrastructure.ReactiveUI;
 using ServerTCP;
 using ServerTCP.Models;
 
 namespace LauncherDM.ViewModels
 {
-    internal class ItemsViewModel : ViewModel.Base.ViewModel
+    internal class ItemsViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         
         #region Binding
@@ -97,6 +98,14 @@ namespace LauncherDM.ViewModels
             Description = MessageLanguages.Language == MessageLanguages.Languages.rus ? games.description : games.descriptionEng;
             ToolTipProgramsText = string.Concat(Description.Substring(0, Description.Length / 4), "...");
             ClickProgramCommand = lambdaCommand;
+        }
+
+        public void Update(LoadUI data)
+        {
+            if (data.UpdateUI)
+            {
+                AllPropertyChanged();
+            }
         }
     }
 }

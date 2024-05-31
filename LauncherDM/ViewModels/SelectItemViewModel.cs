@@ -1,9 +1,10 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Infrastructure.ReactiveUI;
 
 namespace LauncherDM.ViewModels
 {
-    class SelectItemViewModel : ViewModel.Base.ViewModel  
+    class SelectItemViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         #region Binding
 
@@ -31,6 +32,14 @@ namespace LauncherDM.ViewModels
         {
             ImageItemPath = imageItemPath;
             ClickItemCommand = lambdaCommand;
+        }
+
+        public void Update(LoadUI data)
+        {
+            if (data.UpdateUI)
+            {
+                AllPropertyChanged();
+            }
         }
     }
 }

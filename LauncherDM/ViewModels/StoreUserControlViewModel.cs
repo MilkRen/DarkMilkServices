@@ -9,18 +9,25 @@ using System.Drawing;
 using System.Windows.Input;
 using LauncherDM.Infastructure.Commands.Base;
 using System.Windows.Media;
+using ServerTCP;
 using ServerTCP.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
+using LauncherDM.Infrastructure.ReactiveUI;
+using LauncherDM.Infrastructure;
 
 namespace LauncherDM.ViewModels
 {
-    internal class StoreUserControlViewModel : ViewModel.Base.ViewModel
+    internal class StoreUserControlViewModel : ViewModel.Base.ViewModel, Infrastructure.ReactiveUI.Base.IObserver<LoadUI>
     {
         //Todo: убрать эти костыли 
 
         public static GamesForXml gamesArray;
 
+        public static string gamesPath;
+
         public static ProgramsForXml progArray;
+
+        public static string progPath;
 
         #region Fields
 
@@ -151,6 +158,7 @@ namespace LauncherDM.ViewModels
             BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#33c02b");
             _payButtonText = "InTheLibrary";
             OnPropertyChanged("PayButtonText");
+            UpdateUI.PullUi.Notify(new LoadUI(true));
         }
 
         #endregion
@@ -177,7 +185,7 @@ namespace LauncherDM.ViewModels
         {
             ICheckNetworkService networkService = new CheckNetworkService();
             progArray = _storeService.GetPrograms();
-            var progPath = _storeService.GetProgramsPath();
+            progPath = _storeService.GetProgramsPath();
             foreach (var prog in progArray.ProgramsArray)
             {
                 ProgramsListView.Add(new ItemsViewModel(prog, progPath, new LambdaCommand(o =>
@@ -185,7 +193,7 @@ namespace LauncherDM.ViewModels
                     TitleItem = prog.name;
                     TagText = prog.tag;
                     ImageItem = string.Concat(progPath, TitleItem, ".png"); 
-                    DescItem = prog.description;
+                    DescItem = MessageLanguages.Language == MessageLanguages.Languages.rus ? prog.description : prog.descriptionEng;
 
                     var countLoadImage = 1;
                     ItemListView = new ObservableCollection<SelectItemViewModel>();
@@ -212,7 +220,7 @@ namespace LauncherDM.ViewModels
             }
 
             gamesArray = _storeService.GetGames();
-            var gamesPath = _storeService.GetGamesPath();
+            gamesPath = _storeService.GetGamesPath();
             foreach (var games in gamesArray.GamesArray)
             {
                 GamesListView.Add(new ItemsViewModel(games, gamesPath, new LambdaCommand(o =>
@@ -220,7 +228,7 @@ namespace LauncherDM.ViewModels
                     TitleItem = games.name;
                     TagText = games.tag;
                     ImageItem = string.Concat(gamesPath, TitleItem, ".png");
-                    DescItem = games.description;
+                    DescItem = MessageLanguages.Language == MessageLanguages.Languages.rus ? games.description : games.descriptionEng;
 
                     var countLoadImage = 1;
                     ItemListView = new ObservableCollection<SelectItemViewModel>();
@@ -254,6 +262,14 @@ namespace LauncherDM.ViewModels
             buttonAnimation.To = 400;
             buttonAnimation.Duration = TimeSpan.FromSeconds(1);
             ItemProgram.BeginAnimation(Button.WidthProperty, buttonAnimation);
+        }
+
+        public void Update(LoadUI data)
+        {
+            if (data.UpdateUI)
+            {
+                AllPropertyChanged();
+            }
         }
     }
 }

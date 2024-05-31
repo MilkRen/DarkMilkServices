@@ -12,7 +12,7 @@ namespace ServerTCP
 
         public static string GenerateToken(string login, string password)
         {
-            var tokenData = string.Concat(login, ",", password);
+            //var tokenData = string.Concat(login, ",", password);
             var regToken = string.Concat(login, ",", DateTime.Now);
             using (var myAes = Aes.Create())
             {
@@ -20,7 +20,7 @@ namespace ServerTCP
                 byte[] aesIV = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(Key));
                 myAes.Key = aesKey;
                 myAes.IV = aesIV;
-                var tokenResult = Convert.ToBase64String(CryptoAes.EncryptStringToBytes_Aes(tokenData, myAes.Key, myAes.IV));
+                var tokenResult = Convert.ToBase64String(CryptoAes.EncryptStringToBytes_Aes(regToken, myAes.Key, myAes.IV));
 
                 if(!Tokens.ContainsKey(tokenResult))
                     Tokens.Add(tokenResult, regToken);

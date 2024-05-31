@@ -73,7 +73,11 @@ namespace LauncherDM.Services
                     tcpClient = new TcpClient();
                     tcpClient.Connect(_endPoint);
 
-                    var messageHeader = new MessageHeader(messageType, MessageLanguages.Language);
+                    MessageHeader messageHeader = null;
+                    if (loadToken)
+                        messageHeader = new MessageHeader(messageType, MessageLanguages.Language, SettingsApp.Default.Token);
+                    else
+                        messageHeader = new MessageHeader(messageType, MessageLanguages.Language);
                     byte[] headerBytes = messageHeader.MessageToArray(loadToken);
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);

@@ -29,7 +29,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="230"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -41,7 +41,7 @@
         <Border  Grid.RowSpan="2" Style="{StaticResource BorderRoundedVertical}"  HorizontalAlignment="Right" Margin="0,0,-1,0"/>
 
         <TextBlock Text="{Binding ItemTitle}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}" />
-        <TextBlock Grid.Column="1" Text="Приложения" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}" />
+        <TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}" />
             
         <Grid Grid.Row="1">
             <ListView ItemsSource="{Binding ItemListView}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0">
@@ -61,11 +61,11 @@
                                 </ToolTip>
                             </Grid.ToolTip>
                             
-                            <Grid Margin="10">
+                            <Grid Margin="5">
                                 <Button Background="Transparent" Command="{Binding ClickItemCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
-                                    <Border BorderThickness="1" BorderBrush="White" CornerRadius="5" Width="150" Height="30" Background="Transparent">
+                                    <Border BorderThickness="1" BorderBrush="White" CornerRadius="5" Width="180" Height="35" Background="Transparent">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <Image Width="30" Source="{Binding ImageItemPath}"/>
+                                            <Image Width="30" Source="{Binding ImageItemPath}" Margin="5,0,5,0"/>
                                             <TextBlock Text="{Binding NameItem}" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </Border>
@@ -78,6 +78,75 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <StackPanel >
+                            <MediaElement x:Name="myMediaElement"   Volume="0"  LoadedBehavior="Play">
+                                <MediaElement.Triggers>
+                                    <EventTrigger RoutedEvent="MediaElement.Loaded">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <MediaTimeline Source="https://darkmilk.store/Launcher/Video/wallper.mp4" Storyboard.TargetName="myMediaElement"  
+                                                                   RepeatBehavior="Forever" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </MediaElement.Triggers>
+                            </MediaElement>
+                        </StackPanel>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.Background>
+
+            <TextBlock  Text="{Binding ItemName}" FontSize="24" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TitleLibItemTextBlock}" />
+
+            <Grid Grid.Row="1">
+                <ListView ItemsSource="{Binding ImageListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Button Background="Transparent" Command="{Binding ClickItemCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                    <Image Width="260" Source="{Binding ImageItemPath}" Margin="10"/>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <Grid Grid.Row="2" VerticalAlignment="Center" Margin="5">
+                <StackPanel Orientation="Horizontal" >
+                    <Button  Width="{Binding WidthDownload}" Command="{Binding DownloadCommand}" Height="40" Margin="0,0,5,0" Style="{StaticResource ButtonDownload}">
+                        <TextBlock Text="{Binding ButDow}" Style="{StaticResource TitleProgramTextBlock}"/>
+                    </Button>
+                    <Button  Width="{Binding WidthRun}" Command="{Binding RunCommand}"  Height="40" Margin="0,0,5,0" Style="{StaticResource ButtonDownload}">
+                        <TextBlock Text="{Binding ButRun}" Style="{StaticResource TitleProgramTextBlock}"/>
+                    </Button>
+                    <TextBlock Text="{Binding Tags}" FontSize="8" TextAlignment="Center"  VerticalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}" Foreground="Silver" />
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="5">
+                <ScrollViewer>
+                    <TextBlock Text="{Binding DescItem}" FontSize="12" VerticalAlignment="Top" TextWrapping="Wrap" HorizontalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}" /> 
+                </ScrollViewer>
+            </Grid>
 
         </Grid>
     </Grid>

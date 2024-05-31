@@ -20,4 +20,9 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
+    <Style x:Key="TitleLibItemTextBlock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Cascadia Code SemiBold"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
 </ResourceDictionary>

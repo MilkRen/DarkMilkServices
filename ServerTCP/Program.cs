@@ -177,6 +177,54 @@ namespace ServerTCP
                                     ? new MessageHeader("1", header.Type)
                                     : new MessageHeader("0", header.Type);
                                 break;
+
+                            case MessageHeader.MessageType.GamesItemUser:
+                                var messageAll = header.Message.ToString();
+                                var tokenAll = string.Empty;
+                                try
+                                {
+                                    tokenAll = Token.Tokens[messageAll];
+                                }
+                                catch
+                                {
+                                    ConsoleExtension.WriteLineColor("Токена не существует!", ConsoleColor.DarkRed);
+                                }
+
+                                if (string.IsNullOrEmpty(tokenAll))
+                                {
+                                    headerRequest = new MessageHeader(new SaleGamesForXml(), header.Type);
+                                }
+                                else
+                                {
+                                    var insertMessage = messageAll + "," + tokenAll;
+                                    var gameSelect = DataBaseCommands.Select(header.Type, insertMessage);
+                                    headerRequest = new MessageHeader(gameSelect, header.Type);
+                                }
+                                break;
+
+                            case MessageHeader.MessageType.ProgramsItemUser:
+                                messageAll = header.Message.ToString();
+                                tokenAll = string.Empty;
+                                try
+                                {
+                                    tokenAll = Token.Tokens[messageAll];
+                                }
+                                catch
+                                {
+                                    ConsoleExtension.WriteLineColor("Токена не существует!", ConsoleColor.DarkRed);
+                                }
+
+                                if (string.IsNullOrEmpty(tokenAll))
+                                {
+                                    headerRequest = new MessageHeader(new SaleProgramsForXml(), header.Type);
+                                }
+                                else
+                                {
+                                    var insertMessage = messageAll + "," + tokenAll;
+                                    var progSelect = DataBaseCommands.Select(header.Type, insertMessage);
+                                    headerRequest = new MessageHeader(progSelect, header.Type);
+                                }
+                                break;
                         }
 
                         if (headerRequest is not null)

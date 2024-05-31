@@ -1,5 +1,6 @@
 ﻿using LauncherDM.Infastructure.Commands;
 using LauncherDM.Infastructure.Commands.Base;
+using LauncherDM.Infrastructure.ReactiveUI;
 
 namespace LauncherDM.ViewModels
 {

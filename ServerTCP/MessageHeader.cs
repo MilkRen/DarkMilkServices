@@ -26,7 +26,8 @@ namespace ServerTCP
             Programs,
             ProgramsPath,
             Games,
-            AllGamesOrPrograms,
+            GamesItemUser,
+            ProgramsItemUser,
             GamesPath,
             RecoveryAccount,
             Log,
@@ -143,7 +144,8 @@ namespace ServerTCP
                     Array.Copy(message ?? [0], 0, result, LengthAndDataType, messageLength);
                     Array.Copy(token ?? [0], 0, result, LengthAndDataType + messageLength, tokenLength);
                     break;
-                case MessageType.AllGamesOrPrograms:
+                case MessageType.GamesItemUser:
+                case MessageType.ProgramsItemUser:
                     Array.Copy(token ?? [0], 0, result, LengthAndDataType + messageLength, tokenLength);
                     break;
             }
@@ -166,7 +168,6 @@ namespace ServerTCP
                 case MessageType.Token:
                 case MessageType.Sale:
                 case MessageType.Login:
-                case MessageType.AllGamesOrPrograms:
                 case MessageType.Registration:
                 case MessageType.TitleLoading:
                 case MessageType.ProgramsPath:
@@ -190,6 +191,22 @@ namespace ServerTCP
                     using (var textWriter = new StringWriter())
                     {
                         xmlGame.Serialize(textWriter, Message);
+                        message = Encoding.UTF8.GetBytes(textWriter.ToString());
+                    }
+                    break;
+                case MessageType.GamesItemUser:
+                    var xmlSaleGame = new XmlSerializer(typeof(SaleGamesForXml));
+                    using (var textWriter = new StringWriter())
+                    {
+                        xmlSaleGame.Serialize(textWriter, Message);
+                        message = Encoding.UTF8.GetBytes(textWriter.ToString());
+                    }
+                    break;
+                case MessageType.ProgramsItemUser:
+                    var xmlSaleProg = new XmlSerializer(typeof(SaleProgramsForXml));
+                    using (var textWriter = new StringWriter())
+                    {
+                        xmlSaleProg.Serialize(textWriter, Message);
                         message = Encoding.UTF8.GetBytes(textWriter.ToString());
                     }
                     break;
@@ -232,7 +249,8 @@ namespace ServerTCP
                 case MessageHeader.MessageType.PublicKey:
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Registration:
-                case MessageHeader.MessageType.AllGamesOrPrograms:
+                case MessageHeader.MessageType.GamesItemUser:
+                case MessageHeader.MessageType.ProgramsItemUser:
                 case MessageHeader.MessageType.TitleLoading:
                 case MessageHeader.MessageType.RecoveryAccount:
                 case MessageHeader.MessageType.Programs:
@@ -277,7 +295,8 @@ namespace ServerTCP
                 case MessageHeader.MessageType.PublicKey:
                 case MessageHeader.MessageType.Login:
                 case MessageHeader.MessageType.Programs:
-                case MessageHeader.MessageType.AllGamesOrPrograms:
+                case MessageHeader.MessageType.GamesItemUser:
+                case MessageHeader.MessageType.ProgramsItemUser:
                 case MessageHeader.MessageType.ProgramsPath:
                 case MessageHeader.MessageType.RecoveryAccount:
                 case MessageHeader.MessageType.Games:

@@ -3,7 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServerTCP.Models
 {
-    internal class SalePrograms
+    public class SaleProgramsForXml
+    {
+        public SalePrograms[] SaleProgramsArray { get; set; }
+    }
+
+    public class SalePrograms
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }

@@ -286,4 +286,16 @@
   <data name="InTheLibrary" xml:space="preserve">
 	  <value>В библиотеке</value>
   </data>
+  <data name="Game" xml:space="preserve">
+	  <value>Игра</value>
+  </data>
+  <data name="Program" xml:space="preserve">
+	  <value>Программа </value>
+  </data>
+  <data name="Download" xml:space="preserve">
+	  <value>СКАЧАТЬ</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+	  <value>ЗАПУСТИТЬ</value>
+  </data>
 </root>

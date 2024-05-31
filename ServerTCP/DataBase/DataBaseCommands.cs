@@ -2,6 +2,7 @@
 using ServerTCP.Models.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ServerTCP.DataBase
 {
@@ -71,6 +72,13 @@ namespace ServerTCP.DataBase
                                 if (idMax != 0)
                                     saleGames.id = idMax + 1;
                             }
+
+                            checkData = db.sale_games.Where(x => x.id == saleGames.id
+                                                                     && x.game_id == saleGames.game_id
+                                                                     && x.user_id == saleGames.user_id).ToArray();
+                            if (checkData.Length > 0)
+                                return false;
+
                             db.sale_games.Add(saleGames);
                         }
                         else
@@ -91,8 +99,15 @@ namespace ServerTCP.DataBase
                             {
                                 var idMax = db.sale_programs?.Max(x => x.id) ?? 0;
                                 if (idMax != 0)
-                                    saleGames.id = idMax + 1;
+                                    salePrograms.id = idMax + 1;
                             }
+
+                            checkData = db.sale_programs.Where(x => x.id == salePrograms.id
+                                                                        && x.program_id == salePrograms.program_id
+                                                                        && x.user_id == salePrograms.user_id).ToArray();
+                            if (checkData.Length > 0)
+                                return false;
+
                             db.sale_programs.Add(salePrograms);
                         }
 
@@ -133,6 +148,24 @@ namespace ServerTCP.DataBase
                     case MessageHeader.MessageType.Registration:
                         var userCheck = db.users.Where(x => x.username == data[0]).ToArray();
                         result = userCheck.Length > 0;
+                        break;
+                    case MessageHeader.MessageType.GamesItemUser:
+                        var dataMessageForGame = data[0].ToString().Split(",");
+                        var getUserForGame = db.users.Where(x => x.login == dataMessageForGame[1]).ToArray();
+                        var saleGames = db.sale_games.Where(x => x.user_id == getUserForGame[0].id);
+
+                        var saleGameXml = new SaleGamesForXml();
+                        saleGameXml.SaleGamesArray = saleGames.ToArray();
+                        return saleGameXml;
+                        break;
+                    case MessageHeader.MessageType.ProgramsItemUser:
+                        var dataMessageForProg = data[0].ToString().Split(",");
+                        var getUserForProg = db.users.Where(x => x.login == dataMessageForProg[1]).ToArray();
+                        var salePrograms = db.sale_programs.Where(x => x.user_id == getUserForProg[0].id).ToArray();
+
+                        var saleProgXml = new SaleProgramsForXml();
+                        saleProgXml.SaleProgramsArray = salePrograms.ToArray();
+                        return saleProgXml;
                         break;
                     default: 
                         result = null;                     

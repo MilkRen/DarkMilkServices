@@ -102,9 +102,11 @@ namespace LauncherDM.Services
         public void OpenMainWindow()
         {
             var mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainWindowViewModel(mainWindow.Close, mainWindow.DragMove,
+            var MainWindowVM = new MainWindowViewModel(mainWindow.Close, mainWindow.DragMove,
                 new ToolbarToWindowViewModel(new WindowService(mainWindow), mainWindow.Hide, widthMax: 30),
                 ResourcesHelper, ServerRequest);
+            mainWindow.DataContext = MainWindowVM;
+            UpdateUI.PullUi.Subscribe(MainWindowVM);
             mainWindow.Owner = Application.Current.MainWindow;
             mainWindow.Show();
         }

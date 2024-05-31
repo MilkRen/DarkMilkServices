@@ -188,6 +188,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на СКАЧАТЬ.
+        /// </summary>
+        internal static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Почта.
         /// </summary>
         internal static string Email {
@@ -287,6 +296,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Игра.
+        /// </summary>
+        internal static string Game {
+            get {
+                return ResourceManager.GetString("Game", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Игры.
         /// </summary>
         internal static string Games {
@@ -296,7 +314,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на В библиотеке.
         /// </summary>
         internal static string InTheLibrary {
             get {
@@ -425,6 +443,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Программа .
+        /// </summary>
+        internal static string Program {
+            get {
+                return ResourceManager.GetString("Program", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Программы.
         /// </summary>
         internal static string Programs {
@@ -457,6 +484,15 @@ namespace LauncherDM.Properties {
         internal static string RememberPassword {
             get {
                 return ResourceManager.GetString("RememberPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string Run {
+            get {
+                return ResourceManager.GetString("Run", resourceCulture);
             }
         }
         

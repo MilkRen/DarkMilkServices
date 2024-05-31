@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerTCP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace LauncherDM.Services.Interfaces
 {
     interface ILibraryUserControlService
     {
-        string GetAllItems();
+        SaleGamesForXml GetGamesItem();
+
+        SaleProgramsForXml GetProgramItem();
     }
 }
