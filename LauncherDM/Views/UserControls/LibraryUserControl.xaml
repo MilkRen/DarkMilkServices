@@ -134,8 +134,11 @@
                     <Button  Width="{Binding WidthDownload}" Command="{Binding DownloadCommand}" Height="40" Margin="0,0,5,0" Style="{StaticResource ButtonDownload}">
                         <TextBlock Text="{Binding ButDow}" Style="{StaticResource TitleProgramTextBlock}"/>
                     </Button>
-                    <Button  Width="{Binding WidthRun}" Command="{Binding RunCommand}"  Height="40" Margin="0,0,5,0" Style="{StaticResource ButtonDownload}">
+                    <Button  Width="{Binding WidthRun}" Command="{Binding RunCommand}"  Height="40" Margin="0,0,5,0" Style="{StaticResource ButtonRun}">
                         <TextBlock Text="{Binding ButRun}" Style="{StaticResource TitleProgramTextBlock}"/>
+                    </Button>
+                    <Button  Width="{Binding WidthDont}"  Height="40" Margin="0,0,5,0" Style="{StaticResource ButtonDont}">
+                        <TextBlock Text="{Binding ButDont}" Style="{StaticResource TitleProgramTextBlock}"/>
                     </Button>
                     <TextBlock Text="{Binding Tags}" FontSize="8" TextAlignment="Center"  VerticalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}" Foreground="Silver" />
                 </StackPanel>

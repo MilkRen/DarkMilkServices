@@ -635,4 +635,19 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="ButtonDont" TargetType="Button">
+        <Setter Property="FontFamily" Value="#Cascadia Mono SemiLight"/>
+        <Setter Property="Background" Value="DarkRed" />
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
 </ResourceDictionary>

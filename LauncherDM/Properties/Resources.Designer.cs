@@ -188,6 +188,15 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string DontDownload {
+            get {
+                return ResourceManager.GetString("DontDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на СКАЧАТЬ.
         /// </summary>
         internal static string Download {
@@ -488,7 +497,7 @@ namespace LauncherDM.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на ЗАПУСТИТЬ.
         /// </summary>
         internal static string Run {
             get {

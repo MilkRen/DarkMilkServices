@@ -298,4 +298,7 @@
   <data name="Run" xml:space="preserve">
 	  <value>ЗАПУСТИТЬ</value>
   </data>
+  <data name="DontDownload" xml:space="preserve">
+	  <value>СКАЧИВАНИЕ НЕ ДОСТУПНО</value>
+  </data>
 </root>

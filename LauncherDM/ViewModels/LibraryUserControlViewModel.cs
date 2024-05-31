@@ -1,7 +1,9 @@
-﻿using LauncherDM.Infastructure.Commands;
+﻿using System;
+using LauncherDM.Infastructure.Commands;
 using LauncherDM.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms.VisualStyles;
 using LauncherDM.Infrastructure.ReactiveUI;
 using LauncherDM.Services.Interfaces;
@@ -12,6 +14,12 @@ using LauncherDM.Infrastructure;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
 using System.Windows.Media;
 using LauncherDM.Infastructure.Commands.Base;
+using System.IO;
+using System.Net.Http;
+using Aspose.Zip;
+using System.Xml.XPath;
+using Aspose.Zip.Rar;
+using System.Diagnostics;
 
 namespace LauncherDM.ViewModels
 {
@@ -42,6 +50,8 @@ namespace LauncherDM.ViewModels
         public string ButDow => _resourcesHelper.LocalizationGet("Download");
 
         public string ButRun => _resourcesHelper.LocalizationGet("Run");
+
+        public string ButDont => _resourcesHelper.LocalizationGet("DontDownload");
 
         #region SourceMedia
 
@@ -121,6 +131,14 @@ namespace LauncherDM.ViewModels
             set => Set(ref _widthRun, value);
         }
 
+        private int _widthDont = 0;
+
+        public int WidthDont
+        {
+            get => _widthDont;
+            set => Set(ref _widthDont, value);
+        }
+
         #endregion
 
         #region ItemListView
@@ -150,18 +168,61 @@ namespace LauncherDM.ViewModels
 
         #region Command
 
+        private string ZipName()
+        {
+            var fileZip = ItemName + ".rar";
+            var pathFileWeb = PathDownload + fileZip;
+            return pathFileWeb;
+        }
+
         public Command DownloadCommand { get; }
         private bool CanDownloadCommandExecute(object p) => true;
         private void OnDownloadCommandExecuted(object p)
         {
-            
+            ICheckNetworkService networkService = new CheckNetworkService();
+            var pathDowlFile= Directory.CreateDirectory("DownloadFile");
+            var fileZip = ItemName + ".rar";
+            if (networkService.CheckingUriFileConnection(ZipName()))
+                try
+                {
+                    DownloadFile(ZipName(), pathDowlFile.FullName + "\\" + fileZip);
+                    UpdateForm();
+                }
+                catch 
+                { }
+
+            dirInfo = Directory.CreateDirectory("DownloadFile\\" + ItemName);
         }
+
+        private static DirectoryInfo dirInfo;
+
+        public static async void DownloadFile(string url, string path)
+        {
+            byte[] data;
+
+            using (var client = new HttpClient())
+            using (HttpResponseMessage response = await client.GetAsync(url))
+            using (HttpContent content = response.Content)
+            {
+                data = await content.ReadAsByteArrayAsync();
+                using (FileStream file = File.Create(path)) //path = "wwwroot\\XML\\1.zip"
+                    file.Write(data, 0, data.Length);
+            }
+
+            using (RarArchive archive1 = new RarArchive(path))
+            {
+                archive1.ExtractToDirectory(dirInfo.FullName);
+            }
+        }
+
+
 
         public Command RunCommand { get; }
         private bool CanRunCommandExecute(object p) => true;
         private void OnRunCommandExecuted(object p)
         {
-
+            var prog =  Environment.CurrentDirectory + "\\DownloadFile\\" + ItemName + "\\" + ItemName + ".exe";
+            Process.Start(prog);
         }
 
 
@@ -177,6 +238,7 @@ namespace LauncherDM.ViewModels
             DownloadCommand = new LambdaCommand(OnDownloadCommandExecuted, CanDownloadCommandExecute);
             RunCommand = new LambdaCommand(OnRunCommandExecuted, CanRunCommandExecute);
             LoadItems();
+            Directory.CreateDirectory("DownloadFile");
         }
 
         private void LoadItems()
@@ -193,82 +255,124 @@ namespace LauncherDM.ViewModels
             var programs = _libraryUserService.GetProgramItem();
 
             ICheckNetworkService networkService = new CheckNetworkService();
-            foreach (var game in games.SaleGamesArray)
+            if (games.SaleGamesArray is not null)
             {
-                var gameSelect = preLoadGame.GamesArray.First(x => x.id == game.game_id);
-                var image = string.Concat(gamePath, gameSelect.name, ".png");
-                ItemListView.Add(new LibrarySelectItemViewModel(gameSelect.name, image,
-                    new LambdaCommand(o =>
-                    {
-                        NowGame = true;
-                        TitleLoad(true);
-                        ItemName = gameSelect.name;
-                        Tags = gameSelect.tag;
-                        WidthDownload = 150;
-                        SourceMedia = string.Concat(gamePath, gameSelect.name, ".mp4");
-
-                        // Todo:  костыль
-                        DescEng = gameSelect.descriptionEng; // костыль
-                        Desc = gameSelect.description; // костыль
-                        DescLoad();
-                        ImageListView.Clear();
-
-                        var countLoadImage = 1;
-                        while (MaxImageToItem >= countLoadImage)
+                foreach (var game in games.SaleGamesArray)
+                {
+                    var gameSelect = preLoadGame.GamesArray.First(x => x.id == game.game_id);
+                    var image = string.Concat(gamePath, gameSelect.name, ".png");
+                    ItemListView.Add(new LibrarySelectItemViewModel(gameSelect.name, image,
+                        new LambdaCommand(o =>
                         {
-                            var imageDop = string.Concat(gamePath, gameSelect.name,
-                                countLoadImage.ToString(), ".png");
-                            if (networkService.CheckingUriFileConnection(imageDop))
-                                ImageListView.Add(new SelectItemViewModel(imageDop, new LambdaCommand(o =>
-                                {
-                                    _dialogWindow.OpenImageItemWindow(imageDop);
-                                }, o => true)));
+                            NowGame = true;
+                            TitleLoad(true);
+                            ItemName = gameSelect.name;
+                            Tags = gameSelect.tag;
+
+                            if (File.Exists("DownloadFile\\" + ItemName))
+                            {
+                                WidthRun = 150;
+                                WidthDont = 0;
+                                WidthDownload = 0;
+                            }
+                            else if (networkService.CheckingUriFileConnection(ZipName()))
+                            {
+                                WidthRun = 0;
+                                WidthDont = 0;
+                                WidthDownload = 150;
+                            }
                             else
-                                break;
+                            {
+                                WidthRun = 0;
+                                WidthDont = 250;
+                                WidthDownload = 0;
+                            }
 
-                            countLoadImage++;
-                        }
+                            SourceMedia = string.Concat(gamePath, gameSelect.name, ".mp4");
 
-                    }, o => true)));
+                            // Todo:  костыль
+                            DescEng = gameSelect.descriptionEng; // костыль
+                            Desc = gameSelect.description; // костыль
+                            DescLoad();
+                            ImageListView.Clear();
+
+                            var countLoadImage = 1;
+                            while (MaxImageToItem >= countLoadImage)
+                            {
+                                var imageDop = string.Concat(gamePath, gameSelect.name,
+                                    countLoadImage.ToString(), ".png");
+                                if (networkService.CheckingUriFileConnection(imageDop))
+                                    ImageListView.Add(new SelectItemViewModel(imageDop, new LambdaCommand(o =>
+                                    {
+                                        _dialogWindow.OpenImageItemWindow(imageDop);
+                                    }, o => true)));
+                                else
+                                    break;
+
+                                countLoadImage++;
+                            }
+
+                        }, o => true)));
+                }
             }
-
-            foreach (var prog in programs.SaleProgramsArray)
+           
+            if (programs.SaleProgramsArray is not null)
             {
-                var progSelect = preLoadProg.ProgramsArray.First(x => x.id == prog.program_id);
-                var image = string.Concat(progPath, progSelect.name, ".png");
-                ItemListView.Add(new LibrarySelectItemViewModel(progSelect.name, image,
-                    new LambdaCommand(o =>
-                    {
-                        // Todo:  костыль
-                        NowGame = false;
-                        TitleLoad(false);
-                        DescEng = progSelect.descriptionEng;
-                        Desc = progSelect.description;
-                        DescLoad();
-                        ItemName = progSelect.name;
-                        Tags = progSelect.tag;
-                        WidthDownload = 150;
-                        ImageListView.Clear();
-                        //SourceMedia = DefaultMediaSource1;
-
-                        var countLoadImage = 1;
-                        while (MaxImageToItem >= countLoadImage)
+                foreach (var prog in programs.SaleProgramsArray)
+                {
+                    var progSelect = preLoadProg.ProgramsArray.First(x => x.id == prog.program_id);
+                    var image = string.Concat(progPath, progSelect.name, ".png");
+                    ItemListView.Add(new LibrarySelectItemViewModel(progSelect.name, image,
+                        new LambdaCommand(o =>
                         {
-                            var imageDop = string.Concat(progPath, progSelect.name,
-                                countLoadImage.ToString(), ".png");
-                            if (networkService.CheckingUriFileConnection(imageDop))
-                                ImageListView.Add(new SelectItemViewModel(imageDop, new LambdaCommand(o =>
-                                {
-                                    _dialogWindow.OpenImageItemWindow(imageDop);
-                                }, o => true)));
+                            // Todo:  костыль
+                            NowGame = false;
+                            TitleLoad(false);
+                            DescEng = progSelect.descriptionEng;
+                            Desc = progSelect.description;
+                            DescLoad();
+                            ItemName = progSelect.name;
+                            Tags = progSelect.tag;
+                            WidthDownload = 150;
+                            ImageListView.Clear();
+                            if (File.Exists(Environment.CurrentDirectory + "\\DownloadFile\\" + ItemName + "\\" + ItemName + ".exe"))
+                            {
+                                WidthRun = 150;
+                                WidthDont = 0;
+                                WidthDownload = 0;
+                            }
+                            else if (networkService.CheckingUriFileConnection(ZipName()))
+                            {
+                                WidthRun = 0;
+                                WidthDont = 0;
+                                WidthDownload = 150;
+                            }
                             else
-                                break;
+                            {
+                                WidthRun = 0;
+                                WidthDont = 250;
+                                WidthDownload = 0;
+                            }
 
-                            countLoadImage++;
-                        }
+                            var countLoadImage = 1;
+                            while (MaxImageToItem >= countLoadImage)
+                            {
+                                var imageDop = string.Concat(progPath, progSelect.name,
+                                    countLoadImage.ToString(), ".png");
+                                if (networkService.CheckingUriFileConnection(imageDop))
+                                    ImageListView.Add(new SelectItemViewModel(imageDop, new LambdaCommand(o =>
+                                    {
+                                        _dialogWindow.OpenImageItemWindow(imageDop);
+                                    }, o => true)));
+                                else
+                                    break;
+
+                                countLoadImage++;
+                            }
 
 
-                    }, o => true)));
+                        }, o => true)));
+                }
             }
         }
 
@@ -280,6 +384,7 @@ namespace LauncherDM.ViewModels
 
         private const string DefaultMediaSource = "https://darkmilk.store/Launcher/Video/wallper.mp4";
 
+        private const string PathDownload = "https://darkmilk.store/Launcher/File/";
 
         private void TitleLoad(bool game)
         {
@@ -300,6 +405,14 @@ namespace LauncherDM.ViewModels
                 DescLoad();
                 LoadItems();
             }
+        }
+
+        private void UpdateForm()
+        {
+            AllPropertyChanged();
+            TitleLoad(NowGame);
+            DescLoad();
+            LoadItems();
         }
     }
 }

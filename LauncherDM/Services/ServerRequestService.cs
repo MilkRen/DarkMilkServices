@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows.Forms.VisualStyles;
 using ServerTCP;
 using LauncherDM.Properties;
 using static ServerTCP.MessageLanguages;
@@ -40,7 +41,7 @@ namespace LauncherDM.Services
                     byte[] headerBytes = messageHeader.MessageToArray(loadToken);
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);
-
+                    System.Threading.Thread.Sleep(1000);
                     do
                     {
                         var getBytes = new byte[tcpClient.ReceiveBufferSize];
@@ -81,7 +82,7 @@ namespace LauncherDM.Services
                     byte[] headerBytes = messageHeader.MessageToArray(loadToken);
                     NetworkStream tcpStream = tcpClient.GetStream();
                     tcpStream.Write(headerBytes);
-
+                    System.Threading.Thread.Sleep(1000); // Todo: Костыль с получениями байтов, намеренная задержка, чтобы все байты были отправлены
                     do
                     {
                         var getBytes = new byte[tcpClient.ReceiveBufferSize];

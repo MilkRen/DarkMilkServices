@@ -176,4 +176,7 @@
 	<data name="Run" xml:space="preserve">
 		<value>RUN</value>
 	</data>
+	<data name="DontDownload" xml:space="preserve">
+		<value>DOWNLOAD IS NOT AVAILABLE</value>
+	</data>
 </root>

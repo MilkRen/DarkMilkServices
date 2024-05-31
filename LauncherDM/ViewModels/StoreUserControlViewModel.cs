@@ -186,72 +186,79 @@ namespace LauncherDM.ViewModels
             ICheckNetworkService networkService = new CheckNetworkService();
             progArray = _storeService.GetPrograms();
             progPath = _storeService.GetProgramsPath();
-            foreach (var prog in progArray.ProgramsArray)
+            if (progArray.ProgramsArray is not null)
             {
-                ProgramsListView.Add(new ItemsViewModel(prog, progPath, new LambdaCommand(o =>
+                foreach (var prog in progArray.ProgramsArray)
                 {
-                    TitleItem = prog.name;
-                    TagText = prog.tag;
-                    ImageItem = string.Concat(progPath, TitleItem, ".png"); 
-                    DescItem = MessageLanguages.Language == MessageLanguages.Languages.rus ? prog.description : prog.descriptionEng;
-
-                    var countLoadImage = 1;
-                    ItemListView = new ObservableCollection<SelectItemViewModel>();
-                    while (MaxImageToItem >= countLoadImage)
+                    ProgramsListView.Add(new ItemsViewModel(prog, progPath, new LambdaCommand(o =>
                     {
-                        var image = string.Concat(progPath, TitleItem,
-                            countLoadImage.ToString(), ".png");
-                        if (networkService.CheckingUriFileConnection(image))
-                            ItemListView.Add(new SelectItemViewModel(image, new LambdaCommand(o =>
-                            {
-                                ImageItem = image;
-                            }, o => true)));
-                        else
-                            break;
+                        TitleItem = prog.name;
+                        TagText = prog.tag;
+                        ImageItem = string.Concat(progPath, TitleItem, ".png");
+                        DescItem = MessageLanguages.Language == MessageLanguages.Languages.rus ? prog.description : prog.descriptionEng;
 
-                        countLoadImage++;
-                    }
+                        var countLoadImage = 1;
+                        ItemListView = new ObservableCollection<SelectItemViewModel>();
+                        while (MaxImageToItem >= countLoadImage)
+                        {
+                            var image = string.Concat(progPath, TitleItem,
+                                countLoadImage.ToString(), ".png");
+                            if (networkService.CheckingUriFileConnection(image))
+                                ItemListView.Add(new SelectItemViewModel(image, new LambdaCommand(o =>
+                                {
+                                    ImageItem = image;
+                                }, o => true)));
+                            else
+                                break;
 
-                    BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
-                    _payButtonText = "AddLibrary";
-                    OnPropertyChanged("PayButtonText");
-                    AnimationItemShow();
-                }, o => true)));
+                            countLoadImage++;
+                        }
+
+                        BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
+                        _payButtonText = "AddLibrary";
+                        OnPropertyChanged("PayButtonText");
+                        AnimationItemShow();
+                    }, o => true)));
+                }
+
             }
 
             gamesArray = _storeService.GetGames();
             gamesPath = _storeService.GetGamesPath();
-            foreach (var games in gamesArray.GamesArray)
+            if (gamesArray.GamesArray is not null)
             {
-                GamesListView.Add(new ItemsViewModel(games, gamesPath, new LambdaCommand(o =>
+                foreach (var games in gamesArray.GamesArray)
                 {
-                    TitleItem = games.name;
-                    TagText = games.tag;
-                    ImageItem = string.Concat(gamesPath, TitleItem, ".png");
-                    DescItem = MessageLanguages.Language == MessageLanguages.Languages.rus ? games.description : games.descriptionEng;
-
-                    var countLoadImage = 1;
-                    ItemListView = new ObservableCollection<SelectItemViewModel>();
-                    while (MaxImageToItem >= countLoadImage)
+                    GamesListView.Add(new ItemsViewModel(games, gamesPath, new LambdaCommand(o =>
                     {
-                        var image = string.Concat(gamesPath, TitleItem,
-                            countLoadImage.ToString(), ".png");
-                        if (networkService.CheckingUriFileConnection(image))
-                            ItemListView.Add(new SelectItemViewModel(image, new LambdaCommand(o =>
-                            {
-                                ImageItem = image;
-                            }, o => true)));
-                        else
-                            break;
+                        TitleItem = games.name;
+                        TagText = games.tag;
+                        ImageItem = string.Concat(gamesPath, TitleItem, ".png");
+                        DescItem = MessageLanguages.Language == MessageLanguages.Languages.rus ? games.description : games.descriptionEng;
 
-                        countLoadImage++;
-                    }
+                        var countLoadImage = 1;
+                        ItemListView = new ObservableCollection<SelectItemViewModel>();
+                        while (MaxImageToItem >= countLoadImage)
+                        {
+                            var image = string.Concat(gamesPath, TitleItem,
+                                countLoadImage.ToString(), ".png");
+                            if (networkService.CheckingUriFileConnection(image))
+                                ItemListView.Add(new SelectItemViewModel(image, new LambdaCommand(o =>
+                                {
+                                    ImageItem = image;
+                                }, o => true)));
+                            else
+                                break;
 
-                    BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
-                    _payButtonText = "AddLibrary";
-                    OnPropertyChanged("PayButtonText");
-                    AnimationItemShow();
-                }, o => true)));
+                            countLoadImage++;
+                        }
+
+                        BackgroundButton = (SolidColorBrush)new BrushConverter().ConvertFrom("#738aea");
+                        _payButtonText = "AddLibrary";
+                        OnPropertyChanged("PayButtonText");
+                        AnimationItemShow();
+                    }, o => true)));
+                }
             }
         }
 
