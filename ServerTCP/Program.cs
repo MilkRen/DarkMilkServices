@@ -39,7 +39,7 @@ namespace ServerTCP
                 var listener = tcpSocket.Accept(); // новый с   окет для нового клиента
                 try
                 {
-                    Console.WriteLine("Подключился!");
+                    ConsoleExtension.WriteLineColor("Подключился!", ConsoleColor.DarkYellow);
                     var buffer = new byte[listener.ReceiveBufferSize]; // размер буфера .  максимум сообщение из 256 байт 
                     var size = 0; // количество реально полученных количества байт, потом чтобы оптимизировать память 
                     do
@@ -49,9 +49,10 @@ namespace ServerTCP
 
                         MessageHeader headerRequest = null;
                         byte[] headerRequestBytes;
-                        string message = string.Empty;
-                        bool loadToken = false;
+                        var message = string.Empty;
+                        var loadToken = false;
                         bool result;
+                        Console.WriteLine($"Пришёл запрос: {header.Type}");
                         switch (header.Type)
                         {
                             case MessageHeader.MessageType.Check:
@@ -245,6 +246,7 @@ namespace ServerTCP
                 {
                     listener.Shutdown(SocketShutdown.Both); // закрываем подкоючение сокета и клиента, и у сервера 
                     listener.Close(); // отключает, закрывает сокет и освобождает ресурсы
+                    ConsoleExtension.WriteLineColor("Отключился!", ConsoleColor.DarkYellow);
                 }
             }
         }
