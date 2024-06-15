@@ -20,6 +20,8 @@ using Aspose.Zip;
 using System.Xml.XPath;
 using Aspose.Zip.Rar;
 using System.Diagnostics;
+using System.Timers;
+using System.Windows.Controls;
 
 namespace LauncherDM.ViewModels
 {
@@ -34,6 +36,8 @@ namespace LauncherDM.ViewModels
         private readonly IDialogWindowService _dialogWindow;
 
         private readonly IServerRequestService _serverRequest;
+
+        private readonly ICheckNetworkService _networkService;
 
         #endregion
 
@@ -179,19 +183,22 @@ namespace LauncherDM.ViewModels
         private bool CanDownloadCommandExecute(object p) => true;
         private void OnDownloadCommandExecuted(object p)
         {
+            ProgressBar.Value = 20;
+            dirInfo = Directory.CreateDirectory("DownloadFile\\" + ItemName);
             ICheckNetworkService networkService = new CheckNetworkService();
             var pathDowlFile= Directory.CreateDirectory("DownloadFile");
             var fileZip = ItemName + ".rar";
             if (networkService.CheckingUriFileConnection(ZipName()))
                 try
                 {
+                    ProgressBar.Value = 50;
                     DownloadFile(ZipName(), pathDowlFile.FullName + "\\" + fileZip);
-                    UpdateForm();
+                    ProgressBar.Value = 100;
                 }
                 catch 
                 { }
 
-            dirInfo = Directory.CreateDirectory("DownloadFile\\" + ItemName);
+            File.Delete(pathDowlFile.FullName + "\\" + fileZip);
         }
 
         private static DirectoryInfo dirInfo;
@@ -215,14 +222,17 @@ namespace LauncherDM.ViewModels
             }
         }
 
-
-
         public Command RunCommand { get; }
         private bool CanRunCommandExecute(object p) => true;
         private void OnRunCommandExecuted(object p)
         {
             var prog =  Environment.CurrentDirectory + "\\DownloadFile\\" + ItemName + "\\" + ItemName + ".exe";
-            Process.Start(prog);
+            try
+            {
+                Process.Start(prog);
+            }
+            catch 
+            { }
         }
 
 
@@ -235,6 +245,7 @@ namespace LauncherDM.ViewModels
             _serverRequest = serverRequest;
             _libraryUserService = new LibraryUserControlService(serverRequest);
             _dialogWindow = new DialogWindowService();
+            _networkService = new CheckNetworkService();
             DownloadCommand = new LambdaCommand(OnDownloadCommandExecuted, CanDownloadCommandExecute);
             RunCommand = new LambdaCommand(OnRunCommandExecuted, CanRunCommandExecute);
             LoadItems();
@@ -243,6 +254,7 @@ namespace LauncherDM.ViewModels
 
         private void LoadItems()
         {
+            ProgressBar.Value = 0;
             ItemListView = new ObservableCollection<LibrarySelectItemViewModel>();
             ImageListView = new ObservableCollection<SelectItemViewModel>();
 
@@ -254,7 +266,6 @@ namespace LauncherDM.ViewModels
             var games = _libraryUserService.GetGamesItem();
             var programs = _libraryUserService.GetProgramItem();
 
-            ICheckNetworkService networkService = new CheckNetworkService();
             if (games.SaleGamesArray is not null)
             {
                 foreach (var game in games.SaleGamesArray)
@@ -264,29 +275,13 @@ namespace LauncherDM.ViewModels
                     ItemListView.Add(new LibrarySelectItemViewModel(gameSelect.name, image,
                         new LambdaCommand(o =>
                         {
+                            TimerOn();
+                            ProgressBar.Value = 0;
                             NowGame = true;
                             TitleLoad(true);
                             ItemName = gameSelect.name;
                             Tags = gameSelect.tag;
-
-                            if (File.Exists("DownloadFile\\" + ItemName))
-                            {
-                                WidthRun = 150;
-                                WidthDont = 0;
-                                WidthDownload = 0;
-                            }
-                            else if (networkService.CheckingUriFileConnection(ZipName()))
-                            {
-                                WidthRun = 0;
-                                WidthDont = 0;
-                                WidthDownload = 150;
-                            }
-                            else
-                            {
-                                WidthRun = 0;
-                                WidthDont = 250;
-                                WidthDownload = 0;
-                            }
+                            UpdateButtons();
 
                             SourceMedia = string.Concat(gamePath, gameSelect.name, ".mp4");
 
@@ -301,7 +296,7 @@ namespace LauncherDM.ViewModels
                             {
                                 var imageDop = string.Concat(gamePath, gameSelect.name,
                                     countLoadImage.ToString(), ".png");
-                                if (networkService.CheckingUriFileConnection(imageDop))
+                                if (_networkService.CheckingUriFileConnection(imageDop))
                                     ImageListView.Add(new SelectItemViewModel(imageDop, new LambdaCommand(o =>
                                     {
                                         _dialogWindow.OpenImageItemWindow(imageDop);
@@ -325,6 +320,8 @@ namespace LauncherDM.ViewModels
                     ItemListView.Add(new LibrarySelectItemViewModel(progSelect.name, image,
                         new LambdaCommand(o =>
                         {
+                            TimerOn();
+                            ProgressBar.Value = 0;
                             // Todo:  костыль
                             NowGame = false;
                             TitleLoad(false);
@@ -335,31 +332,14 @@ namespace LauncherDM.ViewModels
                             Tags = progSelect.tag;
                             WidthDownload = 150;
                             ImageListView.Clear();
-                            if (File.Exists(Environment.CurrentDirectory + "\\DownloadFile\\" + ItemName + "\\" + ItemName + ".exe"))
-                            {
-                                WidthRun = 150;
-                                WidthDont = 0;
-                                WidthDownload = 0;
-                            }
-                            else if (networkService.CheckingUriFileConnection(ZipName()))
-                            {
-                                WidthRun = 0;
-                                WidthDont = 0;
-                                WidthDownload = 150;
-                            }
-                            else
-                            {
-                                WidthRun = 0;
-                                WidthDont = 250;
-                                WidthDownload = 0;
-                            }
+                            UpdateButtons();
 
                             var countLoadImage = 1;
                             while (MaxImageToItem >= countLoadImage)
                             {
                                 var imageDop = string.Concat(progPath, progSelect.name,
                                     countLoadImage.ToString(), ".png");
-                                if (networkService.CheckingUriFileConnection(imageDop))
+                                if (_networkService.CheckingUriFileConnection(imageDop))
                                     ImageListView.Add(new SelectItemViewModel(imageDop, new LambdaCommand(o =>
                                     {
                                         _dialogWindow.OpenImageItemWindow(imageDop);
@@ -386,6 +366,8 @@ namespace LauncherDM.ViewModels
 
         private const string PathDownload = "https://darkmilk.store/Launcher/File/";
 
+        public static ProgressBar ProgressBar; 
+
         private void TitleLoad(bool game)
         {
             Title = game ? _resourcesHelper.LocalizationGet("Game") : _resourcesHelper.LocalizationGet("Program");
@@ -400,19 +382,62 @@ namespace LauncherDM.ViewModels
         {
             if (data.UpdateUI)
             {
-                AllPropertyChanged();
-                TitleLoad(NowGame);
-                DescLoad();
-                LoadItems();
+                UpdateForm();
+            }
+        }
+
+        private void UpdateButtons()
+        {
+            if (File.Exists(Environment.CurrentDirectory + "\\DownloadFile\\" + ItemName + "\\" + ItemName + ".exe"))
+            {
+                WidthRun = 150;
+                WidthDont = 0;
+                WidthDownload = 0;
+            }
+            else if (_networkService.CheckingUriFileConnection(ZipName()))
+            {
+                WidthRun = 0;
+                WidthDont = 0;
+                WidthDownload = 150;
+            }
+            else
+            {
+                WidthRun = 0;
+                WidthDont = 250;
+                WidthDownload = 0;
             }
         }
 
         private void UpdateForm()
         {
+            ProgressBar.Value = 0;
             AllPropertyChanged();
             TitleLoad(NowGame);
             DescLoad();
             LoadItems();
+            DescItem = ItemName = Tags = string.Empty;
+            Title = "---";
+            WidthRun = WidthDont = WidthDownload = 0;
         }
+
+        private Timer _timerButtons;
+        public void TimerOn()
+        {
+            if(_timerButtons is null)
+                _timerButtons = new Timer(5000);
+
+            if (!_timerButtons.Enabled)
+            {
+                _timerButtons.AutoReset = true;
+                _timerButtons.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+                _timerButtons.Start();
+            }
+        }
+
+        private async void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            UpdateButtons();
+        }
+
     }
 }

@@ -179,4 +179,7 @@
 	<data name="DontDownload" xml:space="preserve">
 		<value>DOWNLOAD IS NOT AVAILABLE</value>
 	</data>
+	<data name="DeleteProg" xml:space="preserve">
+		<value>Delete the program</value>
+	</data>
 </root>

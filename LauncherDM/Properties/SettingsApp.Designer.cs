@@ -25,7 +25,7 @@ namespace LauncherDM.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("185.119.58.142")]
         public string Ip {
             get {
                 return ((string)(this["Ip"]));

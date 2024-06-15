@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using LauncherDM.Views.Windows;
+using LauncherDM.Infrastructure.ReactiveUI;
+using LauncherDM.Infrastructure;
 
 namespace LauncherDM.ViewModels
 {
@@ -277,11 +279,10 @@ namespace LauncherDM.ViewModels
             }
 
             // Todo: исправить 
-            RegAndLogWindow.CloseShow = true; // костыль
+            RegAndLogWindow.CloseShow = false;
             if (signUpService.SignUp(RegLogin, Email, RegPassword))
             {
                 // Todo: исправить 
-                RegAndLogWindow.CloseShow = true; // костыль
 
                 var userlist = _xmlService.DeserializeUsersXMl();
                 var user = new Users(RegLogin, string.Empty);
@@ -295,8 +296,7 @@ namespace LauncherDM.ViewModels
                     _dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Attention"), _resourcesHelper.LocalizationGet("AccountListIsFull"));
                     return;
                 }
-
-                _dialogWindow.OpenWindow(this);
+                
                 _dialogWindow.CloseAction = _closeAction;
                 _dialogWindow.CloseWindow();
             }

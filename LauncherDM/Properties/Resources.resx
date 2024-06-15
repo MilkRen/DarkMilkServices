@@ -301,4 +301,7 @@
   <data name="DontDownload" xml:space="preserve">
 	  <value>СКАЧИВАНИЕ НЕ ДОСТУПНО</value>
   </data>
+  <data name="DeleteProg" xml:space="preserve">
+	  <value>Удалить программу</value>
+  </data>
 </root>

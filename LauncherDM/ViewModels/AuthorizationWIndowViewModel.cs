@@ -80,6 +80,7 @@ namespace LauncherDM.ViewModels
         private void OnShowRegAndLogFormCommandExecuted(object p)
         {
             _windowService.OpenWindow(this);
+            UpdateUI.PullUi.Notify(new LoadUI(true));
             // Todo: исправить 
             if (RegAndLogWindow.CloseShow) // костыль 
             {

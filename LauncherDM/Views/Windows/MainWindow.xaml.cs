@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
+using LauncherDM.ViewModels;
 
 namespace LauncherDM
 {
@@ -13,6 +14,10 @@ namespace LauncherDM
         public MainWindow()
         {
             InitializeComponent();
+
+            // Todo: надо убрать это безобразие 
+            LibraryUserControlViewModel.ProgressBar = MainProgressBar;
+
             var notifyIcon1 = new NotifyIcon();
             var logoIcon = (Icon)Properties.Resources.ResourceManager?.GetObject("OnlyLogo")!;
             notifyIcon1.Icon = logoIcon ?? SystemIcons.Exclamation;

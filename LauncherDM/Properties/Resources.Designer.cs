@@ -190,6 +190,15 @@ namespace LauncherDM.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на .
         /// </summary>
+        internal static string DeleteProg {
+            get {
+                return ResourceManager.GetString("DeleteProg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на СКАЧИВАНИЕ НЕ ДОСТУПНО.
+        /// </summary>
         internal static string DontDownload {
             get {
                 return ResourceManager.GetString("DontDownload", resourceCulture);

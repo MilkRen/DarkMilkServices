@@ -32,7 +32,7 @@
                         <TextBlock Text="{Binding Status}"/>
                     </StatusBarItem>
                     <StatusBarItem VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <ProgressBar Width="150" Height="3" Value="30" Style="{StaticResource ProgressBarStyle}"/>
+                        <ProgressBar Width="150" Height="3" Value="30" x:Name="MainProgressBar" Style="{StaticResource ProgressBarStyle}"/>
                     </StatusBarItem>
                 </StatusBar>
 
@@ -149,7 +149,6 @@
                 <userControls:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" />
         </StackPanel>
     </Grid>
-
         <Border Grid.Row="0" Grid.RowSpan="2" BorderBrush="White" Opacity="0.5" Margin="1,1,1,23" BorderThickness="1" />
     </Grid>
 </Window>
