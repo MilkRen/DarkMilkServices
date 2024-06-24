@@ -20,7 +20,7 @@
     </behaviors:Interaction.Triggers>
 
     <Grid>
-    <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
         <RowDefinition Height="30"/>
         <RowDefinition/>
     </Grid.RowDefinitions>
@@ -146,6 +146,7 @@
 
     <Grid Grid.Row="0">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button Command="{Binding ReloadPageCommand}" Width="30" Height="25" Background="Transparent" BorderBrush="Transparent" />
                 <userControls:ToolbarToWindowUserControl DataContext="{Binding ToolbarVM}" />
         </StackPanel>
     </Grid>

@@ -20,11 +20,15 @@ namespace LauncherDM.ViewModel
 
         private readonly IDialogWindowService _dialogWindow;
 
+        private readonly IServerRequestService _serverRequest;
+
         #endregion
 
         #region Fields
 
         private Action _dragMoveAction;
+
+        private Action _closeAction;
 
         #endregion
 
@@ -131,23 +135,46 @@ namespace LauncherDM.ViewModel
 
         #endregion
 
+
+        #region ReloadPageCommand
+
+        public Command ReloadPageCommand { get; }
+        private bool CanReloadPageCommandExecute(object p) => true;
+        private void OnReloadPageCommandExecuted(object p)
+        {
+            LoadData(_closeAction, new ResourcesHelperService(), new ServerRequestService());
+            AllPropertyChanged();
+        }
+
+        #endregion
+
+
         #endregion
 
 
         public MainWindowViewModel(Action closeAction, Action dragMove, ToolbarToWindowViewModel toolbarViewModel, ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
         {
             _dragMoveAction = dragMove;
+            _closeAction = closeAction;
             ToolbarVM = toolbarViewModel;
             _resourcesHelper = resourcesHelper;
+            _serverRequest = serverRequest;
             _dialogWindow = new DialogWindowService();
+            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
+            ReloadPageCommand = new LambdaCommand(OnReloadPageCommandExecuted, CanReloadPageCommandExecute);
+            LoadData(closeAction, resourcesHelper, serverRequest);
+        }
+
+        private void LoadData(Action closeAction, ResourcesHelperService resourcesHelper, ServerRequestService serverRequest)
+        {
             StoreUserControlVM = new StoreUserControlViewModel(resourcesHelper, serverRequest);
             UpdateUI.PullUi.Subscribe(StoreUserControlVM);
             SettingsUserControlVM = new SettingsUserControlViewModel(closeAction, resourcesHelper);
             MyAccountUserControlVM = new MyAccountUserControlViewModel();
             LibraryUserControlVM = new LibraryUserControlViewModel(resourcesHelper, serverRequest);
             UpdateUI.PullUi.Subscribe(LibraryUserControlVM);
-            MoveWindowCommand = new LambdaCommand(OnMoveWindowCommandExecuted, CanMoveWindowCommandExecute);
         }
+
 
         public void Update(LoadUI data)
         {

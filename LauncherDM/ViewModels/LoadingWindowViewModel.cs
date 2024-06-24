@@ -146,9 +146,10 @@ namespace LauncherDM.ViewModels
                         {
                             IDialogMessageBoxService dialogMessageBox = new DialogMessageBoxService();
                             dialogMessageBox.DialogShow(_resourcesHelper.LocalizationGet("Error"), _resourcesHelper.LocalizationGet("ServerClose"));
-                            SettingsApp.Default.OfflineMode = true;
-                            SettingsApp.Default.Save();
-                            OpenWindow();
+                            Environment.Exit(0);
+                            //SettingsApp.Default.OfflineMode = true;
+                            //SettingsApp.Default.Save();
+                            //OpenWindow();
                             break;
                         }
 
