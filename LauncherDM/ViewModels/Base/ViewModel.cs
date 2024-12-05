@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LauncherDM.ViewModel.Base
 {
@@ -19,7 +15,9 @@ namespace LauncherDM.ViewModel.Base
 
         protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            if (Equals(field, value)) return false;
+            if (Equals(field, value))
+                return false;
+
             field = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -33,9 +31,17 @@ namespace LauncherDM.ViewModel.Base
         private bool _disposed;
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposing || _disposed) return;
+            if (!disposing || _disposed) 
+                return;
+
             _disposed = true;
             // освобождение управляемых ресурсов
+        }
+
+        public void AllPropertyChanged()
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(null));
         }
     }
 }

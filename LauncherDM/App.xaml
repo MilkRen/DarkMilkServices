@@ -6,8 +6,20 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-
                 <ResourceDictionary Source="Styles/Other/DockPanelStyles.xaml"/>
+                <ResourceDictionary Source="Styles/Other/LabelStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/TextBlockStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/BorderStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/RadioButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ContextMenuStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ImageStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/TabControlStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/TabPanelStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ScrollbarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/MediaElementStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Other/ProgressBarStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

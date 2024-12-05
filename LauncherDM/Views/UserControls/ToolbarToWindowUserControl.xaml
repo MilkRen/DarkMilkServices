@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="LauncherDM.Views.UserControls.ToolbarToWindowUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LauncherDM.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" UseLayoutRounding="True">
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,2,2,0">
+            <Label Content="{Binding Title}" FontSize="10" Style="{StaticResource AccountFont}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,2,0" >
+            <Button Command="{Binding ShowSettingsMiniCommand}" Style="{StaticResource ButtonSettings}" Visibility="{Binding VisibilitySettingsBut}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="abcd" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Command="{Binding MinimizeWindowCommand}" Style="{StaticResource ButtonMinimize}" Visibility="{Binding VisibilityMinBut}"/>
+            <Button Command="{Binding MaximizeWindowCommand}" Style="{StaticResource ButtonMaximize}" Width="{Binding WidthMax}"/>
+            <Button Command="{Binding CloseWindowActionCommand}" Style="{StaticResource ButtonClose}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

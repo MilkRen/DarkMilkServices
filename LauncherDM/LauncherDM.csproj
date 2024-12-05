@@ -2,19 +2,182 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+	  <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+    <ApplicationIcon>Source\Images\Logo\OnlyLogoTwo.ico</ApplicationIcon>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Source\Fonts\" />
-    <Folder Include="Source\Images\" />
+    <None Remove="Source\Fonts\Gloss_And_Bloom.ttf" />
+    <None Remove="Source\Images\Account\IconAdd.png" />
+    <None Remove="Source\Images\Account\Profile.png" />
+    <None Remove="Source\Images\Logo\Logo.png" />
+    <None Remove="Source\Images\Logo\MilkBottle.png" />
+    <None Remove="Source\Images\Logo\OnlyLogo.png" />
+    <None Remove="Source\Images\Logo\OnlyLogoTwo.ico" />
+    <None Remove="Source\Images\ToolBar\Close.png" />
+    <None Remove="Source\Images\ToolBar\CloseBlack.png" />
+    <None Remove="Source\Images\ToolBar\Down.png" />
+    <None Remove="Source\Images\ToolBar\DownBlack.png" />
+    <None Remove="Source\Images\ToolBar\Maximize.png" />
+    <None Remove="Source\Images\ToolBar\MaximizeBlack.png" />
+    <None Remove="Source\Images\ToolBar\MaximizeRev.png" />
+    <None Remove="Source\Images\ToolBar\Minimize.png" />
+    <None Remove="Source\Images\ToolBar\MinimizeBlack.png" />
+    <None Remove="Source\Images\ToolBar\Settings.png" />
+    <None Remove="Source\Images\ToolBar\SettingsBlack.png" />
+    <None Remove="Source\Images\ToolBar\SettingsThree.png" />
+    <None Remove="Source\Images\ToolBar\SettingsThreeBlack.png" />
+    <None Remove="Source\Images\ToolBar\SettingsTwo.png" />
+    <None Remove="Source\Images\ToolBar\SettingsTwoBlack.png" />
+    <None Remove="Source\Images\ToolBar\Up.png" />
+    <None Remove="Source\Images\ToolBar\UpBlack.png" />
+    <None Remove="Source\Images\ToolBar\World.png" />
+    <None Remove="Source\Video\wallpaper engine crescent moon %28red%29.mp4" />
+    <None Remove="Source\Video\wallpaper engine space.mp4" />
+    <None Remove="Source\Video\wallper1.mp4" />
+    <None Remove="Source\Video\wallper2.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Source\Images\Logo\OnlyLogoTwo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Source\Images\Account\IconAdd.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\Account\Profile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\Logo\OnlyLogoTwo.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Source\Sounds\" />
     <Folder Include="Styles\Pages\" />
     <Folder Include="Styles\Window\" />
     <Folder Include="Views\Pages\" />
-    <Folder Include="Server\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspose.Zip" Version="24.5.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServerTCP\ServerTCP.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Source\Fonts\Gloss_And_Bloom.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\Logo\Logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\Logo\MilkBottle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\Logo\OnlyLogo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\CloseBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\DownBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Maximize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\MaximizeBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\MaximizeRev.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\MinimizeBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsThree.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsThreeBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsTwo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\SettingsTwoBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\Up.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\UpBlack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Source\Images\ToolBar\World.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Source\Video\wallper1.mp4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Source\Video\wallper2.mp4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\SettingsApp.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SettingsApp.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.en.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\SettingsApp.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SettingsApp.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

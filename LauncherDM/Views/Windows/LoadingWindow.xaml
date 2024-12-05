@@ -3,29 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LauncherDM.Views.Windows"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="100" Width="500"
-        Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" ResizeMode="NoResize">
-
+        Title="{Binding Title}"
+        Height="100" Width="500"
+        Background="Black"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        ResizeMode="NoResize">
 
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu Style="{StaticResource ContextMenuLoadingForm}">
+                <MenuItem Header="{Binding CloseApp}" Command="{Binding CloseWindowCommand}"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
+
+        <behaviors:Interaction.Triggers>
+            <behaviors:EventTrigger EventName="MouseDown" >
+                <behaviors:InvokeCommandAction Command="{Binding MoveWindowCommand}" />
+            </behaviors:EventTrigger>
+        </behaviors:Interaction.Triggers>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="Black">
+        <Border Grid.Row="0" Grid.RowSpan="2" BorderBrush="White" Opacity="0.5" Margin="1" BorderThickness="1" />
+
+        <Grid Grid.Row="0" Background="Black" Margin="5">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <Image Source="/Source/Images/DarkMilk/Logo.png" Width="15" Height="15"/>
-                <Label Content="{Binding Title}" Foreground="White" FontSize="8" VerticalAlignment="Center"/>
+                <Image Source="/Source/Images/Logo/MilkBottle.png" Width="18" Height="18" Style="{StaticResource WhiteLiteImage}" />
+                <Label Content="{Binding Title}" Foreground="White" FontSize="10" VerticalAlignment="Center" Style="{StaticResource LogoFont}"/>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <Border Background="White" Height="2" VerticalAlignment="Top"/>
-            <Label Content="{Binding InfoConnecting}" Foreground="White" />
+            <Border Background="White" Height="2" VerticalAlignment="Top" Margin="2,0,2,0"/>
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding DescInfoConnect}" Margin="8" FontSize="10" Style="{StaticResource DescFont}"/>
         </Grid>
 
     </Grid>

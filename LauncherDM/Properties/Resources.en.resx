@@ -1,0 +1,185 @@
+﻿<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Reconnection" xml:space="preserve">
+		<value>Reconnect after {0} ms...</value>
+	</data>
+	<data name="ServerClose" xml:space="preserve">
+		<value>The server is unavailable (offline mode).</value>
+	</data>
+	<data name="Error" xml:space="preserve">
+		<value>Error!</value>
+	</data>
+	<data name="Сonnection" xml:space="preserve">
+		<value>Сonnection...</value>
+	</data>
+	<data name="EthernetClose" xml:space="preserve">
+		<value>There is no internet connection.</value>
+	</data>
+	<data name="CloseApp" xml:space="preserve">
+		<value>Close the application</value>
+	</data>
+	<data name="ConnectClose" xml:space="preserve">
+		<value>The server has terminated the connection.</value>
+	</data>
+	<data name="Login" xml:space="preserve">
+		<value>Login</value>
+	</data>
+	<data name="Password" xml:space="preserve">
+		<value>Password</value>
+	</data>
+	<data name="RememberPassword" xml:space="preserve">
+		<value>Remember the password</value>
+	</data>
+	<data name="RememberMe" xml:space="preserve">
+		<value>Remember me</value>
+	</data>
+	<data name="Authorization" xml:space="preserve">
+		<value>Authorization</value>
+	</data>
+	<data name="SignUp" xml:space="preserve">
+		<value>Sign Up</value>
+	</data>
+	<data name="ConfirmPassword" xml:space="preserve">
+		<value>Confirm password</value>
+	</data>
+	<data name="ForgotPassword" xml:space="preserve">
+		<value>Forgot password</value>
+	</data>
+	<data name="Email" xml:space="preserve">
+		<value>Email</value>
+	</data>
+	<data name="Version" xml:space="preserve">
+		<value>Version:</value>
+	</data>
+	<data name="Settings" xml:space="preserve">
+		<value>Settings</value>
+	</data>
+	<data name="SettingsSmall" xml:space="preserve">
+		<value>Small settings</value>
+	</data>
+	<data name="AboutSmallText" xml:space="preserve">
+		<value>This program was created by a small enthusiast!</value>
+	</data>
+	<data name="Languages" xml:space="preserve">
+		<value>Languages</value>
+	</data>
+	<data name="Russian" xml:space="preserve">
+		<value>Russian</value>
+	</data>
+	<data name="English" xml:space="preserve">
+		<value>English</value>
+	</data>
+	<data name="ErrorLogin" xml:space="preserve">
+		<value>Incorrect username or password.</value>
+	</data>
+	<data name="ErrorLoginloggedIn" xml:space="preserve">
+		<value>This account is already logged in.</value>
+	</data>
+	<data name="Attention" xml:space="preserve">
+		<value>Attention!</value>
+	</data>
+	<data name="AccountListIsFull" xml:space="preserve">
+		<value>The list of accounts is full.  Remove unnecessary accounts.</value>
+	</data>
+	<data name="Account" xml:space="preserve">
+		<value>Account</value>
+	</data>
+	<data name="Store" xml:space="preserve">
+		<value>Workshop | Catalog</value>
+	</data>
+	<data name="Forum" xml:space="preserve">
+		<value>Forum</value>
+	</data>
+	<data name="Programs" xml:space="preserve">
+		<value>Programs</value>
+	</data>
+	<data name="Games" xml:space="preserve">
+		<value>Games</value>
+	</data>
+	<data name="Library" xml:space="preserve">
+		<value>Library</value>
+	</data>
+	<data name="Friends" xml:space="preserve">
+		<value>Friends</value>
+	</data>
+	<data name="AppMutexOn" xml:space="preserve">
+		<value>The application could not be started (the application is already running).</value>
+	</data>
+	<data name="AddLibrary" xml:space="preserve">
+		<value>Add to library</value>
+	</data>
+	<data name="IsNotEmpty" xml:space="preserve">
+		<value>In the paragraph "{0}", "{1}" it cannot be empty.</value>
+	</data>
+	<data name="LoginError" xml:space="preserve">
+		<value>It is allowed to use the characters {0} for the login.</value>
+	</data>
+	<data name="PasswordError" xml:space="preserve">
+		<value>The characters {0} must be used for the password.</value>
+	</data>
+	<data name="EmailError" xml:space="preserve">
+		<value>Invalid mailing address.</value>
+	</data>
+	<data name="LenghtMaxRegPassword" xml:space="preserve">
+		<value>The length of the registration password must be greater than {0}.</value>
+	</data>
+	<data name="LenghtMaxRegLogin" xml:space="preserve">
+		<value>The length of the registration login must be greater than {0}.</value>
+	</data>
+	<data name="LoginBusy" xml:space="preserve">
+		<value>The login is busy.</value>
+	</data>
+	<data name="DeleteAccount" xml:space="preserve">
+		<value>Delete account</value>
+	</data>
+	<data name="AccountRecovery" xml:space="preserve">
+		<value>Account recovery</value>
+	</data>
+	<data name="SupportRecovery" xml:space="preserve">
+		<value>Enter your login and email address so that the support team will contact you.</value>
+	</data>
+	<data name="Send" xml:space="preserve">
+		<value>Send</value>
+	</data>
+	<data name="SendMessage" xml:space="preserve">
+		<value>The application has been sent!</value>
+	</data>
+	<data name="SendError" xml:space="preserve">
+		<value>Ошибка отправки!</value>
+	</data>
+	<data name="AccountChange" xml:space="preserve">
+		<value>Change account</value>
+	</data>
+	<data name="InTheLibrary" xml:space="preserve">
+		<value>In the library</value>
+	</data>
+	<data name="Game" xml:space="preserve">
+		<value>Game</value>
+	</data>
+	<data name="Program" xml:space="preserve">
+		<value>Program</value>
+	</data>
+	<data name="Download" xml:space="preserve">
+		<value>DOWNLOAD</value>
+	</data>
+	<data name="Run" xml:space="preserve">
+		<value>RUN</value>
+	</data>
+	<data name="DontDownload" xml:space="preserve">
+		<value>DOWNLOAD IS NOT AVAILABLE</value>
+	</data>
+	<data name="DeleteProg" xml:space="preserve">
+		<value>Delete the program</value>
+	</data>
+</root>

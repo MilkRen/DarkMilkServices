@@ -1,0 +1,222 @@
+﻿<UserControl x:Class="LauncherDM.Views.UserControls.StoreUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LauncherDM.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="StoreControl">
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="StoreControl" From="0.3" To="1.0" Storyboard.TargetProperty="Opacity" Duration="0:0:1.2" >
+                        <DoubleAnimation.EasingFunction>
+                            <CircleEase/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <ThicknessAnimation Storyboard.TargetName="StoreControl" From="0 -25 0 0" To="0 0 0 0" Storyboard.TargetProperty="Margin" Duration="0:0:1.2" >
+                        <ThicknessAnimation.EasingFunction>
+                            <BackEase/>
+                        </ThicknessAnimation.EasingFunction>
+                    </ThicknessAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.ColumnSpan="2">
+                    <MediaElement x:Name="myMediaElement" Volume="0" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center" LoadedBehavior="Play" >
+                        <MediaElement.Triggers>
+                            <EventTrigger RoutedEvent="MediaElement.Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <MediaTimeline Source="https://darkmilk.store/Launcher/Video/wallperStore.mp4" Storyboard.TargetName="myMediaElement"  
+                                                           RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </MediaElement.Triggers>
+                    </MediaElement>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Margin="5">
+                <TextBlock Text="{Binding ProgramText}" FontSize="20" Style="{StaticResource TitleProgramTextBlock}" HorizontalAlignment="Center"/>
+                <Border Style="{StaticResource BorderRounded}" Width="150" Margin="0,1,0,0"/>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Margin="0,5,5,0" >
+                <ListView ItemsSource="{Binding ProgramsListView}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#6E00FF" Opacity="0.8" >
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ToolTipProgramsText}" Width="150" Height="100" TextWrapping="Wrap" Margin="3" Style="{StaticResource ToolTipTextBlock}"/>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button Background="Transparent" Command="{Binding ClickProgramCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                        <StackPanel >
+                                            <Image Source="{Binding ImagePath}" Width="250" Height="150"  Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5"/>
+                                            <Border Width="250" Height="33" Background="#202227" BorderThickness="0">
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="{Binding Title}" FontSize="16" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                    <TextBlock Text="{Binding Price, StringFormat={}{0:N2} RUB}" FontSize="12" Foreground="Silver" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <StackPanel Grid.Column="2" Grid.Row="1" Margin="5">
+                <TextBlock Text="{Binding GamesText}" FontSize="20" Style="{StaticResource TitleProgramTextBlock}" HorizontalAlignment="Center"/>
+                <Border Style="{StaticResource BorderRounded}" Width="150" Margin="0,1,0,0" />
+            </StackPanel>
+
+            <Grid Grid.Column="2" Grid.Row="2" Margin="5,5,0,0">
+                <ListView ItemsSource="{Binding GamesListView}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#6E00FF" Opacity="0.8" >
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ToolTipProgramsText}" Width="150" Height="100" TextWrapping="Wrap" Margin="3" Style="{StaticResource ToolTipTextBlock}"/>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button Background="Transparent" Command="{Binding ClickProgramCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                        <StackPanel >
+                                            <Image Source="{Binding ImagePath}" Width="250" Height="150"  Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5"/>
+                                            <Border Width="250" Height="33" Background="#202227" BorderThickness="0">
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="{Binding Title}" FontSize="16" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                    <TextBlock Text="{Binding Price, StringFormat={}{0:N2} RUB}" FontSize="12" Foreground="Silver" Style="{StaticResource TitleProgramTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Border CornerRadius="18" Background="#35383f" x:Name="BorderItem" Width="0">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width" To="400" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="230"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding TitleItem}" FontSize="20" Style="{StaticResource TitleProgramTextBlock}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" VerticalAlignment="Center">
+                        <StackPanel>
+                            <Button Background="Transparent" Command="{Binding ClickImageItemCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                <Image Source="{Binding ImageItem}" Width="250" Height="150"/>
+                            </Button>
+                            <ListView ItemsSource="{Binding ItemListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderThickness="0">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button Background="Transparent" Command="{Binding ClickItemCommand}" BorderThickness="0" Style="{StaticResource ButtonDefault}">
+                                                <Image Width="50" Source="{Binding ImageItemPath}" Margin="10"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2" VerticalAlignment="Center">
+                        <Border Background="BlueViolet" CornerRadius="10">
+                            <TextBlock Text="{Binding TagText}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TitleProgramTextBlock}"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <ScrollViewer>
+                            <TextBlock Text="{Binding DescItem}" TextWrapping="Wrap" FontSize="10" Style="{StaticResource TitleProgramTextBlock}"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid Grid.Row="4" VerticalAlignment="Center">
+                        <Button Command="{Binding SaleItemCommand}" Content="{Binding PayButtonText}" Background="{Binding BackgroundButton}" Height="30" Margin="10" Foreground="White" Style="{StaticResource ButtonItemSend}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
